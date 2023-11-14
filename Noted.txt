@@ -1,0 +1,12 @@
+Status Assessment
+1 = Self Assessment
+2 = Review by Superior
+3 = Completed
+
+Status Learning 
+1 = Assigned
+2 = Riviwed by People Development /On-Progress
+3 = Completed / Approved
+4 = Rejected
+
+
