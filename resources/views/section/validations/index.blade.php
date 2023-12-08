@@ -39,38 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-none d-md-block">
 
-
-            <div class="form-group row row-xs mg-0">
-                <div class="col-sm-10">
-                    <form action="assessmentValidation/import-data" method="post" enctype="multipart/form-data">
-                        @csrf
-                        <div class="search-form input-group">
-                            <input type="file" class="form-control tx-11" name="file" id="file"
-                                accept=".xlsx,.xlsx" placeholder="" required>
-                            <button class="btn btn-xs pd-x-15 btn-dark btn-uppercase" type="submit">
-                                IMPORT
-                            </button>
-                        </div>
-                    </form>
-
-                </div>
-
-                <div class="col-sm-2">
-                    <a href="/assessmentValidation/create" class="btn btn-sm btn-dark btn-uppercase">
-                        <i data-feather="plus" class=""></i>
-                    </a>
-
-                </div>
-                {{-- <div class="col-sm-2">
-                    <button class="btn btn-sm btn-dark" onclick="addData()">
-                        add
-                    </button>
-                </div> --}}
-            </div>
-
-        </div>
     </div>
 
 
@@ -84,7 +53,7 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 45px">#</th>
+                    <th style="width: 75px">#</th>
                     <th style="width: 100px">ID</th>
                     <th>Name</th>
                     <th>Position</th>
@@ -101,19 +70,30 @@
                         if ($view->status == 1) {
                             $color = 'bg-light';
                             $text = 'Self Assessment';
+                            $btn = 'disabled="disabled"';
                         } elseif ($view->status == 2) {
                             $color = 'bg-warning';
                             $text = 'Review by Superior';
+                            $btn = '';
                         } else {
                             $color = 'bg-success';
                             $text = 'Completed';
+                            $btn = 'disabled="disabled"';
                         }
                     @endphp
 
                     <tr>
                         <td class="tx-center">
-                            <a href="/assessmentValidation/{{ $view->id }}/edit" class="badge badge-warning pd-y-0"><i
+                            <a href="/assessmentValidation/show/{{ $view->id }}" class="badge badge-warning pd-y-0"><i
                                     data-feather="eye" class="wd-15"></i></a>
+
+                            <form action="/finishFormValidation" method="POST" onclick="return confirm('Are you sure?')"
+                                class="d-inline">
+                                @csrf
+                                <input type="hidden" name="assessment_id" value="{{ $view->id }}">
+                                <button class="badge badge-danger pd-y-0 border-0" {{ $btn }}
+                                    title="update status"><i data-feather="arrow-up-circle" class="wd-15"></i></button>
+                            </form>
                         </td>
                         <td class="pd-t-25">{{ $view->employee_id }}</td>
                         <td>{{ $view->employee_name }}</td>

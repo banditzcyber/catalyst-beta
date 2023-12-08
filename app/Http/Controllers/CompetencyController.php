@@ -91,7 +91,7 @@ class CompetencyController extends Controller
     public function importData(Request $request){
         // dd($request);
         $request->validate([
-            'file' => 'required|file|mimes:xlsx,csv', // Add any validation rules you need
+            'file' => 'required|file|mimes:xlsx,csv,xls', // Add any validation rules you need
         ]);
 
         if ($request->hasFile('file')) {

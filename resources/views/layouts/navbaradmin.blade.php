@@ -47,7 +47,7 @@
                     <li class="nav-item"><a href="" class="nav-link"><i data-feather="help-circle"></i>
                             <span>Help Center</span></a></li>
                     <li class="nav-item">
-                        <form action="/logout" method="POST">
+                        <form action="/logout" method="POST" onclick="return confirm('Are you sure?')">
                             @csrf
                             <button type="submit" class="nav-link dropdown-item">
                                 <i data-feather="log-out"></i>
@@ -123,10 +123,10 @@
 
             <li class="nav-item mt-25 {{ request()->is('userlogin*') ? 'active' : '' }}">
                 <a href="/userlogin" class="nav-link">
-                    <i data-feather="user"></i> <span>User Login</span>
+                    <i data-feather="settings"></i> <span>User Login</span>
                 </a>
             </li>
-            <li class="nav-item with-sub">
+            {{-- <li class="nav-item with-sub">
                 <a href="" class="nav-link"><i data-feather="user"></i> <span>Functional Competency</span></a>
                 <ul>
                     <li><a href="page-profile-view.html">Assessment</a></li>
@@ -140,7 +140,7 @@
                 <ul>
                     <li><a href="page-timeline.html">Timeline</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
         </ul>
     </div>

@@ -48,7 +48,7 @@
                         <div class="search-form input-group">
                             <input type="file" class="form-control tx-11" name="file" id="file"
                                 accept=".xlsx,.xlsx" placeholder="" required>
-                            <button class="btn btn-xs pd-x-15 btn-dark btn-uppercase" type="submit">
+                            <button class="btn btn-xs pd-x-15 btn-primary btn-uppercase" type="submit">
                                 IMPORT
                             </button>
                         </div>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <a href="/matrix/create" class="btn btn-sm btn-dark btn-uppercase">
+                    <a href="/matrix/create" class="btn btn-sm btn-primary btn-uppercase">
                         <i data-feather="plus" class=""></i>
                     </a>
                 </div>
@@ -84,7 +84,7 @@
                     <th>Target</th>
                     <th>Position Future</th>
                     <th>Job Code Future</th>
-                    <th>Target Future</th>
+                    <th>Target(F)</th>
                 </tr>
             </thead>
             <tbody>

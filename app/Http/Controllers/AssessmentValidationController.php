@@ -54,12 +54,33 @@ class AssessmentValidationController extends Controller
                             ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                             ->where('assessment_details.assessment_id', '=', $id);
 
-        return view('section.validation.detail', [
+        return view('section.validations.detail', [
             'title'     => 'Assessment Detail',
             'status'    => $status,
             'data'      => $competency->get(),
             'valid'     => $valid,
             'id'     => $id
+        ]);
+    }
+
+    public function finishFormValidation(Request $request)
+    {
+        $assessment_id = $request->input('assessment_id');
+        $data['status']     = 3;
+        DB::table('assessments')->where('id', $assessment_id)->update($data);
+        return redirect('/assessmentValidation')->with('success', 'Assessment has been updated!');
+    }
+
+    public function reviewAssessment($competency_id, $assessment_id, $jobcode)
+    {
+
+        $data       = DB::table('assessment_details')
+                        ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
+                        ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
+                        ;
+
+        return view('section.validations.form', [
+            'title'     => 'Form Edit'
         ]);
     }
 }

@@ -1,7 +1,8 @@
 Status Assessment
 1 = Self Assessment
 2 = Review by Superior
-3 = Completed
+3 = Approve by system
+4 = Completed
 
 Status Learning 
 1 = Assigned

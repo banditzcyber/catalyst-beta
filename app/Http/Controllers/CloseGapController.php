@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\CloseGap;
+use App\Http\Requests\StoreCompetencyRequest;
+// use App\Http\Requests\UpdateCompetencyRequest;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\RedirectResponse;
 
 
 

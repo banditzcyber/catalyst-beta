@@ -21,7 +21,7 @@ class AldpSectionController extends Controller
                         ->where('manager_id', '=', $idLogin);
 
         return view('section.aldp.index', [
-            'title'         => 'ALDP',
+            'title'         => 'Annual Learning Development Plan',
             'data'          => $query->get()
         ]);
     }

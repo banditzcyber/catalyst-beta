@@ -61,7 +61,7 @@
     <div class="table-responsive">
         {{-- <div id="read"></div> --}}
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
-            <thead class="thead-primary">
+            <thead class="thead-primary tx-uppercase">
                 <tr>
                     <th>ID</th>
                     <th>Employee Name</th>

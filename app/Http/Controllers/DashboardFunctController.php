@@ -13,6 +13,10 @@ class DashboardFunctController extends Controller
         $competencies  = DB::table('competencies')->count();
         $performance_standards   = DB::table('performance_standards')->count();
         $items   = DB::table('items')->count();
+        $aldp       = DB::table('aldps')->count();
+        $closegap_activity = DB::table('learnings')->count();
+        $assessment     = DB::table('assessments')->count();
+        $matrix     = DB::table('profile_matrices')->count();
 
         return view('admin.dashboard.index', [
             'title'     => 'Dashboard',
@@ -20,6 +24,10 @@ class DashboardFunctController extends Controller
             'competencies'  => $competencies,
             'performance_standards'  => $performance_standards,
             'items'  => $items,
+            'aldp'   => $aldp,
+            'closegap_activity'     => $closegap_activity,
+            'assessment'       => $assessment,
+            'matrix'        => $matrix
         ]);
     }
 }

@@ -52,10 +52,15 @@ use Illuminate\Support\Facades\Redirect;
 //     return view('welcome');
 // });
 
+Route::get('/login/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2');
+Route::post('/login/saml2callback', '\RootInc\LaravelSaml2Middleware\Saml2@saml2callback');
+Route::get('/logout/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2logout');
+Route::post('/logout/logoutcallback', '\RootInc\LaravelSaml2Middleware\Saml2@logoutcallback');
 
 Route::get('/', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/auth-azure', [LoginController::class, 'authAzure']);
 
 // Route::get('/register', [RegisterController::class, 'index']);
 // Route::post('/register', [RegisterController::class, 'store']);
@@ -151,7 +156,10 @@ Route::post('/addParticipant', [AldpSectionController::class, 'addParticipant'])
 Route::get('/subordinate', [SubordinateController::class, 'index']);
 Route::get('/subordinate/profile/{employee_id}', [SubordinateController::class, 'profile']);
 Route::get('/assessmentValidation', [AssessmentValidationController::class, 'index']);
+Route::get('/assessmentValidation/show/{id}', [AssessmentValidationController::class, 'show']);
 
+Route::get('/reviewAssessment/{id}/{kd_assessment}/{jobcode}', [AssessmentValidationController::class, 'reviewAssessment']);
+Route::post('/finishFormValidation', [AssessmentValidationController::class, 'finishFormValidation']);
 
 
 //Access from department
@@ -167,6 +175,8 @@ Route::resource('/items', ItemController::class);
 Route::resource('/matrix', ProfileMatrixController::class);
 Route::resource('/employees', EmployeeController::class);
 Route::resource('/assessmentAdmin', AssessmentController::class);
+Route::get('/assessmentAdmin/edit/{id}', [AssessmentController::class, 'editData']);
+Route::post('/assessmentAdmin/update', [AssessmentController::class, 'updateData']);
 Route::resource('/assessmentAdminDetails', AssessmentDetailController::class);
 Route::resource('/aldpAdmin', AldpController::class);
 Route::resource('/closegap', ClosegapController::class);

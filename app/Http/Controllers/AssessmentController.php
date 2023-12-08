@@ -20,17 +20,19 @@ class AssessmentController extends Controller
     {
         $search = DB::table('assessments')
                     ->join('employees', 'assessments.employee_id', '=', 'employees.employee_id')
-                    ->select('assessments.id','assessments.employee_id', 'employees.employee_name', 'assessments.jobcode', 'assessments.year', 'assessments.status');
+                    ->select('assessments.*', 'employees.employee_name', 'employees.position');
 
         if(request('search')) {
-            $search->where('employee_id', 'like', '%' . request('search') . '%')
-                   ->orWhere('jobcode', 'like', '%' . request('search') . '%')
-                   ->orWhere('year', 'like', '%' . request('search') . '%');
+            $search->where('assessments.employee_id', 'like', '%' . request('search') . '%')
+                   ->orWhere('assessments.jobcode', 'like', '%' . request('search') . '%')
+                   ->orWhere('assessments.year', 'like', '%' . request('search') . '%')
+                   ->orWhere('employees.employee_name', 'like', '%' . request('search') . '%');
         }
 
         return view('admin.assessment.index', [
             'title'     => 'Assessment',
-            'data'      => $search->paginate(10)->withQueryString()
+            'data'      => $search->paginate(10)->withQueryString(),
+            'countData' => $search->count()
         ]);
     }
 
@@ -53,6 +55,7 @@ class AssessmentController extends Controller
         ]);
 
         $validation['status']  = 1;
+        $validation['status_launch']  = 2;
 
         DB::table('assessments')->insert($validation);
 
@@ -99,15 +102,36 @@ class AssessmentController extends Controller
     }
 
 
-    public function edit(Assessment $assessment)
+    public function editData($id)
     {
-        //
+        $data  = DB::table('assessments')
+                ->join('employees', 'assessments.employee_id', '=', 'employees.employee_id')
+                ->select('assessments.*', 'employees.employee_name', 'employees.position')
+                ->where('assessments.id', $id)->first();
+
+        $employee = DB::table('employees')->get();
+
+        return view('admin.assessment.edit', [
+            'title'     => 'Add Assessment',
+            'employee'  => $employee,
+            'assessment'  => $data
+        ]);
     }
 
 
-    public function update(UpdateAssessmentRequest $request, Assessment $assessment)
+    public function updateData(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'employee_id'   => 'required',
+            'jobcode'       => 'required',
+            'year'          => 'required',
+            'status'        => 'required',
+            'status_launch' => 'required'
+        ]);
+
+        $id     = $request->input('assessment_id');
+        DB::table('assessments')->where('id', $id)->update($validation);
+        return redirect('/assessmentAdmin')->with('success', 'Data has been updated!');
     }
 
 

@@ -38,7 +38,7 @@
                                         <h6 class="tx-11 tx-spacing-1 tx-uppercase tx-semibold mg-b-5">Employees <span
                                                 class="tx-color-03 tx-normal">(EMP)</span></h6>
                                         <div class="d-flex align-items-baseline tx-rubik">
-                                            <h5 class="tx-20 mg-b-0">{{ number_format($employee) }}</h5>
+                                            <a href="/employees" class="tx-20 mg-b-0">{{ number_format($employee) }}</a>
                                         </div>
 
                                     </div><!-- media-body -->
@@ -55,15 +55,16 @@
                             <div class="pd-10">
                                 <div class="media mg-b-0">
 
-                                    <div class="crypto-icon bg-pink">
-                                        <i data-feather="users"></i>
+                                    <div class="crypto-icon bg-success">
+                                        <i data-feather="briefcase"></i>
                                     </div><!-- crypto-icon -->
 
                                     <div class="media-body pd-l-8">
                                         <h6 class="tx-11 tx-spacing-1 tx-uppercase tx-semibold mg-b-5">Competency <span
                                                 class="tx-color-03 tx-normal">(C)</span></h6>
                                         <div class="d-flex align-items-baseline tx-rubik">
-                                            <h5 class="tx-20 mg-b-0">{{ number_format($competencies) }}</h5>
+                                            <a href="/competency"
+                                                class="tx-20 mg-b-0">{{ number_format($competencies) }}</a>
                                         </div>
 
                                     </div><!-- media-body -->
@@ -80,8 +81,8 @@
                             <div class="pd-10">
                                 <div class="media mg-b-0">
 
-                                    <div class="crypto-icon bg-pink">
-                                        <i class="icon ion-md-alarm"></i>
+                                    <div class="crypto-icon bg-success">
+                                        <i data-feather="award"></i>
                                     </div><!-- crypto-icon -->
 
                                     <div class="media-body pd-l-8">
@@ -89,7 +90,8 @@
                                             <span class="tx-color-03 tx-normal">(PS)</span>
                                         </h6>
                                         <div class="d-flex align-items-baseline tx-rubik">
-                                            <h5 class="tx-20 mg-b-0">{{ number_format($performance_standards) }}</h5>
+                                            <a href="/performance"
+                                                class="tx-20 mg-b-0">{{ number_format($performance_standards) }}</a>
                                         </div>
 
                                     </div><!-- media-body -->
@@ -106,15 +108,39 @@
                             <div class="pd-10">
                                 <div class="media mg-b-0">
 
-                                    <div class="crypto-icon bg-pink">
-                                        <i class="fa fa-file"></i>
+                                    <div class="crypto-icon bg-success">
+                                        <i data-feather="list"></i>
                                     </div><!-- crypto-icon -->
 
                                     <div class="media-body pd-l-8">
                                         <h6 class="tx-11 tx-spacing-1 tx-uppercase tx-semibold mg-b-5">Learning Items <span
                                                 class="tx-color-03 tx-normal">(LI)</span></h6>
                                         <div class="d-flex align-items-baseline tx-rubik">
-                                            <h5 class="tx-20 mg-b-0">{{ number_format($items) }}</h5>
+                                            <a href="/items" class="tx-20 mg-b-0">{{ number_format($items) }}</a>
+                                        </div>
+
+                                    </div><!-- media-body -->
+                                </div><!-- media -->
+
+                            </div><!-- crypto -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 mg-t-10">
+                    <div class="card">
+                        <div class="col col-sm-12 col-lg">
+                            <div class="pd-10">
+                                <div class="media mg-b-0">
+
+                                    <div class="crypto-icon bg-success">
+                                        <i data-feather="list"></i>
+                                    </div><!-- crypto-icon -->
+
+                                    <div class="media-body pd-l-8">
+                                        <h6 class="tx-11 tx-spacing-1 tx-uppercase tx-semibold mg-b-5">Profile Matrix <span
+                                                class="tx-color-03 tx-normal">(LI)</span></h6>
+                                        <div class="d-flex align-items-baseline tx-rubik">
+                                            <a href="/items" class="tx-20 mg-b-0">{{ number_format($matrix) }}</a>
                                         </div>
 
                                     </div><!-- media-body -->
@@ -131,14 +157,39 @@
                                 <div class="media mg-b-0">
 
                                     <div class="crypto-icon bg-pink">
-                                        <i class="fa fa-list"></i>
+                                        <i data-feather="check-circle"></i>
+                                    </div><!-- crypto-icon -->
+
+                                    <div class="media-body pd-l-8">
+                                        <h6 class="tx-11 tx-spacing-1 tx-uppercase tx-semibold mg-b-5">Assessments <span
+                                                class="tx-color-03 tx-normal">(AS)</span></h6>
+                                        <div class="d-flex align-items-baseline tx-rubik">
+                                            <a href="/assessmentAdmin"
+                                                class="tx-20 mg-b-0">{{ number_format($assessment) }}</a>
+                                        </div>
+
+                                    </div><!-- media-body -->
+                                </div><!-- media -->
+
+                            </div><!-- crypto -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 mg-t-10">
+                    <div class="card">
+                        <div class="col col-sm-12 col-lg">
+                            <div class="pd-10">
+                                <div class="media mg-b-0">
+
+                                    <div class="crypto-icon bg-pink">
+                                        <i data-feather="calendar"></i>
                                     </div><!-- crypto-icon -->
 
                                     <div class="media-body pd-l-8">
                                         <h6 class="tx-11 tx-spacing-1 tx-uppercase tx-semibold mg-b-5">Annual Learning
                                             Dev Plan <span class="tx-color-03 tx-normal">(ALDP)</span></h6>
                                         <div class="d-flex align-items-baseline tx-rubik">
-                                            <h5 class="tx-20 mg-b-0">{{ number_format($items) }}</h5>
+                                            <a href="/aldpAdmin" class="tx-20 mg-b-0">{{ number_format($aldp) }}</a>
                                         </div>
 
                                     </div><!-- media-body -->
@@ -155,7 +206,7 @@
                                 <div class="media mg-b-0">
 
                                     <div class="crypto-icon bg-pink">
-                                        <i class="fa fa-list"></i>
+                                        <i data-feather="camera"></i>
                                     </div><!-- crypto-icon -->
 
                                     <div class="media-body pd-l-8">
@@ -163,7 +214,8 @@
                                             <span class="tx-color-03 tx-normal">(CGA)</span>
                                         </h6>
                                         <div class="d-flex align-items-baseline tx-rubik">
-                                            <h5 class="tx-20 mg-b-0">{{ number_format($items) }}</h5>
+                                            <a href="/closegap"
+                                                class="tx-20 mg-b-0">{{ number_format($closegap_activity) }}</a>
                                         </div>
 
                                     </div><!-- media-body -->

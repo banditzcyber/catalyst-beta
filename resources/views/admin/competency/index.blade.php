@@ -49,7 +49,7 @@
                         <div class="search-form input-group">
                             <input type="file" class="form-control tx-11" name="file" id="file"
                                 accept=".xlsx,.xlsx" placeholder="" required>
-                            <button class="btn btn-xs pd-x-15 btn-dark btn-uppercase" type="submit">
+                            <button class="btn btn-xs pd-x-15 btn-primary" type="submit">
                                 IMPORT
                             </button>
                         </div>
@@ -58,16 +58,11 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <a href="/competency/create" class="btn btn-sm btn-dark btn-uppercase">
+                    <a href="/competency/create" class="btn btn-sm btn-primary btn-uppercase">
                         <i data-feather="plus" class=""></i>
                     </a>
 
                 </div>
-                {{-- <div class="col-sm-2">
-                    <button class="btn btn-sm btn-dark" onclick="addData()">
-                        add
-                    </button>
-                </div> --}}
             </div>
 
         </div>
@@ -82,7 +77,7 @@
 
     <div class="table-responsive">
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
-            <thead class="thead-primary">
+            <thead class="thead-primary tx-uppercase">
                 <tr>
                     <th style="width: 75px">#</th>
                     <th style="width: 100px">ID</th>

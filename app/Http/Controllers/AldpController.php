@@ -13,6 +13,7 @@ class AldpController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * ini tes git
      *
      * @return \Illuminate\Http\Response
      */
@@ -23,14 +24,15 @@ class AldpController extends Controller
                     ->select('aldps.id','aldps.manager_id', 'employees.employee_name', 'employees.section', 'aldps.year', 'aldps.comment', 'aldps.status');
 
         if(request('search')) {
-            $search->where('manager_id', 'like', '%' . request('search') . '%')
-                   ->orWhere('employee_name', 'like', '%' . request('search') . '%')
-                   ->orWhere('year', 'like', '%' . request('search') . '%');
+            $search->where('aldps.manager_id', 'like', '%' . request('search') . '%')
+                   ->orWhere('employees.employee_name', 'like', '%' . request('search') . '%')
+                   ->orWhere('aldps.year', 'like', '%' . request('search') . '%');
         }
 
         return view('admin.aldp.index', [
-            'title'     => 'ALDP',
-            'data'      => $search->paginate(10)->withQueryString()
+            'title'     => 'Annual Learning Development Plan',
+            'data'      => $search->paginate(10)->withQueryString(),
+            'countData' => $search->count()
         ]);
     }
 

@@ -11,34 +11,47 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <button class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-l-5">
-                <i data-feather="share" class="wd-10 mg-r-5"></i>
-                Upload Data
-            </button>
-            <button class="btn btn-sm pd-x-15 btn-warning btn-uppercase mg-l-5" onclick="create()">
-                <i data-feather="share" class="wd-10 mg-r-5"></i>
-                Add Data
-            </button>
-            <a href="/aldpAdmin/create" class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5">
-                <i data-feather="file" class="wd-10 mg-r-5"></i>
-                Add New Data
-            </a>
+            <div class="col-sm-12">
+                <h3 class="">
+                    Total Data : {{ $countData }}
+                </h3 class="tx-uppercase">
+            </div>
         </div>
     </div>
 
-    <div class="row mg-b-10 justify-content-right">
-        <div class="col-md-4">
-            <form action="/aldpAdmin">
-                <div class="input-group">
-                    <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
-                        value="{{ request('search') }}">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-light btn-sm" type="submit" id="button-addon2">
-                            <i data-feather="search" class="wd-15"></i>
-                        </button>
-                    </div>
+
+    <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
+        <div>
+            <div class="row ">
+                <div class="col-md">
+                    <form action="/aldpAdmin">
+                        <div class="input-group">
+                            <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
+                                value="{{ request('search') }}" style="width: 250px">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-light btn-sm" type="submit" id="button-addon2">
+                                    <i data-feather="search" class="wd-15"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
+        </div>
+        <div class="d-none d-md-block">
+
+
+            <div class="form-group row row-xs mg-0">
+
+                <div class="col-sm-2">
+                    <a href="/aldpAdmin/create" class="btn btn-sm btn-primary btn-uppercase">
+                        <i data-feather="plus" class=""></i>
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
     </div>
 
@@ -50,7 +63,7 @@
 
     <div class="table-responsive">
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
-            <thead class="thead-primary">
+            <thead class="thead-primary tx-uppercase">
                 <tr>
                     <th style="width: 105px">#</th>
                     <th>Employee ID</th>
@@ -58,13 +71,13 @@
                     <th>Section</th>
                     <th>Year</th>
                     <th>Remarks</th>
-                    <th style="width: 115px">Status</th>
+                    <th style="width: 95px">Status</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $view)
                     @php
-                        
+
                         if ($view->status == 1) {
                             $color = 'bg-blue';
                             $text = 'Created';
@@ -75,7 +88,7 @@
                             $color = 'bg-hijau';
                             $text = 'Completed';
                         }
-                        
+
                     @endphp
                     <tr>
                         <td class="tx-center">
