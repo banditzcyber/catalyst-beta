@@ -15,8 +15,10 @@ class LoginController extends Controller
         ]);
     }
 
-    public function authenticate(Request $request)
+    public function index(Request $request)
     {
+
+        dd($request);
 
         $credentials = $request->validate([
             'email'         => 'required',
@@ -45,7 +47,7 @@ class LoginController extends Controller
         return back()->with('loginErorr', 'Login Failed!');
     }
 
-    public function index(Request $request)
+    public function authenticate(Request $request)
     {
         $appId = '5c2ce04a-9305-468d-9fe1-cb5e071e8c44';
         $tennantId = 'a289e960-a538-4db3-adf0-845b57e616cf';
