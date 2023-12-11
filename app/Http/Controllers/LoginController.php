@@ -17,6 +17,7 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+
         $credentials = $request->validate([
             'email'         => 'required',
             'password'      => 'required'
@@ -61,7 +62,7 @@ class LoginController extends Controller
         // Check if the user is logging in
         $params = [
             'client_id' => $appId,
-            'redirect_uri' => $redirectUri,
+            'redirect_uri' => $redirectUri . 'login',
             'response_type' => 'token',
             'response_mode' => 'form_post',
             'scope' => $scope,
