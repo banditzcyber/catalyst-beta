@@ -64,7 +64,7 @@ class LoginController extends Controller
         // Check if the user is logging in
         $params = [
             'client_id' => $appId,
-            'redirect_uri' => $redirectUri . 'login',
+            'redirect_uri' => $redirectUri . 'authenticate',
             'response_type' => 'token',
             'response_mode' => 'form_post',
             'scope' => $scope,
