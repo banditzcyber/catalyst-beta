@@ -24,20 +24,20 @@ class EmployeeController extends Controller
     {
         $search = DB::table('employees')->orderby('created_at', 'asc');
 
-        if(request('search')) {
+        if (request('search')) {
             $search->where('employee_id', 'like', '%' . request('search') . '%')
-                   ->orWhere('employee_name', 'like', '%' . request('search') . '%')
-                   ->orWhere('division', 'like', '%' . request('search') . '%')
-                   ->orWhere('department', 'like', '%' . request('search') . '%')
-                   ->orWhere('jobcode', 'like', '%' . request('search') . '%')
-                   ->orWhere('section', 'like', '%' . request('search') . '%')
-                   ->orWhere('position', 'like', '%' . request('search') . '%');
+                ->orWhere('employee_name', 'like', '%' . request('search') . '%')
+                ->orWhere('division', 'like', '%' . request('search') . '%')
+                ->orWhere('department', 'like', '%' . request('search') . '%')
+                ->orWhere('jobcode', 'like', '%' . request('search') . '%')
+                ->orWhere('section', 'like', '%' . request('search') . '%')
+                ->orWhere('position', 'like', '%' . request('search') . '%');
         }
 
         return view('admin.employees.index', [
             'title'     => 'Employees',
             'data'      => $search->paginate(10)->withQueryString(),
-            'countData' =>$search->count()
+            'countData' => $search->count()
         ]);
     }
 
@@ -75,11 +75,14 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         DB::table('employees')->where('id', $id)->delete();
-        return redirect('/employees')->with('success','Data has been deleted!');
+        return redirect('/employees')->with('success', 'Data has been deleted!');
     }
 
-    public function importData(Request $request){
+    public function importData(Request $request)
+    {
         // dd($request);
+        DB::table('employees')->delete();
+
         $request->validate([
             'file' => 'required|file|mimes:xlsx,csv', // Add any validation rules you need
         ]);

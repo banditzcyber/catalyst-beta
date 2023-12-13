@@ -58,6 +58,7 @@ Route::get('/logout/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2logout')
 Route::post('/logout/logoutcallback', '\RootInc\LaravelSaml2Middleware\Saml2@logoutcallback');
 
 Route::get('/', [LoginController::class, 'index']);
+// Route::get('/', [LoginController::class, 'indexq']);
 // Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/authenticate', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
