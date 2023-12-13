@@ -52,7 +52,7 @@ class LoginController extends Controller
     {
         $appId = '5c2ce04a-9305-468d-9fe1-cb5e071e8c44';
         $tennantId = 'a289e960-a538-4db3-adf0-845b57e616cf';
-        $redirectUri = 'https://mycatalyst.capcx.com/';
+        $redirectUri = 'https://mycatalyst.capcx.com/authenticate';
         $scope = 'https://graph.microsoft.com/User.Read';
 
         session_start();
@@ -65,7 +65,7 @@ class LoginController extends Controller
         // Check if the user is logging in
         $params = [
             'client_id' => $appId,
-            'redirect_uri' => $redirectUri . 'authenticate',
+            'redirect_uri' => $redirectUri,
             'response_type' => 'token',
             'response_mode' => 'form_post',
             'scope' => $scope,
