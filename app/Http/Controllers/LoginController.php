@@ -128,13 +128,14 @@ class LoginController extends Controller
         // $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
 
         session_start();
-        $microsoft = new Auth(
-            Session::get('a289e960-a538-4db3-adf0-845b57e616cf'),
-            Session::get('5c2ce04a-9305-468d-9fe1-cb5e071e8c44'),
-            Session::get('aa05fef4-1ab4-48e5-b805-15e430aad22d'),
-            Session::get('https://mycatalyst.capcx.com/authenticate'),
-            Session::get(['User.Read', 'Files.ReadWrite.All', 'offline_access'])
-        );
+
+        $tenant = env('TENANT_ID');
+        $client_id = env('CLIENT_ID');
+        $client_secret = env('CLIENT_SECRET');
+        $callback = env('CALLBACK_URL'); // Your callback URL
+        $scopes = ['User.Read', 'Files.ReadWrite.All', 'offline_access'];
+
+        $microsoft = new Auth($tenant, $client_id, $client_secret, $callback, $scopes);
 
         $url = $microsoft->getAuthUrl();
 
@@ -153,20 +154,26 @@ class LoginController extends Controller
 
         // $microsoft->setAccessToken($accessToken);
 
-        $microsoft = new Auth(Session::get("a289e960-a538-4db3-adf0-845b57e616cf"),
-                        Session::get("5c2ce04a-9305-468d-9fe1-cb5e071e8c44"),  
-                        Session::get("aa05fef4-1ab4-48e5-b805-15e430aad22d"), 
-                        Session::get("https://mycatalyst.capcx.com/authenticate"), 
-                        Session::get(['User.Read', 'Files.ReadWrite.All', 'offline_access']));
 
-        $tokens = $microsoft->getToken($_REQUEST['code'], Session::get("state"));
+        // $tenant = env('TENANT_ID');
+        // $client_id = env('CLIENT_ID');
+        // $client_secret = env('CLIENT_SECRET');
+        // $callback = env('CALLBACK_URL'); // Your callback URL
+        // $scopes = ['User.Read', 'Files.ReadWrite.All', 'offline_access'];
 
-        // // Setting access token to the wrapper
-        // $microsoft->setAccessToken($tokens->access_token);
+        $auth = new Auth(
+            Session::get('tenant_id'),
+            Session::get('client_id'),
+            Session::get('client_secret'),
+            Session::get('redirect_uri'),
+            Session::get('scopes')
+        );
+
+        $tokens = $auth->getToken($_REQUEST['code'], $_REQUEST['state']);
 
         $accessToken = $tokens->access_token;
 
-        $microsoft->setAccessToken($accessToken);
+        $auth->setAccessToken($accessToken);
 
         $user = new User;
 
