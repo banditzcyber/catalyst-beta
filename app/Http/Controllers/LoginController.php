@@ -134,6 +134,8 @@ class LoginController extends Controller
 
     public function microsoftOAuthCallback(Request $request)
     {
+
+        session_start(); 
         // $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
         
         // $tokens = $microsoft->getToken($request->code);
