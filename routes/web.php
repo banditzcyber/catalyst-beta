@@ -52,10 +52,16 @@ use Illuminate\Support\Facades\Redirect;
 //     return view('welcome');
 // });
 
-Route::get('/login/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2');
-Route::post('/login/saml2callback', '\RootInc\LaravelSaml2Middleware\Saml2@saml2callback');
-Route::get('/logout/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2logout');
-Route::post('/logout/logoutcallback', '\RootInc\LaravelSaml2Middleware\Saml2@logoutcallback');
+// MICROSOFT LOGIN
+// Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
+Route::get('/',[LoginController::class,'microsoftOAuth'])->name('microsoft.oAuth');
+Route::get('callback',[LoginController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
+
+
+// Route::get('/login/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2');
+// Route::post('/login/saml2callback', '\RootInc\LaravelSaml2Middleware\Saml2@saml2callback');
+// Route::get('/logout/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2logout');
+// Route::post('/logout/logoutcallback', '\RootInc\LaravelSaml2Middleware\Saml2@logoutcallback');
 
 Route::get('/', [LoginController::class, 'index']);
 // Route::get('/', [LoginController::class, 'indexq']);

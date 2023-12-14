@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
+
+use myPHPnotes\Microsoft\Auth;
+use myPHPnotes\Microsoft\Models\User;
 
 class LoginController extends Controller
 {
@@ -54,6 +56,7 @@ class LoginController extends Controller
         $tennantId = 'a289e960-a538-4db3-adf0-845b57e616cf';
         $redirectUri = 'https://mycatalyst.capcx.com/authenticate';
         $scope = 'https://graph.microsoft.com/User.Read';
+        $secret = 'aa05fef4-1ab4-48e5-b805-15e430aad22d';
 
         session_start();
 
@@ -117,5 +120,32 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function microsoftOAuth()
+    {
+        $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
+
+        $url = $microsoft->getAuthUrl();
+
+        return redirect($url);
+    }
+
+    public function microsoftOAuthCallback(Request $request)
+    {
+        $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
+
+        $tokens = $microsoft->getToken($request->code);
+
+        $accessToken = $tokens->access_token;
+
+        $microsoft->setAccessToken($accessToken);
+
+        $user = new User;
+
+        $name = $user->data->getDisplayName();
+        $email = $user->data->getUserPrincipalName();
+
+        dd($name, $email);
     }
 }
