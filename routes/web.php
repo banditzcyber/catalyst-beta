@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Redirect;
 // MICROSOFT LOGIN
 // Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
 Route::get('/',[LoginController::class,'microsoftOAuth'])->name('microsoft.oAuth');
-Route::get('callback',[LoginController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
+Route::get('authenticate',[LoginController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
 
 
 // Route::get('/login/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2');
@@ -63,12 +63,12 @@ Route::get('callback',[LoginController::class,'microsoftOAuthCallback'])->name('
 // Route::get('/logout/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2logout');
 // Route::post('/logout/logoutcallback', '\RootInc\LaravelSaml2Middleware\Saml2@logoutcallback');
 
-Route::get('/', [LoginController::class, 'index']);
-// Route::get('/', [LoginController::class, 'indexq']);
-// Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/authenticate', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/auth-azure', [LoginController::class, 'authAzure']);
+// Route::get('/', [LoginController::class, 'index']);
+// // Route::get('/', [LoginController::class, 'indexq']);
+// // Route::post('/login', [LoginController::class, 'authenticate']);
+// Route::post('/authenticate', [LoginController::class, 'authenticate']);
+// Route::post('/logout', [LoginController::class, 'logout']);
+// Route::get('/auth-azure', [LoginController::class, 'authAzure']);
 
 // Route::get('/register', [RegisterController::class, 'index']);
 // Route::post('/register', [RegisterController::class, 'store']);
