@@ -135,7 +135,6 @@ class LoginController extends Controller
     {
         $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
 
-        dd($microsoft);
 
         $tokens = $microsoft->getToken($request->code);
 
