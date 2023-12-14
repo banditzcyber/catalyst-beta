@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use myPHPnotes\Microsoft\Auth;
 use myPHPnotes\Microsoft\Models\User;
+use myPHPnotes\Microsoft\Handlers\Session;
 
 class LoginController extends Controller
 {
@@ -133,15 +134,19 @@ class LoginController extends Controller
 
     public function microsoftOAuthCallback(Request $request)
     {
-        $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
-
-        dd($microsoft->getToken($request->code));
+        // $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
         
-        $tokens = $microsoft->getToken($request->code);
+        // $tokens = $microsoft->getToken($request->code);
         
-        $accessToken = $tokens->access_token;
+        // $accessToken = $tokens->access_token;
 
-        $microsoft->setAccessToken($accessToken);
+        // $microsoft->setAccessToken($accessToken);
+
+        $microsoft = new Auth(Session::env("tenant_id"),Session::env("client_id"),  Session::env("client_secret"), Session::env("redirect_uri"), Session::env("scopes"));
+        $tokens = $microsoft->getToken($_REQUEST['code'], Session::get("state"));
+
+        // Setting access token to the wrapper
+        $microsoft->setAccessToken($tokens->access_token);
 
         $user = new User;
 
