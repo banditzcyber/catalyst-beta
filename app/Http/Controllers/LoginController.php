@@ -137,6 +137,8 @@ class LoginController extends Controller
 
         $tokens = $microsoft->getToken($request->code);
 
+        dd($tokens);
+
         $accessToken = $tokens->access_token;
 
         $microsoft->setAccessToken($accessToken);
