@@ -123,19 +123,14 @@ class LoginController extends Controller
         return redirect('/');
     }
 
+    public function signInForm()
+    {
+        return view('auth.sign-in');
+    }
+
     public function microsoftOAuth()
     {
-        // $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
-
-        session_start();
-
-        $tenant = env('TENANT_ID');
-        $client_id = env('CLIENT_ID');
-        $client_secret = env('CLIENT_SECRET');
-        $callback = env('CALLBACK_URL'); // Your callback URL
-        $scopes = ['User.Read', 'Files.ReadWrite.All', 'offline_access'];
-
-        $microsoft = new Auth($tenant, $client_id, $client_secret, $callback, $scopes);
+        $microsoft = new Auth(env('TENANT_ID'),env('CLIENT_ID'),env('CLIENT_SECRET'),env('CALLBACK_URL') ,["User.Read"]);
 
         $url = $microsoft->getAuthUrl();
 
@@ -145,44 +140,19 @@ class LoginController extends Controller
     public function microsoftOAuthCallback(Request $request)
     {
 
-        session_start(); 
-        // $microsoft = new Auth(env('TENANT_ID'), env('CLIENT_ID'), env('CLIENT_SECRET'), env('CALLBACK_URL'), ["User.Read"]);
-        
-        // $tokens = $microsoft->getToken($request->code);
-        
-        // $accessToken = $tokens->access_token;
+        $microsoft = new Auth(env('TENANT_ID'),env('CLIENT_ID'),env('CLIENT_SECRET'),env('CALLBACK_URL') ,["User.Read"]);
 
-        // $microsoft->setAccessToken($accessToken);
-
-
-        // $tenant = env('TENANT_ID');
-        // $client_id = env('CLIENT_ID');
-        // $client_secret = env('CLIENT_SECRET');
-        // $callback = env('CALLBACK_URL'); // Your callback URL
-        // $scopes = ['User.Read', 'Files.ReadWrite.All', 'offline_access'];
-
-        $auth = new Auth(
-            Session::get('tenant_id'),
-            Session::get('client_id'),
-            Session::get('client_secret'),
-            Session::get('redirect_uri'),
-            Session::get('scopes')
-        );
-
-        dd($auth);
-
-        $tokens = $auth->getToken($request->code, $request->state);
-        // $tokens = $auth->getToken($_REQUEST['code'], $_REQUEST['state']);
+        $tokens = $microsoft->getToken($request->code);
 
         $accessToken = $tokens->access_token;
 
-        $auth->setAccessToken($accessToken);
+        $microsoft->setAccessToken($accessToken);
 
         $user = new User;
 
         $name = $user->data->getDisplayName();
         $email = $user->data->getUserPrincipalName();
 
-        dd($name, $email);
+        dd($name,$email);
     }
 }

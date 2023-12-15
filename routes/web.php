@@ -54,7 +54,8 @@ use Illuminate\Support\Facades\Redirect;
 
 // MICROSOFT LOGIN
 // Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
-Route::get('/',[LoginController::class,'microsoftOAuth'])->name('microsoft.oAuth');
+Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
+Route::get('microsoft-oAuth',[LoginController::class,'microsoftOAuth'])->name('microsoft.oAuth');
 Route::get('authenticate',[LoginController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
 
 
