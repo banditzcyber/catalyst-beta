@@ -169,7 +169,7 @@ class LoginController extends Controller
             Session::get('scopes')
         );
 
-        dd($auth->getToken($request));
+        dd($auth);
 
         $tokens = $auth->getToken($request->code, $request->state);
         // $tokens = $auth->getToken($_REQUEST['code'], $_REQUEST['state']);
