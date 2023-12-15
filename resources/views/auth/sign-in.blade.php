@@ -12,7 +12,10 @@
 
                     <div class="row-xs">
                         <div class="col-6">
-                            hallo
+                            Employees
+                        </div>
+                        <div class="col-6">
+                            Administrator
                         </div>
                     </div>
 
