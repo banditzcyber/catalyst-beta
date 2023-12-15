@@ -9,49 +9,13 @@
             <div class="col-lg-3 col-sm-4">
 
                 <main class="form-signin tx-center">
-                    <form action="/login" method="post">
-                        @csrf
-                        <img class="mb-2 tx-center" src="/images/logo_mycatalyst_full.png" width="270">
-                        <div class="mb-4 tx-20 tx-center">Please sign in</div>
 
-                        @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{ session('success') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                        @endif
-
-                        @if (session()->has('loginError'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('loginError') }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                        @endif
-
-                        <div class="form-floating">
-                            <input type="email"
-                                class="form-control @error('email')
-                            is-invalid
-                        @enderror"
-                                name="email" id="email" placeholder="name@example.com" autofocus required
-                                value="{{ old('email') }}">
-                            @error('email')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                    <div class="row-xs">
+                        <div class="col-6">
+                            hallo
                         </div>
-                        <div class="form-floating">
-                            <input type="password" class="form-control" name="password" id="password"
-                                placeholder="Password" required>
-                        </div>
+                    </div>
 
-                        <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-                    </form>
                     <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a href="/register">Create an
                             Account</a></div>
                     <a href="/dashboard">klik</a>
