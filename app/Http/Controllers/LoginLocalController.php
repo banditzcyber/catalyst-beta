@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
-use myPHPnotes\Microsoft\Auth;
-use myPHPnotes\Microsoft\Models\User;
-use myPHPnotes\Microsoft\Handlers\Session;
-
-class LoginController extends Controller
+class LoginLocalController extends Controller
 {
     public function formLogin()
     {
@@ -20,10 +17,6 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-
-        // dd($request);
-
-
         $credentials = $request->validate([
             'email'         => 'required',
             'password'      => 'required'
@@ -55,9 +48,8 @@ class LoginController extends Controller
     {
         $appId = '5c2ce04a-9305-468d-9fe1-cb5e071e8c44';
         $tennantId = 'a289e960-a538-4db3-adf0-845b57e616cf';
-        $redirectUri = 'https://mycatalyst.capcx.com/authenticate';
+        $redirectUri = 'https://mycatalyst.capcx.com/';
         $scope = 'https://graph.microsoft.com/User.Read';
-        $secret = 'aa05fef4-1ab4-48e5-b805-15e430aad22d';
 
         session_start();
 
@@ -122,38 +114,4 @@ class LoginController extends Controller
 
         return redirect('/');
     }
-
-    public function signInForm()
-    {
-        return view('auth.sign-in');
-    }
-
-    public function microsoftOAuth()
-    {
-        $microsoft = new Auth(env('TENANT_ID'),env('CLIENT_ID'),env('CLIENT_SECRET'),env('CALLBACK_URL') ,["User.Read"]);
-
-        $url = $microsoft->getAuthUrl();
-
-        return redirect($url);
-    }
-
-    public function microsoftOAuthCallback(Request $request)
-    {
-
-        $microsoft = new Auth(env('TENANT_ID'),env('CLIENT_ID'),env('CLIENT_SECRET'),env('CALLBACK_URL') ,["User.Read"]);
-
-        $tokens = $microsoft->getToken($request->code);
-
-        $accessToken = $tokens->access_token;
-
-        $microsoft->setAccessToken($accessToken);
-
-        $user = new User;
-
-        $name = $user->data->getDisplayName();
-        $email = $user->data->getUserPrincipalName();
-
-        dd($name,$email);
-    }
-
 }

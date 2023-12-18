@@ -2,33 +2,20 @@
 
 @section('container')
     <div class="content content-fixed content-auth-alt">
+        <div class="container ht-100p">
+            <div class="ht-100p d-flex flex-column align-items-center justify-content-center">
 
+                <div class="tx-13 tx-lg-14 mg-b-40">
+                    <a href="microsoft-oAuth" class="align-items-center wd-40 wd-sm-250">
+                        <img src="/images/employee.png" class="img-fluid wd-100 wd-sm-200 mg-b-30 mg-r-10" alt="">
+                    </a>
 
-
-        <div class="row justify-content-center">
-            <div class="col-lg-3 col-sm-4">
-
-                <main class="form-signin tx-center">
-
-                    <div class="row-xs">
-                        <div class="col-6">
-                            Employees
-                        </div>
-                        <div class="col-6">
-                            Administrator
-                        </div>
-                    </div>
-
-                    <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a href="/register">Create an
-                            Account</a></div>
-                    <a href="/dashboard">klik</a>
-
-                </main>
+                    <a href="/formLogin" class="align-items-center wd-40 wd-sm-250">
+                        <img src="/images/admin.png" class="img-fluid wd-100 wd-sm-200 mg-b-30" alt="">
+                    </a>
+                </div>
             </div>
-        </div>
-
-
-
+        </div><!-- container -->
     </div><!-- content -->
 
     <footer class="footer">

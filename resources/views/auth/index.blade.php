@@ -69,9 +69,9 @@
 
                         <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
                     </form>
-                    <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a href="/register">Create an
+                    {{-- <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a href="/register">Create an
                             Account</a></div>
-                    <a href="/dashboard">klik</a>
+                    <a href="/dashboard">klik</a> --}}
 
                 </main>
             </div>

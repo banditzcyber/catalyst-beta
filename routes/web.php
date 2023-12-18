@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LoginLocalController;
 // use App\Http\Controllers\RegisterController;
 
 // Administrator
@@ -36,6 +37,8 @@ use App\Http\Controllers\DepartSubordinateController;
 
 
 use Illuminate\Support\Facades\Redirect;
+use Laravel\Socialite\Facades\Socialite;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,10 +68,10 @@ Route::get('authenticate',[LoginController::class,'microsoftOAuthCallback'])->na
 // Route::post('/logout/logoutcallback', '\RootInc\LaravelSaml2Middleware\Saml2@logoutcallback');
 
 // Route::get('/', [LoginController::class, 'index']);
-// // Route::get('/', [LoginController::class, 'indexq']);
-// // Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/formLogin', [LoginLocalController::class, 'formLogin']);
+Route::post('/login', [LoginLocalController::class, 'login']);
 // Route::post('/authenticate', [LoginController::class, 'authenticate']);
-// Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginLocalController::class, 'logout']);
 // Route::get('/auth-azure', [LoginController::class, 'authAzure']);
 
 // Route::get('/register', [RegisterController::class, 'index']);
