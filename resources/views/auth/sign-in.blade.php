@@ -7,11 +7,11 @@
 
                 <div class="tx-13 tx-lg-14 mg-b-40">
                     <a href="microsoft-oAuth" class="align-items-center wd-40 wd-sm-250">
-                        <img src="/images/employee.png" class="img-fluid wd-100 wd-sm-200 mg-b-30 mg-r-10" alt="">
+                        <img src="/images/employee-2.png" class="img-fluid wd-100 wd-sm-200 mg-b-30 mg-r-10" alt="">
                     </a>
 
                     <a href="/formLogin" class="align-items-center wd-40 wd-sm-250">
-                        <img src="/images/admin.png" class="img-fluid wd-100 wd-sm-200 mg-b-30" alt="">
+                        <img src="/images/admin-2.png" class="img-fluid wd-100 wd-sm-200 mg-b-30" alt="">
                     </a>
                 </div>
             </div>
