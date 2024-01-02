@@ -26,6 +26,7 @@ class DashboardSection extends Model
                 ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
                 ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                 ->where('assessments.employee_id', '=', $subId)
+                // ->where('assessments.status', '=', 3)
                 ->where('competencies.competency_id', '=', $id);
     }
     public function getItemAssessmentLevel($subId, $id)

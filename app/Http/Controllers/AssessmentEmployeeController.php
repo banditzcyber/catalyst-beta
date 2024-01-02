@@ -166,6 +166,7 @@ class AssessmentEmployeeController extends Controller
         $assessment_result  = $request->input('assessment_result');
         $actual_result  = $request->input('assessment_result');
         $comment  = $request->input('comment');
+        $assessment_update = $request->input('kd_assessment_update');
 
         $data   = array();
         $index  = 0;
@@ -181,7 +182,8 @@ class AssessmentEmployeeController extends Controller
             $index++;
         }
         DB::table('assessment_details')->insert($data);
-        return redirect()->back()->with('success','Data has been added!');
+        // return redirect()->back()->with('success','Data has been added!');
+        return redirect('/assessmentEmployee/'.$assessment_update)->with('success', 'Assessment has been added!');
     }
 
     public function resultAssessment($id, $assessment_id, $jobcode)

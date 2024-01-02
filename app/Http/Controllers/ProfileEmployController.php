@@ -25,7 +25,10 @@ class ProfileEmployController extends Controller
 
         $m_query =  new \App\Models\ProfileEmploy();
         $competency = $m_query->getCompetency($idLogin);
+
         foreach($competency as $vCompetency) :
+        
+
 
             $getCompetency[]    = $vCompetency->competency_name;
             $getId[]            = $vCompetency->competency_id;
@@ -38,6 +41,7 @@ class ProfileEmployController extends Controller
             $neet               = $m_query->getItemAssessment($idLogin, $id);
             $getNeed[]          = $neet->where('assessment_details.actual_result','=', 2)->count();
 
+            
 
             $getLevel1[]        = $m_query->getItemAssessment($idLogin, $id)
                                         ->where('assessment_details.actual_result','=', 1)
@@ -74,6 +78,7 @@ class ProfileEmployController extends Controller
                                         ->count();
         endforeach;
 
+
         if(array_sum($getCompetent) == 0) {
             $percent = 0;
             $percentLevel1 = 0;
@@ -83,8 +88,8 @@ class ProfileEmployController extends Controller
         }else{
 
             $percent = array_sum($getCompetent)/(array_sum($getCompetent) + array_sum($getNeed)) * 100;
-            $percentLevel1 = array_sum($getLevel1)/array_sum($getAllLevel1) * 100;
-            $percentLevel2 = array_sum($getLevel2)/array_sum($getAllLevel2) * 100;
+            // $percentLevel1 = array_sum($getLevel1)/array_sum($getAllLevel1) * 100;
+            // $percentLevel2 = array_sum($getLevel2)/array_sum($getAllLevel2) * 100;
 
             if(array_sum($getLevel3) == 0) {
                 $percentLevel3 = 0;
@@ -96,6 +101,16 @@ class ProfileEmployController extends Controller
                 $percentLevel4 = 0;
             }else{
                 $percentLevel4 = array_sum($getLevel4)/array_sum($getAllLevel4) * 100;
+            }
+            if(array_sum($getLevel1) == 0) {
+                $percentLevel1 = 0;
+            }else{
+                $percentLevel1 = array_sum($getLevel1)/array_sum($getAllLevel1) * 100;
+            }
+            if(array_sum($getLevel2) == 0) {
+                $percentLevel2 = 0;
+            }else{
+                $percentLevel2 = array_sum($getLevel2)/array_sum($getAllLevel2) * 100;
             }
         }
 

@@ -13,7 +13,7 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <a href="/assessmentEmployee/{{ $assessment_id }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>

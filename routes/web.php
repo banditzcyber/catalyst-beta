@@ -169,6 +169,7 @@ Route::get('/subordinate', [SubordinateController::class, 'index']);
 Route::get('/subordinate/profile/{employee_id}', [SubordinateController::class, 'profile']);
 Route::get('/assessmentValidation', [AssessmentValidationController::class, 'index']);
 Route::get('/assessmentValidation/show/{id}', [AssessmentValidationController::class, 'show']);
+Route::post('/savevalidationform', [AssessmentValidationController::class, 'saveFormAssessment']);
 
 Route::get('/reviewAssessment/{id}/{kd_assessment}/{jobcode}', [AssessmentValidationController::class, 'reviewAssessment']);
 Route::post('/finishFormValidation', [AssessmentValidationController::class, 'finishFormValidation']);

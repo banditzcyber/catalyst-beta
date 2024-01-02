@@ -22,7 +22,7 @@
 
 
 
-    <form id="form" action="/saveformassessment" method="post">
+    <form id="form" action="/savevalidationform" method="post">
         @csrf
         @foreach ($data as $vData)
             <div class="card mg-b-10">
@@ -37,19 +37,29 @@
                     </span>
                 </div>
                 <div class="card-footer">
-                    <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5"
-                        style="width: 60px; border-radius: 0px; height: 30px;" name="kd_assessment_update"
-                        id="kd_assessment_update" value="<?= $assessment_id ?>">
-                    <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5"
-                        style="width: 60px; border-radius: 0px; height: 30px;" name="assessment_id[]" id="assessment_id"
+                    <input type="text" class="tx-12 mg-b-5 pd-t-5" style="width: 60px; border-radius: 0px; height: 30px;"
+                        name="kd_assessment_detail[]" id="kd_assessment_detail[]" value="<?= $vData->id ?>">
+                    <input type="text" class="tx-12 custom-select mg-b-5 pd-t-5"
+                        style="width: 60px; border-radius: 0px; height: 30px;" name="assessment_id" id="assessment_id"
                         value="<?= $assessment_id ?>">
-                    <input type="hidden"class="tx-12 custom-select mg-b-5 pd-t-5"
+                    <input type="text"class="tx-12 custom-select mg-b-5 pd-t-5"
                         style="width: 190px; border-radius: 0px; height: 30px;" name="item_id[]" id="item_id"
                         value="<?= $vData->item_id ?>">
 
+
+
                     <select name="assessment_result[]" id="assessment_result" class="tx-12 custom-select mg-b-5 pd-t-5"
                         style="width: 190px; border-radius: 0px; height: 30px;">
-                        <option value="2" class="tx-italic">--please select--</option>
+
+                        <option value="{{ $vData->assessment_result }}" @selected(old('assessment_result') == $vData->assessment_result)>
+                            @if ($vData->assessment_result == 1)
+                                competent
+                            @elseif($vData->assessment_result == 2)
+                                Need Improvement
+                            @else
+                                Not Applicable
+                            @endif
+                        </option>
                         <option value="1">Competent</option>
                         <option value="2">Need Improvement</option>
                         <option value="3">Not Applicable</option>
