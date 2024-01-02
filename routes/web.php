@@ -194,6 +194,7 @@ Route::resource('/assessmentAdminDetails', AssessmentDetailController::class);
 Route::resource('/aldpAdmin', AldpController::class);
 Route::resource('/closegap', ClosegapController::class);
 Route::resource('/userlogin', UserLoginController::class);
+Route::get('/userlogin/edit/{id}', [UserLoginController::class, 'editData']);
 Route::post('/updateStatus', [ClosegapController::class, 'updateStatus']);
 
 Route::get('/create', [ClosegapController::class, 'create']);

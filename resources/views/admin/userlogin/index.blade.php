@@ -76,7 +76,7 @@
 
                     <tr>
                         <td class="tx-center">
-                            <a href="/userlogin/{{ $view->id }}/edit" class="badge badge-warning pd-y-0"><i
+                            <a href="/userlogin/edit/{{ $view->id }}" class="badge badge-warning pd-y-0"><i
                                     data-feather="edit-2" class="wd-15"></i></a>
                             <form action="/userlogin/{{ $view->id }}" method="post" class="d-inline"
                                 onclick="return confirm('Are you sure?')">

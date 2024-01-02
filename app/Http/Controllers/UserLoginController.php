@@ -69,15 +69,17 @@ class UserLoginController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\UserLogin  $userLogin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(UserLogin $userLogin)
+
+    public function editData($id)
     {
-        //
+        $user =  DB::table('users')->where('id', $id)->first();
+        $data = DB::table('employees');
+
+        return view('admin.userLogin.edit', [
+            'data'      => $data->get(),
+            'user'      => $user,
+            'title'     => 'Edit Data User'
+        ]);
     }
 
     /**
@@ -87,9 +89,19 @@ class UserLoginController extends Controller
      * @param  \App\Models\UserLogin  $userLogin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserLogin $userLogin)
+    public function update(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'employee_id'   => 'required',
+            'employee_name' => 'required',
+            'email'         => 'required|email:dns|unique:users',
+            'password'      => 'required|min:5|max:255',
+            'role_id'       => 'required'
+        ]);
+
+        $id     = $request->input('assessment_id');
+        DB::table('assessments')->where('id', $id)->update($validation);
+        return redirect('/assessmentAdmin')->with('success', 'Data has been updated!');
     }
 
     
