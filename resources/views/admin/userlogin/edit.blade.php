@@ -19,9 +19,10 @@
     </div>
 
     <div class="col-md-8">
-        <form action="/userlogin" method="post">
+        <form action="/userlogin/update" method="post">
             @csrf
 
+            <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Employee ID</label>
                 <div class="col-sm-3">
@@ -81,13 +82,30 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Role ID</label>
                 <div class="col-sm-8">
-                    <select class="custom-select" name="year" id="year">
-                        <option @if (old('role_id', $user->role_id) == '1') selected @endif>Employee</option>
-                        <option @if (old('role_id', $user->role_id) == '2') selected @endif>Section</option>
-                        <option @if (old('role_id', $user->role_id) == '3') selected @endif>Department</option>
-                        <option @if (old('role_id', $user->role_id) == '4') selected @endif>General</option>
-                        <option @if (old('role_id', $user->role_id) == '5') selected @endif>Adm. Functional</option>
-                        <option @if (old('role_id', $user->role_id) == '6') selected @endif>Root</option>
+                    <select class="custom-select" name="role_id" id="role_id">
+
+                        <option value="{{ $user->role_id }}" @selected(old('role_id') == $user->role_id)>
+                            @if ($user->role_id == 1)
+                                Employee
+                            @elseif($user->role_id == 2)
+                                Section
+                            @elseif($user->role_id == 3)
+                                Department
+                            @elseif($user->role_id == 4)
+                                General
+                            @elseif($user->role_id == 5)
+                                Adm. Functional
+                            @else
+                                Root
+                            @endif
+                        </option>
+                        <option value="1">Employee</option>
+                        <option value="2">Section</option>
+                        <option value="3">Department</option>
+                        <option value="4">General</option>
+                        <option value="5">Adm. Functional</option>
+                        <option value="6">Root</option>
+
                     </select>
                 </div>
                 @error('role_id')

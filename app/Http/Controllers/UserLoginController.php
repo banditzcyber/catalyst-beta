@@ -89,19 +89,25 @@ class UserLoginController extends Controller
      * @param  \App\Models\UserLogin  $userLogin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function updateData(Request $request)
     {
+
+
         $validation = $request->validate([
             'employee_id'   => 'required',
             'employee_name' => 'required',
-            'email'         => 'required|email:dns|unique:users',
+            'email'         => 'required|email:dns',
             'password'      => 'required|min:5|max:255',
             'role_id'       => 'required'
         ]);
 
-        $id     = $request->input('assessment_id');
-        DB::table('assessments')->where('id', $id)->update($validation);
-        return redirect('/assessmentAdmin')->with('success', 'Data has been updated!');
+        $validation['password'] = Hash::make($validation['password']);
+
+        $id     = $request->input('user_id');
+        // dd($id);
+        DB::table('users')->where('id', $id)->update($validation);
+
+        return redirect('/userlogin')->with('success', 'Data has been updated!');
     }
 
     

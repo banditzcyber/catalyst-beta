@@ -180,23 +180,29 @@ Route::get('/departmentDashboard', [DepartDashboardController::class, 'index']);
 Route::get('/departSubordinate', [DepartSubordinateController::class, 'index']);
 Route::get('/departSubordinate/profile/{employee_id}', [DepartSubordinateController::class, 'profile']);
 
-// Access for admin
+// Access for administrator
 Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);
 Route::resource('/competency', CompetencyController::class);
 Route::resource('/performance', PerformanceStandardController::class);
 Route::resource('/items', ItemController::class);
 Route::resource('/matrix', ProfileMatrixController::class);
 Route::resource('/employees', EmployeeController::class);
+Route::resource('/aldpAdmin', AldpController::class);
+
+// ## Asessment
 Route::resource('/assessmentAdmin', AssessmentController::class);
 Route::get('/assessmentAdmin/edit/{id}', [AssessmentController::class, 'editData']);
 Route::post('/assessmentAdmin/update', [AssessmentController::class, 'updateData']);
 Route::resource('/assessmentAdminDetails', AssessmentDetailController::class);
-Route::resource('/aldpAdmin', AldpController::class);
-Route::resource('/closegap', ClosegapController::class);
+
+// ## Menu UserLogin
 Route::resource('/userlogin', UserLoginController::class);
 Route::get('/userlogin/edit/{id}', [UserLoginController::class, 'editData']);
-Route::post('/updateStatus', [ClosegapController::class, 'updateStatus']);
+Route::post('/userlogin/update', [UserLoginController::class, 'updateData']);
 
+// ## Close GAP
+Route::resource('/closegap', ClosegapController::class);
+Route::post('/updateStatus', [ClosegapController::class, 'updateStatus']);
 Route::get('/create', [ClosegapController::class, 'create']);
 Route::get('/store', [ClosegapController::class, 'store']);
 Route::get('/read', [ClosegapController::class, 'read']);
