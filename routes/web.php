@@ -182,12 +182,14 @@ Route::get('/departSubordinate/profile/{employee_id}', [DepartSubordinateControl
 
 // Access for administrator
 Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);
-Route::resource('/competency', CompetencyController::class);
 Route::resource('/performance', PerformanceStandardController::class);
 Route::resource('/items', ItemController::class);
-Route::resource('/matrix', ProfileMatrixController::class);
 Route::resource('/employees', EmployeeController::class);
 Route::resource('/aldpAdmin', AldpController::class);
+
+Route::resource('/matrix', ProfileMatrixController::class);
+Route::get('/matrix/edit/{id}', [ProfileMatrixController::class, 'editData']);
+Route::post('/matrix/updateData', [ProfileMatrixController::class, 'updateData']);
 
 // ## Asessment
 Route::resource('/assessmentAdmin', AssessmentController::class);
@@ -210,9 +212,11 @@ Route::get('/onprogress', [ClosegapController::class, 'onprogress']);
 Route::get('/show/{id}', [ClosegapController::class, 'show']);
 Route::get('/update/{id}', [ClosegapController::class, 'updateData']);
 
-// competency
+// Menu Competency
+Route::resource('/competency', CompetencyController::class);
 Route::get('/formCompetency', [CompetencyController::class, 'form']);
 Route::get('/saveData', [CompetencyController::class, 'saveData']);
+Route::post('/competency/updateData', [CompetencyController::class, 'updateData']);
 
 // import data
 Route::post('/competency/import-data', [CompetencyController::class, 'importData']);

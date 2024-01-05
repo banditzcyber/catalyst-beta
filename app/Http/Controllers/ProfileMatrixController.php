@@ -122,4 +122,20 @@ class ProfileMatrixController extends Controller
 
         return redirect('/matrix')->with('warning', 'Imprort data failed!');
     }
+
+    public function editData($id)
+    {
+
+        $data       = DB::table('profile_matrices')->where('id', $id)->first();
+        $competency = DB::table('competencies')->get();
+        $employee   = DB::table('employees')->get();
+
+
+        return view('admin.matrix.edit', [
+            'title'         => 'Edit Profile Matriix',
+            'data'          => $data,
+            'competency'    => $competency,
+            'employee'      => $employee
+        ]);
+    }
 }

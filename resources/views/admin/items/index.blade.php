@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <a href="/items/create" class="btn btn-sm btn-primary btn-uppercase">
+                    <a href="#" class="btn btn-sm btn-primary btn-uppercase">
                         <i data-feather="plus" class=""></i>
                     </a>
                 </div>
@@ -76,7 +76,7 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 75px">#</th>
+                    <th style="width: 45px">#</th>
                     <th>ID</th>
                     <th>Item Name</th>
                     <th>Intervention</th>
@@ -87,8 +87,8 @@
                 @foreach ($data as $view)
                     <tr>
                         <td class="tx-center">
-                            <a href="/items/{{ $view->item_id }}/edit" class="badge badge-warning pd-y-0"><i
-                                    data-feather="edit-2" class="wd-15"></i></a>
+                            {{-- <a href="/items/{{ $view->item_id }}/edit" class="badge badge-warning pd-y-0"><i
+                                    data-feather="edit-2" class="wd-15"></i></a> --}}
                             <form action="/items/{{ $view->item_id }}" method="post" class="d-inline"
                                 onclick="return confirm('Are you sure?')">
                                 @method('delete') @csrf

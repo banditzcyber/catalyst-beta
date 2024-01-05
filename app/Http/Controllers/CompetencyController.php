@@ -125,4 +125,23 @@ class CompetencyController extends Controller
 
         DB::table('competencies')->insert($data);
     }
+
+    public function updateData(Request $request)
+    {
+        $validation     = $request->validate([
+            'competency_id'         => 'required',
+            'competency_area'       => 'required',
+            'competency_type'       => 'required',
+            'competency_name'       => 'required',
+            'competency_bahasa'     => '',
+            'description'           => '',
+            'description_bahasa'    => '',
+            'status'                => ''
+        ]);
+
+        $id         = $request->input('id_competency');
+
+        DB::table('competencies')->where('id', $id)->update($validation);
+        return redirect('/competency')->with('success', 'New data has been addedd!');
+    }
 }

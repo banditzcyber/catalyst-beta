@@ -19,9 +19,10 @@
     </div>
 
     <div class="col-md-8">
-        <form action="/competency" method="post">
+        <form action="/competency/updateData" method="post">
             @csrf
 
+            <input type="hidden" name="id_competency" id="id_competency" value="{{ $data->id }}">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Competency ID</label>
                 <div class="col-sm-8">
@@ -39,7 +40,15 @@
                 <label class="col-sm-4 col-form-label">Area</label>
                 <div class="col-sm-8">
                     <select class="custom-select" name="competency_area" id="competency_area">
-                        <option selected class="tx-italic">--please select-</option>
+                        <option value="{{ $data->competency_area }}" @selected(old('role_id') == $data->competency_area)>
+                            @if ($data->competency_area == 'MFG')
+                                Manufacturing - MFG
+                            @elseif($data->competency_area == 'NMFG')
+                                Non Manufacturing - NMFG
+                            @else
+                                All
+                            @endif
+                        </option>
                         <option value="MFG">Manufacturing - MFG</option>
                         <option value="NMFG">Non Manufacturing - NMFG</option>
                         <option value="ALL">All</option>
@@ -56,7 +65,10 @@
                 <label class="col-sm-4 col-form-label">Type</label>
                 <div class="col-sm-8">
                     <select class="custom-select" name="competency_type" id="competency_type">
-                        <option selected class="tx-italic">--please select-</option>
+                        <option value="{{ $data->competency_type }}" @selected(old('role_id') == $data->competency_type)>
+                            {{ $data->competency_type }}
+                        </option>
+
                         <option value="Functional">Functional</option>
                         <option value="Core and Leardership">Core and Leadership</option>
                         <option value="Other">Other</option>
@@ -73,7 +85,7 @@
                 <div class="col-sm-8">
                     <input type="text" name="competency_name" id="competency_name"
                         class="form-control @error('competency_name') is-invalid @enderror" autofocus
-                        value="{{ old('competency_name') }}" placeholder="competency name" />
+                        value="{{ old('competency_name', $data->competency_name) }}" placeholder="competency name" />
                 </div>
                 @error('competency_name')
                     <div class="invalid-feedback">
@@ -86,7 +98,8 @@
                 <div class="col-sm-8">
                     <input type="text" name="competency_bahasa" id="competency_bahasa"
                         class="form-control @error('competency_bahasa') is-invalid @enderror" autofocus
-                        value="{{ old('competency_bahasa') }}" placeholder="competency name (bahasa)" />
+                        value="{{ old('competency_bahasa', $data->competency_bahasa) }}"
+                        placeholder="competency name (bahasa)" />
                 </div>
                 @error('competency_bahasa')
                     <div class="invalid-feedback">
@@ -98,7 +111,7 @@
                 <label class="col-sm-4 col-form-label">Description</label>
                 <div class="col-sm-8">
                     <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description"
-                        cols="30" rows="3" name="desc" value="{{ old('description') }}"></textarea>
+                        cols="30" rows="3" name="desc" value="{{ old('description') }}">{{ $data->description }}</textarea>
                     @error('description')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -115,7 +128,7 @@
                 <label class="col-sm-4 col-form-label">Description (bahasa)</label>
                 <div class="col-sm-8">
                     <textarea name="description_bahasa" class="form-control @error('description_bahasa') is-invalid @enderror"
-                        id="description_bahasa" cols="30" rows="3" name="desc" value="{{ old('description_bahasa') }}"></textarea>
+                        id="description_bahasa" cols="30" rows="3" name="desc" value="{{ old('description_bahasa') }}">{{ $data->description_bahasa }}</textarea>
                     @error('description_bahasa')
                         <div class="invalid-feedback">
                             {{ $message }}

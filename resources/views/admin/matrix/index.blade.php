@@ -91,7 +91,7 @@
                 @foreach ($data as $view)
                     <tr>
                         <td class="tx-center">
-                            <a href="/matrix/{{ $view->id }}/edit" class="badge badge-warning pd-y-0"><i
+                            <a href="/matrix/edit/{{ $view->id }}/" class="badge badge-warning pd-y-0"><i
                                     data-feather="edit-2" class="wd-15"></i></a>
                             <form action="/matrix/{{ $view->id }}" method="post" class="d-inline"
                                 onclick="return confirm('Are you sure?')">
