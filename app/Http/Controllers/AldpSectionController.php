@@ -244,4 +244,13 @@ class AldpSectionController extends Controller
 
         return redirect('/participant/'. $aldp_detail_id.'/'.$aldp_id)->with('success', 'Data has been Deleted!');
     }
+
+    public function submitForm(Request $request)
+    {
+
+        $data = $request->input('id');
+
+        DB::table('aldps')->where('id', $data)->update(['status' => 2]);
+        return redirect('/aldpSection')->with('success', 'Assessment has been updated!');
+    }
 }

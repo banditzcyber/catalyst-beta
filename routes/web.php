@@ -158,6 +158,8 @@ Route::get('/listItems', [ProfileEmployController::class, 'listItem']);
 
 // Access form Manager
 Route::resource('/dashboardSection', DashboardSectionController::class);
+
+// # menu ALDP
 Route::resource('/aldpSection', AldpSectionController::class);
 Route::get('/aldpSection/functional/{id_aldp}', [AldpSectionController::class, 'formFunctional']);
 Route::get('/aldpSection/cnl/{id_aldp}', [AldpSectionController::class, 'create']);
@@ -165,6 +167,8 @@ Route::get('/aldpSection/other/{id_aldp}', [AldpSectionController::class, 'creat
 Route::get('/participant/{aldp_detail_id}/{aldp_id}', [AldpSectionController::class, 'formParticipant']);
 Route::post('/deleteParticipant', [AldpSectionController::class, 'deleteParticipat']);
 Route::post('/addParticipant', [AldpSectionController::class, 'addParticipant']);
+Route::post('/submitForm', [AldpSectionController::class, 'submitForm']);
+
 Route::get('/subordinate', [SubordinateController::class, 'index']);
 Route::get('/subordinate/profile/{employee_id}', [SubordinateController::class, 'profile']);
 Route::get('/assessmentValidation', [AssessmentValidationController::class, 'index']);

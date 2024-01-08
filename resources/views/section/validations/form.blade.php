@@ -37,12 +37,12 @@
                     </span>
                 </div>
                 <div class="card-footer">
-                    <input type="text" class="tx-12 mg-b-5 pd-t-5" style="width: 60px; border-radius: 0px; height: 30px;"
+                    <input type="hidden" class="tx-12 mg-b-5 pd-t-5" style="width: 60px; border-radius: 0px; height: 30px;"
                         name="kd_assessment_detail[]" id="kd_assessment_detail[]" value="<?= $vData->id ?>">
-                    <input type="text" class="tx-12 custom-select mg-b-5 pd-t-5"
+                    <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5"
                         style="width: 60px; border-radius: 0px; height: 30px;" name="assessment_id" id="assessment_id"
                         value="<?= $assessment_id ?>">
-                    <input type="text"class="tx-12 custom-select mg-b-5 pd-t-5"
+                    <input type="hidden"class="tx-12 custom-select mg-b-5 pd-t-5"
                         style="width: 190px; border-radius: 0px; height: 30px;" name="item_id[]" id="item_id"
                         value="<?= $vData->item_id ?>">
 
