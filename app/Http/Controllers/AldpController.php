@@ -43,7 +43,9 @@ class AldpController extends Controller
      */
     public function create()
     {
-        $data   = DB::table('employees')->get();
+        $data   = DB::table('employees')->where('job_level', '=', 'SM')->orWhere('job_level', '=', 'DM')
+                    ->orWhere('job_level', '=', 'GM')->get();
+
         return view('admin.aldp.create', [
             'title'         => 'Add Annual Learning Development',
             'data'          => $data

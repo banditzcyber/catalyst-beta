@@ -156,7 +156,7 @@ Route::get('/profileEmploy/current', [ProfileEmployController::class, 'shojw']);
 Route::get('/listItems', [ProfileEmployController::class, 'listItem']);
 // Route::get('/current', [ProfileEmployController::class, 'index ']);
 
-// Access form Manager
+// ------------------------------------ Access form Manager -----------------------------------------------------------
 Route::resource('/dashboardSection', DashboardSectionController::class);
 
 // # menu ALDP
@@ -179,12 +179,12 @@ Route::get('/reviewAssessment/{id}/{kd_assessment}/{jobcode}', [AssessmentValida
 Route::post('/finishFormValidation', [AssessmentValidationController::class, 'finishFormValidation']);
 
 
-//Access from department
+// ------------------------------------------ Access from department -----------------------------------------------
 Route::get('/departmentDashboard', [DepartDashboardController::class, 'index']);
 Route::get('/departSubordinate', [DepartSubordinateController::class, 'index']);
 Route::get('/departSubordinate/profile/{employee_id}', [DepartSubordinateController::class, 'profile']);
 
-// Access for administrator
+// ------------------------------------- Access for administrator -----------------------------------------------
 Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);
 Route::resource('/performance', PerformanceStandardController::class);
 Route::resource('/items', ItemController::class);

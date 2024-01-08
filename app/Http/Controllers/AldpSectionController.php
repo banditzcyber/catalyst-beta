@@ -8,11 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class AldpSectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $idLogin    = auth()->user()->employee_id;
@@ -26,11 +22,7 @@ class AldpSectionController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function formFunctional($id)
     {
         $data = DB::table('assessment_details')
@@ -58,12 +50,7 @@ class AldpSectionController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
 

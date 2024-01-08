@@ -15,27 +15,9 @@
             </h4>
         </div>
         <div class="d-none d-md-block">
-            <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-primary">
-                    Add Data
-                </button>
-                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/aldpSection/functional/{{ $id_aldp }}"
-                        onclick="addDataFunctional()">Functional
-                        Competency</a>
-                    <a class="dropdown-item" href="/aldpSection/cnl/{{ $id_aldp }}">Core and Leadership Program</a>
-                    <a class="dropdown-item" href="/aldpSection/other/{{ $id_aldp }}">Other Program</a>
-                </div>
-            </div>
-
-            {{-- <a href="/aldpSection/form/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
-                <i data-feather="plus" class="wd-10 mg-r-5"></i>
-                Add
-            </a> --}}
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalItem">
+                Add Data
+            </button>
             <a href="/aldpSection" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
@@ -193,6 +175,7 @@
                             </div>
 
                             <div class="table-body" style="width: 420px;">
+                                <div>{{ $view->id }}</div>
                                 <div>{{ $view->item_id }}</div>
                                 <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
@@ -396,7 +379,7 @@
                             </a>
 
                             <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remaks }}</div>
+                                {{-- <div>{{ $view->remaks }}</div> --}}
                             </div>
 
                             @php
@@ -630,6 +613,26 @@
             </div>
         </div>
     </div>
+
+
+    {{-- -------------------------------------- MODAL ------------------------------------- --}}
+
+    <div class="modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="width: 310px">
+            <div class="modal-content">
+
+                <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-5 tx-center">
+
+                    <div class="demo-btn-group">
+                        <a class="btn btn-primary" href="/aldpSection/functional/{{ $id_aldp }}">Functional</a>
+                        <a class="btn btn-secondary" href="/aldpSection/functional/{{ $id_aldp }}">Leadership</a>
+                        <a class="btn btn-success" href="/aldpSection/functional/{{ $id_aldp }}">Other</a>
+                    </div>
+
+                </div><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 
 
     <script src="/lib/jquery/jquery.min.js"></script>
