@@ -37,7 +37,31 @@ class AldpSectionController extends Controller
         return view('section.aldp.create', [
             'title'     => 'Form Input ALDP (Functional)',
             'id_aldp'   => $id,
-            'data'      => $data
+            'data'      => $data,
+            'comp_type' => 1
+        ]);
+    }
+
+    public function formLeadership($id)
+    {
+        $data  = DB::table('items')
+                    ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
+                    ->join('competencies', 'competencies.competency_id', '=', 'performance_standards.competency_id')
+                    ->where('competencies.competency_type', '=','Leadership')
+                    ->get();
+        return view('section.aldp.create', [
+            'title'     => 'Form Input Leadership Competency',
+            'id_aldp'   => $id,
+            'data'      => $data,
+            'comp_type' => 2
+        ]);
+    }
+
+    public function formOther($id)
+    {
+        return view('section.aldp.createother', [
+            'title'      => 'Form Input Other Program or Mandatory Program',
+            'id_aldp'   => $id
         ]);
     }
 
@@ -53,7 +77,6 @@ class AldpSectionController extends Controller
 
     public function store(Request $request)
     {
-
 
         $validation     = $request->validate([
             'aldp_id'           => 'required',
@@ -72,6 +95,24 @@ class AldpSectionController extends Controller
         return redirect('/aldpSection/'. $validation['aldp_id'])->with('success', 'New data has been addedd!');
     }
 
+    public function submitFormOther(Request $request)
+    {
+        $validation = $request->validate([
+            'aldp_id'           => 'required',
+            'competency_type'   => 'required',
+            'item_name'         => 'required',
+            'planned_month'     => '',
+            'planned_week'      => '',
+            'remarks'           => ''
+        ]);
+
+        dd($validation);
+
+        $validation['status_detail'] = 0;
+
+        DB::table('aldp_details')->insert($validation);
+        return redirect('/aldpSection/'. $validation['aldp_id'])->with('success', 'New data has been addedd!');
+    }
 
     public function show($id)
     {
@@ -81,7 +122,7 @@ class AldpSectionController extends Controller
 
         $basequery = DB::table('aldp_details')
                     ->select('aldp_details.*', 'items.*', 'aldp_details.id as id_aldp_details')
-                    ->leftjoin('items','aldp_details.item_id', '=', 'items.item_id')
+                    ->join('items','aldp_details.item_id', '=', 'items.item_id')
                     ->where('aldp_details.aldp_id', '=', $id);
 
         $learning   = DB::table('learnings')
@@ -150,7 +191,6 @@ class AldpSectionController extends Controller
         ]);
     }
 
-
     public function edit(AldpSection $aldpSection)
     {
         //
@@ -163,7 +203,6 @@ class AldpSectionController extends Controller
 
     public function destroy(AldpSection $aldpSection)
     {
-        //
     }
 
     public function formParticipant($aldp_detail_id, $aldp_id)
