@@ -192,7 +192,7 @@
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
                                         ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
@@ -202,6 +202,7 @@
                                     <span
                                         class="badge
                                         @if ($vDetail->status == 0) badge-primary
+                                        
                                         @elseif ($vDetail->status == 1)
                                             badge-warning
                                         @else
@@ -625,8 +626,8 @@
 
                     <div class="demo-btn-group">
                         <a class="btn btn-primary" href="/aldpSection/functional/{{ $id_aldp }}">Functional</a>
-                        <a class="btn btn-secondary" href="/aldpSection/functional/{{ $id_aldp }}">Leadership</a>
-                        <a class="btn btn-success" href="/aldpSection/functional/{{ $id_aldp }}">Other</a>
+                        <a class="btn btn-secondary" href="/aldpSection/leadership/{{ $id_aldp }}">Leadership</a>
+                        <a class="btn btn-success" href="/aldpSection/other/{{ $id_aldp }}">Other</a>
                     </div>
 
                 </div><!-- modal-body -->
