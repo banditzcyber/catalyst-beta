@@ -201,9 +201,9 @@
                                 @foreach ($detail as $vDetail)
                                     <span
                                         class="badge
-                                        @if ($vDetail->status == 0) badge-primary
+                                        @if ($vDetail->status == 1) badge-primary
                                         
-                                        @elseif ($vDetail->status == 1)
+                                        @elseif ($vDetail->status == 2)
                                             badge-warning
                                         @else
                                             badge-success @endif
@@ -220,12 +220,12 @@
 
                             @php
                                 $propose = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
                                     ->count();
 
                                 $actual = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
-                                    ->where('status', '=', 2)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
+                                    ->where('status', '=', 3)
                                     ->count();
                                 if (empty($propose)) {
                                     $total = 0;
@@ -233,6 +233,8 @@
                                     $total = ($actual / $propose) * 100;
                                 }
                             @endphp
+
+
 
                             <div class="table-body tx-center"
                                 style="width: 60px;
@@ -354,21 +356,23 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="" class="table-body" style="width: 340px;">
+                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
+                                style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->aldp_detail_id)
+                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
                                 @endphp
 
                                 @foreach ($detail as $vDetail)
                                     <span
                                         class="badge
-                                        @if ($vDetail->status == 0) badge-primary
-                                        @elseif ($vDetail->status == 1)
+                                        @if ($vDetail->status == 1) badge-primary
+                                        
+                                        @elseif ($vDetail->status == 2)
                                             badge-warning
                                         @else
                                             badge-success @endif
@@ -380,20 +384,25 @@
                             </a>
 
                             <div class="table-body" style="width: 185px;">
-                                {{-- <div>{{ $view->remaks }}</div> --}}
+                                <div>{{ $view->remarks }}</div>
                             </div>
 
                             @php
                                 $propose = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
                                     ->count();
 
                                 $actual = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
-                                    ->where('status', '=', 2)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
+                                    ->where('status', '=', 3)
                                     ->count();
-                                $total = ($actual / $propose) * 100;
+                                if (empty($propose)) {
+                                    $total = 0;
+                                } else {
+                                    $total = ($actual / $propose) * 100;
+                                }
                             @endphp
+
 
                             <div class="table-body tx-center"
                                 style="width: 60px;
@@ -504,7 +513,7 @@
                             </div>
 
                             <div class="table-body" style="width: 420px;">
-                                <div>{{ $view->training_name }}</div>
+                                <div>{{ $view->item_name }}</div>
                                 {{-- <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
                                         [{{ $view->intervention }}, {{ $view->type_training }}]
@@ -515,13 +524,14 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="" class="table-body" style="width: 340px;">
+                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
+                                style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->aldp_detail_id)
+                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
                                 @endphp
 
@@ -529,6 +539,7 @@
                                     <span
                                         class="badge
                                         @if ($vDetail->status == 0) badge-primary
+                                        
                                         @elseif ($vDetail->status == 1)
                                             badge-warning
                                         @else
@@ -541,7 +552,7 @@
                             </a>
 
                             <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remaks }}</div>
+                                <div>{{ $view->remarks }}</div>
                             </div>
 
                             @php
