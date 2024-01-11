@@ -4,8 +4,83 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0caaf4368779b1ba1b3b3dc75e88a37c",
+    "content-hash": "98317854ba83ec5500df6c1eea4af4f8",
     "packages": [
+        {
+            "name": "24slides/laravel-saml2",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/24Slides/laravel-saml2.git",
+                "reference": "e96f4a27067efce984ffe26dfe1233d36ea5427d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/24Slides/laravel-saml2/zipball/e96f4a27067efce984ffe26dfe1233d36ea5427d",
+                "reference": "e96f4a27067efce984ffe26dfe1233d36ea5427d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "illuminate/console": "~5.5|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/database": "~5.5|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "~5.4|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "onelogin/php-saml": "^3.0|^4.0",
+                "php": ">=7.1",
+                "ramsey/uuid": "^3.8|^4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.9",
+                "phpunit/phpunit": "^7.5|^9.0",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Saml2": "Slides\\Saml2\\Facades\\Auth"
+                    },
+                    "providers": [
+                        "Slides\\Saml2\\ServiceProvider"
+                    ]
+                },
+                "branch-aliases": {
+                    "dev-master": "2.0.8-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Slides\\Saml2\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Artem Brezhnev",
+                    "email": "brezzhnev@gmail.com"
+                }
+            ],
+            "description": "SAML2 Service Provider integration to your Laravel 5.4+ application, based on OneLogin toolkit",
+            "homepage": "https://github.com/24slides/laravel-saml2",
+            "keywords": [
+                "SAML2",
+                "SSO",
+                "laravel",
+                "onelogin",
+                "saml"
+            ],
+            "support": {
+                "issues": "https://github.com/24Slides/laravel-saml2/issues",
+                "source": "https://github.com/24Slides/laravel-saml2/tree/2.3.0"
+            },
+            "time": "2023-11-26T10:59:23+00:00"
+        },
         {
             "name": "adnanhussainturki/microsoft-api-php",
             "version": "0.03",
@@ -4523,6 +4598,57 @@
                 "source": "https://github.com/socialiteproviders/manager"
             },
             "time": "2023-08-27T23:46:34+00:00"
+        },
+        {
+            "name": "socialiteproviders/microsoft-azure",
+            "version": "5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/Microsoft-Azure.git",
+                "reference": "7522b27cd8518706b50e03b40a396fb0a6891feb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/Microsoft-Azure/zipball/7522b27cd8518706b50e03b40a396fb0a6891feb",
+                "reference": "7522b27cd8518706b50e03b40a396fb0a6891feb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.2 || ^8.0",
+                "socialiteproviders/manager": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\Azure\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Hemmings",
+                    "email": "chris@hemmin.gs"
+                }
+            ],
+            "description": "Microsoft Azure OAuth2 Provider for Laravel Socialite",
+            "keywords": [
+                "azure",
+                "laravel",
+                "microsoft",
+                "oauth",
+                "provider",
+                "socialite"
+            ],
+            "support": {
+                "docs": "https://socialiteproviders.com/microsoft-azure",
+                "issues": "https://github.com/socialiteproviders/providers/issues",
+                "source": "https://github.com/socialiteproviders/providers"
+            },
+            "time": "2022-03-15T21:17:43+00:00"
         },
         {
             "name": "socialiteproviders/zoho",

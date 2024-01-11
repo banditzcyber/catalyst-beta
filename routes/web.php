@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\LoginLocalController;
 // use App\Http\Controllers\RegisterController;
 
@@ -51,15 +53,31 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
+Route::redirect('/', 'login');
+
+Route::group(['middleware' => ['web', 'guest']], function(){
+    Route::get('login', [AuthController::class, 'login'])->name('login');
+    Route::get('connect', [AuthController::class, 'connect'])->name('connect');
+});
+
+Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'], function(){
+    Route::get('/', [PageController::class, 'app'])->name('app');
+    Route::get('logout', [AuthController::class, 'login'])->name('logout');
+});
+
+// Route::get('/',[AuthController::class, 'login'])->name('login');
+// Route::get('/login',[AuthController::class, 'login'])->name('login');
+// Route::get('/connect',[AuthController::class, 'connect'])->name('connect');
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
 // MICROSOFT LOGIN
 // Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
-Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
-Route::get('microsoft-oAuth',[LoginController::class,'microsoftOAuth'])->name('microsoft.oAuth');
-Route::get('authenticate',[LoginController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
+// Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
+// Route::get('microsoft-oAuth',[LoginController::class,'microsoftOAuth'])->name('microsoft.oAuth');
+// Route::get('authenticate',[LoginController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
 
 
 // Route::get('/login/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2');
@@ -74,71 +92,9 @@ Route::post('/login', [LoginLocalController::class, 'login']);
 Route::post('/logout', [LoginLocalController::class, 'logout']);
 // Route::get('/auth-azure', [LoginController::class, 'authAzure']);
 
-// Route::get('/register', [RegisterController::class, 'index']);
-// Route::post('/register', [RegisterController::class, 'store']);
-
-// Route::get('/dashboard', function() {
-//     return view('admin.dashboard.index', [
-//         'title'     => 'Dashboard'
-//     ]);
-// });
-
-// Route::post('/dashboard', [DashboardController::class, 'authenticate']);
-
-// Route::middleware(['auth', 'check.role:1'])->group(function () {
-//     Route::resource('/profileEmploy', ProfileEmployController::class);
-//     Route::resource('/dashboardEmploy', DashboardEmployController::class);
-//     Route::resource('/mylearning', MylearningController::class);
-//     Route::resource('/assessmentEmployee', AssessmentEmployeeController::class);
-//     Route::get('/formassessment/{id}/{kd_assessment}/{jobcode}', [AssessmentEmployeeController::class, 'form']);
-//     Route::post('/saveformassessment', [AssessmentEmployeeController::class, 'saveFormAssessment']);
-
-//     // dashboard
-//     // Route::post('/profileEmploy/current', [AssessmentController::class, 'currentData']);
-// });
-
-// Route::middleware(['auth', 'check.role:2'])->group(function () {
-//     Route::resource('/dashboardSection', DashboardSectionController::class);
-//     Route::resource('/aldpSection', AldpSectionController::class);
-
-//     Route::resource('/profileEmploy', ProfileEmployController::class);
-//     Route::resource('/dashboardEmploy', DashboardEmployController::class);
-//     Route::resource('/mylearning', MylearningController::class);
-//     Route::resource('/assessmentEmployee', AssessmentEmployeeController::class);
-//     Route::get('/formassessment/{id}/{kd_assessment}/{jobcode}', [AssessmentEmployeeController::class, 'form']);
-//     Route::post('/saveformassessment', [AssessmentEmployeeController::class, 'saveFormAssessment']);
-
-//     // dashboard
-//     Route::post('/profileEmploy/current', [AssessmentController::class, 'currentData']);
-// });
 
 
-// Route::middleware(['auth', 'check.role:5'])->group(function () {
-
-//     Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);
-//     Route::resource('/competency', CompetencyController::class);
-//     Route::resource('/performance', PerformanceStandardController::class);
-//     Route::resource('/items', ItemController::class);
-//     Route::resource('/matrix', ProfileMatrixController::class);
-//     Route::resource('/employees', EmployeeController::class);
-//     Route::resource('/assessmentAdmin', AssessmentController::class);
-//     Route::resource('/assessmentAdminDetails', AssessmentDetailController::class);
-//     Route::resource('/aldpAdmin', AldpController::class);
-//     Route::resource('/closegap', ClosegapController::class);
-//     Route::resource('/userlogin', UserLoginController::class);
-
-//     // import data
-//     Route::post('/competency/import-data', [CompetencyController::class, 'importData']);
-//     Route::post('/performance/importData', [PerformanceStandardController::class, 'importData']);
-//     Route::post('/items/importData', [ItemController::class, 'importData']);
-//     Route::post('/matrix/importData', [ProfileMatrixController::class, 'importData']);
-//     Route::post('/employees/importData', [EmployeeController::class, 'importData']);
-//     Route::post('/assessment/importData', [AssessmentController::class, 'importData']);
-
-
-// });
-
-// Access for employee
+// ----------------------------------------Access for employee----------------------------------------------------
 
 Route::resource('/profileEmploy', ProfileEmployController::class);
 Route::resource('/dashboardEmploy', DashboardEmployController::class);
@@ -260,3 +216,68 @@ Route::post('/assessment/importData', [AssessmentController::class, 'importData'
 //Section Manager
 // Route::resource('/dashboardSection', DashboardSectionController::class);
 // Route::resource('/aldpSection', AldpSectionController::class);
+
+
+// Route::get('/register', [RegisterController::class, 'index']);
+// Route::post('/register', [RegisterController::class, 'store']);
+
+// Route::get('/dashboard', function() {
+//     return view('admin.dashboard.index', [
+//         'title'     => 'Dashboard'
+//     ]);
+// });
+
+// Route::post('/dashboard', [DashboardController::class, 'authenticate']);
+
+// Route::middleware(['auth', 'check.role:1'])->group(function () {
+//     Route::resource('/profileEmploy', ProfileEmployController::class);
+//     Route::resource('/dashboardEmploy', DashboardEmployController::class);
+//     Route::resource('/mylearning', MylearningController::class);
+//     Route::resource('/assessmentEmployee', AssessmentEmployeeController::class);
+//     Route::get('/formassessment/{id}/{kd_assessment}/{jobcode}', [AssessmentEmployeeController::class, 'form']);
+//     Route::post('/saveformassessment', [AssessmentEmployeeController::class, 'saveFormAssessment']);
+
+//     // dashboard
+//     // Route::post('/profileEmploy/current', [AssessmentController::class, 'currentData']);
+// });
+
+// Route::middleware(['auth', 'check.role:2'])->group(function () {
+//     Route::resource('/dashboardSection', DashboardSectionController::class);
+//     Route::resource('/aldpSection', AldpSectionController::class);
+
+//     Route::resource('/profileEmploy', ProfileEmployController::class);
+//     Route::resource('/dashboardEmploy', DashboardEmployController::class);
+//     Route::resource('/mylearning', MylearningController::class);
+//     Route::resource('/assessmentEmployee', AssessmentEmployeeController::class);
+//     Route::get('/formassessment/{id}/{kd_assessment}/{jobcode}', [AssessmentEmployeeController::class, 'form']);
+//     Route::post('/saveformassessment', [AssessmentEmployeeController::class, 'saveFormAssessment']);
+
+//     // dashboard
+//     Route::post('/profileEmploy/current', [AssessmentController::class, 'currentData']);
+// });
+
+
+// Route::middleware(['auth', 'check.role:5'])->group(function () {
+
+//     Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);
+//     Route::resource('/competency', CompetencyController::class);
+//     Route::resource('/performance', PerformanceStandardController::class);
+//     Route::resource('/items', ItemController::class);
+//     Route::resource('/matrix', ProfileMatrixController::class);
+//     Route::resource('/employees', EmployeeController::class);
+//     Route::resource('/assessmentAdmin', AssessmentController::class);
+//     Route::resource('/assessmentAdminDetails', AssessmentDetailController::class);
+//     Route::resource('/aldpAdmin', AldpController::class);
+//     Route::resource('/closegap', ClosegapController::class);
+//     Route::resource('/userlogin', UserLoginController::class);
+
+//     // import data
+//     Route::post('/competency/import-data', [CompetencyController::class, 'importData']);
+//     Route::post('/performance/importData', [PerformanceStandardController::class, 'importData']);
+//     Route::post('/items/importData', [ItemController::class, 'importData']);
+//     Route::post('/matrix/importData', [ProfileMatrixController::class, 'importData']);
+//     Route::post('/employees/importData', [EmployeeController::class, 'importData']);
+//     Route::post('/assessment/importData', [AssessmentController::class, 'importData']);
+
+
+// });
