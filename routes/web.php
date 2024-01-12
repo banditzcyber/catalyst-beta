@@ -41,6 +41,8 @@ use App\Http\Controllers\DepartSubordinateController;
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 
+use Dcblogdev\MsGraph\Models\MsGraphToken;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -65,9 +67,6 @@ Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'
     Route::get('logout', [AuthController::class, 'login'])->name('logout');
 });
 
-// Route::get('/',[AuthController::class, 'login'])->name('login');
-// Route::get('/login',[AuthController::class, 'login'])->name('login');
-// Route::get('/connect',[AuthController::class, 'connect'])->name('connect');
 
 // Route::get('/', function () {
 //     return view('welcome');
