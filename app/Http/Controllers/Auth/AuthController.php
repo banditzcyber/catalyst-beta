@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Dcblogdev\MsGraph\Facades\MsGraph;
-use Dcblogdev\MsGraph\Models\MsGraphToken;
-use Laravel\Socialite\Facades\Socialite;
+// use Dcblogdev\MsGraph\Models\MsGraphToken;
+// use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -22,7 +22,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        return MsGraph::disconnect();
+        return MsGraph::disconnect('/');
     }
 
     public function redirectToMicrosoft()

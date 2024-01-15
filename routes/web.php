@@ -67,12 +67,16 @@ Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'
     Route::get('logout', [AuthController::class, 'login'])->name('logout');
 });
 
-Route::get('/login/azure', [AuthController::class, 'redirectToMicrosoft']);
-Route::get('/login/azure/callback', [AuthController::class, 'handleMicrosoftCallback']);
+// Route::redirect('/', 'login');
 
+// Route::group(['middleware' => ['web', 'guest']], function(){
+//     Route::get('login', AuthController::class, 'login')->name('login');
+//     Route::get('connect', AuthController::class, 'connect')->name('connect');
+// });
 
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'], function(){
+//     Route::get('/', PagesController::class, 'app')->name('app');
+//     Route::get('logout', AuthController::class, 'logout')->name('logout');
 // });
 
 // MICROSOFT LOGIN
