@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function connect()
     {
-        dd('testing');
+        // dd('testing');
         return MsGraph::connect();
     }
 
