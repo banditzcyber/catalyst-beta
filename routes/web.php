@@ -89,9 +89,9 @@ Route::get('/login/azure/callback', [AuthController::class, 'handleMicrosoftCall
 
 // Route::get('/', [LoginController::class, 'index']);
 Route::get('/formLogin', [LoginLocalController::class, 'formLogin']);
-Route::post('/login', [LoginLocalController::class, 'login']);
+Route::post('/signin', [LoginLocalController::class, 'login']);
 // Route::post('/authenticate', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginLocalController::class, 'logout']);
+Route::post('/signout', [LoginLocalController::class, 'logout']);
 // Route::get('/auth-azure', [LoginController::class, 'authAzure']);
 
 
