@@ -67,6 +67,9 @@ Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'
     Route::get('logout', [AuthController::class, 'login'])->name('logout');
 });
 
+Route::get('/login/azure', [AuthController::class, 'redirectToMicrosoft']);
+Route::get('/login/azure/callback', [AuthController::class, 'handleMicrosoftCallback']);
+
 
 // Route::get('/', function () {
 //     return view('welcome');
