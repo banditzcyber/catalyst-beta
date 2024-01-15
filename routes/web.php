@@ -42,7 +42,7 @@ use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
 
 use Dcblogdev\MsGraph\Models\MsGraphToken;
-
+use App\Http\Controllers\MicrosoftAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,17 +55,17 @@ use Dcblogdev\MsGraph\Models\MsGraphToken;
 |
 */
 
-Route::redirect('/', 'login');
+// Route::redirect('/', 'login');
 
-Route::group(['middleware' => ['web', 'guest']], function(){
-    Route::get('login', [AuthController::class, 'login'])->name('login');
-    Route::get('connect', [AuthController::class, 'connect'])->name('connect');
-});
+// Route::group(['middleware' => ['web', 'guest']], function(){
+//     Route::get('login', [AuthController::class, 'login'])->name('login');
+//     Route::get('connect', [AuthController::class, 'connect'])->name('connect');
+// });
 
-Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'], function(){
-    Route::get('/', [PageController::class, 'app'])->name('app');
-    Route::get('logout', [AuthController::class, 'login'])->name('logout');
-});
+// Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'], function(){
+//     Route::get('/', [PageController::class, 'app'])->name('app');
+//     Route::get('logout', [AuthController::class, 'login'])->name('logout');
+// });
 
 // Route::redirect('/', 'login');
 
@@ -78,6 +78,11 @@ Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'
 //     Route::get('/', PagesController::class, 'app')->name('app');
 //     Route::get('logout', AuthController::class, 'logout')->name('logout');
 // });
+
+// MICROSOFT LOGIN
+Route::get('/',[MicrosoftAuthController::class,'signInForm'])->name('sign.in');
+Route::get('microsoft-oAuth',[MicrosoftAuthController::class,'microsoftOAuth'])->name('microsoft.oAuth');
+Route::get('callback',[MicrosoftAuthController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
 
 // MICROSOFT LOGIN
 // Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
