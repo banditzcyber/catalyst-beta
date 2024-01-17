@@ -47,7 +47,7 @@
                     <li class="nav-item"><a href="" class="nav-link"><i data-feather="help-circle"></i>
                             <span>Help Center</span></a></li>
                     <li class="nav-item">
-                        <form action="/logout" method="POST" onclick="return confirm('Are you sure?')">
+                        <form action="/signout" method="POST" onclick="return confirm('Are you sure?')">
                             @csrf
                             <button type="submit" class="nav-link dropdown-item">
                                 <i data-feather="log-out"></i>
