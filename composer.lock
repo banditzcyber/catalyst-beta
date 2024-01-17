@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b2b8ab315bc9b24b1389521f6115273",
+    "content-hash": "81a434b02fb0dfa0011bb69bd1230cc5",
     "packages": [
         {
             "name": "24slides/laravel-saml2",
@@ -2762,60 +2762,6 @@
                 "source": "https://github.com/microsoftgraph/msgraph-sdk-php/tree/1.109.2"
             },
             "time": "2023-12-01T09:41:49+00:00"
-        },
-        {
-            "name": "miniorange/oauth-laravel-free",
-            "version": "v2.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/miniOrangeDev/oauth-laravel-free.git",
-                "reference": "59100b5edf25a655e4e73d24c7d96a9f31b41697"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/miniOrangeDev/oauth-laravel-free/zipball/59100b5edf25a655e4e73d24c7d96a9f31b41697",
-                "reference": "59100b5edf25a655e4e73d24c7d96a9f31b41697",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": ">=5.2",
-                "php": "^5.1 || ^7.1 || ^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "provider\\oauthServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/connector.php"
-                ],
-                "psr-4": {
-                    "provider\\": "provider/"
-                },
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "miniOrange Security Software Pvt Ltd",
-                    "email": "laravelsupport@xecurify.com"
-                }
-            ],
-            "description": "Laravel OAuth Single Sign On Solution. Make yourLaravel application as OAuth Client using this plugin. Laravel end users can login into Laravel application using their OAuth Provider / Server credentials.",
-            "support": {
-                "issues": "https://github.com/miniOrangeDev/oauth-laravel-free/issues",
-                "source": "https://github.com/miniOrangeDev/oauth-laravel-free/tree/v2.0.7"
-            },
-            "time": "2023-11-22T11:50:58+00:00"
         },
         {
             "name": "monolog/monolog",

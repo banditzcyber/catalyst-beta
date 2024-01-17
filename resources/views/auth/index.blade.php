@@ -26,7 +26,7 @@
             <div class="col-lg-3 col-sm-4">
 
                 <main class="form-signin tx-center">
-                    <form action="/login" method="post">
+                    <form action="/signin" method="post">
                         @csrf
                         <img class="mb-2 tx-center" src="/images/logo_mycatalyst_full.png" width="270">
                         <div class="mb-4 tx-20 tx-center">Please sign in</div>

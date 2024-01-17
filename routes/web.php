@@ -80,9 +80,13 @@ use App\Http\Controllers\MicrosoftAuthController;
 // });
 
 // MICROSOFT LOGIN
-Route::get('/',[MicrosoftAuthController::class,'signInForm'])->name('sign.in');
-Route::get('microsoft-oAuth',[MicrosoftAuthController::class,'microsoftOAuth'])->name('microsoft.oAuth');
-Route::get('callback',[MicrosoftAuthController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
+// Route::get('/',[MicrosoftAuthController::class,'signInForm'])->name('sign.in');
+// Route::get('microsoft-oAuth',[MicrosoftAuthController::class,'microsoftOAuth'])->name('microsoft.oAuth');
+// Route::get('callback',[MicrosoftAuthController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
+
+Route::get('/login', 'LoginController@redirectToAzure');
+Route::get('/connect', 'LoginController@handleAzureCallback');
+
 
 // MICROSOFT LOGIN
 // Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');

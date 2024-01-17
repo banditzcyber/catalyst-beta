@@ -20,8 +20,8 @@ class EventServiceProvider extends ServiceProvider
             
         ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            // add your listeners (aka providers) here
-            'SocialiteProviders\\Zoho\\ZohoExtendSocialite@handle',
+            // ... other providers
+            \SocialiteProviders\Azure\AzureExtendSocialite::class.'@handle',
         ],
     ];
 

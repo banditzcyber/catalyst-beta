@@ -18,7 +18,7 @@ class LoginController extends Controller
         ]);
     }
 
-    public function login(Request $request)
+    public function signin(Request $request)
     {
 
         // dd($request);
@@ -154,6 +154,12 @@ class LoginController extends Controller
         $email = $user->data->getUserPrincipalName();
 
         dd($name,$email);
+    }
+
+
+    public function loginAzure()
+    {
+        return Socialite::driver('azure')->redirect();
     }
 
 }
