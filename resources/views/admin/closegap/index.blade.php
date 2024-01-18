@@ -64,11 +64,10 @@
             <thead class="thead-primary tx-uppercase">
                 <tr>
                     <th>ID</th>
-                    <th>Employee Name</th>
+                    <th>Employee</th>
                     <th>Item ID</th>
                     <th>Item Name</th>
-                    <th>Started at</th>
-                    <th>Finished at</th>
+                    <th>Date</th>
                     <th>Comment</th>
                     <th>Status</th>
                 </tr>
@@ -79,10 +78,10 @@
 
                         if ($view->status == 1) {
                             $color = 'bg-light';
-                            $text = 'Assigned';
+                            $text = 'Submitted';
                         } elseif ($view->status == 2) {
                             $color = 'bg-warning';
-                            $text = 'On-Progress';
+                            $text = 'Reviewed';
                         } elseif ($view->status == 3) {
                             $color = 'bg-success';
                             $text = 'Approved';
@@ -96,9 +95,9 @@
                         <td>{{ $view->employee_name }}</td>
                         <td>{{ $view->item_id }}</td>
                         <td>{{ $view->item_name }}</td>
-                        <td>{{ $view->started_at }}</td>
-                        <td>{{ $view->finished_at }}</td>
-                        <td>{{ $view->status }}</td>
+                        <td>{{ date('d F Y', strtotime($view->started_at)) }} s/d
+                            {{ date('d F Y', strtotime($view->finished_at)) }}</td>
+                        <td>{{ $view->comment }}</td>
                         <td class="{{ $color }} tx-center" style="cursor: pointer"
                             onclick="show({{ $view->id }})">
                             {{ $text }}
