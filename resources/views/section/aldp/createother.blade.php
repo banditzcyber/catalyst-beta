@@ -24,15 +24,15 @@
 
             <div class="form-group row row-xs">
                 <div class="col-sm-3">
-                    <input type="text" name="aldp_id" id="aldp_id" class="form-control " autofocus
+                    <input type="hidden" name="aldp_id" id="aldp_id" class="form-control " autofocus
                         value="{{ $id_aldp }}" placeholder="position" readonly />
                 </div>
                 <div class="col-sm-5">
-                    <input type="text" name="competency_type" id="competency_type" class="form-control " autofocus
+                    <input type="hidden" name="competency_type" id="competency_type" class="form-control " autofocus
                         value="3" placeholder="position" readonly />
                 </div>
                 <div class="col-sm-5">
-                    <input type="text" name="item_id" id="item_id" class="form-control " autofocus value="1"
+                    <input type="hidden" name="item_id" id="item_id" class="form-control " autofocus value="1"
                         placeholder="position" readonly />
                 </div>
             </div>
