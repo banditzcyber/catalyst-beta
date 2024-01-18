@@ -12,6 +12,11 @@ use myPHPnotes\Microsoft\Handlers\Session;
 
 class LoginController extends Controller
 {
+    public function signInForm()
+    {
+        return view('auth.sign-in');
+    }
+    
     public function formLogin()
     {
         return view('auth.index', [
