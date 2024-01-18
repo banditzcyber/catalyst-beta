@@ -15,28 +15,16 @@
             </h4>
         </div>
         <div class="d-none d-md-block">
-            <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-primary">
-                    Add Data
-                </button>
-                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#" onclick="addDataFunctional()">Functional
-                        Competency</a>
-                    <a class="dropdown-item" href="#">Core and Leadership Program</a>
-                    <a class="dropdown-item" href="#">Other Program</a>
-                </div>
-            </div>
-            <a href="/aldpAdmin" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalItem">
+                Add Data
+            </button>
+            <a href="/aldpSection" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>
         </div>
     </div>
-
+    {{-- Budge --}}
     <div class="d-md-flex align-items-center justify-content-between">
 
         <div class="col-12 mg-t-10">
@@ -130,7 +118,7 @@
 
     </div>
 
-
+    {{-- functional competency  --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
             <div class="mg-t-10 mg-b-10" role="alert">
@@ -187,6 +175,7 @@
                             </div>
 
                             <div class="table-body" style="width: 420px;">
+                                <div>{{ $view->id }}</div>
                                 <div>{{ $view->item_id }}</div>
                                 <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
@@ -198,21 +187,23 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="" class="table-body" style="width: 340px;">
+                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
+                                style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->aldp_detail_id)
+                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
                                 @endphp
 
                                 @foreach ($detail as $vDetail)
                                     <span
-                                        class="badge 
-                                        @if ($vDetail->status == 0) badge-primary
-                                        @elseif ($vDetail->status == 1)
+                                        class="badge
+                                        @if ($vDetail->status == 1) badge-primary
+                                        
+                                        @elseif ($vDetail->status == 2)
                                             badge-warning
                                         @else
                                             badge-success @endif
@@ -229,23 +220,24 @@
 
                             @php
                                 $propose = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
                                     ->count();
-                                
-                                $actual = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
-                                    ->where('status', '=', 2)
-                                    ->count();
-                                if(empty($propose)){
-                                    $total = 0;
-                                }else{
 
+                                $actual = DB::table('learnings')
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
+                                    ->where('status', '=', 3)
+                                    ->count();
+                                if (empty($propose)) {
+                                    $total = 0;
+                                } else {
                                     $total = ($actual / $propose) * 100;
                                 }
                             @endphp
 
+
+
                             <div class="table-body tx-center"
-                                style="width: 60px; 
+                                style="width: 60px;
                             @if ($total == 0) background: #E2445C; color: #FFFDE7
                         @elseif ($total <= 75)
                             background: #FDAB3D; color: #FFFDE7
@@ -296,7 +288,7 @@
             </div>
         </div>
     </div>
-
+    {{-- Core Leadership Competency --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
             <div class="mg-t-10 mg-b-10" role="alert">
@@ -364,21 +356,23 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="" class="table-body" style="width: 340px;">
+                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
+                                style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->aldp_detail_id)
+                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
                                 @endphp
 
                                 @foreach ($detail as $vDetail)
                                     <span
-                                        class="badge 
-                                        @if ($vDetail->status == 0) badge-primary
-                                        @elseif ($vDetail->status == 1)
+                                        class="badge
+                                        @if ($vDetail->status == 1) badge-primary
+                                        
+                                        @elseif ($vDetail->status == 2)
                                             badge-warning
                                         @else
                                             badge-success @endif
@@ -390,28 +384,28 @@
                             </a>
 
                             <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remaks }}</div>
+                                <div>{{ $view->remarks }}</div>
                             </div>
 
                             @php
                                 $propose = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
                                     ->count();
-                                
+
                                 $actual = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
-                                    ->where('status', '=', 2)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
+                                    ->where('status', '=', 3)
                                     ->count();
-                                
-                                if(empty($propose)){
+                                if (empty($propose)) {
                                     $total = 0;
-                                }else{
+                                } else {
                                     $total = ($actual / $propose) * 100;
                                 }
                             @endphp
 
+
                             <div class="table-body tx-center"
-                                style="width: 60px; 
+                                style="width: 60px;
                             @if ($total == 0) background: #E2445C; color: #FFFDE7
                         @elseif ($total <= 75)
                             background: #FDAB3D; color: #FFFDE7
@@ -462,7 +456,7 @@
             </div>
         </div>
     </div>
-
+    {{-- Other Program --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
             <div class="mg-t-10 mg-b-10" role="alert">
@@ -519,7 +513,7 @@
                             </div>
 
                             <div class="table-body" style="width: 420px;">
-                                <div>{{ $view->training_name }}</div>
+                                <div>{{ $view->item_name }}</div>
                                 {{-- <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
                                         [{{ $view->intervention }}, {{ $view->type_training }}]
@@ -530,20 +524,22 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="" class="table-body" style="width: 340px;">
+                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
+                                style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->aldp_detail_id)
+                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
                                 @endphp
 
                                 @foreach ($detail as $vDetail)
                                     <span
-                                        class="badge 
+                                        class="badge
                                         @if ($vDetail->status == 0) badge-primary
+                                        
                                         @elseif ($vDetail->status == 1)
                                             badge-warning
                                         @else
@@ -556,21 +552,21 @@
                             </a>
 
                             <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remaks }}</div>
+                                <div>{{ $view->remarks }}</div>
                             </div>
 
                             @php
                                 $propose = DB::table('learnings')
                                     ->where('aldp_detail_id', '=', $view->aldp_detail_id)
                                     ->count();
-                                
+
                                 $actual = DB::table('learnings')
                                     ->where('aldp_detail_id', '=', $view->aldp_detail_id)
                                     ->where('status', '=', 2)
                                     ->count();
-                                
+
                                 // $total = 0;
-                                
+
                                 if (empty($actual)) {
                                     $total = 0;
                                 } else {
@@ -579,7 +575,7 @@
                             @endphp
 
                             <div class="table-body tx-center"
-                                style="width: 60px; 
+                                style="width: 60px;
                             @if ($total == 0) background: #E2445C; color: #FFFDE7
                         @elseif ($total <= 75)
                             background: #FDAB3D; color: #FFFDE7
@@ -629,6 +625,26 @@
             </div>
         </div>
     </div>
+
+
+    {{-- -------------------------------------- MODAL ------------------------------------- --}}
+
+    <div class="modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="width: 310px">
+            <div class="modal-content">
+
+                <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-5 tx-center">
+
+                    <div class="demo-btn-group">
+                        <a class="btn btn-primary" href="/aldpSection/functional/{{ $id_aldp }}">Functional</a>
+                        <a class="btn btn-secondary" href="/aldpSection/leadership/{{ $id_aldp }}">Leadership</a>
+                        <a class="btn btn-success" href="/aldpSection/other/{{ $id_aldp }}">Other</a>
+                    </div>
+
+                </div><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 
 
     <script src="/lib/jquery/jquery.min.js"></script>
