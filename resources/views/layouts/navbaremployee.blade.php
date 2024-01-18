@@ -38,14 +38,14 @@
             </div>
             <div class="collapse" id="loggedinMenu">
                 <ul class="nav nav-aside mg-b-0">
-                    <li class="nav-item"><a href="" class="nav-link"><i data-feather="edit"></i> <span>Edit
+                    {{-- <li class="nav-item"><a href="" class="nav-link"><i data-feather="edit"></i> <span>Edit
                                 Profile</span></a></li>
                     <li class="nav-item"><a href="" class="nav-link"><i data-feather="user"></i> <span>View
                                 Profile</span></a></li>
                     <li class="nav-item"><a href="" class="nav-link"><i data-feather="settings"></i>
                             <span>Account Settings</span></a></li>
                     <li class="nav-item"><a href="" class="nav-link"><i data-feather="help-circle"></i>
-                            <span>Help Center</span></a></li>
+                            <span>Help Center</span></a></li> --}}
                     <li class="nav-item">
                         <form action="/signout" method="POST" onclick="return confirm('Are you sure?')">
                             @csrf

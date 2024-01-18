@@ -19,7 +19,7 @@ use App\Http\Controllers\UserLoginController;
 
 use App\Http\Controllers\DashboardFunctController;
 use App\Http\Controllers\AldpController;
-use App\Http\Controllers\ClosegapController;
+use App\Http\Controllers\CloseGapController;
 
 // Employees
 use App\Http\Controllers\ProfileEmployController;
@@ -179,14 +179,14 @@ Route::get('/userlogin/edit/{id}', [UserLoginController::class, 'editData']);
 Route::post('/userlogin/update', [UserLoginController::class, 'updateData']);
 
 // ## Close GAP
-Route::resource('/closegap', ClosegapController::class);
-Route::post('/updateStatus', [ClosegapController::class, 'updateStatus']);
-Route::get('/create', [ClosegapController::class, 'create']);
-Route::get('/store', [ClosegapController::class, 'store']);
-Route::get('/read', [ClosegapController::class, 'read']);
-Route::get('/onprogress', [ClosegapController::class, 'onprogress']);
-Route::get('/show/{id}', [ClosegapController::class, 'show']);
-Route::get('/update/{id}', [ClosegapController::class, 'updateData']);
+Route::resource('/closegap', CloseGapController::class);
+Route::post('/updateStatus', [CloseGapController::class, 'updateStatus']);
+Route::get('/create', [CloseGapController::class, 'create']);
+Route::get('/store', [CloseGapController::class, 'store']);
+Route::get('/read', [CloseGapController::class, 'read']);
+Route::get('/onprogress', [CloseGapController::class, 'onprogress']);
+Route::get('/show/{id}', [CloseGapController::class, 'show']);
+Route::get('/update/{id}', [CloseGapController::class, 'updateData']);
 
 // Menu Competency
 Route::resource('/competency', CompetencyController::class);
