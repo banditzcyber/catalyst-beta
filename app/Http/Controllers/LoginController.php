@@ -39,11 +39,8 @@ class LoginController extends Controller
     {
 
         $microsoft = new Auth(env('TENANT_ID'),env('CLIENT_ID'),env('CLIENT_SECRET'),env('CALLBACK_URL') ,["User.Read"]);
-
         $tokens = $microsoft->getToken($request->code);
-
         $accessToken = $tokens->access_token;
-
         $microsoft->setAccessToken($accessToken);
 
         $user = new User;
