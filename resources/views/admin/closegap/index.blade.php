@@ -36,16 +36,16 @@
         </div>
         <div class="d-none d-md-block">
 
-            <button class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-l-5">
-                <i data-feather="send" class="wd-10 mg-r-5"></i>
-                Assigned
-            </button>
-            <a href="/closegap/reviewed" class="btn btn-sm pd-x-15 btn-warning btn-uppercase mg-l-5">
-                <i data-feather="refresh-cw" class="wd-10 mg-r-5"></i>
-                On-Progress
+            <a href="/closegap" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-l-5">
+                <i data-feather="list" class="wd-10 mg-r-5"></i>
+                All
             </a>
-            <a href="/closegap/completed" class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5">
-                <i data-feather="target" class="wd-10 mg-r-5"></i>
+            <a href="/closegapreview" class="btn btn-sm pd-x-15 btn-warning btn-uppercase mg-l-5">
+                <i data-feather="refresh-cw" class="wd-10 mg-r-5"></i>
+                Reviewed
+            </a>
+            <a href="/closegapcompleted" class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5">
+                <i data-feather="check-circle" class="wd-10 mg-r-5"></i>
                 Completed
             </a>
 
@@ -90,7 +90,7 @@
                         }
                     @endphp
                     <tr>
-                        <td>({{ $view->employee_id }}) {{ $view->employee_name }}</td>
+                        <td>{{ $view->employee_name }} - {{ $view->employee_id }}</td>
                         <td>{{ $view->item_id }}</td>
                         <td>{{ $view->item_name }}</td>
                         <td>{{ date('d F Y', strtotime($view->started_at)) }} s/d

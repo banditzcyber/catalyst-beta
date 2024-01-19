@@ -42,6 +42,52 @@ class CloseGapController extends Controller
         ]);
     }
 
+    public function closegapcompleted()
+    {
+
+        $search = DB::table('learnings')
+                    ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
+                    ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
+                    ->join('items', 'learnings.item_id', '=', 'items.item_id')
+                    ->where('learnings.status', 3)
+                    ->select('learnings.id', 'employees.employee_id', 'employees.employee_name', 'learnings.item_id', 'items.item_name', 'learnings.started_at', 'learnings.finished_at', 'learnings.comment', 'learnings.status');
+
+        if(request('search')) {
+            $search->where('items.item_id', 'like', '%' . request('search') . '%')
+                   ->orWhere('employees.employee_id', 'like', '%' . request('search') . '%')
+                   ->orWhere('employees.employee_name', 'like', '%' . request('search') . '%')
+                   ->orWhere('items.item_name', 'like', '%' . request('search') . '%');
+        }
+
+        return view('admin.closegap.index', [
+            'title'     => 'Close Gap Activity - Completed',
+            'data'      => $search->paginate(10)->withQueryString()
+        ]);
+    }
+
+    public function closegapreview()
+    {
+
+        $search = DB::table('learnings')
+                    ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
+                    ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
+                    ->join('items', 'learnings.item_id', '=', 'items.item_id')
+                    ->where('learnings.status', 2)
+                    ->select('learnings.id', 'employees.employee_id', 'employees.employee_name', 'learnings.item_id', 'items.item_name', 'learnings.started_at', 'learnings.finished_at', 'learnings.comment', 'learnings.status');
+
+        if(request('search')) {
+            $search->where('items.item_id', 'like', '%' . request('search') . '%')
+                   ->orWhere('employees.employee_id', 'like', '%' . request('search') . '%')
+                   ->orWhere('employees.employee_name', 'like', '%' . request('search') . '%')
+                   ->orWhere('items.item_name', 'like', '%' . request('search') . '%');
+        }
+
+        return view('admin.closegap.index', [
+            'title'     => 'Close Gap Activity - Reviewed',
+            'data'      => $search->paginate(10)->withQueryString()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
