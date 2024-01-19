@@ -122,7 +122,7 @@
                     <select class="custom-select" name="planned_month" id="planned_month">
                         <option selected class="tx-italic">--select mount-</option>
                         <option value="January">January</option>
-                        <option value="Pebruary">Pebruary</option>
+                        <option value="February">February</option>
                         <option value="March">March</option>
                         <option value="April">April</option>
                         <option value="June">June</option>

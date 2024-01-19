@@ -187,6 +187,7 @@ Route::get('/read', [CloseGapController::class, 'read']);
 Route::get('/onprogress', [CloseGapController::class, 'onprogress']);
 Route::get('/show/{id}', [CloseGapController::class, 'show']);
 Route::get('/update/{id}', [CloseGapController::class, 'updateData']);
+Route::get('/closegap/completed', [CloseGapController::class, 'completed']);
 
 // Menu Competency
 Route::resource('/competency', CompetencyController::class);

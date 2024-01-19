@@ -38,13 +38,13 @@
 
             <button class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-l-5">
                 <i data-feather="send" class="wd-10 mg-r-5"></i>
-                Assign
+                Assigned
             </button>
-            <a href="/closegap/create" class="btn btn-sm pd-x-15 btn-warning btn-uppercase mg-l-5">
+            <a href="/closegap/reviewed" class="btn btn-sm pd-x-15 btn-warning btn-uppercase mg-l-5">
                 <i data-feather="refresh-cw" class="wd-10 mg-r-5"></i>
                 On-Progress
             </a>
-            <a href="/closegap/create" class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5">
+            <a href="/closegap/completed" class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5">
                 <i data-feather="target" class="wd-10 mg-r-5"></i>
                 Completed
             </a>
@@ -63,7 +63,6 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
                 <tr>
-                    <th>ID</th>
                     <th>Employee</th>
                     <th>Item ID</th>
                     <th>Item Name</th>
@@ -91,8 +90,7 @@
                         }
                     @endphp
                     <tr>
-                        <td>{{ $view->employee_id }}</td>
-                        <td>{{ $view->employee_name }}</td>
+                        <td>({{ $view->employee_id }}) {{ $view->employee_name }}</td>
                         <td>{{ $view->item_id }}</td>
                         <td>{{ $view->item_name }}</td>
                         <td>{{ date('d F Y', strtotime($view->started_at)) }} s/d
