@@ -12,13 +12,13 @@ class ProfileEmployController extends Controller
     {
 
         // $idLogin    = '003169';
-        // $idLogin    = auth()->user()->employee_id;
+        $idLogin    = $request->session()->get('user');
 
-        if(empty(auth()->user()->employee_id)){
-            $idLogin = auth()->user()->employee_id;
-        }else{
-            $idLogin = $request->session()->get('user');
-        }
+        // if(empty(auth()->user()->employee_id)){
+        //     $idLogin = auth()->user()->employee_id;
+        // }else{
+        //     $idLogin = $request->session()->get('user');
+        // }
 
         $dEmployee  = DB::table('employees')
                       ->where('employees.employee_id', '=', $idLogin );
