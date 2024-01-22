@@ -228,7 +228,8 @@ class AldpSectionController extends Controller
                         ->where('learnings.aldp_detail_id', $aldp_detail_id);
 
         $employee   = DB::table('employees')
-                        ->where('sm_code', $idLogin)->get();
+                        ->where('sm_code', $idLogin)
+                        ->orWhere('employee_id', $idLogin)->get();
 
         $item   = DB::table('aldp_details')->where('id', $aldp_detail_id)->get();
         foreach ($item as $vItem) :

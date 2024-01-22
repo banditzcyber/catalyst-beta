@@ -105,14 +105,14 @@
                     @php
 
                         if ($view->status == 1) {
-                            $color = 'bg-success';
-                            $text = 'Approved';
+                            $color = 'bg-light';
+                            $text = 'Submited';
                         } elseif ($view->status == 2) {
-                            $color = 'bg-danger';
-                            $text = 'Rejected';
-                        } else {
                             $color = 'bg-warning';
-                            $text = 'Submitted';
+                            $text = 'Riviewed';
+                        } else {
+                            $color = 'bg-success';
+                            $text = 'Completed';
                         }
                     @endphp
                     <tr>
@@ -137,7 +137,7 @@
                         <td>{{ $view->started_at }} s/d {{ $view->finished_at }}</td>
                         <td>{{ $view->comment }}</td>
                         <td>{{ $view->evidence }}</td>
-                        <td class="{{ $color }}">{{ $text }}</td>
+                        <td class="{{ $color }} tx-center">{{ $text }}</td>
                     </tr>
                 @endforeach
             </tbody>

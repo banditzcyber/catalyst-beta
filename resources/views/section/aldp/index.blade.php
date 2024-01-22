@@ -42,19 +42,30 @@
                             </p>
                         </div>
 
+                        @php
+                            if ($vData->status == 1) {
+                                $valueBtn = 'Form';
+                                $class = '';
+                            } elseif ($vData->status == 2) {
+                                $valueBtn = 'View';
+                                $class = 'disabled="disabled"';
+                            }
+                        @endphp
+
                         <div class="card-footer tx-13">
                             <div class="row row-xs">
                                 <div class="col-lg-5">
                                     <a href="/aldpSection/{{ $vData->id }}"
                                         class="btn btn-xs btn-outline-dark btn-block">
-                                        Form ALDP
+                                        {{ $valueBtn }}
                                     </a>
                                 </div>
                                 <div class="col-lg-6">
                                     <form action="/submitForm" method="POST" onclick="return confirm('Are you sure?')">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $vData->id }}">
-                                        <button type="submit" class="btn btn-xs btn-outline-secondary btn-block">Finish
+                                        <button type="submit" class="btn btn-xs btn-outline-secondary btn-block"
+                                            {{ $class }}>Finish
                                             Form</button>
                                     </form>
                                 </div>
