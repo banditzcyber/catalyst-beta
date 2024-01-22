@@ -166,9 +166,9 @@
 
                             </div>
                             <div class="table-body tx-center tx-15" style="width: 55px;">
-                                <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                                {{-- <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
+                                </a> --}}
                                 <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
                                     <i data-feather="x" style="width: 15px;"></i>
                                 </a>
@@ -336,9 +336,9 @@
 
                             </div>
                             <div class="table-body tx-center tx-15" style="width: 55px;">
-                                <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                                {{-- <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
+                                </a> --}}
                                 <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
                                     <i data-feather="x" style="width: 15px;"></i>
                                 </a>
@@ -504,9 +504,9 @@
 
                             </div>
                             <div class="table-body tx-center tx-15" style="width: 55px;">
-                                <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                                {{-- <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
+                                </a> --}}
                                 <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
                                     <i data-feather="x" style="width: 15px;"></i>
                                 </a>
