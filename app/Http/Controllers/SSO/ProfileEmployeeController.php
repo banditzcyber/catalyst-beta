@@ -131,6 +131,7 @@ class ProfileEmployeeController extends Controller
 
         return view('employee.dashboard.index', [
             'title'         => 'Dashboard',
+            'IdLogin'       => $idLogin,
             'subTitle'      => 'Actual Data',
             'btnList'      => 'btn-outline-dark',
             'btnCurrent'   => 'btn-outline-warning',
