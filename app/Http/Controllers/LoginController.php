@@ -51,7 +51,7 @@ class LoginController extends Controller
         $query = DB::table('employees')->where('email', $email)->first();
 
 
-        dd($name,$email, $query->employee_name);
+        dd($name,$email, $query->job_level);
     }
 
 
