@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class LoginLocalController extends Controller
 {
@@ -22,7 +23,8 @@ class LoginLocalController extends Controller
             'password'      => 'required'
         ]);
 
-
+        $query = DB::table('employees')->where('email', $credentials['email'])->first();
+        $request->session()->put('user', $query->employee_id);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -37,11 +39,33 @@ class LoginLocalController extends Controller
             } elseif (auth()->user()->role_id == 5) {
                 return redirect()->intended('/dashboardFunct');
             } elseif (auth()->user()->role_id == 6) {
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/dashboardFunct');
             }
         }
 
         return back()->with('loginErorr', 'Login Failed!');
+
+
+        // $query = DB::table('employees')->where('email', $credentials['email'])->first();
+        // $request->session()->put('user', $query->employee_id);
+
+        // if (Auth::attempt($credentials)) {
+        //     $request->session()->regenerate();
+        //     if ($query->job_level != 'SM' && $query->job_level != 'DM' && $query->job_level != 'GM' ) {
+        //         return redirect()->intended('/profileEmploy');
+        //     } elseif ($query->job_level == 'SM') {
+        //         return redirect()->intended('/profileEmploy');
+        //     } elseif ($query->job_level == 'DM') {
+        //         return redirect()->intended('/departmentDashboard');
+        //     } elseif ($query->job_level == 'GM') {
+        //         return redirect()->intended('/dashboardDivisi');
+        //     } elseif ($query->job_level == 5) {
+        //         return redirect()->intended('/dashboardFunct');
+        //     } elseif ($query->job_level == 6) {
+        //         return redirect()->intended('/dashboard');
+        //     }
+        // }
+        // return back()->with('loginErorr', 'Login Failed!');
     }
 
     public function index(Request $request)
