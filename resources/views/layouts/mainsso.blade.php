@@ -31,62 +31,44 @@
 
 <body>
 
-    {{-- @if (auth()->user()->role_id == 1)
-        @include('layouts.navbaremployee')
-    </ul>
-</div>
-</aside>
-
-    @elseif (auth()->user()->role_id == 2)
-        @include('layouts.navbaremployee')
-        @include('layouts.navbarsection')
-    @elseif (auth()->user()->role_id == 3)
-        @include('layouts.navbardepart')
-    @elseif (auth()->user()->role_id == 4)
-        @include('layouts.navbardivisi')
-    @elseif (auth()->user()->role_id == 5)
-        @include('layouts.navbaradmin')
-    @elseif (auth()->user()->role_id == 6)
-        @include('layouts.navbaradmin') @endif --}}
-
-        <aside class="aside aside-fixed">
-            <div class="aside-header">
-                <a href="../../index.html" class="aside-logo">
-                    <img src="/images/logo_mycatalyst_full.png" width="170" alt="">
-                </a>
-                <a href="" class="aside-menu-link">
-                    <i data-feather="menu"></i>
-                    <i data-feather="x"></i>
-                </a>
-            </div>
-            <div class="aside-body">
-                <div class="aside-loggedin">
-                    <div class="d-flex align-items-center justify-content-start">
-                        <a href="" class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle"
-                                alt=""></a>
-                    </div>
-                    <div class="aside-loggedin-user">
-                        <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2"
-                            data-toggle="collapse">
-                            <h6 class="tx-semibold tx-14 mg-b-0">{{ auth()->user()->employee_name }}</h6>
-                            <i data-feather="chevron-down"></i>
-                        </a>
-                        <p class="tx-color-03 tx-12 mg-b-0">
-                            @if (auth()->user()->role_id == 1)
-                                Employee
-                            @elseif (auth()->user()->role_id == 2)
-                                Section Manager
-                            @elseif (auth()->user()->role_id == 3)
-                                Department Manager
-                            @elseif (auth()->user()->role_id == 4)
-                                General Manager
-                            @elseif (auth()->user()->role_id == 5)
-                                Admin Functional
-                            @elseif (auth()->user()->role_id == 6)
-                                Root @endif
-                        </p>
-                    </div>
-                    <div class="collapse"
+    <aside class="aside aside-fixed">
+        <div class="aside-header">
+            <a href="../../index.html" class="aside-logo">
+                <img src="/images/logo_mycatalyst_full.png" width="170" alt="">
+            </a>
+            <a href="" class="aside-menu-link">
+                <i data-feather="menu"></i>
+                <i data-feather="x"></i>
+            </a>
+        </div>
+        <div class="aside-body">
+            <div class="aside-loggedin">
+                <div class="d-flex align-items-center justify-content-start">
+                    <a href="" class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle"
+                            alt=""></a>
+                </div>
+                <div class="aside-loggedin-user">
+                    <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2"
+                        data-toggle="collapse">
+                        <h6 class="tx-semibold tx-14 mg-b-0">{{ auth()->user()->employee_name }}</h6>
+                        <i data-feather="chevron-down"></i>
+                    </a>
+                    <p class="tx-color-03 tx-12 mg-b-0">
+                        @if (auth()->user()->role_id == 1)
+                            Employee
+                        @elseif (auth()->user()->role_id == 2)
+                            Section Manager
+                        @elseif (auth()->user()->role_id == 3)
+                            Department Manager
+                        @elseif (auth()->user()->role_id == 4)
+                            General Manager
+                        @elseif (auth()->user()->role_id == 5)
+                            Admin Functional
+                        @elseif (auth()->user()->role_id == 6)
+                            Root @endif
+                    </p>
+                </div>
+                <div class="collapse"
         id="loggedinMenu">
     <ul class="nav nav-aside mg-b-0">
 

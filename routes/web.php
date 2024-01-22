@@ -7,6 +7,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\LoginLocalController;
 // use App\Http\Controllers\RegisterController;
 
+use App\Http\Controllers\SSO\ProfileEmployeeController;
+
 // Administrator
 use App\Http\Controllers\CompetencyController;
 use App\Http\Controllers\PerformanceStandardController;
@@ -111,6 +113,7 @@ Route::post('/signout', [LoginLocalController::class, 'logout']);
 
 // ----------------------------------------Access for employee----------------------------------------------------
 
+Route::resource('/profilessoemployee', ProfileEmployeeController::class);
 Route::resource('/profileEmploy', ProfileEmployController::class);
 Route::resource('/dashboardEmploy', DashboardEmployController::class);
 Route::resource('/mylearning', MylearningController::class);

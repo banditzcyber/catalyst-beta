@@ -54,7 +54,7 @@ class LoginController extends Controller
         if (!empty($query->employee_id)) {
             $request->session()->regenerate();
             if ($query->job_level != 'SM' && $query->job_level != 'DM' && $query->job_level != 'GM' ) {
-                return redirect()->intended('/profileEmploy');
+                return redirect()->intended('/profilessoemployee');
             } elseif ($query->job_level == 'SM') {
                 return redirect()->intended('/profileEmploy');
             } elseif ($query->job_level == 'DM') {
