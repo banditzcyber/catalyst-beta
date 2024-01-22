@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProfileEmployController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
         // $idLogin    = '003169';
