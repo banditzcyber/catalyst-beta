@@ -49,27 +49,28 @@ class LoginController extends Controller
         $email = $user->data->getUserPrincipalName();
 
         $query = DB::table('employees')->where('email', $email)->first();
-
-        // if (!empty($query->employee_id)) {
-        //     $request->session()->regenerate();
-        //     if ($query->job_level != 'SM' && $query->job_level != 'DM' && $query->job_level != 'GM' ) {
-        //         return redirect()->intended('/profileEmploy');
-        //     } elseif ($query->job_level == 'SM') {
-        //         return redirect()->intended('/profileEmploy');
-        //     } elseif ($query->job_level == 'DM') {
-        //         return redirect()->intended('/departmentDashboard');
-        //     } elseif ($query->job_level == 'GM') {
-        //         return redirect()->intended('/dashboardDivisi');
-        //     } elseif ($query->job_level == 5) {
-        //         return redirect()->intended('/dashboardFunct');
-        //     } elseif ($query->job_level == 6) {
-        //         return redirect()->intended('/dashboard');
-        //     }
-        // }
-        // return back()->with('loginErorr', 'Login Failed!');
-
         $request->session()->put('user', $query->employee_id);
-        dd($name,$email, $query->job_level, $request->session()->get('user'));
+
+        if (!empty($query->employee_id)) {
+            $request->session()->regenerate();
+            if ($query->job_level != 'SM' && $query->job_level != 'DM' && $query->job_level != 'GM' ) {
+                return redirect()->intended('/profileEmploy');
+            } elseif ($query->job_level == 'SM') {
+                return redirect()->intended('/profileEmploy');
+            } elseif ($query->job_level == 'DM') {
+                return redirect()->intended('/departmentDashboard');
+            } elseif ($query->job_level == 'GM') {
+                return redirect()->intended('/dashboardDivisi');
+            } elseif ($query->job_level == 5) {
+                return redirect()->intended('/dashboardFunct');
+            } elseif ($query->job_level == 6) {
+                return redirect()->intended('/dashboard');
+            }
+        }
+        return back()->with('loginErorr', 'Login Failed!');
+
+        
+        // dd($name,$email, $query->job_level, $request->session()->get('user'));
     }
 
 
