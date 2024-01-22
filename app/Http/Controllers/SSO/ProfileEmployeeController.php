@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ProfileEmploy;
 use Illuminate\Support\Facades\DB;
 
-class ProfileEmployController extends Controller
+class ProfileEmployeeController extends Controller
 {
     public function index(Request $request)
     {
