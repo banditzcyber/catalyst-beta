@@ -27,7 +27,7 @@ class CloseGapController extends Controller
                     ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
                     ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
                     ->join('items', 'learnings.item_id', '=', 'items.item_id')
-                    ->select('learnings.id', 'employees.employee_id', 'employees.employee_name', 'learnings.item_id', 'items.item_name', 'learnings.started_at', 'learnings.finished_at', 'learnings.comment', 'learnings.status');
+                    ->select('learnings.id', 'employees.employee_id', 'employees.employee_name', 'learnings.item_id', 'items.item_name', 'learnings.started_at', 'learnings.finished_at', 'learnings.comment', 'learnings.evidence', 'learnings.status');
 
         if(request('search')) {
             $search->where('items.item_id', 'like', '%' . request('search') . '%')
