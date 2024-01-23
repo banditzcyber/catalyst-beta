@@ -67,6 +67,7 @@
                     <th>Item ID</th>
                     <th>Item Name</th>
                     <th>Date</th>
+                    <th>Doc</th>
                     <th>Comment</th>
                     <th>Status</th>
                 </tr>
@@ -95,6 +96,7 @@
                         <td>{{ $view->item_name }}</td>
                         <td>{{ date('d F Y', strtotime($view->started_at)) }} s/d
                             {{ date('d F Y', strtotime($view->finished_at)) }}</td>
+                        <td>{{ $view->evidence }}</td>
                         <td>{{ $view->comment }}</td>
                         <td class="{{ $color }} tx-center" style="cursor: pointer"
                             onclick="show({{ $view->id }})">
