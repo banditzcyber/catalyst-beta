@@ -13,9 +13,11 @@ class AssessmentEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $idLogin    = auth()->user()->employee_id;
+        // $idLogin    = auth()->user()->employee_id;
+        $idLogin    = $request->session()->get('user');
+        // dd($idLogin);
 
         $data   = DB::table('assessments')
                     ->join('employees', 'assessments.employee_id', '=', 'employees.employee_id')

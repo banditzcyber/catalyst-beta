@@ -13,7 +13,8 @@ class ProfileEmployController extends Controller
 
         // $idLogin    = '003169';
         $idLogin    = $request->session()->get('user');
-
+        
+        // dd($idLogin);
         // if(empty(auth()->user()->employee_id)){
         //     $idLogin = auth()->user()->employee_id;
         // }else{
