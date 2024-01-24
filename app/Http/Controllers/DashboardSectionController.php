@@ -23,12 +23,13 @@ class DashboardSectionController extends Controller
         $this->m_user =  new \App\Models\User();
     }
 
-    public function index()
+    public function index(Request $request)
     {
 
-        $idLogin    = auth()->user()->employee_id;
+        // $idLogin    = auth()->user()->employee_id;
+        $idLogin    = $request->session()->get('user');
         // dd($idLogin);
-        $json_data = $this->dataCompetency();
+        $json_data = $this->dataCompetency($idLogin);
         $data = json_decode($json_data->content(), true);
         // dd($data);
         extract($data);
@@ -51,6 +52,7 @@ class DashboardSectionController extends Controller
 
     public function dataCompetency(){
         // $idLogin    = auth()->user()->employee_id;
+        // $idLogin    = $request->session()->get('user');
         $idLogin    = '3383';
         // dd($idLogin);
         $subCount   = $this->m_dashboardSection->getSubordinate($idLogin)->count();

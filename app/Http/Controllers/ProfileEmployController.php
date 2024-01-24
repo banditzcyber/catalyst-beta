@@ -158,6 +158,7 @@ class ProfileEmployController extends Controller
             'percentLevel2' => $percentLevel2,
             'percentLevel3' => $percentLevel3,
             'percentLevel4' => $percentLevel4,
+            'idLogin'       => $idLogin
         ]);
     }
 

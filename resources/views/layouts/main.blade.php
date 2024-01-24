@@ -50,10 +50,11 @@
                 <div class="aside-loggedin-user">
                     <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2"
                         data-toggle="collapse">
-                        <h6 class="tx-semibold tx-14 mg-b-0">{{ auth()->user()->employee_name }}</h6>
+                        <h6 class="tx-semibold tx-14 mg-b-0">{{ $idLogin }}</h6>
                         <i data-feather="chevron-down"></i>
                     </a>
                     <p class="tx-color-03 tx-12 mg-b-0">
+
                         @if (auth()->user()->role_id == 1)
                             Employee
                         @elseif (auth()->user()->role_id == 2)
@@ -66,6 +67,8 @@
                             Admin Functional
                         @elseif (auth()->user()->role_id == 6)
                             Root @endif
+                        
+                        
                     </p>
                 </div>
                 <div class="collapse"

@@ -14,9 +14,10 @@ class MylearningController extends Controller
         $this->mMyLearning =  new \App\Models\Mylearning();
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $idLogin    = auth()->user()->employee_id;
+        // $idLogin    = auth()->user()->employee_id;
+        $idLogin    = $request->session()->get('user');
         $data = $this->mMyLearning->getData($idLogin);
 
         return view('employee.mylearning.index', [

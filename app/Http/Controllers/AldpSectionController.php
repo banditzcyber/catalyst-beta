@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\DB;
 class AldpSectionController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $idLogin    = auth()->user()->employee_id;
+        // $idLogin    = auth()->user()->employee_id;
+        $idLogin    = $request->session()->get('user');
 
         $query      = DB::table('aldps')
                         ->where('manager_id', '=', $idLogin);
