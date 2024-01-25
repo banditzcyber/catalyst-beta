@@ -16,32 +16,24 @@ class MylearningController extends Controller
 
     public function index(Request $request)
     {
-        // $idLogin    = auth()->user()->employee_id;
-        $idLogin    = $request->session()->get('user');
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data = $this->mMyLearning->getData($idLogin);
 
         return view('employee.mylearning.index', [
-            'data'          => $data->get(),
-            'title'         => 'My Learning'
+            'title'         => 'My Learning',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'          => $data->get()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $leaning_id = $request->input('learning_id');
@@ -62,14 +54,15 @@ class MylearningController extends Controller
         return redirect('/mylearning')->with('success', 'New data has been addedd!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Mylearning  $mylearning
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Request $request, $id)
     {
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data   = DB::table('learnings')
                     ->join('items', 'learnings.item_id', '=', 'items.item_id')
                     ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
@@ -82,47 +75,24 @@ class MylearningController extends Controller
 
             return view('employee.mylearning.detail', [
                 'title'     => 'Detail Learning',
+                'employeeSession'   => $dEmployee->first(),
+                'area'              => $area,
+                'roleId'            => $roleId,
                 'data'      => $query,
                 'data2'     => $data
             ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mylearning  $mylearning
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mylearning $mylearning)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Mylearning  $mylearning
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Mylearning $mylearning)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Mylearning  $mylearning
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Mylearning $mylearning)
+    public function form(Request $request, $id)
     {
-        //
-    }
 
-    public function form($id)
-    {
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $data   = DB::table('learnings')
                     ->join('items', 'learnings.item_id', '=', 'items.item_id')
@@ -136,6 +106,9 @@ class MylearningController extends Controller
 
             return view('employee.mylearning.form', [
                 'title'     => 'Form Close Gap',
+                'employeeSession'   => $dEmployee->first(),
+                'area'              => $area,
+                'roleId'            => $roleId,
                 'data'      => $query,
                 'data2'     => $data,
                 'learning_id'   => $id

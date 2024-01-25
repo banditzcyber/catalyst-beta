@@ -156,6 +156,12 @@ class AssessmentEmployeeController extends Controller
 
     public function resultAssessment($id, $assessment_id, $jobcode)
     {
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data = DB::table('assessment_details')
                     ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
                     ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
@@ -171,6 +177,9 @@ class AssessmentEmployeeController extends Controller
 
         return view('employee.assessment.view', [
             'title'             => 'Result Assessment',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'              => $data->get(),
             'competency'        => $competency,
             'assessment_id'     => $assessment_id
