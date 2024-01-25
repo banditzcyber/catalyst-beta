@@ -11,21 +11,35 @@ class AldpSectionController extends Controller
 
     public function index(Request $request)
     {
-        // $idLogin    = auth()->user()->employee_id;
-        $idLogin    = $request->session()->get('user');
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $query      = DB::table('aldps')
                         ->where('manager_id', '=', $idLogin);
 
         return view('section.aldp.index', [
-            'title'         => 'Annual Learning Development Plan',
-            'data'          => $query->get()
+            'title'             => 'Annual Learning Development Plan',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $query->get()
         ]);
     }
 
 
-    public function formFunctional($id)
+    public function formFunctional(Request $request, $id)
     {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data = DB::table('assessment_details')
                 ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
                 ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
@@ -36,42 +50,75 @@ class AldpSectionController extends Controller
                 ->get();
         // dd($data);
         return view('section.aldp.create', [
-            'title'     => 'Form Input ALDP (Functional)',
-            'id_aldp'   => $id,
-            'data'      => $data,
-            'comp_type' => 1
+            'title'             => 'Form Input ALDP (Functional)',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'id_aldp'           => $id,
+            'data'              => $data,
+            'comp_type'         => 1
         ]);
     }
 
-    public function formLeadership($id)
+    public function formLeadership(Request $request, $id)
     {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data  = DB::table('items')
                     ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
                     ->join('competencies', 'competencies.competency_id', '=', 'performance_standards.competency_id')
                     ->where('competencies.competency_type', '=','leadership')
                     ->get();
         return view('section.aldp.create', [
-            'title'     => 'Form Input Leadership Competency',
-            'id_aldp'   => $id,
-            'data'      => $data,
-            'comp_type' => 2
+            'title'             => 'Form Input Leadership Competency',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'id_aldp'           => $id,
+            'data'              => $data,
+            'comp_type'         => 2
         ]);
     }
 
-    public function formOther($id)
+    public function formOther(Request $request, $id)
     {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         return view('section.aldp.createother', [
-            'title'      => 'Form Input Other Program or Mandatory Program',
-            'id_aldp'   => $id
+            'title'             => 'Form Input Other Program or Mandatory Program',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'id_aldp'           => $id
         ]);
     }
 
-    public function create($id)
+    public function create(Request $request, $id)
     {
+
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         return view('section.aldp.create', [
-            'title'     => 'Add Data',
-            'id_aldp'   => $id
+            'title'             => 'Add Data',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'id_aldp'           => $id
         ]);
     }
 
@@ -108,7 +155,7 @@ class AldpSectionController extends Controller
             'item_id'           => ''
         ]);
 
-        
+
 
         $validation['status_detail'] = 0;
 
@@ -116,8 +163,15 @@ class AldpSectionController extends Controller
         return redirect('/aldpSection/'. $validation['aldp_id'])->with('success', 'New data has been addedd!');
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $title  = DB::table('aldps')
                     ->join('employees', 'aldps.manager_id', '=', 'employees.employee_id')
                     ->where('aldp_id', '=', $id);
@@ -179,6 +233,9 @@ class AldpSectionController extends Controller
 
         return view('section.aldp.detail', [
             'title'             => 'ALDP Details',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'title2'            => $title->get(),
             'functional'        => $basequery->where('aldp_details.competency_type','=', '1')->get(),
             'functional_all'    => $functional_all,
@@ -211,9 +268,14 @@ class AldpSectionController extends Controller
     {
     }
 
-    public function formParticipant($aldp_detail_id, $aldp_id)
+    public function formParticipant(Request $request, $aldp_detail_id, $aldp_id)
     {
-        $idLogin    = auth()->user()->employee_id;
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         // dd($aldp_detail_id);
         // $data = DB::table('assessment_details')
@@ -222,7 +284,7 @@ class AldpSectionController extends Controller
         //             ->where('assessment_details.item_id', $item_id)
         //             ->select('employee_id')
         //             ->get();
-    
+
         $data   = DB::table('learnings')
                         ->join('employees', 'employees.employee_id', '=', 'learnings.employee_id')
                         ->select('learnings.*', 'employees.employee_name', 'employees.position')
@@ -240,6 +302,9 @@ class AldpSectionController extends Controller
 
         return view('section.aldp.participant', [
             'title'             => 'Add Participant',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'id_aldp'           => $aldp_id,
             'id_aldp_details'   => $aldp_detail_id,
             'data'              => $data->paginate(10)->withQueryString(),

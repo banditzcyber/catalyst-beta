@@ -7,25 +7,38 @@ use Illuminate\Support\Facades\DB;
 
 class SubordinateController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $idLogin    = auth()->user()->employee_id;
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $query  = DB::table('employees')
                     ->where('sm_code', $idLogin)
                     ->paginate(10)->withQueryString();
 
         return view('section.subordinate.index', [
-            'title'     => 'Subordinate',
-            'data'      => $query,
-            'id_login'  => $idLogin
+            'title'             => 'Subordinate',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $query,
+            'id_login'          => $idLogin
         ]);
     }
 
-    public function profile($employee_id)
+    public function profile(Request $request, $employee_id)
     {
-        $idLogin    = $employee_id;
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $dEmployee  = DB::table('employees')
                       ->where('employees.employee_id', '=', $idLogin );
@@ -121,6 +134,9 @@ class SubordinateController extends Controller
 
         return view('section.subordinate.profile', [
             'title'         => 'Dashboard',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'subTitle'      => 'Actual Data',
             'btnList'      => 'btn-outline-dark',
             'btnCurrent'   => 'btn-outline-warning',

@@ -13,10 +13,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AssessmentValidationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $idLogin    = auth()->user()->employee_id;
-        
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('assessments')
                     ->join('employees', 'assessments.employee_id', '=', 'employees.employee_id')
                     ->select('assessments.*', 'employees.employee_name', 'employees.position')
@@ -29,14 +34,25 @@ class AssessmentValidationController extends Controller
         }
 
         return view('section.validations.index', [
-            'title'     => 'Assessment Validation',
-            'data'      => $search->paginate(10)->withQueryString(),
-            'countData' => $search->count('assessments.id')
+            'title'             => 'Assessment Validation',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $search->paginate(10)->withQueryString(),
+            'countData'         => $search->count('assessments.id')
         ]);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
+
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $status     = DB::table('assessments')
                         ->where('id', $id)
                         ->select('status', 'id', 'jobcode')
@@ -55,11 +71,14 @@ class AssessmentValidationController extends Controller
                             ->where('assessment_details.assessment_id', '=', $id);
 
         return view('section.validations.detail', [
-            'title'     => 'Assessment Detail',
-            'status'    => $status,
-            'data'      => $competency->get(),
-            'valid'     => $valid,
-            'id'     => $id
+            'title'             => 'Assessment Detail',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'status'            => $status,
+            'data'              => $competency->get(),
+            'valid'             => $valid,
+            'id'                => $id
         ]);
     }
 
@@ -71,8 +90,15 @@ class AssessmentValidationController extends Controller
         return redirect('/assessmentValidation')->with('success', 'Assessment has been updated!');
     }
 
-    public function reviewAssessment($competency_id, $assessment_id, $jobcode)
+    public function reviewAssessment(Request $request, $competency_id, $assessment_id, $jobcode)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $id = $assessment_id;
         // dd($id);
 
@@ -84,9 +110,12 @@ class AssessmentValidationController extends Controller
                         ->where('assessment_details.assessment_id', '=', $id);
 
         return view('section.validations.form', [
-            'title'     => 'Form Edit',
-            'data'       => $data->get(),
-            'assessment_id' => $id
+            'title'             => 'Form Edit',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $data->get(),
+            'assessment_id'     => $id
         ]);
     }
 
@@ -114,7 +143,7 @@ class AssessmentValidationController extends Controller
         //     ));
         //     $index++;
         // }
-        
+
         // dd ($data[]);
         // DB::table('assessment_details')->where('id', $kd_assessment_detail)->update($data);
 
@@ -136,9 +165,9 @@ class AssessmentValidationController extends Controller
             $data['comment']                = $request->comment[$kode];
 
             // dd($request->kd_assessment_detail[$kode], $data);
-           
+
         }
-        
+
         DB::table('assessment_details')->where('id', $request->kd_assessment_detail[$kode])->update($data);
         // dd($data);
         return redirect('/assessmentValidation/show/'.$assessment_id)->with('success', 'Assessment has been updated!');
@@ -148,14 +177,14 @@ class AssessmentValidationController extends Controller
 
 
         // foreach ($request->kd_assessment_detail as $key => $value) {
-        //     $data = array(                 
+        //     $data = array(
         //         'assessment_result'     => $request->assessment_result[$key],
-        //         'actual_result'         => $request->assessment_result[$key],                   
-        //         'comment'               => $request->comment[$key],                   
-        //     );         
+        //         'actual_result'         => $request->assessment_result[$key],
+        //         'comment'               => $request->comment[$key],
+        //     );
 
         //     dd($request->kd_assessment_detail[$key], $data);
-        //     // DB::table('assessment_details')->where('id',$kd_assessment_detail[$key])->update($data); 
+        //     // DB::table('assessment_details')->where('id',$kd_assessment_detail[$key])->update($data);
         // }
 
 

@@ -16,6 +16,7 @@ class MylearningController extends Controller
 
     public function index(Request $request)
     {
+        //session
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
