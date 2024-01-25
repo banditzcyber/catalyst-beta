@@ -21,8 +21,15 @@ class CloseGapController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('learnings')
                     ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
                     ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
@@ -38,6 +45,9 @@ class CloseGapController extends Controller
 
         return view('admin.closegap.index', [
             'title'     => 'Close Gap Activity',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString()
         ]);
     }
@@ -61,6 +71,9 @@ class CloseGapController extends Controller
 
         return view('admin.closegap.index', [
             'title'     => 'Close Gap Activity - Completed',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString()
         ]);
     }
@@ -84,6 +97,9 @@ class CloseGapController extends Controller
 
         return view('admin.closegap.index', [
             'title'     => 'Close Gap Activity - Reviewed',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString()
         ]);
     }
@@ -126,7 +142,8 @@ class CloseGapController extends Controller
                     ->where('id', $id)
                     ->first();
         return view('admin.closegap.update', [
-            'data'  => $data
+            'data'  => $data,
+
         ]);
     }
 
@@ -174,8 +191,15 @@ class CloseGapController extends Controller
     }
 
 
-    public function read() 
+    public function read(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('learnings')
                     ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
                     ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
@@ -191,12 +215,23 @@ class CloseGapController extends Controller
 
         return view('admin.closegap.data', [
             'title'     => 'Close Gap Activity',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString()
         ]);
     }
 
-    public function onprogress() 
+    public function onprogress(Request $request)
     {
+
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('learnings')
                     ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
                     ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
@@ -212,6 +247,9 @@ class CloseGapController extends Controller
 
         return view('admin.closegap.data', [
             'title'     => 'Close Gap Activity',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString()
         ]);
     }
