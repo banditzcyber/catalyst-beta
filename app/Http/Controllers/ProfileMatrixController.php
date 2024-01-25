@@ -19,8 +19,15 @@ class ProfileMatrixController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('profile_matrices')->orderby('created_at', 'desc');
 
         if(request('search')) {
@@ -33,6 +40,9 @@ class ProfileMatrixController extends Controller
 
         return view('admin.matrix.index', [
             'title'     => 'Profile Matrices',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString(),
             'countData' =>$search->count()
         ]);
@@ -43,13 +53,23 @@ class ProfileMatrixController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data   = DB::table('employees')->distinct('employees.jobcode')->select('jobcode', 'position', 'section', 'job_level')->orderby('section','desc')->get();
         $competency = DB::table('competencies')->get();
 
         return view('admin.matrix.create', [
             'title'         => 'Add Profile Matriix',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'          => $data,
             'competency'    => $competency
         ]);
@@ -123,8 +143,14 @@ class ProfileMatrixController extends Controller
         return redirect('/matrix')->with('warning', 'Imprort data failed!');
     }
 
-    public function editData($id)
+    public function editData(Request $request, $id)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $data       = DB::table('profile_matrices')->where('id', $id)->first();
         $competency = DB::table('competencies')->get();
@@ -133,6 +159,9 @@ class ProfileMatrixController extends Controller
 
         return view('admin.matrix.edit', [
             'title'         => 'Edit Profile Matriix',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'          => $data,
             'competency'    => $competency,
             'employee'      => $employee

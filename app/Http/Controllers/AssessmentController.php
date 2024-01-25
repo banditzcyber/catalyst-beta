@@ -16,8 +16,15 @@ use App\Imports\AssessmentDetailImport;
 class AssessmentController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('assessments')
                     ->join('employees', 'assessments.employee_id', '=', 'employees.employee_id')
                     ->select('assessments.*', 'employees.employee_name', 'employees.position');
@@ -31,17 +38,30 @@ class AssessmentController extends Controller
 
         return view('admin.assessment.index', [
             'title'     => 'Assessment',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString(),
             'countData' => $search->count()
         ]);
     }
 
 
-    public function create()
+    public function create(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $employee = DB::table('employees')->get();
         return view('admin.assessment.create', [
             'title'     => 'Add Assessment',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'employee'  => $employee
         ]);
     }
@@ -63,8 +83,15 @@ class AssessmentController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $employee   = DB::table('assessments')
                         ->join('employees', 'employees.employee_id', '=', 'assessments.employee_id')
                         ->select('employees.employee_name', 'employees.position')
@@ -94,6 +121,9 @@ class AssessmentController extends Controller
 
         return view('admin.assessment.detail', [
             'title'     => 'Assessment Details',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString(),
             'employee'  => $employee,
             'id'        => $id,
@@ -102,8 +132,15 @@ class AssessmentController extends Controller
     }
 
 
-    public function editData($id)
+    public function editData(Request $request, $id)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data  = DB::table('assessments')
                 ->join('employees', 'assessments.employee_id', '=', 'employees.employee_id')
                 ->select('assessments.*', 'employees.employee_name', 'employees.position')
@@ -113,6 +150,9 @@ class AssessmentController extends Controller
 
         return view('admin.assessment.edit', [
             'title'     => 'Add Assessment',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'employee'  => $employee,
             'assessment'  => $data
         ]);
@@ -150,7 +190,7 @@ class AssessmentController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
-            
+
             $path = $request->file('file')->getRealPath();
             $import = new AssessmentDetailImport();
             Excel::import($import, $path);

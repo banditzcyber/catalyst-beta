@@ -11,9 +11,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UserLoginController extends Controller
 {
- 
-    public function index()
+
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $search = DB::table('users');
 
@@ -25,17 +31,31 @@ class UserLoginController extends Controller
 
         return view('admin.userlogin.index', [
             'title'     => 'User Login',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString()
         ]);
     }
 
-   
-    public function create()
+
+    public function create(Request $request)
     {
+
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data = DB::table('employees');
 
         return view('admin.userlogin.create', [
             'title'     => 'Add user login',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $data->get()
         ]);
     }
@@ -70,13 +90,23 @@ class UserLoginController extends Controller
     }
 
 
-    public function editData($id)
+    public function editData(Request $request, $id)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $user =  DB::table('users')->where('id', $id)->first();
         $data = DB::table('employees');
 
         return view('admin.userLogin.edit', [
             'data'      => $data->get(),
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'user'      => $user,
             'title'     => 'Edit Data User'
         ]);
@@ -110,7 +140,7 @@ class UserLoginController extends Controller
         return redirect('/userlogin')->with('success', 'Data has been updated!');
     }
 
-    
+
     public function destroy($id)
     {
         DB::table('users')->where('id', $id)->delete();

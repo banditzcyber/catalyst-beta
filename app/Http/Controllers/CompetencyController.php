@@ -17,8 +17,15 @@ use App\Imports\CompetenciesImport;
 class CompetencyController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('competencies')->orderby('id', 'desc');
 
         if(request('search')) {
@@ -29,16 +36,29 @@ class CompetencyController extends Controller
         }
 
         return view('admin.competency.index', [
-            'title'     => 'Competency',
-            'data'      => $search->paginate(10)->withQueryString(),
-            'countData' => $search->count()
+            'title'             => 'Competency',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $search->paginate(10)->withQueryString(),
+            'countData'         => $search->count()
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         return view('admin.competency.create', [
-            'title'         => 'Add Data Competency'
+            'title'             => 'Add Data Competency',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
         ]);
     }
 
@@ -65,15 +85,25 @@ class CompetencyController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $query = DB::table('competencies')
                     ->where('competency_id', $id)
                     ->first();
         // dd($query);
         return view('admin.competency.edit', [
-            'title'         => 'Add Data Competency',
-            'data'          => $query
+            'title'             => 'Add Data Competency',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $query
         ]);
     }
 

@@ -20,8 +20,14 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
         $search = DB::table('employees')->orderby('created_at', 'asc');
 
         if (request('search')) {
@@ -36,6 +42,9 @@ class EmployeeController extends Controller
 
         return view('admin.employees.index', [
             'title'     => 'Employees',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString(),
             'countData' => $search->count()
         ]);

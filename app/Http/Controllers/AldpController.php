@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aldp;
 use App\Http\Requests\StoreAldpRequest;
+use Illuminate\Http\Request;
 // use App\Http\Requests\UpdateAldpRequest;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
@@ -17,8 +18,15 @@ class AldpController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('aldps')
                     ->join('employees', 'aldps.manager_id', '=', 'employees.employee_id')
                     ->select('aldps.id','aldps.manager_id', 'employees.employee_name', 'employees.section', 'aldps.year', 'aldps.comment', 'aldps.status');
@@ -31,6 +39,9 @@ class AldpController extends Controller
 
         return view('admin.aldp.index', [
             'title'     => 'Annual Learning Development Plan',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString(),
             'countData' => $search->count()
         ]);
@@ -43,6 +54,13 @@ class AldpController extends Controller
      */
     public function create()
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $data   = DB::table('employees')
                     ->where('job_level', '=', 'SM')
                     ->orWhere('job_level', '=', 'SM (ACT)')
@@ -56,7 +74,7 @@ class AldpController extends Controller
     }
 
 
-    public function store(StoreAldpRequest $request)
+    public function store(Request $request)
     {
         $validation = $request->validate([
             'manager_id'   => 'required',
@@ -72,8 +90,15 @@ class AldpController extends Controller
     }
 
 
-    public function show(Aldp $aldp, $id)
+    public function show(Request $request, Aldp $aldp, $id)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $title  = DB::table('aldps')
                     ->join('employees', 'aldps.manager_id', '=', 'employees.employee_id')
                     ->where('aldp_id', '=', $id);
@@ -135,6 +160,9 @@ class AldpController extends Controller
 
         return view('section.aldp.detail', [
             'title'             => 'ALDP Details',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'title2'            => $title->get(),
             'functional'        => $basequery->where('aldp_details.competency_type','=', '1')->get(),
             'functional_all'    => $functional_all,

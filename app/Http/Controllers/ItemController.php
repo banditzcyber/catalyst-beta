@@ -19,8 +19,15 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('items')->orderby('created_at', 'desc');
 
         if(request('search')) {
@@ -30,6 +37,9 @@ class ItemController extends Controller
 
         return view('admin.items.index', [
             'title'     => 'Learning Item',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString(),
             'countData' =>$search->count()
         ]);

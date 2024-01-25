@@ -15,8 +15,15 @@ use App\Imports\PerformanceStandardImport;
 class PerformanceStandardController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $search = DB::table('performance_standards')->orderby('id', 'desc');
 
         if(request('search')) {
@@ -26,6 +33,9 @@ class PerformanceStandardController extends Controller
 
         return view('admin.ps.index', [
             'title'     => 'Performance Standard',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $search->paginate(10)->withQueryString(),
             'countData' => $search->count()
         ]);
