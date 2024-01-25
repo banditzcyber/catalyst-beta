@@ -15,9 +15,12 @@ class AssessmentEmployeeController extends Controller
      */
     public function index(Request $request)
     {
-        // $idLogin    = auth()->user()->employee_id;
-        $idLogin    = $request->session()->get('user');
-        // dd($idLogin);
+        // session (wajib);
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $data   = DB::table('assessments')
                     ->join('employees', 'assessments.employee_id', '=', 'employees.employee_id')
@@ -26,33 +29,22 @@ class AssessmentEmployeeController extends Controller
 
         return view('employee.assessment.index', [
             'title'     => 'Assessment',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'      => $data->get()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function show(Request $request, $id)
     {
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-
-    }
-
-    public function show($id)
-    {
         $status     = DB::table('assessments')
                         ->where('id', $id)
                         ->select('status', 'id', 'jobcode')
@@ -72,6 +64,9 @@ class AssessmentEmployeeController extends Controller
 
         return view('employee.assessment.detail', [
             'title'     => 'Assessment Detail',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'status'    => $status,
             'data'      => $competency->get(),
             'valid'     => $valid,
@@ -79,47 +74,15 @@ class AssessmentEmployeeController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\AssessmentEmployee  $assessmentEmployee
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(AssessmentEmployee $assessmentEmployee)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AssessmentEmployee  $assessmentEmployee
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, AssessmentEmployee $assessmentEmployee)
+    public function form(Request $request, $id, $assessment_id, $jobcode)
     {
-        //
-    }
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\AssessmentEmployee  $assessmentEmployee
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(AssessmentEmployee $assessmentEmployee)
-    {
-        //
-    }
-
-    public function details($id)
-    {
-
-    }
-
-    public function form($id, $assessment_id, $jobcode)
-    {
         $level  = DB::table('profile_matrices')->where('competency_id', $id)->where('jobcode', $jobcode)->get();
         foreach($level as $vLevel) :
             $dLevel = $vLevel->level;
@@ -156,6 +119,9 @@ class AssessmentEmployeeController extends Controller
 
         return view('employee.assessment.form', [
             'title'             => 'Form Assessment',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'              => $data->get(),
             'assessment_id'     => $assessment_id
         ]);

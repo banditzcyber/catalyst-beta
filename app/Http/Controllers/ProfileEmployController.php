@@ -11,7 +11,7 @@ class ProfileEmployController extends Controller
     public function index(Request $request)
     {
 
-        // $idLogin    = '003169';
+        // session (wajib);
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
