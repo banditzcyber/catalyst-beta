@@ -12,10 +12,11 @@ class ProfileEmployController extends Controller
     {
 
         // $idLogin    = '003169';
-        $area   = $request->session()->get('local');
-        $idLogin    = $request->session()->get('user');
-        $dEmployee  = DB::table('employees')
-                      ->where('employees.employee_id', '=', $idLogin );
+        $area           = $request->session()->get('local');
+        $roleId         = auth()->user()->role_id;
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
 
 
@@ -128,6 +129,7 @@ class ProfileEmployController extends Controller
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
+            'roleId'            => $roleId,
             'subTitle'      => 'Actual Data',
             'btnList'      => 'btn-outline-dark',
             'btnCurrent'   => 'btn-outline-warning',
@@ -160,10 +162,11 @@ class ProfileEmployController extends Controller
     public function show(Request $request)
     {
         // $idLogin    = '003169';
-        $area   = $request->session()->get('local');
-        $idLogin    = $request->session()->get('user');
-        $dEmployee  = DB::table('employees')
-                      ->where('employees.employee_id', '=', $idLogin );
+        $area           = $request->session()->get('local');
+        $roleId         = auth()->user()->role_id;
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
 
         $getCompetency  = array();
@@ -258,6 +261,7 @@ class ProfileEmployController extends Controller
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
+            'roleId'            => $roleId,
             'subTitle'      => 'Current Data',
             'btnList'      => 'btn-outline-dark',
             'btnCurrent'   => 'btn-warning',
@@ -289,10 +293,11 @@ class ProfileEmployController extends Controller
 
     public function listItem(Request $request)
     {
-        $area   = $request->session()->get('local');
-        $idLogin    = $request->session()->get('user');
-        $dEmployee  = DB::table('employees')
-                      ->where('employees.employee_id', '=', $idLogin );
+        $area           = $request->session()->get('local');
+        $roleId         = auth()->user()->role_id;
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $dataCompetent  = DB::table('assessment_details')
                             ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
@@ -316,6 +321,7 @@ class ProfileEmployController extends Controller
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
+            'roleId'            => $roleId,
             'subTitle'      => 'List Item',
             'btnList'       => 'btn-dark',
             'btnCurrent'    => 'btn-outline-warning',

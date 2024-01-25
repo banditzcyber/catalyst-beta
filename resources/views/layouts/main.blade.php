@@ -103,17 +103,17 @@
                     @else
                         @include('layouts.navbaremployee') @endif
                 @else
-                    @if (auth()->user()->role_id == 1)
+                    @if ($roleId == 1)
                         @include('layouts.navbaremployee')
-                    @elseif (auth()->user()->role_id == 2)
+                    @elseif ($roleId == 2)
                         @include('layouts.navbarsection')
-                    @elseif (auth()->user()->role_id == 3)
+                    @elseif ($roleId == 3)
                         @include('layouts.navbardepart')
-                    @elseif (auth()->user()->role_id == 4)
+                    @elseif ($roleId == 4)
                         @include('layouts.navbardivisi')
-                    @elseif (auth()->user()->role_id == 5)
+                    @elseif ($roleId == 5)
                         @include('layouts.navbaradmin')
-                    @elseif (auth()->user()->role_id == 6)
+                    @elseif ($roleId == 6)
                         @include('layouts.navbaradmin') @endif @endif
 
 
