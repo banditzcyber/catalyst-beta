@@ -96,7 +96,7 @@
     {{-- --------------------------------------------------menu---------------------------------------------- --}}
     <ul class="nav nav-aside">
 
-        @if (auth()->user()->role_id == 1)
+        {{-- @if (auth()->user()->role_id == 1)
             @include('layouts.navbaremployee')
         @elseif (auth()->user()->role_id == 2)
             @include('layouts.navbarsection')
@@ -107,7 +107,13 @@
         @elseif (auth()->user()->role_id == 5)
             @include('layouts.navbaradmin')
         @elseif (auth()->user()->role_id == 6)
-            @include('layouts.navbaradmin') @endif
+            @include('layouts.navbaradmin') @endif --}}
+
+
+        @if ($employeeSession->job_level == 'SM')
+        @include('layouts.navbarsection')
+        @else
+        @include('layouts.navbaremployee') @endif
 
 
 
