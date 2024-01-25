@@ -12,9 +12,11 @@ class ProfileEmployController extends Controller
     {
 
         // $idLogin    = '003169';
+        $area   = $request->session()->get('local');
         $idLogin    = $request->session()->get('user');
         $dEmployee  = DB::table('employees')
                       ->where('employees.employee_id', '=', $idLogin );
+
 
 
         $getCompetency  = array();
@@ -124,6 +126,8 @@ class ProfileEmployController extends Controller
 
         return view('employee.dashboard.index', [
             'title'         => 'Dashboard',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
             'subTitle'      => 'Actual Data',
             'btnList'      => 'btn-outline-dark',
             'btnCurrent'   => 'btn-outline-warning',
@@ -150,13 +154,13 @@ class ProfileEmployController extends Controller
             'percentLevel2' => $percentLevel2,
             'percentLevel3' => $percentLevel3,
             'percentLevel4' => $percentLevel4,
-            'employeeSession'       => $dEmployee->first()
         ]);
     }
 
     public function show(Request $request)
     {
         // $idLogin    = '003169';
+        $area   = $request->session()->get('local');
         $idLogin    = $request->session()->get('user');
         $dEmployee  = DB::table('employees')
                       ->where('employees.employee_id', '=', $idLogin );
@@ -252,6 +256,8 @@ class ProfileEmployController extends Controller
 
         return view('employee.dashboard.index', [
             'title'         => 'Dashboard',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
             'subTitle'      => 'Current Data',
             'btnList'      => 'btn-outline-dark',
             'btnCurrent'   => 'btn-warning',
@@ -277,13 +283,13 @@ class ProfileEmployController extends Controller
             'percentLevel1' => $percentLevel1,
             'percentLevel2' => $percentLevel2,
             'percentLevel3' => $percentLevel3,
-            'percentLevel4' => $percentLevel4,
-            'employeeSession'       => $dEmployee->first()
+            'percentLevel4' => $percentLevel4
         ]);
     }
 
     public function listItem(Request $request)
     {
+        $area   = $request->session()->get('local');
         $idLogin    = $request->session()->get('user');
         $dEmployee  = DB::table('employees')
                       ->where('employees.employee_id', '=', $idLogin );
@@ -308,14 +314,15 @@ class ProfileEmployController extends Controller
 
         return view('employee.dashboard.item', [
             'title'         => 'Dashboard',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
             'subTitle'      => 'List Item',
             'btnList'       => 'btn-dark',
             'btnCurrent'    => 'btn-outline-warning',
             'btnActual'     => 'btn-outline-primary',
             'employee'      => $dEmployee->get(),
             'competent'     => $dataCompetent->get(),
-            'need'          => $dataNeed->get(),
-            'employeeSession'       => $dEmployee->first()
+            'need'          => $dataNeed->get()
         ]);
     }
 

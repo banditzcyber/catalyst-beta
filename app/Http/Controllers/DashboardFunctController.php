@@ -7,8 +7,16 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardFunctController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
+        $idLogin    = $request->session()->get('user');
+        $dEmployee  = DB::table('employees')
+                      ->where('employees.employee_id', '=', $idLogin );
+
+        $area   = $request->session()->get('local');
+
+
         $employee   = DB::table('employees')->count();
         $competencies  = DB::table('competencies')->count();
         $performance_standards   = DB::table('performance_standards')->count();
@@ -20,6 +28,8 @@ class DashboardFunctController extends Controller
 
         return view('admin.dashboard.index', [
             'title'     => 'Dashboard',
+            'employeeSession'       => $dEmployee->first(),
+            'area'      => $area,
             'employee'  => $employee,
             'competencies'  => $competencies,
             'performance_standards'  => $performance_standards,
@@ -27,7 +37,8 @@ class DashboardFunctController extends Controller
             'aldp'   => $aldp,
             'closegap_activity'     => $closegap_activity,
             'assessment'       => $assessment,
-            'matrix'        => $matrix
+            'matrix'        => $matrix,
+
         ]);
     }
 }

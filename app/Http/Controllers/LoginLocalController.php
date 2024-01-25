@@ -9,8 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class LoginLocalController extends Controller
 {
-    public function formLogin()
+    public function formLogin(Request $request)
     {
+        $request->session()->forget('user');
         return view('auth.index', [
             'favicon'   => 'Login'
         ]);
@@ -24,7 +25,11 @@ class LoginLocalController extends Controller
         ]);
 
         $query = DB::table('employees')->where('email', $credentials['email'])->first();
-        $request->session()->put('user', $query->employee_id);
+        // dd($query->employee_name);
+        $request->session()->put([
+            'user' => $query->employee_id,
+            'local' =>  'local'
+        ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -37,7 +42,9 @@ class LoginLocalController extends Controller
             } elseif (auth()->user()->role_id == 4) {
                 return redirect()->intended('/dashboardDivisi');
             } elseif (auth()->user()->role_id == 5) {
-                return redirect()->intended('/dashboardFunct');
+                return redirect([
+                    'cek'   => 'tes'
+                ])->intended('/dashboardFunct');
             } elseif (auth()->user()->role_id == 6) {
                 return redirect()->intended('/dashboardFunct');
             }

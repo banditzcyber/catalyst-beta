@@ -16,7 +16,7 @@ class LoginController extends Controller
     {
         return view('auth.sign-in');
     }
-    
+
     public function formLogin()
     {
         return view('auth.index', [
@@ -24,7 +24,7 @@ class LoginController extends Controller
         ]);
     }
 
-    
+
 
     public function microsoftOAuth()
     {
@@ -49,7 +49,10 @@ class LoginController extends Controller
         $email = $user->data->getUserPrincipalName();
 
         $query = DB::table('employees')->where('email', $email)->first();
-        $request->session()->put('user', $query->employee_id);
+        $request->session()->put([
+            'user' => $query->employee_id,
+            'local' =>  'local'
+        ]);
 
         if (!empty($query->employee_id)) {
             $request->session()->regenerate();
@@ -69,7 +72,7 @@ class LoginController extends Controller
         }
         return back()->with('loginErorr', 'Login Failed!');
 
-        
+
         // dd($name,$email, $query->job_level, $request->session()->get('user'));
     }
 

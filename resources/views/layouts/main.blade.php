@@ -51,7 +51,7 @@
                     <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2"
                         data-toggle="collapse">
                         @php
-                            $query = DB::table('')
+                            $query = DB::table('');
                         @endphp
                         <h6 class="tx-semibold tx-14 mg-b-0">{{ $employeeSession->employee_name }}</h6>
                         <i data-feather="chevron-down"></i>
@@ -76,49 +76,56 @@
 
                     </p>
                 </div>
-                <div class="collapse"
-        id="loggedinMenu">
-    <ul class="nav nav-aside mg-b-0">
+                <div class="collapse" id="loggedinMenu">
+                    <ul class="nav nav-aside mg-b-0">
 
-        <li class="nav-item">
-            <form action="/signout" method="POST" onclick="return confirm('Are you sure?')">
-                @csrf
-                <button type="submit" class="nav-link dropdown-item">
-                    <i data-feather="log-out"></i>
-                    <span>Sign Out</span>
-                </button>
-            </form>
-        </li>
-    </ul>
-    </div>
-    </div><!-- aside-loggedin -->
+                        <li class="nav-item">
+                            <form action="/signout" method="POST" onclick="return confirm('Are you sure?')">
+                                @csrf
+                                <button type="submit" class="nav-link dropdown-item">
+                                    <i data-feather="log-out"></i>
+                                    <span>Sign Out</span>
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div><!-- aside-loggedin -->
 
-    {{-- --------------------------------------------------menu---------------------------------------------- --}}
-    <ul class="nav nav-aside">
-
-        {{-- @if (auth()->user()->role_id == 1)
-            @include('layouts.navbaremployee')
-        @elseif (auth()->user()->role_id == 2)
-            @include('layouts.navbarsection')
-        @elseif (auth()->user()->role_id == 3)
-            @include('layouts.navbardepart')
-        @elseif (auth()->user()->role_id == 4)
-            @include('layouts.navbardivisi')
-        @elseif (auth()->user()->role_id == 5)
-            @include('layouts.navbaradmin')
-        @elseif (auth()->user()->role_id == 6)
-            @include('layouts.navbaradmin') @endif --}}
+            {{-- --------------------------------------------------menu---------------------------------------------- --}}
+            <ul class="nav nav-aside">
 
 
-        @if ($employeeSession->job_level == 'SM')
+
+                @if ($area == 'azure')
+                    @if ($employeeSession->job_level == 'SM')
+                        @include('layouts.navbarsection')
+                    @else
+                        @include('layouts.navbaremployee') @endif
+                @else
+                    @if (auth()->user()->role_id == 1)
+                        @include('layouts.navbaremployee')
+                    @elseif (auth()->user()->role_id == 2)
+                        @include('layouts.navbarsection')
+                    @elseif (auth()->user()->role_id == 3)
+                        @include('layouts.navbardepart')
+                    @elseif (auth()->user()->role_id == 4)
+                        @include('layouts.navbardivisi')
+                    @elseif (auth()->user()->role_id == 5)
+                        @include('layouts.navbaradmin')
+                    @elseif (auth()->user()->role_id == 6)
+                        @include('layouts.navbaradmin') @endif @endif
+
+
+                {{-- @if ($employeeSession->job_level == 'SM')
         @include('layouts.navbarsection')
         @else
-        @include('layouts.navbaremployee') @endif
+        @include('layouts.navbaremployee') @endif --}}
 
 
 
-    </ul>
-    </div>
+            </ul>
+        </div>
     </aside>
 
     <div class="content
