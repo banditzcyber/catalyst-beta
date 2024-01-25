@@ -54,7 +54,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             $request->session()->put([
                 'user' => $query->employee_id,
-                'local' =>  'local',
+                'local' =>  'azure',
                 'roleId' => 0
             ]);
             if ($query->job_level != 'SM' && $query->job_level != 'DM' && $query->job_level != 'GM' ) {
