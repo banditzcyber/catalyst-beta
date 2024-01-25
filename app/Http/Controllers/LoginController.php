@@ -55,7 +55,7 @@ class LoginController extends Controller
             $request->session()->put([
                 'user' => $query->employee_id,
                 'local' =>  'local',
-                'roleId' => $query->role_id
+                'roleId' => 0
             ]);
             if ($query->job_level != 'SM' && $query->job_level != 'DM' && $query->job_level != 'GM' ) {
                 return redirect()->intended('/profileEmploy');
