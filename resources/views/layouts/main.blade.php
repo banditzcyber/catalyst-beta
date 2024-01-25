@@ -50,12 +50,15 @@
                 <div class="aside-loggedin-user">
                     <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2"
                         data-toggle="collapse">
-                        <h6 class="tx-semibold tx-14 mg-b-0">{{ $idLogin }}</h6>
+                        @php
+                            $query = DB::table('')
+                        @endphp
+                        <h6 class="tx-semibold tx-14 mg-b-0">{{ $employeeSession->employee_name }}</h6>
                         <i data-feather="chevron-down"></i>
                     </a>
                     <p class="tx-color-03 tx-12 mg-b-0">
 
-                        @if (auth()->user()->role_id == 1)
+                        {{-- @if (auth()->user()->role_id == 1)
                             Employee
                         @elseif (auth()->user()->role_id == 2)
                             Section Manager
@@ -65,10 +68,12 @@
                             General Manager
                         @elseif (auth()->user()->role_id == 5)
                             Admin Functional
-                        @elseif (auth()->user()->role_id == 6)
-                            Root @endif
-                        
-                        
+                        @else
+                            Root @endif --}}
+
+                        {{ $employeeSession->position }}
+
+
                     </p>
                 </div>
                 <div class="collapse"
@@ -104,7 +109,7 @@
         @elseif (auth()->user()->role_id == 6)
             @include('layouts.navbaradmin') @endif
 
-            
+
 
     </ul>
     </div>

@@ -13,14 +13,6 @@ class ProfileEmployController extends Controller
 
         // $idLogin    = '003169';
         $idLogin    = $request->session()->get('user');
-        
-        // dd($idLogin);
-        // if(empty(auth()->user()->employee_id)){
-        //     $idLogin = auth()->user()->employee_id;
-        // }else{
-        //     $idLogin = $request->session()->get('user');
-        // }
-
         $dEmployee  = DB::table('employees')
                       ->where('employees.employee_id', '=', $idLogin );
 
@@ -34,7 +26,7 @@ class ProfileEmployController extends Controller
         $competency = $m_query->getCompetency($idLogin);
 
         foreach($competency as $vCompetency) :
-        
+
 
 
             $getCompetency[]    = $vCompetency->competency_name;
@@ -48,7 +40,7 @@ class ProfileEmployController extends Controller
             $neet               = $m_query->getItemAssessment($idLogin, $id);
             $getNeed[]          = $neet->where('assessment_details.actual_result','=', 2)->count();
 
-            
+
 
             $getLevel1[]        = $m_query->getItemAssessment($idLogin, $id)
                                         ->where('assessment_details.actual_result','=', 1)
@@ -158,17 +150,16 @@ class ProfileEmployController extends Controller
             'percentLevel2' => $percentLevel2,
             'percentLevel3' => $percentLevel3,
             'percentLevel4' => $percentLevel4,
-            'idLogin'       => $idLogin
+            'employeeSession'       => $dEmployee->first()
         ]);
     }
 
-    public function show()
+    public function show(Request $request)
     {
         // $idLogin    = '003169';
-        $idLogin    = auth()->user()->employee_id;
-
+        $idLogin    = $request->session()->get('user');
         $dEmployee  = DB::table('employees')
-                    ->where('employees.employee_id', '=', $idLogin );
+                      ->where('employees.employee_id', '=', $idLogin );
 
 
         $getCompetency  = array();
@@ -287,14 +278,15 @@ class ProfileEmployController extends Controller
             'percentLevel2' => $percentLevel2,
             'percentLevel3' => $percentLevel3,
             'percentLevel4' => $percentLevel4,
+            'employeeSession'       => $dEmployee->first()
         ]);
     }
 
-    public function listItem()
+    public function listItem(Request $request)
     {
-        $idLogin    = auth()->user()->employee_id;
+        $idLogin    = $request->session()->get('user');
         $dEmployee  = DB::table('employees')
-                    ->where('employees.employee_id', '=', $idLogin );
+                      ->where('employees.employee_id', '=', $idLogin );
 
         $dataCompetent  = DB::table('assessment_details')
                             ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
@@ -323,6 +315,7 @@ class ProfileEmployController extends Controller
             'employee'      => $dEmployee->get(),
             'competent'     => $dataCompetent->get(),
             'need'          => $dataNeed->get(),
+            'employeeSession'       => $dEmployee->first()
         ]);
     }
 
