@@ -108,7 +108,7 @@ class UserLoginController extends Controller
             'area'              => $area,
             'roleId'            => $roleId,
             'user'      => $user,
-            'title'     => 'Edit Data User'
+            'title'     => 'Edit Data User',
         ]);
     }
 
