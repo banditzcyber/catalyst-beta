@@ -48,14 +48,16 @@ class LoginController extends Controller
         $name = $user->data->getDisplayName();
         $email = $user->data->getUserPrincipalName();
 
-        $query = DB::table('employees')->where('email', $email)->first();
-        $request->session()->put([
-            'user' => $query->employee_id,
-            'local' =>  'local'
-        ]);
+        $query      = DB::table('employees')->where('email', $credentials['email'])->first();
+
 
         if (!empty($query->employee_id)) {
             $request->session()->regenerate();
+            $request->session()->put([
+                'user' => $query->employee_id,
+                'local' =>  'local',
+                'roleId' => 0
+            ]);
             if ($query->job_level != 'SM' && $query->job_level != 'DM' && $query->job_level != 'GM' ) {
                 return redirect()->intended('/profileEmploy');
             } elseif ($query->job_level == 'SM') {

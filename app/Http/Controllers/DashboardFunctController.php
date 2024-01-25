@@ -10,11 +10,11 @@ class DashboardFunctController extends Controller
     public function index(Request $request)
     {
 
-        $idLogin    = $request->session()->get('user');
-        $dEmployee  = DB::table('employees')
-                      ->where('employees.employee_id', '=', $idLogin );
-
-        $area   = $request->session()->get('local');
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
 
         $employee   = DB::table('employees')->count();
@@ -27,17 +27,18 @@ class DashboardFunctController extends Controller
         $matrix     = DB::table('profile_matrices')->count();
 
         return view('admin.dashboard.index', [
-            'title'     => 'Dashboard',
+            'title'                 => 'Dashboard',
             'employeeSession'       => $dEmployee->first(),
-            'area'      => $area,
-            'employee'  => $employee,
-            'competencies'  => $competencies,
-            'performance_standards'  => $performance_standards,
-            'items'  => $items,
-            'aldp'   => $aldp,
+            'area'                  => $area,
+            'roleId'                => $roleId,
+            'employee'              => $employee,
+            'competencies'          => $competencies,
+            'performance_standards' => $performance_standards,
+            'items'                 => $items,
+            'aldp'                  => $aldp,
             'closegap_activity'     => $closegap_activity,
-            'assessment'       => $assessment,
-            'matrix'        => $matrix,
+            'assessment'            => $assessment,
+            'matrix'                => $matrix,
 
         ]);
     }

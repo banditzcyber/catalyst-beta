@@ -13,11 +13,10 @@ class ProfileEmployController extends Controller
 
         // $idLogin    = '003169';
         $area           = $request->session()->get('local');
-        $roleId         = auth()->user()->role_id;
+        $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
-
 
 
         $getCompetency  = array();
