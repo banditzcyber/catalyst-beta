@@ -139,6 +139,7 @@ Route::get('/aldpSection/functional/{id_aldp}', [AldpSectionController::class, '
 Route::get('/aldpSection/leadership/{id_aldp}', [AldpSectionController::class, 'formLeadership']);
 Route::get('/aldpSection/other/{id_aldp}', [AldpSectionController::class, 'formOther']);
 Route::get('/participant/{aldp_detail_id}/{aldp_id}', [AldpSectionController::class, 'formParticipant']);
+Route::post('/deleteItemAldp', [AldpSectionController::class, 'deleteItemAldp']);
 Route::post('/deleteParticipant', [AldpSectionController::class, 'deleteParticipat']);
 Route::post('/addParticipant', [AldpSectionController::class, 'addParticipant']);
 Route::post('/submitForm', [AldpSectionController::class, 'submitForm']);

@@ -254,18 +254,17 @@ class AldpSectionController extends Controller
         ]);
     }
 
-    public function edit(AldpSection $aldpSection)
+    public function deleteItemAldp(Request $request)
     {
-        //
-    }
+        $idAldp         = $request->input('idAldp');
+        $idAldpDetail   = $request->input('idAldpDetail');
 
-    public function update(Request $request, AldpSection $aldpSection)
-    {
-        //
-    }
 
-    public function destroy(AldpSection $aldpSection)
-    {
+        DB::table('learnings')->where('aldp_detail_id', $idAldpDetail)->delete();
+        DB::table('aldp_details')->where('id', $idAldpDetail)->delete();
+
+        return redirect('/aldpSection/'. $idAldp)->with('success', 'Data has been deleted!');
+
     }
 
     public function formParticipant(Request $request, $aldp_detail_id, $aldp_id)
@@ -274,6 +273,7 @@ class AldpSectionController extends Controller
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
+
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 

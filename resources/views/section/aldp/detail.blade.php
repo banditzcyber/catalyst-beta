@@ -135,7 +135,7 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 55px;">
+                <div class="table-header" style="width: 69px;">
 
                 </div>
                 <div class="table-header" style="width: 420px;">
@@ -165,13 +165,24 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 55px;">
-                                {{-- <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                            <div class="table-body tx-center tx-15" style="width: 70px;">
+
+                                <a href="#" class="badge badge-primary pd-y-0 border-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a> --}}
-                                <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
-                                    <i data-feather="x" style="width: 15px;"></i>
                                 </a>
+
+                                <form action="/deleteItemAldp" method="post" class="d-inline"
+                                    onclick="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
+                                        value="{{ $view->aldp_id }}" required>
+                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
+                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
+                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
+                                        <i data-feather="x" class="wd-15"></i>
+                                    </button>
+                                </form>
+
                             </div>
 
                             <div class="table-body" style="width: 420px;">
@@ -202,7 +213,7 @@
                                     <span
                                         class="badge
                                         @if ($vDetail->status == 1) badge-primary
-                                        
+
                                         @elseif ($vDetail->status == 2)
                                             badge-warning
                                         @else
@@ -305,7 +316,7 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 55px;">
+                <div class="table-header" style="width: 69px;">
 
                 </div>
                 <div class="table-header" style="width: 420px;">
@@ -335,13 +346,22 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 55px;">
-                                {{-- <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                            <div class="table-body tx-center tx-15" style="width: 70px;">
+                                <a href="#" class="badge badge-primary pd-y-0 border-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a> --}}
-                                <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
-                                    <i data-feather="x" style="width: 15px;"></i>
                                 </a>
+
+                                <form action="/deleteItemAldp" method="post" class="d-inline"
+                                    onclick="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
+                                        value="{{ $view->aldp_id }}" required>
+                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
+                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
+                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
+                                        <i data-feather="x" class="wd-15"></i>
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="table-body" style="width: 420px;">
@@ -371,7 +391,7 @@
                                     <span
                                         class="badge
                                         @if ($vDetail->status == 1) badge-primary
-                                        
+
                                         @elseif ($vDetail->status == 2)
                                             badge-warning
                                         @else
@@ -473,7 +493,7 @@
                 <div class="table-line-header tx-center" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 55px;">
+                <div class="table-header" style="width: 69px;">
 
                 </div>
                 <div class="table-header" style="width: 420px;">
@@ -503,13 +523,22 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 55px;">
-                                {{-- <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                            <div class="table-body tx-center tx-15" style="width: 70px;">
+                                <a href="#" class="badge badge-primary pd-y-0 border-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a> --}}
-                                <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
-                                    <i data-feather="x" style="width: 15px;"></i>
                                 </a>
+
+                                <form action="/deleteItemAldp" method="post" class="d-inline"
+                                    onclick="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
+                                        value="{{ $view->aldp_id }}" required>
+                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
+                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
+                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
+                                        <i data-feather="x" class="wd-15"></i>
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="table-body" style="width: 420px;">
@@ -539,7 +568,7 @@
                                     <span
                                         class="badge
                                         @if ($vDetail->status == 0) badge-primary
-                                        
+
                                         @elseif ($vDetail->status == 1)
                                             badge-warning
                                         @else

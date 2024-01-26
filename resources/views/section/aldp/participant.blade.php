@@ -20,7 +20,7 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-            <div class="row ">
+            {{-- <div class="row ">
                 <div class="col-md">
                     <form action="/competency">
                         <div class="input-group">
@@ -34,7 +34,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="d-none d-md-block">
             <form action="/addParticipant" method="post">
@@ -56,6 +56,7 @@
                             <input type="hidden" class="form-control tx-11" name="item_name" id="item_name"
                                 value="{{ $item_name }}" required>
                             <input type="hidden" class="form-control tx-11" name="employee_id" id="employee_id" required>
+
                             <input type="text" class="form-control tx-11" name="employee_name" id="employee_name"
                                 required>
                             <button class="btn btn-xs pd-x-15 btn-dark btn-uppercase" data-toggle="modal"
