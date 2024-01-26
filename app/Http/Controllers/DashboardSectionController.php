@@ -26,15 +26,22 @@ class DashboardSectionController extends Controller
     public function index(Request $request)
     {
 
-        // $idLogin    = auth()->user()->employee_id;
-        $idLogin    = $request->session()->get('user');
-        // dd($idLogin);
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
         $json_data = $this->dataCompetency($idLogin);
         $data = json_decode($json_data->content(), true);
         // dd($data);
         extract($data);
         return view('section.dashboard.index', [
             'title'         => 'Dashboard',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             // 'data'          => $competent,
             'competency'    => json_encode($getCompetency),
             'competent'     => json_encode($countCompetent),
