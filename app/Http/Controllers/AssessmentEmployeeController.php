@@ -154,7 +154,7 @@ class AssessmentEmployeeController extends Controller
         return redirect('/assessmentEmployee/'.$assessment_update)->with('success', 'Assessment has been added!');
     }
 
-    public function resultAssessment($id, $assessment_id, $jobcode)
+    public function resultAssessment(Request $request, $id, $assessment_id, $jobcode)
     {
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
