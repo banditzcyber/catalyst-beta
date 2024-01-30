@@ -94,9 +94,19 @@
                         <td>{{ $view->employee_name }} - {{ $view->employee_id }}</td>
                         <td>{{ $view->item_id }}</td>
                         <td>{{ $view->item_name }}</td>
-                        <td>{{ date('d F Y', strtotime($view->started_at)) }} s/d
-                            {{ date('d F Y', strtotime($view->finished_at)) }}</td>
-                        <td>{{ $view->evidence }}</td>
+                        <td>
+                            @if (!empty($view->started_at))
+                                {{ date('d F Y', strtotime($view->started_at)) }} s/d
+                                {{ date('d F Y', strtotime($view->finished_at)) }}
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{ asset('storage/' . $view->evidence) }}" target="_blank">
+                                @if (!empty($view->evidence))
+                                    Evidence
+                                @endif
+                            </a>
+                        </td>
                         <td>{{ $view->comment }}</td>
                         <td class="{{ $color }} tx-center" style="cursor: pointer"
                             onclick="show({{ $view->id }})">
@@ -140,7 +150,7 @@
                 $("#titleModel").html('Form Data')
                 $("#form").html(data);
 
-                // $('#modalUpdate').modal('show'); 
+                // $('#modalUpdate').modal('show');
                 $('#modalUpdate').modal({
                     backdrop: 'static',
                     keyboard: false
@@ -184,7 +194,7 @@
                 $("#titleModel").html('Edit Data')
                 $("#form").html(data);
 
-                // $('#modalUpdate').modal('show'); 
+                // $('#modalUpdate').modal('show');
                 $('#modalUpdate').modal({
                     backdrop: 'static',
                     keyboard: false

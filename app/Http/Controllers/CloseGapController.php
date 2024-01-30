@@ -52,8 +52,14 @@ class CloseGapController extends Controller
         ]);
     }
 
-    public function closegapcompleted()
+    public function closegapcompleted(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $search = DB::table('learnings')
                     ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
@@ -78,8 +84,14 @@ class CloseGapController extends Controller
         ]);
     }
 
-    public function closegapreview()
+    public function closegapreview(Request $request)
     {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
         $search = DB::table('learnings')
                     ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
@@ -147,39 +159,6 @@ class CloseGapController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CloseGap  $closeGap
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CloseGap $closeGap)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CloseGap  $closeGap
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CloseGap $closeGap)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CloseGap  $closeGap
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CloseGap $closeGap)
-    {
-        //
-    }
 
     public function updateStatus(Request $request)
     {

@@ -58,6 +58,18 @@
                 <div class="form-group row row-xs">
                     <label class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-4">
+                        <input type="text" id="dateFrom" class="form-control" placeholder="From">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" id="dateTo" class="form-control" placeholder="To">
+                    </div>
+                    <div id="datepicker2"></div>
+                </div>
+
+                <div class="form-group row row-xs">
+
+                    <label class="col-sm-4 col-form-label">Date</label>
+                    <div class="col-sm-4">
                         <input type="date" name="started_at" id="started_at"
                             class="form-control @error('started_at') is-invalid @enderror" autofocus
                             placeholder="started_at" />
@@ -125,9 +137,8 @@
 
 
 
-
     @push('scripts')
-        <script>
+        <script type="s">
             var cleaveI = new Cleave('#competency_id', {
                 delimiters: ['-', '-', '-'],
                 blocks: [2, 3, 1, 3]
@@ -141,6 +152,64 @@
                 $("#competency_id").val($(this).attr("competencyId"));
                 $("#competency_name").val($(this).attr("competencyName"));
                 $("#modalCompetency").modal("hide");
+            });
+
+            $(function() {
+                'use strict'
+
+                $('#datepicker1').datepicker();
+
+                $('#datepicker2').datepicker({
+                    showOtherMonths: true,
+                    selectOtherMonths: true
+                });
+
+                $('#datepicker3').datepicker({
+                    showOtherMonths: true,
+                    selectOtherMonths: true,
+                    changeMonth: true,
+                    changeYear: true
+                });
+
+                $('#datepicker4').datepicker();
+
+                $('#datepicker5').datepicker({
+                    showButtonPanel: true
+                });
+
+                $('#datepicker6').datepicker({
+                    numberOfMonths: 2
+                });
+
+                var dateFormat = 'mm/dd/yy',
+                    from = $('#dateFrom')
+                    .datepicker({
+                        defaultDate: '+1w',
+                        numberOfMonths: 2
+                    })
+                    .on('change', function() {
+                        to.datepicker('option', 'minDate', getDate(this));
+                    }),
+                    to = $('#dateTo').datepicker({
+                        defaultDate: '+1w',
+                        numberOfMonths: 2
+                    })
+                    .on('change', function() {
+                        from.datepicker('option', 'maxDate', getDate(this));
+                    });
+
+                function getDate(element) {
+                    var date;
+                    try {
+                        date = $.datepicker.parseDate(dateFormat, element.value);
+                    } catch (error) {
+                        date = null;
+                    }
+
+                    return date;
+                }
+
+
             });
         </script>
     @endpush

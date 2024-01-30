@@ -124,6 +124,10 @@ class ProfileEmployController extends Controller
                         ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                         ->where('assessments.employee_id', '=', $idLogin);
 
+        $trainingCompleted  = DB::table('learnings')->where('employee_id', $idLogin)->where('status', 3)->count();
+        $traningPlanned     = DB::table('learnings')->where('employee_id', $idLogin)->where('status', '!=', 3)->count();
+        $trainingTotal      = DB::table('learnings')->where('employee_id', $idLogin)->count();
+
         return view('employee.dashboard.index', [
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
@@ -155,6 +159,9 @@ class ProfileEmployController extends Controller
             'percentLevel2' => $percentLevel2,
             'percentLevel3' => $percentLevel3,
             'percentLevel4' => $percentLevel4,
+            'trainingCompleted'     => $trainingCompleted,
+            'trainingPlanned'       => $traningPlanned,
+            'trainingTotal'         => $trainingTotal
         ]);
     }
 

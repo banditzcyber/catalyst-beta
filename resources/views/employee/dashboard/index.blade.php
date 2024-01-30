@@ -38,8 +38,7 @@
                             class="card-header bd-b-0 pd-t-20 pd-lg-t-25 pd-l-20 pd-lg-l-25 d-flex flex-column flex-sm-row align-items-sm-start justify-content-sm-between">
                             <div>
                                 <h6 class="mg-b-5">Progress based on Competency and Level</h6>
-                                <p class="tx-12 tx-color-03 mg-b-0">Audience to which the users belonged while on the
-                                    current date range.</p>
+                                <p class="tx-12 tx-color-03 mg-b-0">.</p>
                             </div>
                         </div><!-- card-header -->
                         <div class="card-body pd-lg-25">
@@ -163,113 +162,13 @@
                         </div><!-- card-footer -->
                     </div><!-- card -->
                 </div>
-                {{-- <div class="col-md-6 col-lg-5 mg-t-10">
-                    <div class="card">
-                        <div class="card-header pd-b-0 bd-b-0 pd-t-20 pd-lg-t-25 pd-l-20 pd-lg-l-25">
-                            <h6 class="mg-b-5">Acquisition</h6>
-                            <p class="tx-12 tx-color-03 mg-b-0">Tells you where your visitors originated from, such as
-                                search engines, social networks or website referrals. <a href="">Learn more</a></p>
-                        </div><!-- card-header -->
-                        <div class="card-body pd-sm-20 pd-lg-25">
-                            <div class="row row-sm">
-                                <div class="col-sm-5 col-md-12 col-lg-6 col-xl-5">
-                                    <div class="media">
-                                        <div
-                                            class="wd-40 ht-40 rounded bd bd-2 bd-primary d-flex flex-shrink-0 align-items-center justify-content-center op-6">
-                                            <i data-feather="bar-chart-2" class="wd-20 ht-20 tx-primary stroke-wd-3"></i>
-                                        </div>
-                                        <div class="media-body mg-l-10">
-                                            <h4 class="tx-normal tx-rubik tx-spacing--2 lh-1 mg-b-5">33.50%</h4>
-                                            <p
-                                                class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 tx-nowrap mg-b-0">
-                                                Bounce Rate</p>
-                                        </div><!-- media-body -->
-                                    </div><!-- media -->
-                                </div><!-- col -->
-                                <div class="col-sm-5 col-md-12 col-lg-6 col-xl-5 mg-t-20 mg-sm-t-0 mg-md-t-20 mg-lg-t-0">
-                                    <div class="media">
-                                        <div
-                                            class="wd-40 ht-40 rounded bd bd-2 bd-gray-500 d-flex flex-shrink-0 align-items-center justify-content-center op-6">
-                                            <i data-feather="bar-chart-2" class="wd-20 ht-20 tx-gray-500 stroke-wd-3"></i>
-                                        </div>
-                                        <div class="media-body mg-l-10">
-                                            <h4 class="tx-normal tx-rubik tx-spacing--2 lh-1 mg-b-5">9,065</h4>
-                                            <p
-                                                class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 tx-nowrap mg-b-0">
-                                                Page Sessions</p>
-                                        </div><!-- media-body -->
-                                    </div><!-- media -->
-                                </div><!-- col -->
-                            </div><!-- row -->
 
-                            <div class="chart-eight">
-                                <div id="flotChart1" class="flot-chart"></div>
-                            </div>
-                        </div><!-- card-body -->
-                    </div><!-- card -->
-                </div><!-- col -->
-                <div class="col-sm-7 col-md-8 col-lg-4 col-xl mg-t-10">
-                    <div class="card">
-                        <div class="card-header">
-                            <h6 class="mg-b-0">Device Sessions</h6>
-                        </div><!-- card-header -->
-                        <div class="card-body">
-                            <div class="row row-xs">
-                                <div class="col-4 col-lg">
-                                    <div class="d-flex align-items-baseline">
-                                        <span class="d-block wd-8 ht-8 rounded-circle bg-primary"></span>
-                                        <span
-                                            class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">Mobile</span>
-                                    </div>
-                                    <h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">6,098</h4>
-                                </div><!-- col -->
-                                <div class="col-4 col-lg">
-                                    <div class="d-flex align-items-baseline">
-                                        <span class="d-block wd-8 ht-8 rounded-circle bg-teal"></span>
-                                        <span
-                                            class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">Desktop</span>
-                                    </div>
-                                    <h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">3,902</h4>
-                                </div><!-- col -->
-                                <div class="col-4 col-lg">
-                                    <div class="d-flex align-items-baseline">
-                                        <span class="d-block wd-8 ht-8 rounded-circle bg-gray-300"></span>
-                                        <span
-                                            class="d-block tx-10 tx-uppercase tx-medium tx-spacing-1 tx-color-03 mg-l-7">Other</span>
-                                    </div>
-                                    <h4 class="tx-normal tx-rubik tx-spacing--1 mg-l-15 mg-b-0">1,065</h4>
-                                </div><!-- col -->
-                            </div><!-- row -->
-
-                            <div class="chart-nine">
-                                <div id="flotChart2" class="flot-chart"></div>
-                            </div>
-                        </div><!-- card-body -->
-                    </div><!-- card -->
-                </div><!-- col -->
-                <div class="col-sm-5 col-md-4 col-lg-3 mg-t-10">
-                    <div class="card">
-                        <div class="card-header">
-                            <h6 class="mg-b-0">Top Traffic Source</h6>
-                        </div><!-- card-header -->
-                        <div class="card-body tx-center">
-                            <h4 class="tx-normal tx-rubik tx-40 tx-spacing--1 mg-b-0">29,931</h4>
-                            <p class="tx-12 tx-uppercase tx-semibold tx-spacing-1 tx-color-02">Organic Search</p>
-                            <p class="tx-12 tx-color-03 mg-b-0">Measures your user's sources that generate traffic metrics
-                                to your website for this month.</p>
-                        </div><!-- card-body -->
-                        <div class="card-footer bd-t-0 pd-t-0">
-                            <button class="btn btn-sm btn-block btn-outline-primary btn-uppercase tx-spacing-1">Learn
-                                More</button>
-                        </div><!-- card-footer -->
-                    </div><!-- card -->
-                </div><!-- col --> --}}
                 <div class="col-lg-4 col-md-6 mg-t-10">
                     <div class="card">
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">0</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingCompleted }}</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Completed
                                         Training
                                     </h6>
@@ -289,10 +188,11 @@
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">0</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingPlanned }}</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Planned Training
                                     </h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">training planned based on ALDP</p>
+                                    <p class="tx-11 tx-color-03 mg-b-0">training planned or not complete yet based on ALDP
+                                    </p>
                                 </div>
                                 <div class="col-5">
                                     <div class="chart-ten">
@@ -308,7 +208,7 @@
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">0</h3>
+                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingTotal }}</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-pink mg-b-5">Total
                                         Training</h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">total training based on ALDP.</p>

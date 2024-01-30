@@ -138,12 +138,16 @@ Route::resource('/aldpSection', AldpSectionController::class);
 Route::get('/aldpSection/functional/{id_aldp}', [AldpSectionController::class, 'formFunctional']);
 Route::get('/aldpSection/leadership/{id_aldp}', [AldpSectionController::class, 'formLeadership']);
 Route::get('/aldpSection/other/{id_aldp}', [AldpSectionController::class, 'formOther']);
-Route::get('/participant/{aldp_detail_id}/{aldp_id}', [AldpSectionController::class, 'formParticipant']);
+Route::get('/participant/{aldp_detail_id}/{aldp_id}/{item_id}', [AldpSectionController::class, 'formParticipant']);
 Route::post('/deleteItemAldp', [AldpSectionController::class, 'deleteItemAldp']);
 Route::post('/deleteParticipant', [AldpSectionController::class, 'deleteParticipat']);
 Route::post('/addParticipant', [AldpSectionController::class, 'addParticipant']);
 Route::post('/submitForm', [AldpSectionController::class, 'submitForm']);
 Route::post('/submitFormOther', [AldpSectionController::class, 'submitFormOther']);
+Route::get('/detailVerify/{id}', [AldpSectionController::class, 'showVerify']);
+Route::get('/aldpSection/edit/{id}', [AldpSectionController::class, 'editData']);
+Route::get('/aldpSection/editCnl/{id}', [AldpSectionController::class, 'editData']);
+Route::post('/aldpSection/update', [AldpSectionController::class, 'updateData']);
 
 Route::get('/subordinate', [SubordinateController::class, 'index']);
 Route::get('/subordinate/profile/{employee_id}', [SubordinateController::class, 'profile']);
@@ -165,7 +169,11 @@ Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);
 Route::resource('/performance', PerformanceStandardController::class);
 Route::resource('/items', ItemController::class);
 Route::resource('/employees', EmployeeController::class);
+
+// # ALDP
 Route::resource('/aldpAdmin', AldpController::class);
+Route::get('/aldpAdmin/edit/{id}', [AldpController::class, 'editData']);
+Route::post('/aldpAdmin/update', [AldpController::class, 'updateData']);
 
 Route::resource('/matrix', ProfileMatrixController::class);
 Route::get('/matrix/edit/{id}', [ProfileMatrixController::class, 'editData']);

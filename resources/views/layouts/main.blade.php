@@ -21,11 +21,13 @@
         href="/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
+    <link href="/lib/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet">
 
     <!-- DashForge CSS -->
     <link rel="stylesheet" href="/css/dashforge.css">
     <link rel="stylesheet" href="/css/dashforge.dashboard.css">
     <link rel="stylesheet" href="/css/style-cyber.css">
+  <link rel="stylesheet" href="/css/dashforge.demo.css">
 
 </head>
 
@@ -161,6 +163,7 @@
     <script src="/lib/chart.js/Chart.bundle.min.js"></script>
     <script src="/lib/jqvmap/jquery.vmap.min.js"></script>
     <script src="/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <script src="/lib/jqueryui/jquery-ui.min.js"></script>
 
     <script src="/js/dashforge.js"></script>
     <script src="/js/dashforge.aside.js"></script>

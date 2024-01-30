@@ -47,12 +47,8 @@ class AldpController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function create(Request $request)
     {
         //session
         $area           = $request->session()->get('local');
@@ -69,6 +65,9 @@ class AldpController extends Controller
 
         return view('admin.aldp.create', [
             'title'         => 'Add Annual Learning Development',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'data'          => $data
         ]);
     }
@@ -181,35 +180,53 @@ class AldpController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Aldp  $aldp
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Aldp $aldp)
+
+    public function editData(Request $request, $id)
     {
-        //
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
+        $data   = DB::table('aldps')
+                    ->join('employees', 'employees.employee_id', '=', 'aldps.manager_id')
+                    ->select('aldps.*', 'employees.employee_name', 'employees.position', 'employees.jobcode')
+                    ->where('aldps.id', $id)
+                    ->first();
+
+        $employee = DB::table('employees')
+                    ->where('job_level', '=', 'SM')
+                    ->orWhere('job_level', '=', 'SM (ACT)')
+                    ->orWhere('job_level', '=', 'DM')
+                    ->orWhere('job_level', '=', 'GM')->get();
+
+        return view('admin.aldp.edit', [
+            'title'             => 'Edit data Assessment',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'employee'          => $employee,
+            'data'              => $data
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateAldpRequest  $request
-     * @param  \App\Models\Aldp  $aldp
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateAldpRequest $request, Aldp $aldp)
+    public function updateData(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'manager_id'    => 'required',
+            'year'          => 'required',
+            'comment'       => 'required',
+            'status'        => 'required',
+        ]);
+
+        $id     = $request->input('aldp_id');
+
+        DB::table('aldps')->where('id', $id)->update($validation);
+        return redirect('/aldpAdmin')->with('success', 'Data has been updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Aldp  $aldp
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         DB::table('aldps')->where('id', $id)->delete();

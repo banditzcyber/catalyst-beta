@@ -71,7 +71,7 @@
                     <th>Section</th>
                     <th>Year</th>
                     <th>Remarks</th>
-                    <th style="width: 95px">Status</th>
+                    <th style="width: 95px" class="tx-center">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,13 +79,13 @@
                     @php
 
                         if ($view->status == 1) {
-                            $color = 'bg-blue';
-                            $text = 'Created';
+                            $color = 'bg-blue tx-center';
+                            $text = 'Developed';
                         } elseif ($view->status == 2) {
-                            $color = 'bg-kuning';
-                            $text = 'On-Proses';
+                            $color = 'bg-kuning tx-center';
+                            $text = 'Reviewed';
                         } else {
-                            $color = 'bg-hijau';
+                            $color = 'bg-hijau tx-center';
                             $text = 'Completed';
                         }
 
@@ -94,7 +94,7 @@
                         <td class="tx-center">
                             <a href="/aldpAdmin/{{ $view->id }}" class="badge badge-light pd-y-0"><i
                                     data-feather="align-justify" class="wd-15"></i></a>
-                            <a href="/aldpAdmin/{{ $view->id }}/edit" class="badge badge-warning pd-y-0"><i
+                            <a href="/aldpAdmin/edit/{{ $view->id }}" class="badge badge-warning pd-y-0"><i
                                     data-feather="edit-2" class="wd-15"></i></a>
                             <form action="/aldpAdmin/{{ $view->id }}" method="post" class="d-inline"
                                 onclick="return confirm('Are you sure?')">

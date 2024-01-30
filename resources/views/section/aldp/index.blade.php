@@ -33,11 +33,9 @@
                             <h4 class="card-subtitle mb-2 text-muted">ALDP {{ $vData->year }}</h4>
                             <p class="card-text">
                                 @if ($vData->status == 1)
-                                    <span class="badge badge-primary">Created</span>
-                                @elseif ($vData->status == 2)
-                                    <span class="badge badge-primary">Reiview by Admin</span>
+                                    <span class="badge badge-primary">Setup</span>
                                 @else
-                                    <span class="badge badge-primary">Form Completed</span>
+                                    <span class="badge badge-success">Verified</span>
                                 @endif
                             </p>
                         </div>
@@ -46,25 +44,26 @@
                             if ($vData->status == 1) {
                                 $valueBtn = 'Form';
                                 $class = '';
+                                $link = '/aldpSection/';
                             } elseif ($vData->status == 2) {
                                 $valueBtn = 'View';
                                 $class = 'disabled="disabled"';
+                                $link = '/detailVerify/';
                             }
                         @endphp
 
                         <div class="card-footer tx-13">
                             <div class="row row-xs">
-                                <div class="col-lg-5">
-                                    <a href="/aldpSection/{{ $vData->id }}"
-                                        class="btn btn-xs btn-outline-dark btn-block">
+                                <div class="col-lg-6">
+                                    <a href="{{ $link }}{{ $vData->id }}" class="btn btn-xs btn-outline-dark">
                                         {{ $valueBtn }}
                                     </a>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 tx-right">
                                     <form action="/submitForm" method="POST" onclick="return confirm('Are you sure?')">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $vData->id }}">
-                                        <button type="submit" class="btn btn-xs btn-outline-secondary btn-block"
+                                        <button type="submit" class="btn btn-xs btn-outline-secondary"
                                             {{ $class }}>Finish
                                             Form</button>
                                     </form>

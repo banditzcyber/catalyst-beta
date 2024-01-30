@@ -30,6 +30,99 @@ class AldpSectionController extends Controller
         ]);
     }
 
+    public function show(Request $request, $id)
+    {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
+        $title  = DB::table('aldps')
+                    ->join('employees', 'aldps.manager_id', '=', 'employees.employee_id')
+                    ->where('aldp_id', '=', $id);
+
+        $basequery = DB::table('aldp_details')
+                        ->join('items', 'items.item_id', '=', 'aldp_details.item_id')
+                        ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
+                        ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+                        ->select('aldp_details.*', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name', 'aldp_details.id as id_aldp_details')
+                        ->where('aldp_details.aldp_id', '=', $id);
+
+        $cnlquery  = DB::table('aldp_details')
+                        ->select('aldp_details.*', 'items.*', 'aldp_details.id as id_aldp_details')
+                        ->join('items','aldp_details.item_id', '=', 'items.item_id')
+                        ->where('aldp_details.aldp_id', '=', $id);
+
+        $learning   = DB::table('learnings')
+                    ->join('aldp_details', 'learnings.aldp_detail_id','=', 'aldp_details.id')
+                    ->where('aldp_details.aldp_id', '=', $id);
+
+        $qOther = DB::table('aldp_details')
+                    ->select('aldp_details.*', 'aldp_details.id as id_aldp_details')
+                    ->where('aldp_details.aldp_id','=', $id);
+
+        $functional_all     = $learning->where('aldp_details.competency_type','=', '1')->count();
+        $functional_comp    = $learning->where('aldp_details.competency_type','=', '1')
+                                       ->where('learnings.status','=',3)
+                                       ->count();
+
+        $other_all          = $learning->where('aldp_details.competency_type','=', '3')->count();
+        $other_comp         = $learning->where('aldp_details.competency_type','=', '3')
+                                       ->where('learnings.status','=',3)
+                                       ->count();
+
+        $cnl_all            = $learning->where('aldp_details.competency_type','=', '2')->count();
+        $cnl_comp           = $learning->where('aldp_details.competency_type','=', '2')
+                                       ->where('learnings.status','=',3)
+                                       ->count();
+
+        if(!empty($functional_all)){
+            $functional_percent = ($functional_comp / $functional_all) * 100;
+        }else{
+            $functional_percent = 0;
+        }
+
+
+        if(!empty($cnl_all)){
+            $cnl_percent = ($cnl_comp / $cnl_all) * 100;
+        }else{
+            $cnl_percent = 0;
+        }
+
+
+
+        if(!empty($other_all)){
+            $other_percent = ($other_comp / $other_all) * 100;
+        }else{
+            $other_percent = 0;
+        }
+
+
+
+        return view('section.aldp.detail', [
+            'title'             => 'ALDP Details',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'title2'            => $title->get(),
+            'functional'        => $basequery->where('aldp_details.competency_type','=', '1')->get(),
+            'functional_all'    => $functional_all,
+            'functional_comp'   => $functional_comp,
+            'functional_percent'=> $functional_percent,
+            'cnl'               => $cnlquery->where('aldp_details.competency_type','=', '2')->get(),
+            'cnl_all'           => $cnl_all,
+            'cnl_comp'          => $cnl_comp,
+            'cnl_percent'       => $cnl_percent,
+            'other'             => $qOther->where('aldp_details.competency_type','=', '3')->get(),
+            'other_all'         => $other_all,
+            'other_comp'        => $other_comp,
+            'other_percent'     => $other_percent,
+            'id_aldp'           => $id,
+            'assessment_data'   => DB::table('assessments')->where('assessment_id', $id)->get()
+        ]);
+    }
 
     public function formFunctional(Request $request, $id)
     {
@@ -122,7 +215,6 @@ class AldpSectionController extends Controller
         ]);
     }
 
-
     public function store(Request $request)
     {
 
@@ -131,8 +223,8 @@ class AldpSectionController extends Controller
             'competency_type'   => 'required',
             'item_id'           => 'required',
             'item_name'         => '',
-            'planned_month'     => '',
-            'planned_week'      => '',
+            'planned_month'     => 'required',
+            'planned_week'      => 'required',
             'remarks'           => ''
         ]);
 
@@ -163,8 +255,9 @@ class AldpSectionController extends Controller
         return redirect('/aldpSection/'. $validation['aldp_id'])->with('success', 'New data has been addedd!');
     }
 
-    public function show(Request $request, $id)
+    public function editData(Request $request, $id)
     {
+
         // session
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
@@ -172,87 +265,63 @@ class AldpSectionController extends Controller
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 
-        $title  = DB::table('aldps')
-                    ->join('employees', 'aldps.manager_id', '=', 'employees.employee_id')
-                    ->where('aldp_id', '=', $id);
+        $data   = DB::table("aldp_details")
+                    ->join('items', 'items.item_id', '=', 'aldp_details.item_id')
+                    ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
+                    ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+                    ->select('aldp_details.*', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
+                    ->where('aldp_details.id', $id)->first();
 
-        $basequery = DB::table('aldp_details')
-                        ->select('aldp_details.*', 'items.*', 'aldp_details.id as id_aldp_details')
-                        ->join('items','aldp_details.item_id', '=', 'items.item_id')
-                        ->where('aldp_details.aldp_id', '=', $id);
-        $cnlquery  = DB::table('aldp_details')
-                        ->select('aldp_details.*', 'items.*', 'aldp_details.id as id_aldp_details')
-                        ->join('items','aldp_details.item_id', '=', 'items.item_id')
-                        ->where('aldp_details.aldp_id', '=', $id);
+        $item = DB::table('assessment_details')
+                ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
+                ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
+                ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+                ->select('assessment_result', 'items.item_name', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
+                ->orderby('performance_standards.level', 'asc')
+                ->where('assessment_result', 2)
+                ->get();
 
-        $learning   = DB::table('learnings')
-                    ->join('aldp_details', 'learnings.aldp_detail_id','=', 'aldp_details.id')
-                    ->where('aldp_details.aldp_id', '=', $id);
-
-        $qOther = DB::table('aldp_details')
-                    ->select('aldp_details.*', 'aldp_details.id as id_aldp_details')
-                    ->where('aldp_details.aldp_id','=', $id);
-
-        $functional_all     = $learning->where('aldp_details.competency_type','=', '1')->count();
-        $functional_comp    = $learning->where('aldp_details.competency_type','=', '1')
-                                       ->where('learnings.status','=',3)
-                                       ->count();
-
-        $other_all          = $learning->where('aldp_details.competency_type','=', '3')->count();
-        $other_comp         = $learning->where('aldp_details.competency_type','=', '3')
-                                       ->where('learnings.status','=',3)
-                                       ->count();
-
-        $cnl_all            = $learning->where('aldp_details.competency_type','=', '2')->count();
-        $cnl_comp           = $learning->where('aldp_details.competency_type','=', '2')
-                                       ->where('learnings.status','=',3)
-                                       ->count();
-
-        if(!empty($functional_all)){
-            $functional_percent = ($functional_comp / $functional_all) * 100;
-        }else{
-            $functional_percent = 0;
-        }
-
-
-        if(!empty($cnl_all)){
-            $cnl_percent = ($cnl_comp / $cnl_all) * 100;
-        }else{
-            $cnl_percent = 0;
-        }
-
-
-
-        if(!empty($other_all)){
-            $other_percent = ($other_comp / $other_all) * 100;
-        }else{
-            $other_percent = 0;
-        }
-
-
-
-        return view('section.aldp.detail', [
-            'title'             => 'ALDP Details',
+        // dd($id);
+        return view('section.aldp.edit', [
+            'title'             => 'Form Edit ALDP (Functional)',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'title2'            => $title->get(),
-            'functional'        => $basequery->where('aldp_details.competency_type','=', '1')->get(),
-            'functional_all'    => $functional_all,
-            'functional_comp'   => $functional_comp,
-            'functional_percent'=> $functional_percent,
-            'cnl'               => $cnlquery->where('aldp_details.competency_type','=', '2')->get(),
-            'cnl_all'           => $cnl_all,
-            'cnl_comp'          => $cnl_comp,
-            'cnl_percent'       => $cnl_percent,
-            'other'             => $qOther->where('aldp_details.competency_type','=', '3')->get(),
-            'other_all'         => $other_all,
-            'other_comp'        => $other_comp,
-            'other_percent'     => $other_percent,
-            'id_aldp'           => $id,
-            'assessment_data'   => DB::table('assessments')->where('assessment_id', $id)->get()
+            'data'              => $data,
+            'item'              => $item,
+            'id_aldp'           => $data->aldp_id
         ]);
+
     }
+
+    public function updateData(Request $request)
+    {
+
+        $validation = $request->validate([
+            'item_id'           => 'required',
+            'item_name'         => '',
+            'planned_month'     => 'required',
+            'planned_week'      => 'required',
+            'remarks'           => ''
+        ]);
+
+        $learning = [
+            'item_id'           => $request->input('item_id'),
+            'item_name'         => $request->input('item_name'),
+        ];
+
+
+        $aldp_detail_id     = $request->input('aldp_detail_id');
+        $aldp_id            = $request->input('aldp_id');
+
+
+        DB::table('aldp_details')->where('id', $aldp_detail_id)->update($validation);
+        DB::table('learnings')->where('aldp_detail_id', $aldp_detail_id)->update($learning);
+
+        return redirect('/aldpSection/'. $aldp_id)->with('success', 'Data has been updated!');
+
+    }
+
 
     public function deleteItemAldp(Request $request)
     {
@@ -267,7 +336,7 @@ class AldpSectionController extends Controller
 
     }
 
-    public function formParticipant(Request $request, $aldp_detail_id, $aldp_id)
+    public function formParticipant(Request $request, $aldp_detail_id, $aldp_id, $item_id)
     {
         // session
         $area           = $request->session()->get('local');
@@ -351,5 +420,99 @@ class AldpSectionController extends Controller
 
         DB::table('aldps')->where('id', $data)->update(['status' => 2]);
         return redirect('/aldpSection')->with('success', 'Assessment has been updated!');
+    }
+
+    public function showVerify(Request $request, $id)
+    {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
+        $title  = DB::table('aldps')
+                    ->join('employees', 'aldps.manager_id', '=', 'employees.employee_id')
+                    ->where('aldp_id', '=', $id);
+
+        $basequery = DB::table('aldp_details')
+                    ->join('items', 'items.item_id', '=', 'aldp_details.item_id')
+                    ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
+                    ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+                    ->select('aldp_details.*', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name', 'aldp_details.id as id_aldp_details')
+                    ->where('aldp_details.aldp_id', '=', $id);
+
+        $cnlquery  = DB::table('aldp_details')
+                        ->select('aldp_details.*', 'items.*', 'aldp_details.id as id_aldp_details')
+                        ->join('items','aldp_details.item_id', '=', 'items.item_id')
+                        ->where('aldp_details.aldp_id', '=', $id);
+
+        $learning   = DB::table('learnings')
+                    ->join('aldp_details', 'learnings.aldp_detail_id','=', 'aldp_details.id')
+                    ->where('aldp_details.aldp_id', '=', $id);
+
+        $qOther = DB::table('aldp_details')
+                    ->select('aldp_details.*', 'aldp_details.id as id_aldp_details')
+                    ->where('aldp_details.aldp_id','=', $id);
+
+        $functional_all     = $learning->where('aldp_details.competency_type','=', '1')->count();
+        $functional_comp    = $learning->where('aldp_details.competency_type','=', '1')
+                                       ->where('learnings.status','=',3)
+                                       ->count();
+
+        $other_all          = $learning->where('aldp_details.competency_type','=', '3')->count();
+        $other_comp         = $learning->where('aldp_details.competency_type','=', '3')
+                                       ->where('learnings.status','=',3)
+                                       ->count();
+
+        $cnl_all            = $learning->where('aldp_details.competency_type','=', '2')->count();
+        $cnl_comp           = $learning->where('aldp_details.competency_type','=', '2')
+                                       ->where('learnings.status','=',3)
+                                       ->count();
+
+        if(!empty($functional_all)){
+            $functional_percent = ($functional_comp / $functional_all) * 100;
+        }else{
+            $functional_percent = 0;
+        }
+
+
+        if(!empty($cnl_all)){
+            $cnl_percent = ($cnl_comp / $cnl_all) * 100;
+        }else{
+            $cnl_percent = 0;
+        }
+
+
+
+        if(!empty($other_all)){
+            $other_percent = ($other_comp / $other_all) * 100;
+        }else{
+            $other_percent = 0;
+        }
+
+
+
+        return view('section.aldp.verified.detailverify', [
+            'title'             => 'ALDP Details Verify',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'title2'            => $title->get(),
+            'functional'        => $basequery->where('aldp_details.competency_type','=', '1')->get(),
+            'functional_all'    => $functional_all,
+            'functional_comp'   => $functional_comp,
+            'functional_percent'=> $functional_percent,
+            'cnl'               => $cnlquery->where('aldp_details.competency_type','=', '2')->get(),
+            'cnl_all'           => $cnl_all,
+            'cnl_comp'          => $cnl_comp,
+            'cnl_percent'       => $cnl_percent,
+            'other'             => $qOther->where('aldp_details.competency_type','=', '3')->get(),
+            'other_all'         => $other_all,
+            'other_comp'        => $other_comp,
+            'other_percent'     => $other_percent,
+            'id_aldp'           => $id,
+            'assessment_data'   => DB::table('assessments')->where('assessment_id', $id)->get()
+        ]);
     }
 }

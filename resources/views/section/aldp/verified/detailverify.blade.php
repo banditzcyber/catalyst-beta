@@ -15,9 +15,6 @@
             </h4>
         </div>
         <div class="d-none d-md-block">
-            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalItem">
-                Add Data
-            </button>
             <a href="/aldpSection" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
@@ -135,10 +132,8 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 69px;">
 
-                </div>
-                <div class="table-header" style="width: 420px;">
+                <div class="table-header" style="width: 489px;">
                     item competency
                 </div>
                 <div class="table-header" style="width: 100px;">
@@ -165,29 +160,9 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 70px;">
 
-                                <a href="/aldpSection/edit/{{ $view->id_aldp_details }}"
-                                    class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
 
-                                <form action="/deleteItemAldp" method="post" class="d-inline"
-                                    onclick="return confirm('Are you sure?')">
-                                    @csrf
-                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
-                                        value="{{ $view->aldp_id }}" required>
-                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
-                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
-                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
-                                        <i data-feather="x" class="wd-15"></i>
-                                    </button>
-                                </form>
-
-                            </div>
-
-                            <div class="table-body" style="width: 420px;">
-
+                            <div class="table-body" style="width: 489px;">
                                 <div class="tx-uppercase tx-bold">{{ $view->competency_name }}</div>
                                 <div class="mb-2 tx-italic tx-color-02">{{ $view->ps_name }}</div>
                                 <div>{{ $view->item_id }}</div>
@@ -201,8 +176,7 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}"
-                                class="table-body" style="width: 340px;">
+                            <a href="#" class="table-body" style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
@@ -319,10 +293,7 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 69px;">
-
-                </div>
-                <div class="table-header" style="width: 420px;">
+                <div class="table-header" style="width: 489px;">
                     item competency
                 </div>
                 <div class="table-header" style="width: 100px;">
@@ -349,26 +320,9 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 70px;">
-                                <a href="/aldpSection/editCnl/{{ $view->id_aldp_details }}"
-                                    class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
 
-                                <form action="/deleteItemAldp" method="post" class="d-inline"
-                                    onclick="return confirm('Are you sure?')">
-                                    @csrf
-                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
-                                        value="{{ $view->aldp_id }}" required>
-                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
-                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
-                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
-                                        <i data-feather="x" class="wd-15"></i>
-                                    </button>
-                                </form>
-                            </div>
 
-                            <div class="table-body" style="width: 420px;">
+                            <div class="table-body" style="width: 489px;">
                                 <div>{{ $view->item_id }}</div>
                                 <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
@@ -380,8 +334,7 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
-                                style="width: 340px;">
+                            <a href="#" class="table-body" style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
@@ -497,10 +450,8 @@
                 <div class="table-line-header tx-center" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 69px;">
 
-                </div>
-                <div class="table-header" style="width: 420px;">
+                <div class="table-header" style="width: 489px;">
                     item competency
                 </div>
                 <div class="table-header" style="width: 100px;">
@@ -527,25 +478,8 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 70px;">
-                                <a href="#" class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
 
-                                <form action="/deleteItemAldp" method="post" class="d-inline"
-                                    onclick="return confirm('Are you sure?')">
-                                    @csrf
-                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
-                                        value="{{ $view->aldp_id }}" required>
-                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
-                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
-                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
-                                        <i data-feather="x" class="wd-15"></i>
-                                    </button>
-                                </form>
-                            </div>
-
-                            <div class="table-body" style="width: 420px;">
+                            <div class="table-body" style="width: 489px;">
                                 <div>{{ $view->item_name }}</div>
                                 {{-- <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
@@ -557,8 +491,7 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
-                                style="width: 340px;">
+                            <a href="#" class="table-body" style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
