@@ -209,7 +209,7 @@
                                     <td>{{ $view->competency_name }}</td>
                                     <td>{{ Str::limit($view->ps_name, 100) }}</td>
                                     <td>{{ $view->level }}</td>
-                                    <td>{{ $view->item_name }}</td>
+                                    <td>{{ $view->item_id }} - {{ $view->item_name }}</td>
                                     <td>{{ $view->intervention }} ({{ $view->type_training }})</td>
                                 </tr>
                             @endforeach

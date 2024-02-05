@@ -26,7 +26,7 @@
         <div class="row row-xs mg-b-25">
 
             @foreach ($data as $view)
-                <div class="col-sm-4 col-md-2 col-lg-4 col-xl-2 mg-b-10">
+                <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 mg-b-10">
                     <div class="card card-profile" style="height: 270px">
                         <img src="/images/bg-content.jpg" class="card-img-top" alt="">
                         <div class="card-body tx-center">

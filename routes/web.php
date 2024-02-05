@@ -126,7 +126,7 @@ Route::get('/resultAssessment/{id}/{kd_assessment}/{jobcode}', [AssessmentEmploy
 Route::post('/finishForm', [AssessmentEmployeeController::class, 'finishForm']);
 
 // dashboard
-Route::get('/profileEmploy/current', [ProfileEmployController::class, 'shojw']);
+Route::get('/profileEmploy/current', [ProfileEmployController::class, 'show']);
 Route::get('/listItems', [ProfileEmployController::class, 'listItem']);
 // Route::get('/current', [ProfileEmployController::class, 'index ']);
 
@@ -151,6 +151,9 @@ Route::post('/aldpSection/update', [AldpSectionController::class, 'updateData'])
 
 Route::get('/subordinate', [SubordinateController::class, 'index']);
 Route::get('/subordinate/profile/{employee_id}', [SubordinateController::class, 'profile']);
+Route::get('/subordinate/current/{employee_id}', [SubordinateController::class, 'current']);
+Route::get('/subordinate/items/{employee_id}', [SubordinateController::class, 'items']);
+
 Route::get('/assessmentValidation', [AssessmentValidationController::class, 'index']);
 Route::get('/assessmentValidation/show/{id}', [AssessmentValidationController::class, 'show']);
 Route::post('/savevalidationform', [AssessmentValidationController::class, 'saveFormAssessment']);

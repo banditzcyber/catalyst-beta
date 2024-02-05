@@ -127,6 +127,8 @@
                                     value="{{ $id_aldp }}" required>
                                 <input type="hidden" class="form-control tx-11" name="aldp_detail_id" id="aldp_detail_id"
                                     value="{{ $id_aldp_details }}" required>
+                                <input type="hidden" class="form-control tx-11" name="item_id" id="item_id"
+                                    value="{{ $item_id }}" required>
                                 <button class="badge badge-danger pd-y-0 border-0" type="submit">
                                     <i data-feather="x" class="wd-15"></i>
                                 </button>

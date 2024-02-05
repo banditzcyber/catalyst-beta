@@ -205,11 +205,18 @@
 
         //proses data
         function update(id) {
-            var status = $("#status").val();
+            let status = $("#status").val();
+            let item_id = $("#item_id").val();
+            let employee_id = $("#employee_id").val();
             $.ajax({
                 type: "get",
                 url: "{{ url('update') }}/" + id,
-                data: "status=" + status,
+                // data: "status=" + status,
+                data: {
+                    "status": status,
+                    "item_id": item_id,
+                    "employee_id": employee_id
+                },
                 success: function(data) {
                     $(".close").click();
                     // viewData();

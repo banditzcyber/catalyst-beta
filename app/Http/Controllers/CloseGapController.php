@@ -236,7 +236,25 @@ class CloseGapController extends Controller
     public function updateData(Request $request, $id)
     {
         $data['status'] = $request->status;
+        $item_id = $request->item_id;
+        $employee_id = $request->employee_id;
+        $assessment['actual_result'] = 1;
 
-        DB::table('learnings')->where('id', $id)->update($data);
+        $checkData = DB::table('assessment_details')
+                        ->join('assessments', 'assessments.id', '=', 'assessment_details.assessment_id')
+                        ->where('assessment_details.item_id', $item_id)
+                        ->where('assessments.employee_id', $employee_id)
+                        ->where('assessments.status_launch', 1)
+                        ->select('assessment_details.id')
+                        ->first();
+
+        if($data['status'] == 3){
+            DB::table('learnings')->where('id', $id)->update($data);
+            DB::table('assessment_details')->where('id', $checkData->id)->update(['actual_result' => 1]);
+        }else{
+            DB::table('learnings')->where('id', $id)->update($data);
+            DB::table('assessment_details')->where('id', $checkData->id)->update(['actual_result' => 2]);
+        }
+
     }
 }

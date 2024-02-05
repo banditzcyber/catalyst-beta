@@ -166,9 +166,9 @@ class AssessmentValidationController extends Controller
 
             // dd($request->kd_assessment_detail[$kode], $data);
 
+            DB::table('assessment_details')->where('id', $request->kd_assessment_detail[$kode])->update($data);
         }
 
-        DB::table('assessment_details')->where('id', $request->kd_assessment_detail[$kode])->update($data);
         // dd($data);
         return redirect('/assessmentValidation/show/'.$assessment_id)->with('success', 'Assessment has been updated!');
 

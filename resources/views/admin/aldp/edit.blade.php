@@ -117,7 +117,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Year</label>
+                <label class="col-sm-4 col-form-label">Status</label>
                 <div class="col-sm-8">
 
                     <select class="custom-select" name="status" id="status">

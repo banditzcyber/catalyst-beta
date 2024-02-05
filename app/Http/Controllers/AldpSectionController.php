@@ -133,6 +133,12 @@ class AldpSectionController extends Controller
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 
+        $dSubordinate   = DB::table('employees')
+                            ->where('sm_code', $idLogin)
+                            ->get();
+
+        $item   = DB::table('assessment_details')->distinct()->get();
+
         $data = DB::table('assessment_details')
                 ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
                 ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
@@ -140,6 +146,7 @@ class AldpSectionController extends Controller
                 ->select('assessment_result', 'items.item_name', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
                 ->orderby('performance_standards.level', 'asc')
                 ->where('assessment_result', 2)
+                ->distinct()
                 ->get();
         // dd($data);
         return view('section.aldp.create', [
@@ -397,9 +404,10 @@ class AldpSectionController extends Controller
         $validation['status']   = 1;
         $aldp = $request->input('id_aldp');
         $aldp_detail = $request->input('aldp_detail_id');
+        $item_id = $request->input('item_id');
 
         DB::table('learnings')->insert($validation);
-        return redirect('/participant/'. $aldp_detail.'/'.$aldp)->with('success', 'New data has been addedd!');
+        return redirect('/participant/'. $aldp_detail.'/'.$aldp.'/'.$item_id)->with('success', 'New data has been addedd!');
     }
 
     public function deleteParticipat(Request $request)
@@ -407,10 +415,11 @@ class AldpSectionController extends Controller
         $learning_id    = $request->input('id_learning');
         $aldp_id        = $request->input('id_aldp');
         $aldp_detail_id    = $request->input('aldp_detail_id');
+        $item_id    = $request->input('item_id');
 
         DB::table('learnings')->where('id', $learning_id)->delete();
 
-        return redirect('/participant/'. $aldp_detail_id.'/'.$aldp_id)->with('success', 'Data has been Deleted!');
+        return redirect('/participant/'. $aldp_detail_id.'/'.$aldp_id.'/'.$item_id)->with('success', 'Data has been Deleted!');
     }
 
     public function submitForm(Request $request)

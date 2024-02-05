@@ -167,9 +167,9 @@ class ProfileEmployController extends Controller
 
     public function show(Request $request)
     {
-        // $idLogin    = '003169';
+        // session (wajib);
         $area           = $request->session()->get('local');
-        $roleId         = auth()->user()->role_id;
+        $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
@@ -182,7 +182,10 @@ class ProfileEmployController extends Controller
 
         $m_query =  new \App\Models\ProfileEmploy();
         $competency = $m_query->getCompetency($idLogin);
+
         foreach($competency as $vCompetency) :
+
+
 
             $getCompetency[]    = $vCompetency->competency_name;
             $getId[]            = $vCompetency->competency_id;
@@ -190,46 +193,48 @@ class ProfileEmployController extends Controller
 
             $competent  = $m_query->getItemAssessment($idLogin, $id);
 
-            $getCompetent[]     = $competent->where('assessment_details.actual_result','=', 1)->count();
+            $getCompetent[]     = $competent->where('assessment_details.assessment_result','=', 1)->count();
 
             $neet               = $m_query->getItemAssessment($idLogin, $id);
-            $getNeed[]          = $neet->where('assessment_details.actual_result','=', 2)->count();
+            $getNeed[]          = $neet->where('assessment_details.assessment_result','=', 2)->count();
+
 
 
             $getLevel1[]        = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','=', 1)
+                                        ->where('assessment_details.assessment_result','=', 1)
                                         ->where('performance_standards.level', '1')
                                         ->count();
             $getLevel2[]        = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','=', 1)
+                                        ->where('assessment_details.assessment_result','=', 1)
                                         ->where('performance_standards.level', '2')
                                         ->count();
             $getLevel3[]        = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','=', 1)
+                                        ->where('assessment_details.assessment_result','=', 1)
                                         ->where('performance_standards.level', '3')
                                         ->count();
             $getLevel4[]        = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','=', 1)
+                                        ->where('assessment_details.assessment_result','=', 1)
                                         ->where('performance_standards.level', '4')
                                         ->count();
 
             $getAllLevel1[]     = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','!=', 3)
+                                        ->where('assessment_details.assessment_result','!=', 3)
                                         ->where('performance_standards.level', '1')
                                         ->count();
             $getAllLevel2[]     = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','!=', 3)
+                                        ->where('assessment_details.assessment_result','!=', 3)
                                         ->where('performance_standards.level', '2')
                                         ->count();
             $getAllLevel3[]     = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','!=', 3)
+                                        ->where('assessment_details.assessment_result','!=', 3)
                                         ->where('performance_standards.level', '3')
                                         ->count();
             $getAllLevel4[]     = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','!=', 3)
+                                        ->where('assessment_details.assessment_result','!=', 3)
                                         ->where('performance_standards.level', '4')
                                         ->count();
         endforeach;
+
 
         if(array_sum($getCompetent) == 0) {
             $percent = 0;
@@ -240,8 +245,9 @@ class ProfileEmployController extends Controller
         }else{
 
             $percent = array_sum($getCompetent)/(array_sum($getCompetent) + array_sum($getNeed)) * 100;
-            $percentLevel1 = array_sum($getLevel1)/array_sum($getAllLevel1) * 100;
-            $percentLevel2 = array_sum($getLevel2)/array_sum($getAllLevel2) * 100;
+            // $percentLevel1 = array_sum($getLevel1)/array_sum($getAllLevel1) * 100;
+            // $percentLevel2 = array_sum($getLevel2)/array_sum($getAllLevel2) * 100;
+
             if(array_sum($getLevel3) == 0) {
                 $percentLevel3 = 0;
             }else{
@@ -253,7 +259,18 @@ class ProfileEmployController extends Controller
             }else{
                 $percentLevel4 = array_sum($getLevel4)/array_sum($getAllLevel4) * 100;
             }
+            if(array_sum($getLevel1) == 0) {
+                $percentLevel1 = 0;
+            }else{
+                $percentLevel1 = array_sum($getLevel1)/array_sum($getAllLevel1) * 100;
+            }
+            if(array_sum($getLevel2) == 0) {
+                $percentLevel2 = 0;
+            }else{
+                $percentLevel2 = array_sum($getLevel2)/array_sum($getAllLevel2) * 100;
+            }
         }
+
 
 
         $dataList = DB::table('assessment_details')
@@ -263,12 +280,16 @@ class ProfileEmployController extends Controller
                         ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                         ->where('assessments.employee_id', '=', $idLogin);
 
+        $trainingCompleted  = DB::table('learnings')->where('employee_id', $idLogin)->where('status', 3)->count();
+        $traningPlanned     = DB::table('learnings')->where('employee_id', $idLogin)->where('status', '!=', 3)->count();
+        $trainingTotal      = DB::table('learnings')->where('employee_id', $idLogin)->count();
+
         return view('employee.dashboard.index', [
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'subTitle'      => 'Current Data',
+            'subTitle'      => 'Actual Data',
             'btnList'      => 'btn-outline-dark',
             'btnCurrent'   => 'btn-warning',
             'btnActual'    => 'btn-outline-primary',
@@ -293,7 +314,10 @@ class ProfileEmployController extends Controller
             'percentLevel1' => $percentLevel1,
             'percentLevel2' => $percentLevel2,
             'percentLevel3' => $percentLevel3,
-            'percentLevel4' => $percentLevel4
+            'percentLevel4' => $percentLevel4,
+            'trainingCompleted'     => $trainingCompleted,
+            'trainingPlanned'       => $traningPlanned,
+            'trainingTotal'         => $trainingTotal
         ]);
     }
 

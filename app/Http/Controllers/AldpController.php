@@ -91,7 +91,7 @@ class AldpController extends Controller
 
     public function show(Request $request, Aldp $aldp, $id)
     {
-        //session
+        // session
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
@@ -103,9 +103,12 @@ class AldpController extends Controller
                     ->where('aldp_id', '=', $id);
 
         $basequery = DB::table('aldp_details')
-                        ->select('aldp_details.*', 'items.*', 'aldp_details.id as id_aldp_details')
-                        ->join('items','aldp_details.item_id', '=', 'items.item_id')
+                        ->join('items', 'items.item_id', '=', 'aldp_details.item_id')
+                        ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
+                        ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+                        ->select('aldp_details.*', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name', 'aldp_details.id as id_aldp_details')
                         ->where('aldp_details.aldp_id', '=', $id);
+
         $cnlquery  = DB::table('aldp_details')
                         ->select('aldp_details.*', 'items.*', 'aldp_details.id as id_aldp_details')
                         ->join('items','aldp_details.item_id', '=', 'items.item_id')
@@ -157,7 +160,7 @@ class AldpController extends Controller
 
 
 
-        return view('section.aldp.detail', [
+        return view('admin.aldp.detail', [
             'title'             => 'ALDP Details',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -177,6 +180,42 @@ class AldpController extends Controller
             'other_percent'     => $other_percent,
             'id_aldp'           => $id,
             'assessment_data'   => DB::table('assessments')->where('assessment_id', $id)->get()
+        ]);
+    }
+
+    public function formFunctional(Request $request, $id)
+    {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
+        $dSubordinate   = DB::table('employees')
+                            ->where('sm_code', $idLogin)
+                            ->get();
+
+        $item   = DB::table('assessment_details')->distinct()->get();
+
+        $data = DB::table('assessment_details')
+                ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
+                ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
+                ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+                ->select('assessment_result', 'items.item_name', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
+                ->orderby('performance_standards.level', 'asc')
+                ->where('assessment_result', 2)
+                ->distinct()
+                ->get();
+        // dd($data);
+        return view('section.aldp.create', [
+            'title'             => 'Form Input ALDP (Functional)',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'id_aldp'           => $id,
+            'data'              => $data,
+            'comp_type'         => 1
         ]);
     }
 
@@ -203,7 +242,7 @@ class AldpController extends Controller
                     ->orWhere('job_level', '=', 'GM')->get();
 
         return view('admin.aldp.edit', [
-            'title'             => 'Edit data Assessment',
+            'title'             => 'Edit data ALDP',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,

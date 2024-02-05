@@ -58,7 +58,7 @@
                 <div class="form-group row row-xs">
                     <label class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-4">
-                        <input type="text" id="dateFrom" class="form-control" placeholder="From">
+                        <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
                     </div>
                     <div class="col-sm-4">
                         <input type="text" id="dateTo" class="form-control" placeholder="To">
@@ -95,7 +95,7 @@
                     <label class="col-sm-4 col-form-label">Evidence (.pdf)</label>
                     <div class="form-group">
                         <input type="file" class="form-control-file @error('evidence') is-invalid @enderror"
-                            id="evidence" name="evidence">
+                            id="evidence" name="evidence" accept="application/pdf">
                     </div>
                 </div>
                 @error('evidence')
@@ -138,7 +138,17 @@
 
 
     @push('scripts')
+        <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+        <script src="assets/plugins/global/plugins.bundle.js"></script>
         <script type="s">
+            $(function() {
+                $('input[name="daterange"]').daterangepicker({
+                  opens: 'left'
+                }, function(start, end, label) {
+                  console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                });
+              });
+
             var cleaveI = new Cleave('#competency_id', {
                 delimiters: ['-', '-', '-'],
                 blocks: [2, 3, 1, 3]
