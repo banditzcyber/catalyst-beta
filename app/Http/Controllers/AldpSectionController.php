@@ -329,7 +329,6 @@ class AldpSectionController extends Controller
 
     }
 
-
     public function deleteItemAldp(Request $request)
     {
         $idAldp         = $request->input('idAldp');

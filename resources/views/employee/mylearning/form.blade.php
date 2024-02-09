@@ -55,7 +55,7 @@
 
             <input type="hidden" name="learning_id" id="learning_id" value="{{ $learning_id }}">
             <div data-label="Example" class="df-example">
-                <div class="form-group row row-xs">
+                {{-- <div class="form-group row row-xs">
                     <label class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-4">
                         <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
@@ -64,7 +64,7 @@
                         <input type="text" id="dateTo" class="form-control" placeholder="To">
                     </div>
                     <div id="datepicker2"></div>
-                </div>
+                </div> --}}
 
                 <div class="form-group row row-xs">
 
