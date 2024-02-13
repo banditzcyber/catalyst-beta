@@ -94,10 +94,19 @@
                 <div class="form-group row row-xs">
                     <label class="col-sm-4 col-form-label">Evidence (.pdf)</label>
                     <div class="form-group">
-                        <input type="file" class="form-control-file @error('evidence') is-invalid @enderror"
-                            id="evidence" name="evidence" accept="application/pdf">
+                        {{-- <input type="file" class="form-control-file @error('evidence') is-invalid @enderror"
+                            id="evidence" name="evidence" accept="application/pdf"> --}}
+
+                        <input type="file" name="evidence" id="inputFile"
+                            class="form-control @error('evidence') is-invalid @enderror">
+                        @error('evidence')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                 </div>
+
+
+
                 @error('evidence')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -138,6 +147,8 @@
 
 
     @push('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js">
+        </script>
         <link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
         <script src="assets/plugins/global/plugins.bundle.js"></script>
         <script type="s">

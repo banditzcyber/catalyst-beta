@@ -44,7 +44,7 @@ class MylearningController extends Controller
         $validation = $request->validate([
             'started_at'    => 'required',
             'finished_at'   => 'required',
-            'evidence'      => 'required|file|max:1024',
+            'evidence'      => 'required|mimes:pdf|max:2048',
             'comment'       => ''
         ]);
 
