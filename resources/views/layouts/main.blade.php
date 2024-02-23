@@ -134,16 +134,17 @@
         ht-50v pd-0">
     <div class="content-header">
         <div class="content-search">
-            <i data-feather="search"></i>
-            <input type="search" class="form-control" placeholder="Search...">
+            {{ date('l, d F Y') }}
         </div>
         <nav class="nav">
-            <a href="" class="nav-link"><i data-feather="help-circle"></i></a>
-            <a href="" class="nav-link"><i data-feather="grid"></i></a>
-            <a href="" class="nav-link"><i data-feather="align-left"></i></a>
+            <form action="/signout" method="POST" onclick="return confirm('Are you sure?')">
+                @csrf
+                <button type="submit" class="nav-link dropdown-item">
+                    <i data-feather="power"></i>
+                </button>
+            </form>
         </nav>
     </div><!-- content-header -->
-
     <div class="content-body">
         <div class="container pd-x-0">
 
@@ -171,7 +172,7 @@
 
     <!-- append theme customizer -->
     <script src="/lib/js-cookie/js.cookie.js"></script>
-    <script src="/js/dashforge.settings.js"></script>
+    {{-- <script src="/js/dashforge.settings.js"></script> --}}
     <script src="/lib/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
     <script src="/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>

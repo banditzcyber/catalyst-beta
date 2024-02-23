@@ -27,7 +27,7 @@
                 <div class="col-sm-3">
                     <div class="input-group">
                         <input type="text" class="form-control @error('manager_id') is-invalid @enderror"
-                            placeholder="Search..." name="manager_id" id="manager_id" value="{{ old('compmetency_id') }}"
+                            placeholder="Search..." name="manager_id" id="manager_id" value="{{ old('manager_id') }}"
                             readonly />
                         <div class="input-group-append">
                             <button class="btn btn-outline-light" type="button" data-toggle="modal"
@@ -79,8 +79,8 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Year</label>
                 <div class="col-sm-8">
-                    <select class="custom-select" name="year" id="year">
-                        <option selected class="tx-italic">--please select-</option>
+                    <select class="custom-select @error('year') is-invalid @enderror" name="year" id="year">
+                        <option selected value="" class="tx-italic">--please select-</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
                         <option value="2025">2025</option>
