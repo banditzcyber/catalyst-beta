@@ -100,9 +100,8 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Comment / Remarks</label>
                 <div class="col-sm-8">
-                    <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment">
-                        {{ old('comment', $data->comment) }}
-                    </textarea>
+                    <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment"
+                        value="{{ old('comment') }}">{{ $data->comment }}</textarea>
                     @error('comment')
                         <div class="invalid-feedback">
                             {{ $message }}

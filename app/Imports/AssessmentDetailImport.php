@@ -28,8 +28,8 @@ class AssessmentDetailImport implements ToModel
         return new AssessmentDetail([
            'assessment_id'      => $row[1],
            'item_id'            => $row[2],
-           'assessment_result'  => $row[4],
-           'actual_result'      => $row[6],
+           'assessment_result'  => $row[8],
+           'actual_result'      => $row[8],
            'comment'            => $row[7]
         ]);
     }

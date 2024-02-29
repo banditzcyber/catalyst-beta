@@ -19,16 +19,17 @@
     </div>
 
     <div class="col-md-8">
-        <form action="/matrix" method="post">
+        <form action="/matrix/updateData" method="post">
             @csrf
 
+            <input type="hidden" name="id_pm" id="id_pm" value="{{ $data->id }}">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Competency ID</label>
                 <div class="col-sm-8">
                     <div class="input-group">
                         <input type="text" class="form-control @error('competency_id') is-invalid @enderror"
                             placeholder="Search..." name="competency_id" id="competency_id"
-                            value="{{ old('competency_id') }}" readonly />
+                            value="{{ old('competency_id', $data->competency_id) }}" readonly />
                         <div class="input-group-append">
                             <button class="btn btn-outline-light" type="button" data-toggle="modal"
                                 data-target="#modalCompetency">
@@ -49,7 +50,8 @@
                 <div class="col-sm-8">
                     <input type="text" name="competency_name" id="competency_name"
                         class="form-control @error('competency_name') is-invalid @enderror" autofocus
-                        value="{{ old('competency_name') }}" placeholder="competency_name" readonly />
+                        value="{{ old('competency_name', $data->competency_name) }}" placeholder="competency_name"
+                        readonly />
                 </div>
                 @error('competency_name')
                     <div class="invalid-feedback">
@@ -63,7 +65,8 @@
                 <div class="col-sm-8">
                     <div class="input-group">
                         <input type="text" class="form-control @error('section') is-invalid @enderror"
-                            placeholder="Search..." name="section" id="section" value="{{ old('section') }}" />
+                            placeholder="Search..." name="section" id="section"
+                            value="{{ old('section', $data->section) }}" />
                         <div class="input-group-append">
                             <button class="btn btn-outline-light" type="button" data-toggle="modal"
                                 data-target="#modalemployee">
@@ -83,13 +86,13 @@
                 <label class="col-sm-4 col-form-label">Position</label>
                 <div class="col-sm-5">
                     <input type="text" name="position" id="position"
-                        class="form-control @error('position') is-invalid @enderror" autofocus value="{{ old('position') }}"
-                        placeholder="position" />
+                        class="form-control @error('position') is-invalid @enderror" autofocus
+                        value="{{ old('position', $data->position) }}" placeholder="position" />
                 </div>
                 <div class="col-sm-3">
                     <input type="text" name="position_title" id="position_title"
                         class="form-control @error('position_title') is-invalid @enderror" autofocus
-                        value="{{ old('position_title') }}" placeholder="position_title" />
+                        value="{{ old('position_title', $data->position_title) }}" placeholder="position_title" />
                 </div>
 
                 @error('position_title')
@@ -103,8 +106,8 @@
                 <label class="col-sm-4 col-form-label">Jobcode</label>
                 <div class="col-sm-8">
                     <input type="text" name="jobcode" id="jobcode"
-                        class="form-control @error('jobcode') is-invalid @enderror" autofocus value="{{ old('jobcode') }}"
-                        placeholder="jobcode" readonly />
+                        class="form-control @error('jobcode') is-invalid @enderror" autofocus
+                        value="{{ old('jobcode', $data->jobcode) }}" placeholder="jobcode" readonly />
                 </div>
                 @error('jobcode')
                     <div class="invalid-feedback">
@@ -115,13 +118,14 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Targer</label>
                 <div class="col-sm-8">
+
                     <select class="custom-select" name="level" id="level">
-                        <option selected class="tx-italic">--please select-</option>
-                        <option value="1">Level 1</option>
-                        <option value="2">Level 2</option>
-                        <option value="3">Level 3</option>
-                        <option value="4">Level 4</option>
+                        <option value="1" @if (old('level', $data->level) == '1') selected @endif>Level 1</option>
+                        <option value="2" @if (old('level', $data->level) == '2') selected @endif>Level 2</option>
+                        <option value="2" @if (old('level', $data->level) == '3') selected @endif>Level 3</option>
+                        <option value="2" @if (old('level', $data->level) == '4') selected @endif>Level 4</option>
                     </select>
+
                 </div>
                 @error('level')
                     <div class="invalid-feedback">
@@ -130,13 +134,14 @@
                 @enderror
             </div>
             <hr>
+
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Section Future</label>
-                <div class="col-sm-8">
+                <label class="col-sm-4 col-form-label">Position Future</label>
+                <div class="col-sm-5">
                     <div class="input-group">
-                        <input type="text" class="form-control @error('section_future') is-invalid @enderror"
-                            placeholder="Search..." name="section_future" id="section_future"
-                            value="{{ old('compmetency_id') }}" />
+                        <input type="text" name="position_future" id="position_future"
+                            class="form-control @error('position_future') is-invalid @enderror" autofocus
+                            value="{{ old('position_future', $data->position_future) }}" />
                         <div class="input-group-append">
                             <button class="btn btn-outline-light" type="button" data-toggle="modal"
                                 data-target="#modalemployee2">
@@ -144,25 +149,13 @@
                             </button>
                         </div>
                     </div>
-                </div>
-                @error('section_future')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
 
-            <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Position Future</label>
-                <div class="col-sm-5">
-                    <input type="text" name="position_future" id="position_future"
-                        class="form-control @error('position_future') is-invalid @enderror" autofocus
-                        value="{{ old('position_future') }}" placeholder="position_future" />
                 </div>
                 <div class="col-sm-3">
                     <input type="text" name="position_title_future" id="position_title_future"
                         class="form-control @error('position_title_future') is-invalid @enderror" autofocus
-                        value="{{ old('position_title_future') }}" placeholder="position_title_future" />
+                        value="{{ old('position_title_future', $data->position_title_future) }}"
+                        placeholder="position_title_future" />
                 </div>
 
                 @error('position_future')
@@ -177,7 +170,8 @@
                 <div class="col-sm-8">
                     <input type="text" name="jobcode_future" id="jobcode_future"
                         class="form-control @error('jobcode_future') is-invalid @enderror" autofocus
-                        value="{{ old('jobcode_future') }}" placeholder="jobcode_future" readonly />
+                        value="{{ old('jobcode_future', $data->jobcode_future) }}" placeholder="jobcode_future"
+                        readonly />
                 </div>
                 @error('jobcode_future')
                     <div class="invalid-feedback">
@@ -190,14 +184,13 @@
                 <label class="col-sm-4 col-form-label">Target Future</label>
                 <div class="col-sm-8">
                     <select class="custom-select" name="level_future" id="level_future">
-                        <option selected class="tx-italic">--please select-</option>
-                        <option value="1">Level 1</option>
-                        <option value="2">Level 2</option>
-                        <option value="3">Level 3</option>
-                        <option value="4">Level 4</option>
+                        <option value="1" @if (old('level_future', $data->level_future) == '1') selected @endif>Level 1</option>
+                        <option value="2" @if (old('level_future', $data->level_future) == '2') selected @endif>Level 2</option>
+                        <option value="2" @if (old('level_future', $data->level_future) == '3') selected @endif>Level 3</option>
+                        <option value="2" @if (old('level_future', $data->level_future) == '4') selected @endif>Level 4</option>
                     </select>
                 </div>
-                @error('level')
+                @error('level_future')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

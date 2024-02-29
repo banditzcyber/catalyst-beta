@@ -27,7 +27,8 @@ class AssessmentController extends Controller
 
         $search = DB::table('assessments')
                     ->join('employees', 'assessments.employee_id', '=', 'employees.employee_id')
-                    ->select('assessments.*', 'employees.employee_name', 'employees.position');
+                    ->select('assessments.*', 'employees.employee_name', 'employees.position')
+                    ->orderby('id', 'desc');
 
         if(request('search')) {
             $search->where('assessments.employee_id', 'like', '%' . request('search') . '%')

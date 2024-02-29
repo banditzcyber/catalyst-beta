@@ -120,6 +120,29 @@ class ProfileMatrixController extends Controller
         //
     }
 
+    public function updateData(Request $request)
+    {
+        $validation   = $request->validate([
+            'section'               => '',
+            'position'              => 'required',
+            'position_title'        => 'required',
+            'competency_id'         => 'required',
+            'competency_name'       => 'required',
+            'jobcode'               => 'required',
+            'level'                 => 'required',
+            'position_future'       => 'required',
+            'position_title_future' => 'required',
+            'jobcode_future'        => 'required',
+            'level_future'          => 'required'
+        ]);
+
+        $validation['status']     = 1;
+        $id         = $request->input('id_pm');
+
+        DB::table('profile_matrices')->where('id', $id)->update($validation);
+        return redirect('/matrix')->with('success','Data has Update!');
+    }
+
     public function destroy($id)
     {
         DB::table('profile_matrices')->where('id', $id)->delete();
@@ -152,19 +175,23 @@ class ProfileMatrixController extends Controller
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 
-        $data       = DB::table('profile_matrices')->where('id', $id)->first();
+        $data       = DB::table('profile_matrices')
+                        ->join('competencies', 'competencies.competency_id', '=', 'profile_matrices.competency_id')
+                        ->select('profile_matrices.*', 'competencies.competency_name')
+                        ->where('profile_matrices.id', $id)->first();
+
         $competency = DB::table('competencies')->get();
         $employee   = DB::table('employees')->get();
 
 
         return view('admin.matrix.edit', [
-            'title'         => 'Edit Profile Matriix',
+            'title'             => 'Edit Profile Matriix',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'data'          => $data,
-            'competency'    => $competency,
-            'employee'      => $employee
+            'data'              => $data,
+            'competency'        => $competency,
+            'employee'          => $employee
         ]);
     }
 }

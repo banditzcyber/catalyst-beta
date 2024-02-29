@@ -48,7 +48,7 @@
                 <div class="col-sm-12">
                     <form action="/assessment/importData" method="post" enctype="multipart/form-data">
                         @csrf
-                        <input type="text" name="assessment_id" id="assessment_id" value="{{ $id }}">
+                        <input type="hidden" name="assessment_id" id="assessment_id" value="{{ $id }}">
                         <div class="search-form input-group">
                             <input type="file" class="form-control tx-11" name="file" id="file"
                                 accept=".xlsx,.xlsx" placeholder="" required>
@@ -79,7 +79,7 @@
                     <th>Item ID</th>
                     <th>Item Name</th>
                     <th>Intervention</th>
-                    <th>Type Training</th>
+                    <th>Type</th>
                     <th style="width: 115px">Current</th>
                     <th style="width: 115px">Actual</th>
                     <th>Comment</th>
@@ -98,7 +98,7 @@
                             $color = 'bg-merah';
                             $text = 'Not Applicable';
                         }
-                        
+
                         if ($view->actual_result == 1) {
                             $color2 = 'bg-hijau';
                             $text2 = 'Competent';

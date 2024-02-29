@@ -17,14 +17,14 @@ class DashboardFunctController extends Controller
                             ->where('employees.employee_id', '=', $idLogin );
 
 
-        $employee   = DB::table('employees')->count();
-        $competencies  = DB::table('competencies')->count();
-        $performance_standards   = DB::table('performance_standards')->count();
-        $items   = DB::table('items')->count();
-        $aldp       = DB::table('aldps')->count();
-        $closegap_activity = DB::table('learnings')->count();
-        $assessment     = DB::table('assessments')->count();
-        $matrix     = DB::table('profile_matrices')->count();
+        $employee                   = DB::table('employees')->count();
+        $competencies               = DB::table('competencies')->count();
+        $performance_standards      = DB::table('performance_standards')->count();
+        $items                      = DB::table('items')->count();
+        $aldp                       = DB::table('aldps')->count();
+        $closegap_activity          = DB::table('learnings')->count();
+        $assessment                 = DB::table('assessments')->count();
+        $matrix                     = DB::table('profile_matrices')->count();
 
         return view('admin.dashboard.index', [
             'title'                 => 'Dashboard',
