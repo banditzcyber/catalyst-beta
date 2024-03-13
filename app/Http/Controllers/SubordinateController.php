@@ -14,6 +14,8 @@ class SubordinateController extends Controller
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
+
+
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 

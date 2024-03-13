@@ -187,6 +187,7 @@ Route::resource('/assessmentAdmin', AssessmentController::class);
 Route::get('/assessmentAdmin/edit/{id}', [AssessmentController::class, 'editData']);
 Route::post('/assessmentAdmin/update', [AssessmentController::class, 'updateData']);
 Route::resource('/assessmentAdminDetails', AssessmentDetailController::class);
+Route::get('/assessmentAdmin/profile/{employee_id}', [AssessmentController::class, 'profile']);
 
 // ## Menu UserLogin
 Route::resource('/userlogin', UserLoginController::class);

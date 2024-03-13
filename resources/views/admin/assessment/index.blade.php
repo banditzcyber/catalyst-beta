@@ -100,7 +100,7 @@
                     @endphp
                     <tr>
                         <td class="tx-center">
-                            <a href="/assessmentAdmin/{{ $view->id }}" class="badge badge-info pd-y-0"
+                            <a href="/assessmentAdmin/profile/{{ $view->employee_id }}" class="badge badge-info pd-y-0"
                                 title="dashboard"><i data-feather="eye" class="wd-15"></i></a>
                             <a href="/assessmentAdmin/{{ $view->id }}" class="badge badge-light pd-y-0"><i
                                     data-feather="align-justify" class="wd-15"></i></a>

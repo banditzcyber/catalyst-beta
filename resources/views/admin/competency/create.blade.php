@@ -27,7 +27,7 @@
                 <div class="col-sm-8">
                     <input type="text" name="competency_id" id="competency_id"
                         class="form-control tx-uppercase @error('competency_id') is-invalid @enderror" autofocus
-                        value="{{ old('competency_id') }}" placeholder="M-00-0000-0000" />
+                        value="{{ old('competency_id') }}" placeholder="XX-XXXX-XXX" />
                 </div>
                 @error('competency_id')
                     <div class="invalid-feedback">
@@ -145,8 +145,8 @@
     @push('scripts')
         <script>
             var cleaveI = new Cleave('#competency_id', {
-                delimiters: ['-', '-', '-'],
-                blocks: [2, 3, 1, 3]
+                delimiters: ['-', '-'],
+                blocks: [2, 4, 3]
             });
 
             $(document).ready(function() {

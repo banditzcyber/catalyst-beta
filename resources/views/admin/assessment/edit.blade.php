@@ -69,7 +69,7 @@
                 <div class="col-sm-9">
                     <input type="text" name="jobcode" id="jobcode"
                         class="form-control @error('jobcode') is-invalid @enderror" autofocus
-                        value="{{ old('jobcode', $assessment->jobcode) }}" placeholder="jobcode" readonly />
+                        value="{{ old('jobcode', $assessment->jobcode) }}" placeholder="jobcode" />
                 </div>
                 @error('jobcode')
                     <div class="invalid-feedback">

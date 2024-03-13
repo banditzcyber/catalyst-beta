@@ -23,7 +23,7 @@
             @csrf
 
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Employee ID</label>
+                <label class="col-sm-3 col-form-label">Employee ID</label>
                 <div class="col-sm-3">
                     <div class="input-group">
                         <input type="text" class="form-control @error('employee_id') is-invalid @enderror"
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     <input type="text" name="employee_name" id="employee_name"
                         class="form-control @error('employee_name') is-invalid @enderror" autofocus
                         value="{{ old('employee_name') }}" placeholder="employee name" readonly />
@@ -50,8 +50,8 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Position</label>
-                <div class="col-sm-8">
+                <label class="col-sm-3 col-form-label">Position</label>
+                <div class="col-sm-9">
                     <input type="text" name="position" id="position"
                         class="form-control @error('position') is-invalid @enderror" autofocus value="{{ old('position') }}"
                         placeholder="position" readonly />
@@ -64,8 +64,8 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Jobcode</label>
-                <div class="col-sm-8">
+                <label class="col-sm-3 col-form-label">Jobcode</label>
+                <div class="col-sm-9">
                     <input type="text" name="jobcode" id="jobcode"
                         class="form-control @error('jobcode') is-invalid @enderror" autofocus value="{{ old('jobcode') }}"
                         placeholder="jobcode" readonly />
@@ -77,8 +77,8 @@
                 @enderror
             </div>
             <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Year</label>
-                <div class="col-sm-8">
+                <label class="col-sm-3 col-form-label">Year</label>
+                <div class="col-sm-9">
                     <select class="custom-select" name="year" id="year">
                         <option selected class="tx-italic">--please select-</option>
                         <option value="2023">2023</option>
@@ -86,6 +86,29 @@
                         <option value="2025">2025</option>
                         <option value="2026">2026</option>
                         <option value="2027">2027</option>
+                    </select>
+                </div>
+                @error('year')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Status</label>
+                <div class="col-sm-4">
+                    <select class="custom-select" name="status" id="status">
+                        <option value="1">Self Assessment</option>
+                        <option value="2">Review by Superior</option>
+                        <option value="3">Completed</option>
+                    </select>
+                </div>
+                <label class="col-sm-2 col-form-label">Launch</label>
+                <div class="col-sm-3">
+                    <select class="custom-select" name="status_launch" id="status_launch">
+                        <option value="1">Actived</option>
+                        <option value="2">Not Actived</option>
                     </select>
                 </div>
                 @error('year')
