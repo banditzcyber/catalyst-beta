@@ -27,7 +27,7 @@
         <div>
             <div class="row ">
                 <div class="col-md">
-                    <form action="/assessmentAdmin">
+                    <form action="/assessmentAdmin/show">
                         <div class="input-group">
                             <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
                                 value="{{ request('search') }}" style="width: 250px">

@@ -120,8 +120,8 @@
                 <div class="col-sm-8">
 
                     <select class="custom-select" name="status" id="status">
-                        <option value="1" @if (old('status', $data->status) == '1') selected @endif>Developed</option>
-                        <option value="2" @if (old('status', $data->status) == '2') selected @endif>Reviewed</option>
+                        <option value="1" @if (old('status', $data->status) == '1') selected @endif>Assigned</option>
+                        <option value="2" @if (old('status', $data->status) == '2') selected @endif>Completed</option>
                     </select>
                 </div>
                 @error('year')

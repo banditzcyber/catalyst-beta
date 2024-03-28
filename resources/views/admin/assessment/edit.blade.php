@@ -104,7 +104,7 @@
                         <option value="3" @if (old('status', $assessment->status) == '3') selected @endif>Completed</option>
                     </select>
                 </div>
-                <label class="col-sm-2 col-form-label">Status Launch</label>
+                <label class="col-sm-2 col-form-label">Launch</label>
                 <div class="col-sm-3">
                     <select class="custom-select" name="status_launch" id="status_launch">
                         <option value="1" @if (old('status_launch', $assessment->status_launch) == '1') selected @endif>Actived</option>

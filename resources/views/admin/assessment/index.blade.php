@@ -58,6 +58,12 @@
             {{ session('success') }}
         </div>
     @endif
+    @if (session()->has('danger'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('danger') }}
+        </div>
+    @endif
+
 
     <div class="table-responsive">
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
@@ -102,7 +108,7 @@
                         <td class="tx-center">
                             <a href="/assessmentAdmin/profile/{{ $view->employee_id }}" class="badge badge-info pd-y-0"
                                 title="dashboard"><i data-feather="eye" class="wd-15"></i></a>
-                            <a href="/assessmentAdmin/{{ $view->id }}" class="badge badge-light pd-y-0"><i
+                            <a href="/assessmentAdmin/show/{{ $view->id }}" class="badge badge-light pd-y-0"><i
                                     data-feather="align-justify" class="wd-15"></i></a>
                             <a href="/assessmentAdmin/edit/{{ $view->id }}" class="badge badge-warning pd-y-0"><i
                                     data-feather="edit-2" class="wd-15"></i></a>

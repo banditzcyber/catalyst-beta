@@ -22,13 +22,13 @@ class PerformanceStandardController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
+            ->where('employees.employee_id', '=', $idLogin);
 
         $search = DB::table('performance_standards')->orderby('id', 'desc');
 
-        if(request('search')) {
+        if (request('search')) {
             $search->where('ps_id', 'like', '%' . request('search') . '%')
-                   ->orWhere('ps_name', 'like', '%' . request('search') . '%');
+                ->orWhere('ps_name', 'like', '%' . request('search') . '%');
         }
 
         return view('admin.ps.index', [
@@ -77,20 +77,25 @@ class PerformanceStandardController extends Controller
         return redirect('/performance')->with('success', 'Data has been deleted!');
     }
 
-    public function importData(Request $request){
+    public function importData(Request $request)
+    {
         // dd($request);
         $request->validate([
             'file' => 'required|file|mimes:xlsx,csv', // Add any validation rules you need
         ]);
 
         if ($request->hasFile('file')) {
-            $path = $request->file('file')->getRealPath();
-            $import = new PerformanceStandardImport();
-            Excel::import($import, $path);
-            // You can also add success or error handling here
-            return redirect('/performance')->with('success', 'Imprort data has been succesed!');
+
+            try {
+                $path = $request->file('file')->getRealPath();
+                $import = new PerformanceStandardImport();
+                Excel::import($import, $path);
+                return redirect('/performance')->with('success', 'Imprort data has been succesed!');
+            } catch (\Throwable $th) {
+                return redirect('/performance')->with('danger', 'Import data failed ! , please check the file');
+            }
         }
 
-        return redirect('/performance')->with('warning', 'Imprort data failed!');
+        // return redirect('/performance')->with('warning', 'Imprort data failed!');
     }
 }

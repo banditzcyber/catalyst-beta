@@ -30,10 +30,10 @@
                     <div class="card">
                         <div class="card-body">
                             <h6 class="card-title">Annual Learning Development Plant </h6>
-                            <h4 class="card-subtitle mb-2 text-muted">ALDP {{ $vData->year }}</h4>
-                            <p class="card-text">
+                            <h4 class="card-subtitle mb-2 ">ALDP {{ $vData->year }}</h4>
+                            <p class="card-text mg-0">
                                 @if ($vData->status == 1)
-                                    <span class="badge badge-primary">Setup</span>
+                                    <span class="badge badge-light">Please complete the form provided</span>
                                 @else
                                     <span class="badge badge-success">Verified</span>
                                 @endif

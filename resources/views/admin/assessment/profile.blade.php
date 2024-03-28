@@ -10,14 +10,15 @@
                     </nav>
                     @foreach ($employee as $vEmployee)
                         @php
-                            if ($vEmployee->gender == 'M') {
+                            if ($vEmployee->gender == 'Male') {
                                 $gender = 'Mr.';
                             } else {
                                 $gender = 'Mrs.';
                             }
                             $idEmployee = $vEmployee->employee_id;
                         @endphp
-                        <h4 class="mg-b-0 tx-spacing--1">Welcome {{ $gender }} {{ $vEmployee->employee_name }}
+                        <h4 class="mg-b-0 tx-spacing--1">Welcome {{ $gender }}
+                            {{ $vEmployee->employee_name }}
                             ({{ $vEmployee->employee_id }})
                         </h4>
                     @endforeach

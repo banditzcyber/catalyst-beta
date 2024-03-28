@@ -92,9 +92,9 @@ Route::get('/connect', 'LoginController@handleAzureCallback');
 
 // MICROSOFT LOGIN
 // Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
-Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
-Route::get('microsoft-oAuth',[LoginController::class,'microsoftOAuth'])->name('microsoft.oAuth');
-Route::get('authenticate',[LoginController::class,'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
+Route::get('/', [LoginController::class, 'signInForm'])->name('sign.in');
+Route::get('microsoft-oAuth', [LoginController::class, 'microsoftOAuth'])->name('microsoft.oAuth');
+Route::get('authenticate', [LoginController::class, 'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
 
 
 // Route::get('/login/saml2', '\RootInc\LaravelSaml2Middleware\Saml2@saml2');
@@ -113,7 +113,7 @@ Route::post('/signout', [LoginLocalController::class, 'logout']);
 
 // ----------------------------------------Access for employee----------------------------------------------------
 
-Route::resource('/profilessoemployee', ProfileEmployeeController::class);
+Route::resource('/profilessoemployee', ProfileEmployController::class);
 Route::resource('/profileEmploy', ProfileEmployController::class);
 Route::resource('/dashboardEmploy', DashboardEmployController::class);
 Route::resource('/mylearning', MylearningController::class);
@@ -184,6 +184,7 @@ Route::post('/matrix/updateData', [ProfileMatrixController::class, 'updateData']
 
 // ## Asessment
 Route::resource('/assessmentAdmin', AssessmentController::class);
+Route::get('/assessmentAdmin/show/{id}', [AssessmentController::class, 'show']);
 Route::get('/assessmentAdmin/edit/{id}', [AssessmentController::class, 'editData']);
 Route::post('/assessmentAdmin/update', [AssessmentController::class, 'updateData']);
 Route::resource('/assessmentAdminDetails', AssessmentDetailController::class);

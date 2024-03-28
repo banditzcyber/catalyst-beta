@@ -90,7 +90,7 @@ class EmployeeController extends Controller
     public function importData(Request $request)
     {
         // dd($request);
-        DB::table('employees')->delete();
+        // DB::table('employees')->delete();
 
         $request->validate([
             'file' => 'required|file|mimes:xlsx,csv', // Add any validation rules you need
@@ -98,7 +98,7 @@ class EmployeeController extends Controller
 
         if ($request->hasFile('file')) {
 
-            DB::table('employees')->delete();
+            DB::table('employees')->where('employee_id', '!=', '1000001')->delete();
 
             $path = $request->file('file')->getRealPath();
             $import = new EmployeeImport();

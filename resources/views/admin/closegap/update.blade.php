@@ -1,6 +1,6 @@
 <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-20">
-    <input type="text" name="item_id" id="item_id" value="{{ $data->item_id }}">
-    <input type="text" name="employee_id" id="employee_id" value="{{ $data->employee_id }}">
+    <input type="hidden" name="item_id" id="item_id" value="{{ $data->item_id }}">
+    <input type="hidden" name="employee_id" id="employee_id" value="{{ $data->employee_id }}">
     <select name="status" id="status" class="form-control">
         <option value=""></option>
         <option value="1">Submitted</option>
