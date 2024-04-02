@@ -184,7 +184,7 @@
                 data: "item_id=" + item_id,
                 success: function(data) {
                     $(".close").click();
-                    // $("#$modalUpdate").modal('hide');
+                    $("#$modalUpdate").modal('hide');
                 }
             })
         }

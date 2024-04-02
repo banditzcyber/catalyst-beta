@@ -18,7 +18,9 @@ class mylearning extends Model
         return DB::table('learnings')
         ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
         ->join('items', 'learnings.item_id', '=', 'items.item_id')
+        ->join('aldps', 'aldps.id', '=', 'aldp_details.aldp_id')
         ->select('learnings.id', 'learnings.item_id', 'learnings.item_name', 'learnings.aldp_detail_id', 'learnings.competency_type', 'learnings.status', 'items.intervention', 'items.type_training')
-        ->where('learnings.employee_id','=', $idLogin);
+        ->where('learnings.employee_id','=', $idLogin)
+        ->where('aldps.status', 2);
     }
 }

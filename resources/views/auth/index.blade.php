@@ -29,7 +29,7 @@
                     <form action="/signin" method="post">
                         @csrf
                         <img class="mb-2 tx-center" src="/images/logo_mycatalyst_full.png" width="270">
-                        <div class="mb-4 tx-20 tx-center">Please sign in</div>
+                        {{-- <div class="mb-4 tx-20 tx-center">Please sign in</div> --}}
 
                         @if (session()->has('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">

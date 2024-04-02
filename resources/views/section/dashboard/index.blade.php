@@ -83,78 +83,7 @@
                                         <div id="chart"></div>
                                     </div><!-- chart-one -->
                                 </div>
-                                {{-- <div class="col-lg-5 col-xl-4 mg-t-30 mg-lg-t-0">
-                                    <div class="row">
 
-                                        <div class="col-sm-6 col-lg-12 mg-t-30">
-                                            <div class="d-flex align-items-center justify-content-between mg-b-5">
-                                                <h6 class="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
-                                                    Level 1</h6>
-                                                <span class="tx-10 tx-color-04">20% goal reached</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mg-b-5">
-                                                <h5 class="tx-normal tx-rubik mg-b-0">1</h5>
-                                                <h5 class="tx-normal tx-rubik tx-color-03 mg-b-0"><small>85,000</small></h5>
-                                            </div>
-                                            <div class="progress ht-4 mg-b-0 op-5">
-                                                <div class="progress-bar bg-pink wd-20p" role="progressbar"
-                                                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-sm-6 col-lg-12 mg-t-30">
-                                            <div class="d-flex align-items-center justify-content-between mg-b-5">
-                                                <h6 class="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
-                                                    Level 2</h6>
-                                                <span class="tx-10 tx-color-04">20% goal reached</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mg-b-5">
-                                                <h5 class="tx-normal tx-rubik mg-b-0">16,869</h5>
-                                                <h5 class="tx-normal tx-rubik tx-color-03 mg-b-0"><small>85,000</small></h5>
-                                            </div>
-                                            <div class="progress ht-4 mg-b-0 op-5">
-                                                <div class="progress-bar bg-pink wd-20p" role="progressbar"
-                                                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="col-sm-6 col-lg-12 mg-t-30">
-                                            <div class="d-flex align-items-center justify-content-between mg-b-5">
-                                                <h6 class="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
-                                                    Level 3</h6>
-                                                <span class="tx-10 tx-color-04">20% goal reached</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mg-b-5">
-                                                <h5 class="tx-normal tx-rubik mg-b-0">16,869</h5>
-                                                <h5 class="tx-normal tx-rubik tx-color-03 mg-b-0"><small>85,000</small></h5>
-                                            </div>
-                                            <div class="progress ht-4 mg-b-0 op-5">
-                                                <div class="progress-bar bg-pink wd-20p" role="progressbar"
-                                                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-lg-12 mg-t-30">
-                                            <div class="d-flex align-items-center justify-content-between mg-b-5">
-                                                <h6 class="tx-uppercase tx-10 tx-spacing-1 tx-color-02 tx-semibold mg-b-0">
-                                                    Level 4</h6>
-                                                <span class="tx-10 tx-color-04">85% goal reached</span>
-                                            </div>
-                                            <div class="d-flex justify-content-between mg-b-5">
-                                                <h5 class="tx-normal tx-rubik mg-b-0">28.50%</h5>
-                                                <h5 class="tx-normal tx-rubik tx-color-03 mg-b-0"><small>30.50%</small>
-                                                </h5>
-                                            </div>
-                                            <div class="progress ht-4 mg-b-0 op-5">
-                                                <div class="progress-bar bg-primary wd-85p" role="progressbar"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    </div><!-- row -->
-
-                                </div> --}}
                             </div>
 
 
@@ -189,48 +118,6 @@
                         </div><!-- card-body -->
                     </div><!-- card -->
                 </div>
-
-                {{-- <div class="col-md-6 col-xl-4 mg-t-10">
-                    <div class="card ht-100p">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <h6 class="mg-b-0">Subordinate</h6>
-                            <div class="d-flex align-items-center tx-18">
-                                <a href="" class="link-03 lh-0"><i class="icon ion-md-refresh"></i></a>
-                                <a href="" class="link-03 lh-0 mg-l-10"><i class="icon ion-md-more"></i></a>
-                            </div>
-                        </div>
-                        <ul class="list-group list-group-flush tx-13">
-
-                            @foreach ($subordinate as $view)
-                                <li class="list-group-item d-flex pd-sm-x-20">
-                                    <div class="avatar"><span class="avatar-initial rounded-circle bg-gray-600">s</span>
-                                    </div>
-                                    <div class="pd-l-10">
-                                        <p class="tx-medium mg-b-0">{{ $view['employee_name'] }}</p>
-                                        <small class="tx-12 tx-color-03 mg-b-0">Customer ID#00222</small>
-                                    </div>
-                                    <div class="mg-l-auto d-flex align-self-center">
-                                        <nav class="nav nav-icon-only">
-                                            <a href="" class="nav-link d-none d-sm-block"><i
-                                                    data-feather="mail"></i></a>
-                                            <a href="" class="nav-link d-none d-sm-block"><i
-                                                    data-feather="slash"></i></a>
-                                            <a href="" class="nav-link d-none d-sm-block"><i
-                                                    data-feather="user"></i></a>
-                                            <a href="" class="nav-link d-sm-none"><i
-                                                    data-feather="more-vertical"></i></a>
-                                        </nav>
-                                    </div>
-                                </li>
-                            @endforeach
-
-                        </ul>
-                        <div class="card-footer text-center tx-13">
-                            <a href="" class="link-03">View More Customers <i
-                                    class="icon ion-md-arrow-down mg-l-5"></i></a>
-                        </div><!-- card-footer -->
-                    </div><!-- card -->
-                </div> --}}
 
             </div>
         </div>

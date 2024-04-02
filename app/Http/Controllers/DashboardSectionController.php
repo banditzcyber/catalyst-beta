@@ -60,7 +60,7 @@ class DashboardSectionController extends Controller
     public function dataCompetency(){
         // $idLogin    = auth()->user()->employee_id;
         // $idLogin    = $request->session()->get('user');
-        $idLogin    = '3383';
+        $idLogin    = '0773';
         // dd($idLogin);
         $subCount   = $this->m_dashboardSection->getSubordinate($idLogin)->count();
 

@@ -25,17 +25,18 @@ class AssessmentDetailImport implements ToModel
         // $assessment_id = $row[1];
         // $variableData = YourModel::where('some_condition', 'some_value')->first();
         return new AssessmentDetail([
-            'assessment_id'      => $this->assessment_id,
-            'item_id'            => $row[2],
-            'assessment_result'  => $row[8],
-            'actual_result'      => $row[8],
-            'comment'            => $row[7]
 
             // 'assessment_id'      => $this->assessment_id,
-            // 'item_id'            => $row[1],
-            // 'assessment_result'  => $row[2],
-            // 'actual_result'      => $row[2],
-            // 'comment'            => $row[3]
+            // 'item_id'            => $row[2],
+            // 'assessment_result'  => $row[8],
+            // 'actual_result'      => $row[8],
+            // 'comment'            => $row[7]
+
+            'assessment_id'      => $this->assessment_id,
+            'item_id'            => $row[1],
+            'assessment_result'  => $row[2],
+            'actual_result'      => $row[2],
+            'comment'            => $row[3]
         ]);
     }
 }
