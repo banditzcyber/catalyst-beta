@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Visitor;
 
 class DashboardFunctController extends Controller
 {
@@ -16,7 +17,7 @@ class DashboardFunctController extends Controller
         $dEmployee      = DB::table('employees')
             ->where('employees.employee_id', '=', $idLogin);
 
-
+        $visitorCount               = Visitor::count();
         $employee                   = DB::table('employees')->count();
         $competencies               = DB::table('competencies')->count();
         $performance_standards      = DB::table('performance_standards')->count();
@@ -82,6 +83,7 @@ class DashboardFunctController extends Controller
             'itemAldp'              => $itemAldp,
             'participantAldp'       => $participantAldp,
             'percentAldp'           => $percentAldp,
+            'visitor'              => $visitorCount,
 
         ]);
     }

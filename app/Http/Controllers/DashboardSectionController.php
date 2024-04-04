@@ -33,6 +33,7 @@ class DashboardSectionController extends Controller
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 
+
         $json_data = $this->dataCompetency($idLogin);
         $data = json_decode($json_data->content(), true);
         // dd($data);
@@ -53,7 +54,7 @@ class DashboardSectionController extends Controller
             'percent'       => json_encode($percent),
             // 'id'            => json_encode($id),
             'subordinateCount'  => $subCount,
-            'subordinate'   => $subordinate
+            'subordinate'   => $subordinate,
         ]);
     }
 

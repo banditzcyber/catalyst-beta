@@ -49,12 +49,12 @@
                         </div><!-- card-header -->
                         <div class="card-body pd-lg-25">
                             <div class="row align-items-sm-end">
-                                <div class="col-lg-8 col-xl-9">
+                                <div class="col-lg-8 col-xl-9 mg-b-0">
                                     <div class="chart-six">
                                         <div id="chart"></div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-xl-3 mg-t-30 mg-lg-t-0">
+                                <div class="col-lg-4 col-xl-3 mg-t-100 mg-lg-t-0">
                                     <div class="row">
                                         <div class="col-sm-6 col-lg-12">
                                             <div class="d-flex align-items-center justify-content-between mg-b-5">
@@ -139,12 +139,12 @@
                         <div class="card-header">
                             <h6 class="mg-b-0">Progress Overall</h6>
                         </div><!-- card-header -->
-                        <div class="card-body d-lg-10 pd-b-70">
-                            <div class="chart-seven">
+                        <div class="card-body d-lg-10">
+                            <div class="chart-five">
                                 <div id="chart2"></div>
                             </div>
                         </div><!-- card-body -->
-                        <div class="card-footer pd-20">
+                        <div class="card-footer mg-t-20">
                             <div class="row">
 
                                 <div class="col-6 mg-t-20">

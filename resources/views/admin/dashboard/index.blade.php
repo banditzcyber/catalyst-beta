@@ -24,7 +24,7 @@
             </div>
 
             <div class="row row-xs mg-b-40">
-                <div class="col-4 mg-t-10">
+                <div class="col-lg-4 mg-t-10">
                     <div class="card">
                         <div class="col col-sm-12 col-lg">
                             <div class="pd-10">
@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 mg-t-10">
+                <div class="col-lg-4 mg-t-10">
                     <div class="card">
                         <div class="col col-sm-12 col-lg">
                             <div class="pd-10">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 mg-t-10">
+                <div class="col-lg-4 mg-t-10">
                     <div class="card">
                         <div class="col col-sm-12 col-lg">
                             <div class="pd-10">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="col-4 mg-t-10">
+                <div class="col-lg-4 mg-t-10">
                     <div class="card">
                         <div class="col col-sm-12 col-lg">
                             <div class="pd-10">
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4 mg-t-10">
+                <div class="col-lg-4 mg-t-10">
                     <div class="card">
                         <div class="col col-sm-12 col-lg">
                             <div class="pd-10">
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4 mg-t-10">
+                <div class="col-lg-4 mg-t-10">
                     <div class="card">
                         <div class="col col-sm-12 col-lg">
                             <div class="pd-10">
@@ -165,6 +165,30 @@
                                                 class="tx-color-03 tx-normal">(UL)</span></h6>
                                         <div class="d-flex align-items-baseline tx-rubik">
                                             <a href="/aldpAdmin" class="tx-20 mg-b-0">{{ number_format($users) }}</a>
+                                        </div>
+
+                                    </div><!-- media-body -->
+                                </div><!-- media -->
+
+                            </div><!-- crypto -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mg-t-10">
+                    <div class="card">
+                        <div class="col col-sm-12 col-lg">
+                            <div class="pd-10">
+                                <div class="media mg-b-0">
+
+                                    <div class="crypto-icon bg-purple">
+                                        <i data-feather="tag"></i>
+                                    </div><!-- crypto-icon -->
+
+                                    <div class="media-body pd-l-8">
+                                        <h6 class="tx-11 tx-spacing-1 tx-uppercase tx-semibold mg-b-5">Visitor <span
+                                                class="tx-color-03 tx-normal">(V)</span></h6>
+                                        <div class="d-flex align-items-baseline tx-rubik">
+                                            <a href="/aldpAdmin" class="tx-20 mg-b-0">{{ number_format($visitor) }}</a>
                                         </div>
 
                                     </div><!-- media-body -->
