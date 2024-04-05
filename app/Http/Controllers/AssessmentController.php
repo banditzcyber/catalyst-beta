@@ -35,6 +35,7 @@ class AssessmentController extends Controller
             $search->where('assessments.employee_id', 'like', '%' . request('search') . '%')
                 ->orWhere('assessments.jobcode', 'like', '%' . request('search') . '%')
                 ->orWhere('assessments.year', 'like', '%' . request('search') . '%')
+                ->orWhere('employees.position', 'like', '%' . request('search') . '%')
                 ->orWhere('employees.employee_name', 'like', '%' . request('search') . '%');
         }
 
@@ -64,7 +65,7 @@ class AssessmentController extends Controller
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'employee'  => $employee
+            'employee'          => $employee
         ]);
     }
 
@@ -80,6 +81,7 @@ class AssessmentController extends Controller
 
         // $validation['status']  = 1;
         // $validation['status_launch']  = 2;
+        $validation['created_at']  = now();
 
         DB::table('assessments')->insert($validation);
 

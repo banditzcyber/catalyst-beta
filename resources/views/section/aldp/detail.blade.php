@@ -135,7 +135,7 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 69px;">
+                <div class="table-header" style="width: 75px;">
 
                 </div>
                 <div class="table-header" style="width: 420px;">
@@ -165,7 +165,7 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 70px;">
+                            <div class="table-body tx-center tx-15" style="width: 75px;">
 
                                 <a href="/aldpSection/edit/{{ $view->id_aldp_details }}"
                                     class="badge badge-primary pd-y-0 border-0">

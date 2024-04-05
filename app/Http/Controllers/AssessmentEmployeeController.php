@@ -39,6 +39,7 @@ class AssessmentEmployeeController extends Controller
 
     public function show(Request $request, $id)
     {
+
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');

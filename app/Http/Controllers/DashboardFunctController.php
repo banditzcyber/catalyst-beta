@@ -83,7 +83,7 @@ class DashboardFunctController extends Controller
             'itemAldp'              => $itemAldp,
             'participantAldp'       => $participantAldp,
             'percentAldp'           => $percentAldp,
-            'visitor'              => $visitorCount,
+            'visitor'               => $visitorCount,
 
         ]);
     }

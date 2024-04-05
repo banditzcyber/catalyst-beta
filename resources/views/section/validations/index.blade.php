@@ -71,14 +71,17 @@
                             $color = 'bg-light';
                             $text = 'Self Assessment';
                             $btn = 'disabled="disabled"';
+                            $btnColor = 'badge-primary';
                         } elseif ($view->status == 2) {
                             $color = 'bg-warning';
                             $text = 'Review by Superior';
                             $btn = '';
+                            $btnColor = 'badge-primary';
                         } else {
                             $color = 'bg-success';
                             $text = 'Completed';
                             $btn = 'disabled="disabled"';
+                            $btnColor = 'badge-light';
                         }
                     @endphp
 
@@ -91,7 +94,7 @@
                                 class="d-inline">
                                 @csrf
                                 <input type="hidden" name="assessment_id" value="{{ $view->id }}">
-                                <button class="badge badge-danger pd-y-0 border-0" {{ $btn }}
+                                <button class="badge  pd-y-0 border-0  {{ $btnColor }}" {{ $btn }}
                                     title="update status"><i data-feather="arrow-up-circle" class="wd-15"></i></button>
                             </form>
                         </td>
@@ -137,7 +140,7 @@
                     $("#titleModel").html('Update Data')
                     $("#form").html(data);
 
-                    // $('#modalUpdate').modal('show'); 
+                    // $('#modalUpdate').modal('show');
                     $('#modalUpdate').modal({
                         backdrop: 'static',
                         keyboard: false

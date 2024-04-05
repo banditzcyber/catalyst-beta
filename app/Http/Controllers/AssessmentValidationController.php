@@ -86,6 +86,7 @@ class AssessmentValidationController extends Controller
     {
         $assessment_id = $request->input('assessment_id');
         $data['status']     = 3;
+        $data['updated_at'] = now();
         DB::table('assessments')->where('id', $assessment_id)->update($data);
         return redirect('/assessmentValidation')->with('success', 'Assessment has been updated!');
     }

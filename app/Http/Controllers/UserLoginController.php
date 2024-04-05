@@ -21,7 +21,7 @@ class UserLoginController extends Controller
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 
-        $search = DB::table('users');
+        $search = DB::table('users')->orderby('id', 'desc');
 
         if(request('search')) {
             $search->where('employee_id', 'like', '%' . request('search') . '%')
