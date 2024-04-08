@@ -112,8 +112,9 @@
                     @endphp
                     <tr>
                         <td class="tx-center">
-                            <a href="/assessmentAdmin/{{ $view->id }}/edit" class="badge badge-warning pd-y-0"><i
-                                    data-feather="edit-2" class="wd-15"></i></a>
+                            <a href="#" onclick="show({{ $view->id }})">
+                                <i data-feather="edit-2" class="wd-15"></i>
+                            </a>
                         </td>
                         <td class="pd-t-25">{{ $view->id }}</td>
                         <td class="pd-t-25">{{ $view->item_id }}</td>
@@ -130,4 +131,39 @@
     </div>
 
     {{ $data->links() }}
+
+    <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="titleModel" style="margin-top: 5px;"></h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div id="form" class="pd-2"></div>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function() {
+            viewdData();
+        });
+
+        function show(id) {
+            $.get("{{ url('show') }}/" + id, {}, function(data, status) {
+                $("#titleModel").html('Update Data')
+                $("$form").html(data);
+
+                $("#modalUPdate").modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            });
+        }
+    </script>
+@endpush
