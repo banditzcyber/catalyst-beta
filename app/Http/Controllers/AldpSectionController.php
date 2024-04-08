@@ -126,6 +126,7 @@ class AldpSectionController extends Controller
 
     public function formFunctional(Request $request, $id)
     {
+        dd('hallo');
         // session
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
