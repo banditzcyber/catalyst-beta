@@ -52,11 +52,14 @@
         </div>
     </div>
 
+
+
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
         </div>
     @endif
+
 
     <div class="table-responsive">
         {{-- <div id="read"></div> --}}
@@ -93,7 +96,7 @@
                     <tr>
                         <td>{{ $view->employee_name }} - {{ $view->employee_id }}</td>
                         <td>{{ $view->item_id }}</td>
-                        <td>{{ $view->item_name }}</td>
+                        <td style="cursor: pointer" onclick ="tampil({{ $view->id }})">{{ $view->item_name }}</td>
                         <td>
                             @if (!empty($view->started_at))
                                 {{ date('d F Y', strtotime($view->started_at)) }} s/d
@@ -109,7 +112,7 @@
                         </td>
                         <td>{{ $view->comment }}</td>
                         <td class="{{ $color }} tx-center" style="cursor: pointer"
-                            onclick="show({{ $view->id }})">
+                            onclick ="show({{ $view->id }})">
                             {{ $text }}
                         </td>
                     </tr>
@@ -122,10 +125,10 @@
     {{ $data->links() }}
 
     <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="titleModel" style="margin-top: 5px;"></h6>
+                <div class="modal-header pd-0 pd-t-10 pd-x-10 bg-warning">
+                    <h6 class="modal-title tx-uppercase" id="titleModel" style="margin-top: 0px;"></h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -191,7 +194,7 @@
 
         function show(id) {
             $.get("{{ url('show') }}/" + id, {}, function(data, status) {
-                $("#titleModel").html('Edit Data')
+                $("#titleModel").html('Update Status')
                 $("#form").html(data);
 
                 // $('#modalUpdate').modal('show');
@@ -218,6 +221,7 @@
                     "employee_id": employee_id
                 },
                 success: function(data) {
+                    alert("Update data successed!");
                     $(".close").click();
                     // viewData();
                     location.reload();

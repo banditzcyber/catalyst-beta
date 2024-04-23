@@ -73,8 +73,6 @@
                                     </div><!-- media-body -->
                                 </div><!-- media -->
 
-
-
                                 <div class="pos-absolute b-5 l-20 tx-medium">
                                     <label class="tx-9 tx-uppercase tx-sans tx-color-03">
                                         <a href="" class="link-01 tx-semibold">{{ $cnl_all }}</a> Planning
@@ -663,15 +661,26 @@
     {{-- -------------------------------------- MODAL ------------------------------------- --}}
 
     <div class="modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="width: 310px">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
 
-                <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-5 tx-center">
-
-                    <div class="demo-btn-group">
-                        <a class="btn btn-primary" href="/aldpSection/functional/{{ $id_aldp }}">Functional</a>
-                        <a class="btn btn-secondary" href="/aldpSection/leadership/{{ $id_aldp }}">Leadership</a>
-                        <a class="btn btn-success" href="/aldpSection/other/{{ $id_aldp }}">Other</a>
+                <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-5">
+                    <div class="row row-xs">
+                        <div class="col-sm-4 tx-center bg-primary">
+                            <a href="/aldpSection/functional/{{ $id_aldp }}" class=" tx-white">
+                                Functional Competency
+                            </a>
+                        </div>
+                        <div class="col-sm-4 tx-center bg-success">
+                            <a href="/aldpSection/leadership/{{ $id_aldp }}" class=" tx-white">
+                                Leadership Program
+                            </a>
+                        </div>
+                        <div class="col-sm-4 tx-center bg-dark">
+                            <a href="/aldpSection/other/{{ $id_aldp }}" class=" tx-white">
+                                Other Program
+                            </a>
+                        </div>
                     </div>
 
                 </div><!-- modal-body -->

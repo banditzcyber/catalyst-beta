@@ -112,18 +112,19 @@
                     @endphp
                     <tr>
                         <td class="tx-center">
-                            <a href="#" onclick="show({{ $view->id }})">
+                            <a onclick="show({{ $view->id }})" style="cursor: pointer">
                                 <i data-feather="edit-2" class="wd-15"></i>
                             </a>
                         </td>
-                        <td class="pd-t-25">{{ $view->id }}</td>
+                        <td class="pd-t-25" style="cursor: pointer" onclick ="tampil({{ $view->id }})">
+                            {{ $view->id }}</td>
                         <td class="pd-t-25">{{ $view->item_id }}</td>
                         <td class="pd-t-25">{{ $view->item_name }}</td>
                         <td>{{ $view->intervention }}</td>
                         <td>{{ $view->type_training }}</td>
                         <td class="{{ $color }}">{{ $text }}</td>
                         <td class="{{ $color2 }}">{{ $text2 }}</td>
-                        <td>{{ $view->comment }}</td>
+                        <td onclick="show({{ $view->id }})">{{ $view->comment }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -133,10 +134,11 @@
     {{ $data->links() }}
 
     <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="titleModel" style="margin-top: 5px;"></h6>
+
+                <div class="modal-header pd-0 pd-t-10 pd-x-10 bg-warning">
+                    <h6 class="modal-title tx-uppercase" id="titleModel" style="margin-top: 0px;"></h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -148,22 +150,40 @@
     </div><!-- modal -->
 @endsection
 
-@push('script')
+@push('scripts')
     <script>
-        $(document).ready(function() {
-            viewdData();
-        });
-
         function show(id) {
-            $.get("{{ url('show') }}/" + id, {}, function(data, status) {
+            $.get("{{ url('edititem') }}/" + id, {}, function(data, status) {
                 $("#titleModel").html('Update Data')
-                $("$form").html(data);
+                $("#form").html(data);
 
-                $("#modalUPdate").modal({
+                $("#modalUpdate").modal({
                     backdrop: 'static',
                     keyboard: false
                 });
             });
+        }
+
+        function update(id) {
+            let assessment_result = $("#assessment_result").val();
+            let actual_result = $("#actual_result").val();
+
+            $.ajax({
+                type: "get",
+                url: "{{ url('updateitem') }}/" + id,
+                // data: "status=" + status,
+                data: {
+                    "assessment_result": assessment_result,
+                    "actual_result": actual_result
+                },
+                success: function(data) {
+                    alert("Update data successed!");
+                    $(".close").click();
+                    // viewData();
+                    location.reload();
+
+                }
+            })
         }
     </script>
 @endpush

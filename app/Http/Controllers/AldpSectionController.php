@@ -126,7 +126,7 @@ class AldpSectionController extends Controller
 
     public function formFunctional(Request $request, $id)
     {
-        dd('hallo');
+
         // session
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
@@ -147,6 +147,9 @@ class AldpSectionController extends Controller
             $assessments[] = $vSubordinate->employee_id;
         }
 
+
+        // dd($assessments);
+
         $item   = DB::table('assessment_details')->distinct()->get();
 
         $data = DB::table('assessment_details')
@@ -157,7 +160,7 @@ class AldpSectionController extends Controller
             ->select('assessment_result', 'items.item_name', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
             ->orderBy('performance_standards.level', 'asc')
             ->where('assessment_result', 2)
-            ->whereIn('assessments.employee_id', $assessments)
+            ->whereIn('assessments.employee_id', '3169')
             ->distinct('items.item_id') // Applying distinctness only to item_id column
             ->get();
 

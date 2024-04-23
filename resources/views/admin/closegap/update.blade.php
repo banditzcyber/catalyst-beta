@@ -2,11 +2,11 @@
     <input type="hidden" name="item_id" id="item_id" value="{{ $data->item_id }}">
     <input type="hidden" name="employee_id" id="employee_id" value="{{ $data->employee_id }}">
     <select name="status" id="status" class="form-control">
-        <option value=""></option>
-        <option value="1">Submitted</option>
-        <option value="2">Reviewed</option>
-        <option value="3">Approved</option>
-        <option value="4">Rejected</option>
+        <option value="1" @if (old('status', $data->status) == '1') selected @endif>Submitted</option>
+        <option value="2" @if (old('status', $data->status) == '2') selected @endif>Reviewed
+        </option>
+        <option value="3" @if (old('status', $data->status) == '3') selected @endif>Approved</option>
+        <option value="4" @if (old('status', $data->status) == '3') selected @endif>Rejected</option>
     </select>
 </div><!-- modal-body -->
 

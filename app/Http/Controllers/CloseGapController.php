@@ -142,22 +142,6 @@ class CloseGapController extends Controller
         DB::table('learnings')->insert($validata);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\CloseGap  $closeGap
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $data = DB::table('learnings')
-                    ->where('id', $id)
-                    ->first();
-        return view('admin.closegap.update', [
-            'data'  => $data,
-
-        ]);
-    }
 
 
     public function updateStatus(Request $request)
@@ -233,12 +217,22 @@ class CloseGapController extends Controller
         ]);
     }
 
+    public function show($id)
+    {
+        $data = DB::table('learnings')
+                    ->where('id', $id)
+                    ->first();
+        return view('admin.closegap.update', [
+            'data'  => $data,
+
+        ]);
+    }
+
     public function updateData(Request $request, $id)
     {
-        $data['status'] = $request->status;
         $item_id = $request->item_id;
         $employee_id = $request->employee_id;
-        $assessment['actual_result'] = 1;
+        $data['status'] = $request->status;
 
         $checkData = DB::table('assessment_details')
                         ->join('assessments', 'assessments.id', '=', 'assessment_details.assessment_id')

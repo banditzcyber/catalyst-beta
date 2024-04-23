@@ -370,4 +370,27 @@ class AssessmentController extends Controller
 
         return view('admin.assessment.profile', $resultData);
     }
+
+    public function editAssessment($id)
+    {
+        $data = DB::table('assessment_details')
+                    ->where('id', $id)
+                    ->first();
+        return view('admin.assessment.edititem', [
+            'data'  => $data,
+
+        ]);
+    }
+
+    public function updateItemAssessment(Request $request, $id)
+    {
+        $data['assessment_result']  = $request->assessment_result;
+        $data['actual_result'] = $request->actual_result;
+
+        DB::table('assessment_details')
+            ->where('id', $id)
+            ->update($data);
+
+    }
+
 }
