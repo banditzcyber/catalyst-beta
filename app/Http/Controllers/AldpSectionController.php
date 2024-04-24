@@ -152,6 +152,8 @@ class AldpSectionController extends Controller
         $data   = DB::table('assessment_details')
                     ->join('assessments', 'assessments.id', '=', 'assessment_details.assessment_id')
                     ->join('items', 'items.item_id', '=', 'assessment_details.item_id')
+                    ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
+                    ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                     ->select('items.item_name')
                     ->where('assessment_details.actual_result', 2)
                     ->whereIn('assessments.employee_id', $assessments)
