@@ -155,9 +155,7 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $("#viewdata").DataTable({
-                "dom": ' <"search"f><"top"l>rt<"bottom"ip><"clear">'
-            });
+            $("#viewdata").DataTable();
         });
 
         function show(id) {
