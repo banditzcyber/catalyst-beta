@@ -186,7 +186,7 @@ class AldpSectionController extends Controller
         //     // ->distinct('items.item_id') // Applying distinctness only to item_id column
         //     ->get();
 
-        dd($data);
+        // dd($data);
 
         return view('section.aldp.create', [
             'title'             => 'Form Input ALDP (Functional)',
