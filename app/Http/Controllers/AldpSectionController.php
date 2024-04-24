@@ -132,7 +132,7 @@ class AldpSectionController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-            ->where('employees.employee_id', '=', $idLogin);
+                            ->where('employees.employee_id', '=', $idLogin);
 
         $assessments = []; // Array to store all assessments
 
@@ -147,24 +147,32 @@ class AldpSectionController extends Controller
             $assessments[] = $vSubordinate->employee_id;
         }
 
-
         // dd($assessments);
 
-        $item   = DB::table('assessment_details')->distinct()->get();
+        $data   = DB::table('assessment_details')
+                    ->join('assessments', 'assessments.id', '=', 'assessment_details.assessment_id')
+                    ->join('items', 'items.item_id', '=', 'assessment_details.item_id')
+                    ->select('items.item_name')
+                    ->where('assessment_details.actual_result', 2)
+                    ->whereIn('assessments.employee_id', $assessments)
+                    ->distinct('assessment_details.item_id')
+                    ->get();
+        dd($data);
 
-        $data = DB::table('assessment_details')
-            ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
-            ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
-            ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
-            ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
-            ->select('assessment_result', 'items.item_name', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
-            ->orderBy('performance_standards.level', 'asc')
-            ->where('assessment_result', 2)
-            ->whereIn('assessments.employee_id', '3169')
-            ->distinct('items.item_id') // Applying distinctness only to item_id column
-            ->get();
+        // $data = DB::table('assessment_details')
+        //     ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
+        //     ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
+        //     ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
+        //     ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+        //     ->select('assessment_result', 'items.item_name', 'items.item_id', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
+        //     ->orderBy('performance_standards.level', 'asc')
+        //     ->where('assessment_result', 2)
+        //     ->where('assessments.employee_id', 2005)
+        //     // ->whereIn('assessments.employee_id', $assessments)
+        //     // ->distinct('items.item_id') // Applying distinctness only to item_id column
+        //     ->get();
 
-        // dd($data);
+        dd($data);
 
         return view('section.aldp.create', [
             'title'             => 'Form Input ALDP (Functional)',
