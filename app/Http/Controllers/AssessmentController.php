@@ -127,12 +127,29 @@ class AssessmentController extends Controller
                 ->orWhere('year', 'like', '%' . request('search') . '%');
         }
 
+
+        $data  = DB::table('assessment_details')
+        ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
+        ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
+        ->where('assessment_details.assessment_id', '=', $id)
+        ->select(
+            'assessment_details.id',
+            'items.item_id',
+            'items.item_name',
+            'items.intervention',
+            'items.type_training',
+            'assessment_details.assessment_result',
+            'assessment_details.actual_result',
+            'assessment_details.comment'
+        );
+
         return view('admin.assessment.detail', [
             'title'     => 'Assessment Details',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'data'      => $search->paginate(10)->withQueryString(),
+            // 'data'      => $search->paginate(10)->withQueryString(),
+            'data'      => $data->get(),
             'employee'  => $employee,
             'id'        => $id,
             'countData' => $search->count()

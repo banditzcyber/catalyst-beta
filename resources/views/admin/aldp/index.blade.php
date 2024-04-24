@@ -79,10 +79,10 @@
                     @php
 
                         if ($view->status == 1) {
-                            $color = 'bg-primary tx-center';
+                            $color = 'bg-blue tx-center';
                             $text = 'Assigned';
                         } else {
-                            $color = 'bg-success tx-center';
+                            $color = 'bg-hijau tx-center';
                             $text = 'Completed';
                         }
 

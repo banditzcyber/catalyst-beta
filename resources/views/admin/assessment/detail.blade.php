@@ -27,22 +27,24 @@
         <div>
             <div class="row ">
                 <div class="col-md">
-                    <form action="/assessmentAdmin/show">
-                        <div class="input-group">
-                            <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
-                                value="{{ request('search') }}" style="width: 250px">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-light btn-sm" type="submit" id="button-addon2">
-                                    <i data-feather="search" class="wd-15"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <ul class="list-inline d-flex mg-t-20 mg-sm-t-10 mg-md-t-0 mg-b-0">
+                        <li class="list-inline-item d-flex align-items-center">
+                            <span class="d-block wd-10 ht-10 bg-hijau rounded mg-r-5"></span>
+                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">(C) Competent</span>
+                        </li>
+                        <li class="list-inline-item d-flex align-items-center mg-l-5">
+                            <span class="d-block wd-10 ht-10 bg-kuning rounded mg-r-5"></span>
+                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">(N.I) Need Improvement</span>
+                        </li>
+                        <li class="list-inline-item d-flex align-items-center mg-l-5">
+                            <span class="d-block wd-10 ht-10 bg-merah rounded mg-r-5"></span>
+                            <span class="tx-sans tx-uppercase tx-10 tx-medium tx-color-03">(N.A) Not Applicable</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="d-none d-md-block">
-
 
             <div class="form-group row row-xs mg-0">
                 <div class="col-sm-12">
@@ -75,13 +77,13 @@
             <thead class="thead-primary">
                 <tr>
                     <th style="width: 45px">#</th>
-                    <th>ID</th>
-                    <th>Item ID</th>
+                    <th style="width: 180px">Item ID</th>
                     <th>Item Name</th>
                     <th>Intervention</th>
                     <th>Type</th>
-                    <th style="width: 115px">Current</th>
-                    <th style="width: 115px">Actual</th>
+                    <th style="width:
+                        90px">Current</th>
+                    <th style="width: 90px">Actual</th>
                     <th>Comment</th>
                 </tr>
             </thead>
@@ -90,24 +92,24 @@
                     @php
                         if ($view->assessment_result == 1) {
                             $color = 'bg-hijau';
-                            $text = 'Competent';
+                            $text = '(C)';
                         } elseif ($view->assessment_result == 2) {
                             $color = 'bg-kuning';
-                            $text = 'Need Improvement';
+                            $text = '(N.I)';
                         } else {
                             $color = 'bg-merah';
-                            $text = 'Not Applicable';
+                            $text = '(N.A)';
                         }
 
                         if ($view->actual_result == 1) {
                             $color2 = 'bg-hijau';
-                            $text2 = 'Competent';
+                            $text2 = '(C)';
                         } elseif ($view->assessment_result == 2) {
                             $color2 = 'bg-kuning';
-                            $text2 = 'Need Improvement';
+                            $text2 = '(N.I)';
                         } else {
                             $color2 = 'bg-merah';
-                            $text2 = 'Not Applicable';
+                            $text2 = '(N.A)';
                         }
                     @endphp
                     <tr>
@@ -116,14 +118,12 @@
                                 <i data-feather="edit-2" class="wd-15"></i>
                             </a>
                         </td>
-                        <td class="pd-t-25" style="cursor: pointer" onclick ="tampil({{ $view->id }})">
-                            {{ $view->id }}</td>
-                        <td class="pd-t-25">{{ $view->item_id }}</td>
-                        <td class="pd-t-25">{{ $view->item_name }}</td>
+                        <td>{{ $view->item_id }}</td>
+                        <td>{{ $view->item_name }}</td>
                         <td>{{ $view->intervention }}</td>
                         <td>{{ $view->type_training }}</td>
-                        <td class="{{ $color }}">{{ $text }}</td>
-                        <td class="{{ $color2 }}">{{ $text2 }}</td>
+                        <td class="{{ $color }} tx-center">{{ $text }}</td>
+                        <td class="{{ $color2 }} tx-center">{{ $text2 }}</td>
                         <td onclick="show({{ $view->id }})">{{ $view->comment }}</td>
                     </tr>
                 @endforeach
@@ -131,7 +131,9 @@
         </table>
     </div>
 
-    {{ $data->links() }}
+
+
+    {{-- {{ $data->links() }} --}}
 
     <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -152,6 +154,12 @@
 
 @push('scripts')
     <script>
+        $(document).ready(function() {
+            $("#viewdata").DataTable({
+                "dom": ' <"search"f><"top"l>rt<"bottom"ip><"clear">'
+            });
+        });
+
         function show(id) {
             $.get("{{ url('edititem') }}/" + id, {}, function(data, status) {
                 $("#titleModel").html('Update Data')
