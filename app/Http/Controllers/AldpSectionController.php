@@ -166,12 +166,12 @@ class AldpSectionController extends Controller
                         ->join('items AS i', 'i.item_id', '=', 'ad.item_id')
                         ->join('performance_standards As ps', 'ps.ps_id', '=', 'i.ps_id')
                         ->join('competencies As c', 'c.competency_id', '=', 'ps.competency_id')
-                        ->select('ad.item_id', 'i.item_name', 'i.intervention', 'ps.level', 'ps.ps_name', 'c.competency_name')
+                        ->select('ad.item_id', 'i.item_name', 'i.intervention', 'i.type_training', 'ps.level', 'ps.ps_name', 'c.competency_name')
                         ->where('ad.actual_result', 2)
                         ->whereIn('a.employee_id', $assessments)
                         ->distinct('ad.item_id')
                         ->get();
-        dd($data);
+        // dd($data);
 
         // $data = DB::table('assessment_details')
         //     ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
