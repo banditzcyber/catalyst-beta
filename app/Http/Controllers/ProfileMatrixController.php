@@ -28,23 +28,26 @@ class ProfileMatrixController extends Controller
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 
-        $search = DB::table('profile_matrices')->orderby('created_at', 'desc');
+        // $search = DB::table('profile_matrices')->orderby('created_at', 'desc');
 
-        if(request('search')) {
-            $search->where('section', 'like', '%' . request('search') . '%')
-                   ->orWhere('competency_id', 'like', '%' . request('search') . '%')
-                   ->orWhere('competency_name', 'like', '%' . request('search') . '%')
-                   ->orWhere('jobcode', 'like', '%' . request('search') . '%')
-                   ->orWhere('jobcode_future', 'like', '%' . request('search') . '%');
-        }
+        // if(request('search')) {
+        //     $search->where('section', 'like', '%' . request('search') . '%')
+        //            ->orWhere('competency_id', 'like', '%' . request('search') . '%')
+        //            ->orWhere('competency_name', 'like', '%' . request('search') . '%')
+        //            ->orWhere('jobcode', 'like', '%' . request('search') . '%')
+        //            ->orWhere('jobcode_future', 'like', '%' . request('search') . '%');
+        // }
+
+        $data = DB::table('profile_matrices')->orderby('created_at', 'desc');
 
         return view('admin.matrix.index', [
             'title'     => 'Profile Matrices',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'data'      => $search->paginate(10)->withQueryString(),
-            'countData' =>$search->count()
+            // 'data'      => $search->paginate(10)->withQueryString(),
+            'data'      => $data->get(),
+            'countData' =>$data->count()
         ]);
     }
 

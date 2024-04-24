@@ -12,9 +12,7 @@
         </div>
         <div class="d-none d-md-block">
             <div class="col-sm-12">
-                <h3 class="">
-                    Total Data : {{ number_format($countData) }}
-                </h3 class="tx-uppercase">
+
             </div>
         </div>
 
@@ -24,17 +22,9 @@
         <div>
             <div class="row ">
                 <div class="col-md">
-                    <form action="/matrix">
-                        <div class="input-group">
-                            <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
-                                value="{{ request('search') }}" style="width: 250px">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-light btn-sm" type="submit" id="button-addon2">
-                                    <i data-feather="search" class="wd-15"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <h3 class="">
+                        Total Data : {{ number_format($countData) }}
+                    </h3 class="tx-uppercase">
                 </div>
             </div>
         </div>
@@ -57,7 +47,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    <a href="/matrix/create" class="btn btn-sm btn-primary btn-uppercase">
+                    <a href="/matrix/create" class="btn  btn-primary btn-uppercase">
                         <i data-feather="plus" class=""></i>
                     </a>
                 </div>
@@ -73,17 +63,17 @@
     @endif
 
     <div class="table-responsive">
-        <table id="viewdata" class="table table-bordered tx-12 table-hover">
+        <table id="viewdata" class="table table-bordered tx-12 table-hover pd-0">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 75px">#</th>
+                    <th style="width: 85px">#</th>
                     <th>Section</th>
                     <th>Competency</th>
                     <th>Position</th>
                     <th>Job Code</th>
                     <th>Target</th>
-                    <th>Position Future</th>
-                    <th>Job Code Future</th>
+                    <th>Position (F)</th>
+                    <th>Job Code (F)</th>
                     <th>Target(F)</th>
                 </tr>
             </thead>
@@ -143,5 +133,13 @@
         </div><!-- modal-dialog -->
     </div><!-- modal -->
 
-    {{ $data->links() }}
+    {{-- {{ $data->links() }} --}}
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#viewdata").DataTable();
+        });
+    </script>
+@endpush;

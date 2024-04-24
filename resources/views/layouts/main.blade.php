@@ -27,7 +27,15 @@
     <link rel="stylesheet" href="/css/dashforge.css">
     <link rel="stylesheet" href="/css/dashforge.dashboard.css">
     <link rel="stylesheet" href="/css/style-cyber.css">
-  <link rel="stylesheet" href="/css/dashforge.demo.css">
+    <link rel="stylesheet" href="/css/dashforge.demo.css">
+    {{-- <link href="/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.semanticui.css" /> --}}
+
+
+
 
 </head>
 
@@ -173,10 +181,11 @@
     <!-- append theme customizer -->
     <script src="/lib/js-cookie/js.cookie.js"></script>
     {{-- <script src="/js/dashforge.settings.js"></script> --}}
-    <script src="/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    {{-- <script src="/lib/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
     <script src="/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
+    <script src="/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script> --}}
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="/lib/cleave.js/cleave.min.js"></script>
     <script src="/lib/cleave.js/addons/cleave-phone.us.js"></script>
