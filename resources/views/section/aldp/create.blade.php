@@ -194,7 +194,6 @@
                         <thead>
                             <tr>
                                 <th>Competency</th>
-                                <th>Performance Standars</th>
                                 <th style="width: 5%">Level</th>
                                 <th>Learning Item</th>
                                 <th>Intervention</th>
@@ -207,7 +206,6 @@
                                     level="{{ $view->level }}" intervention="{{ $view->intervention }}"
                                     type_training="{{ $view->type_training }}">
                                     <td>{{ $view->competency_name }}</td>
-                                    <td>{{ Str::limit($view->ps_name, 100) }}</td>
                                     <td>{{ $view->level }}</td>
                                     <td>{{ $view->item_id }} - {{ $view->item_name }}</td>
                                     <td>{{ $view->intervention }} ({{ $view->type_training }})</td>

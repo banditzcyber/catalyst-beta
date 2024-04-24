@@ -149,16 +149,26 @@ class AldpSectionController extends Controller
 
         // dd($assessments);
 
-        $data   = DB::table('assessment_details')
-                    ->join('assessments', 'assessments.id', '=', 'assessment_details.assessment_id')
-                    ->join('items', 'items.item_id', '=', 'assessment_details.item_id')
-                    ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
-                    ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
-                    ->select('items.item_name')
-                    ->where('assessment_details.actual_result', 2)
-                    ->whereIn('assessments.employee_id', $assessments)
-                    ->distinct('assessment_details.item_id')
-                    ->get();
+        // $data   = DB::table('assessment_details')
+        //             ->join('assessments', 'assessments.id', '=', 'assessment_details.assessment_id')
+        //             ->join('items', 'items.item_id', '=', 'assessment_details.item_id')
+        //             ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
+        //             ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+        //             ->select('items.item_name', 'items.item_id', 'items.intervention', 'items.type_training', 'competencies.competency_name', 'performance_standards.level')
+        //             ->where('assessment_details.actual_result', 2)
+        //             ->whereIn('assessments.employee_id', $assessments)
+        //             ->distinct('assessment_details.item_id')
+        //             ->get();
+
+
+        $data   = DB::table('assessment_details AS ad')
+                        ->join('assessments AS a', 'a.id', '=', 'ad.assessment_id')
+                        ->join('items AS i', 'i.item_id', '=', 'ad.item_id')
+                        ->select('ad.item_id', 'i.item_name', 'i.intervention')
+                        ->where('ad.actual_result', 2)
+                        ->whereIn('a.employee_id', $assessments)
+                        ->distinct('ad.item_id')
+                        ->get();
         dd($data);
 
         // $data = DB::table('assessment_details')
