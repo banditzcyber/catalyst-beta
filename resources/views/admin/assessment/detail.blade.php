@@ -77,7 +77,7 @@
             <thead class="thead-primary">
                 <tr>
                     <th style="width: 45px">#</th>
-                    <th style="width: 180px">Item ID</th>
+                    <th style="width: 190px">Item ID</th>
                     <th>Item Name</th>
                     <th>Intervention</th>
                     <th>Type</th>

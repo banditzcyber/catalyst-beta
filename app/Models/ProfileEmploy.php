@@ -28,6 +28,7 @@ class ProfileEmploy extends Model
                             ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                             ->where('assessments.employee_id', '=', $idLogin)
                             ->where('assessments.status', '=', 3)
+                            ->where('assessments.status_launch', '=', 2)
                             ->where('competencies.competency_id', '=', $id);
     }
 }
