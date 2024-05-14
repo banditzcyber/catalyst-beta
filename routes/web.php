@@ -39,6 +39,7 @@ use App\Http\Controllers\AssessmentValidationController;
 use App\Http\Controllers\DepartDashboardController;
 use App\Http\Controllers\DepartSubordinateController;
 use App\Http\Controllers\DepartAssessmentValidationController;
+use App\Http\Controllers\DepartAldpController;
 
 
 use Illuminate\Support\Facades\Redirect;
@@ -142,6 +143,16 @@ Route::get('/assessmentValidationDepartment/show/{id}', [DepartAssessmentValidat
 Route::post('/finishFormValidationDepartment', [DepartAssessmentValidationController::class, 'finishFormValidation']);
 
 Route::post('/departSubordinate', [DepartSubordinateController::class, 'finishFormValidation']);
+
+Route::get('/departAldp', [DepartAldpController::class, 'index']);
+Route::get('/departAldpShow/{id}', [DepartAldpController::class, 'show']);
+Route::get('/departAldp/functional/{id_aldp}', [DepartAldpController::class, 'formFunctional']);
+Route::get('/departAldp/leadership/{id_aldp}', [DepartAldpController::class, 'formLeadership']);
+Route::get('/departAldp/other/{id_aldp}', [DepartAldpController::class, 'formOther']);
+Route::post('/departAldp/saveForm', [DepartAldpController::class, 'store']);
+Route::get('/departAldp/edit/{id}', [DepartAldpController::class, 'editData']);
+Route::get('/departAldp/editCnl/{id}', [DepartAldpController::class, 'editData']);
+Route::post('/departAldp/update', [DepartAldpController::class, 'updateData']);
 
 // ------------------------------------- Access for administrator -----------------------------------------------
 Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);

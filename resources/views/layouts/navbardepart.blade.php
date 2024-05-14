@@ -70,7 +70,7 @@
                 </a>
             </li>
             <li class="nav-item mg-t-25 {{ request()->is('departAldp*') ? 'active' : '' }}">
-                <a href="/assessmentValidationDepartment" class="nav-link">
+                <a href="/departAldp" class="nav-link">
                     <i data-feather="clipboard"></i> <span>ALDP</span>
                 </a>
             </li>

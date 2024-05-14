@@ -15,34 +15,16 @@
             </h4>
         </div>
         <div class="d-none d-md-block">
-            <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-primary">
-                    Add Data
-                </button>
-                <button type="button" class="btn btn-sm btn-primary dropdown-toggle dropdown-toggle-split"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/aldpSection/functional/{{ $id_aldp }}"
-                        onclick="addDataFunctional()">Functional
-                        Competency</a>
-                    <a class="dropdown-item" href="/aldpSection/cnl/{{ $id_aldp }}">Core and Leadership Program</a>
-                    <a class="dropdown-item" href="/aldpSection/other/{{ $id_aldp }}">Other Program</a>
-                </div>
-            </div>
-
-            <a href="/aldpSection/form/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
-                <i data-feather="plus" class="wd-10 mg-r-5"></i>
-                Add
-            </a>
-            <a href="/aldpSection" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalItem">
+                Add Data
+            </button>
+            <a href="/departAldp" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>
         </div>
     </div>
-
+    {{-- Budge --}}
     <div class="d-md-flex align-items-center justify-content-between">
 
         <div class="col-12 mg-t-10">
@@ -91,8 +73,6 @@
                                     </div><!-- media-body -->
                                 </div><!-- media -->
 
-
-
                                 <div class="pos-absolute b-5 l-20 tx-medium">
                                     <label class="tx-9 tx-uppercase tx-sans tx-color-03">
                                         <a href="" class="link-01 tx-semibold">{{ $cnl_all }}</a> Planning
@@ -136,7 +116,7 @@
 
     </div>
 
-
+    {{-- functional competency  --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
             <div class="mg-t-10 mg-b-10" role="alert">
@@ -153,7 +133,7 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 55px;">
+                <div class="table-header" style="width: 75px;">
 
                 </div>
                 <div class="table-header" style="width: 420px;">
@@ -183,18 +163,33 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 55px;">
-                                <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                            <div class="table-body tx-center tx-15" style="width: 75px;">
+
+                                <a href="/departAldp/edit/{{ $view->id_aldp_details }}"
+                                    class="badge badge-primary pd-y-0 border-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
                                 </a>
-                                <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
-                                    <i data-feather="x" style="width: 15px;"></i>
-                                </a>
+
+                                <form action="/deleteItemAldp" method="post" class="d-inline"
+                                    onclick="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
+                                        value="{{ $view->aldp_id }}" required>
+                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
+                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
+                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
+                                        <i data-feather="x" class="wd-15"></i>
+                                    </button>
+                                </form>
+
                             </div>
 
                             <div class="table-body" style="width: 420px;">
+
+                                <div class="tx-uppercase tx-bold">{{ $view->competency_name }}</div>
+                                <div class="mb-2 tx-italic tx-color-02">{{ $view->ps_name }}</div>
                                 <div>{{ $view->item_id }}</div>
-                                <div class="">{{ $view->item_name }}
+                                <div class="tx-bold">{{ $view->item_name }}
                                     <label class="tx-italic">
                                         [{{ $view->intervention }}, {{ $view->type_training }}]
                                     </label>
@@ -204,21 +199,23 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="" class="table-body" style="width: 340px;">
+                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}"
+                                class="table-body" style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->aldp_detail_id)
+                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
                                 @endphp
 
                                 @foreach ($detail as $vDetail)
                                     <span
                                         class="badge
-                                        @if ($vDetail->status == 0) badge-primary
-                                        @elseif ($vDetail->status == 1)
+                                        @if ($vDetail->status == 1) badge-primary
+
+                                        @elseif ($vDetail->status == 2)
                                             badge-warning
                                         @else
                                             badge-success @endif
@@ -235,12 +232,12 @@
 
                             @php
                                 $propose = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
                                     ->count();
 
                                 $actual = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
-                                    ->where('status', '=', 2)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
+                                    ->where('status', '=', 3)
                                     ->count();
                                 if (empty($propose)) {
                                     $total = 0;
@@ -248,6 +245,8 @@
                                     $total = ($actual / $propose) * 100;
                                 }
                             @endphp
+
+
 
                             <div class="table-body tx-center"
                                 style="width: 60px;
@@ -301,7 +300,7 @@
             </div>
         </div>
     </div>
-
+    {{-- Core Leadership Competency --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
             <div class="mg-t-10 mg-b-10" role="alert">
@@ -318,7 +317,7 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 55px;">
+                <div class="table-header" style="width: 69px;">
 
                 </div>
                 <div class="table-header" style="width: 420px;">
@@ -348,13 +347,23 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 55px;">
-                                <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                            <div class="table-body tx-center tx-15" style="width: 70px;">
+                                <a href="/aldpSection/editCnl/{{ $view->id_aldp_details }}"
+                                    class="badge badge-primary pd-y-0 border-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
                                 </a>
-                                <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
-                                    <i data-feather="x" style="width: 15px;"></i>
-                                </a>
+
+                                <form action="/deleteItemAldp" method="post" class="d-inline"
+                                    onclick="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
+                                        value="{{ $view->aldp_id }}" required>
+                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
+                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
+                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
+                                        <i data-feather="x" class="wd-15"></i>
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="table-body" style="width: 420px;">
@@ -369,21 +378,23 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="" class="table-body" style="width: 340px;">
+                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
+                                style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->aldp_detail_id)
+                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
                                 @endphp
 
                                 @foreach ($detail as $vDetail)
                                     <span
                                         class="badge
-                                        @if ($vDetail->status == 0) badge-primary
-                                        @elseif ($vDetail->status == 1)
+                                        @if ($vDetail->status == 1) badge-primary
+
+                                        @elseif ($vDetail->status == 2)
                                             badge-warning
                                         @else
                                             badge-success @endif
@@ -395,20 +406,25 @@
                             </a>
 
                             <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remaks }}</div>
+                                <div>{{ $view->remarks }}</div>
                             </div>
 
                             @php
                                 $propose = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
                                     ->count();
 
                                 $actual = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
-                                    ->where('status', '=', 2)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
+                                    ->where('status', '=', 3)
                                     ->count();
-                                $total = ($actual / $propose) * 100;
+                                if (empty($propose)) {
+                                    $total = 0;
+                                } else {
+                                    $total = ($actual / $propose) * 100;
+                                }
                             @endphp
+
 
                             <div class="table-body tx-center"
                                 style="width: 60px;
@@ -462,7 +478,7 @@
             </div>
         </div>
     </div>
-
+    {{-- Other Program --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
             <div class="mg-t-10 mg-b-10" role="alert">
@@ -479,7 +495,7 @@
                 <div class="table-line-header tx-center" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 55px;">
+                <div class="table-header" style="width: 69px;">
 
                 </div>
                 <div class="table-header" style="width: 420px;">
@@ -509,17 +525,26 @@
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 55px;">
-                                <a href="#" onclick="editDataFunctional('')" class="tx-primary mg-x-0">
+                            <div class="table-body tx-center tx-15" style="width: 70px;">
+                                <a href="#" class="badge badge-primary pd-y-0 border-0">
                                     <i data-feather="edit-2" style="width: 15px;"></i>
                                 </a>
-                                <a href="#" onclick="addDataFunctional()" class="tx-danger mg-x-0">
-                                    <i data-feather="x" style="width: 15px;"></i>
-                                </a>
+
+                                <form action="/deleteItemAldp" method="post" class="d-inline"
+                                    onclick="return confirm('Are you sure?')">
+                                    @csrf
+                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
+                                        value="{{ $view->aldp_id }}" required>
+                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
+                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
+                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
+                                        <i data-feather="x" class="wd-15"></i>
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="table-body" style="width: 420px;">
-                                <div>{{ $view->training_name }}</div>
+                                <div>{{ $view->item_name }}</div>
                                 {{-- <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
                                         [{{ $view->intervention }}, {{ $view->type_training }}]
@@ -530,13 +555,14 @@
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="" class="table-body" style="width: 340px;">
+                            <a href="/participant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}" class="table-body"
+                                style="width: 340px;">
 
                                 @php
                                     $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.*')
+                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
                                         ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->aldp_detail_id)
+                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
                                         ->get();
                                 @endphp
 
@@ -544,6 +570,7 @@
                                     <span
                                         class="badge
                                         @if ($vDetail->status == 0) badge-primary
+
                                         @elseif ($vDetail->status == 1)
                                             badge-warning
                                         @else
@@ -556,7 +583,7 @@
                             </a>
 
                             <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remaks }}</div>
+                                <div>{{ $view->remarks }}</div>
                             </div>
 
                             @php
@@ -629,6 +656,37 @@
             </div>
         </div>
     </div>
+
+
+    {{-- -------------------------------------- MODAL ------------------------------------- --}}
+
+    <div class="modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-5">
+                    <div class="row row-xs">
+                        <div class="col-sm-4 tx-center bg-primary">
+                            <a href="/departAldp/functional/{{ $id_aldp }}" class=" tx-white">
+                                Functional Competency
+                            </a>
+                        </div>
+                        <div class="col-sm-4 tx-center bg-success">
+                            <a href="/departAldp/leadership/{{ $id_aldp }}" class=" tx-white">
+                                Leadership Program
+                            </a>
+                        </div>
+                        <div class="col-sm-4 tx-center bg-dark">
+                            <a href="/departAldp/other/{{ $id_aldp }}" class=" tx-white">
+                                Other Program
+                            </a>
+                        </div>
+                    </div>
+
+                </div><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 
 
     <script src="/lib/jquery/jquery.min.js"></script>
