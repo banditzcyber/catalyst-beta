@@ -7,80 +7,94 @@ use Illuminate\Support\Facades\DB;
 
 class DepartSubordinateController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $idLogin    = auth()->user()->employee_id;
+        // session (wajib);
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        // $idLogin        = '0773';
+        $dEmployee      = DB::table('employees')
+            ->where('employees.employee_id', '=', $idLogin);
 
         $query  = DB::table('employees')
                     ->where('dm_code', $idLogin)
                     ->paginate(12)->withQueryString();
 
         return view('department.subordinate.index', [
-            'title'     => 'Subordinate',
-            'data'      => $query,
-            'id_login'  => $idLogin
+            'title'             => 'Subordinate',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $query,
+            'id_login'          => $idLogin
         ]);
     }
 
-    public function profile($employee_id)
+    public function profile(Request $request, $employee_id)
     {
-        $idLogin    = $employee_id;
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
 
-        $dEmployee  = DB::table('employees')
-                      ->where('employees.employee_id', '=', $idLogin );
+        $dEmployeeSub  = DB::table('employees')
+                      ->where('employees.employee_id', '=', $employee_id );
 
         $getCompetency  = array();
         $getCompetent   = array();
         $getNeed        = array();
 
         $m_query =  new \App\Models\ProfileEmploy();
-        $competency = $m_query->getCompetency($idLogin);
+        $competency = $m_query->getCompetency($employee_id);
         foreach($competency as $vCompetency) :
 
             $getCompetency[]    = $vCompetency->competency_name;
             $getId[]            = $vCompetency->competency_id;
             $id                 = $vCompetency->competency_id;
 
-            $competent  = $m_query->getItemAssessment($idLogin, $id);
+            $competent  = $m_query->getItemAssessment($employee_id, $id);
 
-            $getCompetent[]     = $competent->where('assessment_details.actual_result','=', 1)->count();
+            $getCompetent[]     = $competent->where('assessment_details.assessment_result','=', 1)->count();
 
-            $neet               = $m_query->getItemAssessment($idLogin, $id);
-            $getNeed[]          = $neet->where('assessment_details.actual_result','=', 2)->count();
+            $neet               = $m_query->getItemAssessment($employee_id, $id);
+            $getNeed[]          = $neet->where('assessment_details.assessment_result','=', 2)->count();
 
 
-            $getLevel1[]        = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','=', 1)
+            $getLevel1[]        = $m_query->getItemAssessment($employee_id, $id)
+                                        ->where('assessment_details.assessment_result','=', 1)
                                         ->where('performance_standards.level', '1')
                                         ->count();
-            $getLevel2[]        = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','=', 1)
+            $getLevel2[]        = $m_query->getItemAssessment($employee_id, $id)
+                                        ->where('assessment_details.assessment_result','=', 1)
                                         ->where('performance_standards.level', '2')
                                         ->count();
-            $getLevel3[]        = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','=', 1)
+            $getLevel3[]        = $m_query->getItemAssessment($employee_id, $id)
+                                        ->where('assessment_details.assessment_result','=', 1)
                                         ->where('performance_standards.level', '3')
                                         ->count();
-            $getLevel4[]        = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','=', 1)
+            $getLevel4[]        = $m_query->getItemAssessment($employee_id, $id)
+                                        ->where('assessment_details.assessment_result','=', 1)
                                         ->where('performance_standards.level', '4')
                                         ->count();
 
-            $getAllLevel1[]     = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','!=', 3)
+            $getAllLevel1[]     = $m_query->getItemAssessment($employee_id, $id)
+                                        ->where('assessment_details.assessment_result','!=', 3)
                                         ->where('performance_standards.level', '1')
                                         ->count();
-            $getAllLevel2[]     = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','!=', 3)
+            $getAllLevel2[]     = $m_query->getItemAssessment($employee_id, $id)
+                                        ->where('assessment_details.assessment_result','!=', 3)
                                         ->where('performance_standards.level', '2')
                                         ->count();
-            $getAllLevel3[]     = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','!=', 3)
+            $getAllLevel3[]     = $m_query->getItemAssessment($employee_id, $id)
+                                        ->where('assessment_details.assessment_result','!=', 3)
                                         ->where('performance_standards.level', '3')
                                         ->count();
-            $getAllLevel4[]     = $m_query->getItemAssessment($idLogin, $id)
-                                        ->where('assessment_details.actual_result','!=', 3)
+            $getAllLevel4[]     = $m_query->getItemAssessment($employee_id, $id)
+                                        ->where('assessment_details.assessment_result','!=', 3)
                                         ->where('performance_standards.level', '4')
                                         ->count();
         endforeach;
@@ -117,16 +131,19 @@ class DepartSubordinateController extends Controller
                         ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
                         ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
                         ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
-                        ->where('assessments.employee_id', '=', $idLogin);
+                        ->where('assessments.employee_id', '=', $employee_id);
 
         return view('department.subordinate.profile', [
             'title'         => 'Dashboard',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
             'subTitle'      => 'Actual Data',
             'btnList'      => 'btn-outline-dark',
             'btnCurrent'   => 'btn-outline-warning',
             'btnActual'    => 'btn-primary',
             // 'data'          => $competent->where('assessment_details.actual_result','=', 1)->count(),
-            'employee'      => $dEmployee->get(),
+            'employee'      => $dEmployeeSub->get(),
             'competency'    => json_encode($getCompetency),
             'competent'     => json_encode($getCompetent),
             'need'          => json_encode($getNeed),

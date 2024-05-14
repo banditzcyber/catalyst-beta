@@ -15,6 +15,7 @@
                             } else {
                                 $gender = 'Mrs.';
                             }
+                            $idEmployee = $vEmployee->employee_id;
                         @endphp
                         <h4 class="mg-b-0 tx-spacing--1">Welcome {{ $gender }} {{ $vEmployee->employee_name }}
                             ({{ $vEmployee->employee_id }})
@@ -22,12 +23,15 @@
                     @endforeach
                 </div>
                 <div class="d-none d-md-block">
-                    <a href="/listItems" class="btn btn-sm pd-x-15 {{ $btnList }} btn-uppercase mg-l-5"><i
-                            data-feather="list" class="wd-10 mg-r-5"></i> Items</a>
-                    <a href="/profileEmploy/current" class="btn btn-sm pd-x-15 {{ $btnCurrent }} btn-uppercase mg-l-5"><i
-                            data-feather="meh" class="wd-10 mg-r-5"></i> Current</a>
-                    <a href="/profileEmploy" class="btn btn-sm pd-x-15 {{ $btnActual }} btn-uppercase mg-l-5"><i
-                            data-feather="smile" class="wd-10 mg-r-5"></i> Actual</a>
+                    <a href="/subordinate/items/{{ $idEmployee }}"
+                        class="btn btn-sm pd-x-15 {{ $btnList }} btn-uppercase mg-l-5"><i data-feather="list"
+                            class="wd-10 mg-r-5"></i> Items</a>
+                    <a href="/subordinate/current/{{ $idEmployee }}"
+                        class="btn btn-sm pd-x-15 {{ $btnCurrent }} btn-uppercase mg-l-5"><i data-feather="meh"
+                            class="wd-10 mg-r-5"></i> based on Assessment</a>
+                    <a href="/subordinate/profile/{{ $idEmployee }}"
+                        class="btn btn-sm pd-x-15 {{ $btnActual }} btn-uppercase mg-l-5"><i data-feather="smile"
+                            class="wd-10 mg-r-5"></i> Actual</a>
                 </div>
             </div>
 

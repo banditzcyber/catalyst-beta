@@ -10,7 +10,7 @@
                     </nav>
                     @foreach ($employee as $vEmployee)
                         @php
-                            if ($vEmployee->gender == 'M') {
+                            if ($vEmployee->gender == 'Male' or $vEmployee->gender == 'M') {
                                 $gender = 'Mr.';
                             } else {
                                 $gender = 'Mrs.';

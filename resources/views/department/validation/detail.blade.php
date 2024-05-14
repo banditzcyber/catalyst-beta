@@ -13,14 +13,12 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            {{-- <a href="/assessmentValidationDepartment" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
-            </a>
+            </a> --}}
         </div>
     </div>
-
-
 
     <div class="row row-xs mg-b-30">
         @foreach ($status as $vStatus)
@@ -76,6 +74,12 @@
 
     </div>
 
+    @if (session()->has('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="row row-xs">
 
         @foreach ($data as $vData)
@@ -84,6 +88,7 @@
                 <div class="card" style="height: 190px;">
                     <div class="card-body pd-b-0">
                         <label class="tx-bold tx-success tx-13 tx-uppercase">
+                            {{-- {{ $vData->competency_name }} --}}
                             {{ str_word_count($vData->competency_name) > 3 ? substr($vData->competency_name, 0, 27) . ' [...]' : $vData->competency_name }}
                         </label>
 
@@ -111,13 +116,14 @@
                     <div class="card-footer" style="">
                         <div class="row row-xs">
                             <div class="col-lg-6">
-                                @if ($vStatus->status == 1)
+                                @if ($vStatus->status == 2)
                                     @if ($dValid == 0)
                                         {{-- <a href="/sig/edit/{$value->id}/{$value->ticketid}" title="Edit signature"> --}}
                                         <a href="/formassessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"
                                             class="btn btn-xs btn-outline-secondary">Start</a>
                                     @else
-                                        <a href="" class="btn btn-xs btn-outline-secondary">Update</a>
+                                        <a href="/reviewAssessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"
+                                            class="btn btn-xs btn-outline-secondary">Review</a>
                                     @endif
                                 @else
                                     <a href="/resultAssessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"
@@ -136,23 +142,4 @@
         @endforeach
 
     </div><!-- row -->
-
-    </div><!-- container -->
-    </div>
-
-
-    <script>
-        function refresh() {
-            location.reload();
-        }
-
-        $(function() {
-            'use strict'
-
-            $('.img-caption').on('mouseover mouseout', function() {
-                $(this).find('figcaption').toggleClass('op-0');
-            });
-
-        });
-    </script>
 @endsection

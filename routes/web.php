@@ -38,6 +38,7 @@ use App\Http\Controllers\AssessmentValidationController;
 //Department
 use App\Http\Controllers\DepartDashboardController;
 use App\Http\Controllers\DepartSubordinateController;
+use App\Http\Controllers\DepartAssessmentValidationController;
 
 
 use Illuminate\Support\Facades\Redirect;
@@ -99,7 +100,7 @@ Route::get('/profileEmploy/current', [ProfileEmployController::class, 'show']);
 Route::get('/listItems', [ProfileEmployController::class, 'listItem']);
 // Route::get('/current', [ProfileEmployController::class, 'index ']);
 
-// ------------------------------------ Access form Manager -----------------------------------------------------------
+// ------------------------------------ Access form Section Manager -----------------------------------------------------------
 Route::resource('/dashboardSection', DashboardSectionController::class);
 
 // # menu ALDP
@@ -135,6 +136,12 @@ Route::post('/finishFormValidation', [AssessmentValidationController::class, 'fi
 Route::get('/departmentDashboard', [DepartDashboardController::class, 'index']);
 Route::get('/departSubordinate', [DepartSubordinateController::class, 'index']);
 Route::get('/departSubordinate/profile/{employee_id}', [DepartSubordinateController::class, 'profile']);
+
+Route::get('/assessmentValidationDepartment', [DepartAssessmentValidationController::class, 'index']);
+Route::get('/assessmentValidationDepartment/show/{id}', [DepartAssessmentValidationController::class, 'show']);
+Route::post('/finishFormValidationDepartment', [DepartAssessmentValidationController::class, 'finishFormValidation']);
+
+Route::post('/departSubordinate', [DepartSubordinateController::class, 'finishFormValidation']);
 
 // ------------------------------------- Access for administrator -----------------------------------------------
 Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);

@@ -110,6 +110,8 @@
                 @if ($area == 'azure')
                     @if ($employeeSession->job_level == 'SM')
                         @include('layouts.navbarsection')
+                    @elseif ($employeeSession->job_level == 'DM')
+                        @include('layouts.navbardepart')
                     @else
                         @include('layouts.navbaremployee') @endif
                 @else

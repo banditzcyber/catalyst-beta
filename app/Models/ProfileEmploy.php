@@ -31,4 +31,12 @@ class ProfileEmploy extends Model
                             ->where('assessments.status_launch', '=', 1)
                             ->where('competencies.competency_id', '=', $id);
     }
+
+    public function getSubordinate($assessments)
+    {
+        return DB::table('assessment_details AS ad')
+                ->join('assessments AS a', 'a.id', '=', 'ad.assessment_id')
+                ->join('items AS i', 'i.item_id', '=', 'ad.item_id')
+                ->whereIn('a.employee_id', $assessments);
+    }
 }

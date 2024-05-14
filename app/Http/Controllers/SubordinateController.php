@@ -322,6 +322,7 @@ class SubordinateController extends Controller
                             ->join('competencies', 'performance_standards.competency_id' , 'competencies.competency_id')
                             ->select('items.item_id', 'items.item_name', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
                             ->where('assessments.employee_id', '=', $employee_id)
+                            ->where('assessments.status_launch', '=', 1)
                             ->where('assessment_details.actual_result', 1);
 
         $dataNeed       = DB::table('assessment_details')
@@ -331,6 +332,7 @@ class SubordinateController extends Controller
                             ->join('competencies', 'performance_standards.competency_id' , 'competencies.competency_id')
                             ->select('items.item_id', 'items.item_name', 'items.intervention', 'items.type_training', 'performance_standards.ps_name', 'performance_standards.level', 'competencies.competency_name')
                             ->where('assessments.employee_id', '=', $employee_id)
+                            ->where('assessments.status_launch', '=', 1)
                             ->where('assessment_details.actual_result', 2);
 
         return view('section.subordinate.items', [

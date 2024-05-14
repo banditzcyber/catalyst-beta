@@ -13,10 +13,10 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/assessmentValidation" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            {{-- <a href="/assessmentValidation" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
-            </a>
+            </a> --}}
         </div>
     </div>
 
@@ -90,7 +90,7 @@
                 <div class="card" style="height: 190px;">
                     <div class="card-body pd-b-0">
                         <label class="tx-bold tx-success tx-13 tx-uppercase">
-                            {{ $vData->competency_name }}
+                            {{ str_word_count($vData->competency_name) > 3 ? substr($vData->competency_name, 0, 27) . ' [...]' : $vData->competency_name }}
                         </label>
 
                         <label class="tx-10 tx-italic">
@@ -102,7 +102,12 @@
                         $dValid = DB::table('assessment_details')
                             ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
                             ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
-                            ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
+                            ->join(
+                                'competencies',
+                                'performance_standards.competency_id',
+                                '=',
+                                'competencies.competency_id',
+                            )
                             ->where('assessment_details.assessment_id', '=', $id)
                             ->where('competencies.competency_id', '=', $vData->competency_id)
                             ->count();

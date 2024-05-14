@@ -31,7 +31,7 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 75px">#</th>
+                    <th style="width: 65px">#</th>
                     <th style="width: 100px">ID</th>
                     <th>Name</th>
                     <th>Position</th>
@@ -49,12 +49,12 @@
                             $color = 'bg-light';
                             $text = 'Self Assessment';
                             $btn = 'disabled="disabled"';
-                            $btnColor = 'badge-primary';
+                            $btnColor = 'badge-warning';
                         } elseif ($view->status == 2) {
                             $color = 'bg-warning';
                             $text = 'Review by Superior';
                             $btn = '';
-                            $btnColor = 'badge-primary';
+                            $btnColor = 'badge-warning';
                         } else {
                             $color = 'bg-success';
                             $text = 'Completed';
@@ -65,11 +65,11 @@
 
                     <tr>
                         <td class="tx-center">
-                            <a href="/assessmentValidation/show/{{ $view->id }}" class="badge badge-warning pd-y-0"><i
-                                    data-feather="eye" class="wd-15"></i></a>
+                            <a href="/assessmentValidationDepartment/show/{{ $view->id }}"
+                                class="badge badge-info pd-y-0"><i data-feather="eye" class="wd-15"></i></a>
 
-                            <form action="/finishFormValidation" method="POST" onclick="return confirm('Are you sure?')"
-                                class="d-inline">
+                            <form action="/finishFormValidationDepartment" method="POST"
+                                onclick="return confirm('Are you sure?')" class="d-inline">
                                 @csrf
                                 <input type="hidden" name="assessment_id" value="{{ $view->id }}">
                                 <button class="badge  pd-y-0 border-0  {{ $btnColor }}" {{ $btn }}
