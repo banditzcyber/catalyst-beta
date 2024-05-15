@@ -34,7 +34,7 @@ class UserLoginController extends Controller
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'data'      => $search->paginate(10)->withQueryString()
+            'data'      => $search->get()
         ]);
     }
 

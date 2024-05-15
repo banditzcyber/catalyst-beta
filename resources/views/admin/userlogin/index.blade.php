@@ -22,22 +22,6 @@
         </div>
     </div>
 
-    <div class="row mg-b-10 justify-content-right">
-        <div class="col-md-4">
-            <form action="/userlogin">
-                <div class="input-group">
-                    <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
-                        value="{{ request('search') }}">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-light btn-sm" type="submit" id="button-addon2">
-                            <i data-feather="search" class="wd-15"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">
             {{ session('success') }}
@@ -45,10 +29,10 @@
     @endif
 
     <div class="table-responsive">
-        <table id="viewdata" class="table table-bordered tx-12 table-hover">
+        <table id="viewdata" class="table table-bordered tx-14 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 75px">#</th>
+                    <th style="width: 55px">#</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -97,5 +81,13 @@
         </table>
     </div>
 
-    {{ $data->links() }}
+    {{-- {{ $data->links() }} --}}
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#viewdata").DataTable();
+        });
+    </script>
+@endpush;

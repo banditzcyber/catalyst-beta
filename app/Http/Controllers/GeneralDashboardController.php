@@ -2,17 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DashboardSection;
-use App\Models\ProfileEmploy;
-use App\Models\User;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
-class DepartDashboardController extends Controller
+class GeneralDashboardController extends Controller
 {
-
     public function index(Request $request)
     {
 
@@ -48,7 +42,7 @@ class DepartDashboardController extends Controller
 
         $qSubordinate       = DB::table('employees')->where('dm_code', $idLogin);
 
-        return view('department.dashboard.index', [
+        return view('general.dashboard.index', [
             'title'             => 'Dashboard',
             //penting
             'employeeSession'   => $dEmployee->first(),
@@ -61,6 +55,4 @@ class DepartDashboardController extends Controller
 
         ]);
     }
-
-
 }

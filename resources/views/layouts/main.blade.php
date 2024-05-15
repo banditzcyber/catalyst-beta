@@ -122,7 +122,7 @@
                     @elseif ($roleId == 3)
                         @include('layouts.navbardepart')
                     @elseif ($roleId == 4)
-                        @include('layouts.navbardivisi')
+                        @include('layouts.navgeneral')
                     @elseif ($roleId == 5)
                         @include('layouts.navbaradmin')
                     @elseif ($roleId == 6)

@@ -41,6 +41,11 @@ use App\Http\Controllers\DepartSubordinateController;
 use App\Http\Controllers\DepartAssessmentValidationController;
 use App\Http\Controllers\DepartAldpController;
 
+//General
+use App\Http\Controllers\GeneralDashboardController;
+use App\Http\Controllers\GeneralSubordinateController;
+use App\Http\Controllers\GeneralAssessmentController;
+
 
 use Illuminate\Support\Facades\Redirect;
 use Laravel\Socialite\Facades\Socialite;
@@ -153,6 +158,19 @@ Route::post('/departAldp/saveForm', [DepartAldpController::class, 'store']);
 Route::get('/departAldp/edit/{id}', [DepartAldpController::class, 'editData']);
 Route::get('/departAldp/editCnl/{id}', [DepartAldpController::class, 'editData']);
 Route::post('/departAldp/update', [DepartAldpController::class, 'updateData']);
+
+// ------------------------------------------ Access from general -----------------------------------------------
+Route::get('/generalDashboard', [GeneralDashboardController::class, 'index']);
+
+Route::get('/generalSubordinate', [GeneralSubordinateController::class, 'index']);
+Route::get('/generalSubordinate/profile/{employee_id}', [GeneralSubordinateController::class, 'profile']);
+Route::get('/generalSubordinate/basedon/{employee_id}', [GeneralSubordinateController::class, 'basedon']);
+Route::get('/generalSubordinate/items/{employee_id}', [GeneralSubordinateController::class, 'items']);
+
+Route::get('/generalAssessment', [GeneralAssessmentController::class, 'index']);
+Route::get('/generalAssessment/show/{id}', [GeneralAssessmentController::class, 'show']);
+Route::post('/generalAssessment/show', [GeneralAssessmentController::class, 'finishForm']);
+
 
 // ------------------------------------- Access for administrator -----------------------------------------------
 Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);

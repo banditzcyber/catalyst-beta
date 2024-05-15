@@ -44,7 +44,7 @@ class LoginLocalController extends Controller
             } elseif (auth()->user()->role_id == 3) {
                 return redirect()->intended('/departmentDashboard');
             } elseif (auth()->user()->role_id == 4) {
-                return redirect()->intended('/dashboardDivisi');
+                return redirect()->intended('/generalDashboard');
             } elseif (auth()->user()->role_id == 5) {
                 return redirect()->intended('/dashboardFunct');
             } elseif (auth()->user()->role_id == 6) {

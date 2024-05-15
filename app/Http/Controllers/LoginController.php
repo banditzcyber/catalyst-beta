@@ -64,7 +64,7 @@ class LoginController extends Controller
             } elseif ($query->job_level == 'DM') {
                 return redirect()->intended('/departmentDashboard');
             } elseif ($query->job_level == 'GM') {
-                return redirect()->intended('/dashboardDivisi');
+                return redirect()->intended('/generalDashboard');
             } elseif ($query->job_level == 5) {
                 return redirect()->intended('/dashboardFunct');
             } elseif ($query->job_level == 6) {

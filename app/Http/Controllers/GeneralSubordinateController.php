@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DepartSubordinateController extends Controller
+class GeneralSubordinateController extends Controller
 {
     public function index(Request $request)
     {
@@ -18,16 +18,19 @@ class DepartSubordinateController extends Controller
         $dEmployee      = DB::table('employees')
             ->where('employees.employee_id', '=', $idLogin);
 
-        $query  = DB::table('employees')
-                    ->where('dm_code', $idLogin)
-                    ->paginate(12)->withQueryString();
+        $search  = DB::table('employees')->where('gm_code', $idLogin);
 
-        return view('department.subordinate.index', [
+        if(request('search')) {
+            $search->where('employee_id', 'like', '%' . request('search') . '%')
+                    ->orWhere('employee_name', 'like', '%' . request('search') . '%');
+        }
+
+        return view('general.subordinate.index', [
             'title'             => 'Subordinate',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'data'              => $query,
+            'data'              => $search->paginate(12)->withQueryString(),
             'id_login'          => $idLogin
         ]);
     }
@@ -133,7 +136,7 @@ class DepartSubordinateController extends Controller
                         ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                         ->where('assessments.employee_id', '=', $employee_id);
 
-        return view('department.subordinate.profile', [
+        return view('general.subordinate.profile', [
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -268,7 +271,7 @@ class DepartSubordinateController extends Controller
                         ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                         ->where('assessments.employee_id', '=', $employee_id);
 
-        return view('department.subordinate.profile', [
+        return view('general.subordinate.profile', [
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -334,7 +337,7 @@ class DepartSubordinateController extends Controller
                             ->where('assessments.status_launch', '=', 1)
                             ->where('assessment_details.actual_result', 2);
 
-        return view('department.subordinate.items', [
+        return view('general.subordinate.items', [
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
