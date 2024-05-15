@@ -76,7 +76,7 @@ class GeneralAssessmentController extends Controller
         ]);
     }
 
-    public function finishFormValidation(Request $request)
+    public function finishForm(Request $request)
     {
         $assessment_id = $request->input('assessment_id');
         $data['status']     = 3;
