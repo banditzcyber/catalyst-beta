@@ -169,7 +169,7 @@ Route::get('/generalSubordinate/items/{employee_id}', [GeneralSubordinateControl
 
 Route::get('/generalAssessment', [GeneralAssessmentController::class, 'index']);
 Route::get('/generalAssessment/show/{id}', [GeneralAssessmentController::class, 'show']);
-Route::post('/generalAssessment/show', [GeneralAssessmentController::class, 'finishForm']);
+Route::post('/generalAssessment/finish', [GeneralAssessmentController::class, 'finishForm']);
 
 
 // ------------------------------------- Access for administrator -----------------------------------------------
