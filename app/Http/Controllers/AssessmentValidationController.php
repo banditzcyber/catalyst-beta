@@ -107,8 +107,10 @@ class AssessmentValidationController extends Controller
                         ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
                         ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
                         ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
+                        ->join('competencies', 'competencies.competency_id', '=', 'performance_standards.competency_id')
                         ->select('assessment_details.*', 'assessments.id as assessment_id', 'items.item_name', 'items.intervention','performance_standards.ps_name', 'performance_standards.level')
-                        ->where('assessment_details.assessment_id', '=', $id);
+                        ->where('assessment_details.assessment_id', '=', $id)
+                        ->where('competencies.competency_id', $competency_id);
 
         return view('section.validations.form', [
             'title'             => 'Form Edit',
