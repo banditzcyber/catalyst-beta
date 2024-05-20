@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="row row-xs">
+            {{-- <div class="row row-xs">
                 <div class="col-sm-6 col-lg-3">
                     <div class="card card-body">
                         <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Subordinate</h6>
@@ -881,5 +881,7 @@
             var chart = new ApexCharts(document.querySelector("#chart2"), config);
             chart.render();
         </script>
-    @endpush
-@endsection
+    @endpush --}}
+
+            under contruction
+        @endsection
