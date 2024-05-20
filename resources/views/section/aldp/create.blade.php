@@ -11,7 +11,7 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/aldpSection/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <a href="/sectionAldpShow/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-md-8">
-        <form action="/aldpSection" method="post">
+        <form action="/sectionAldp/saveForm" method="post">
             @csrf
 
             <div class="form-group row row-xs">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-sm-5">
                     <input type="hidden" name="competency_type" id="competency_type" class="form-control " autofocus
-                        value="{{ $comp_type }}" placeholder="position" readonly />
+                        value="{{ $comp_type }}" placeholder="position" />
                 </div>
             </div>
 
@@ -184,38 +184,42 @@
     </div>
 
     <div class="modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
 
-                <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-20">
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table id="tableData" style="width: 100%" class="table table-bordered tx-12 table-hover">
 
-                    <table id="tableData" class="table table-bordered table-hover table-striped"
-                        style="font-size: 12px;">
-                        <thead>
-                            <tr>
-                                <th>Competency</th>
-                                <th>Performance Standars</th>
-                                <th style="width: 5%">Level</th>
-                                <th>Learning Item</th>
-                                <th>Intervention</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $view)
-                                <tr class="get" item_id="{{ $view->item_id }}" item_name="{{ $view->item_name }}"
-                                    ps_name="{{ $view->ps_name }}" competency_name="{{ $view->competency_name }}"
-                                    level="{{ $view->level }}" intervention="{{ $view->intervention }}"
-                                    type_training="{{ $view->type_training }}">
-                                    <td>{{ $view->competency_name }}</td>
-                                    <td>{{ Str::limit($view->ps_name, 100) }}</td>
-                                    <td>{{ $view->level }}</td>
-                                    <td>{{ $view->item_id }} - {{ $view->item_name }}</td>
-                                    <td>{{ $view->intervention }} ({{ $view->type_training }})</td>
+                            <thead>
+                                <tr>
+                                    <th style="width: 15%">Competencies</th>
+                                    <th style="width: 35%">Performance Standars</th>
+                                    <th style="width: 5%">Level</th>
+                                    <th style="width: 30%">Learning Item</th>
+                                    <th style="width: 15%">Intervention</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                @foreach ($data as $view)
+                                    <tr class="get" item_id="{{ $view->item_id }}"
+                                        item_name="{{ $view->item_name }}" ps_name="{{ $view->ps_name }}"
+                                        competency_name="{{ $view->competency_name }}" level="{{ $view->level }}"
+                                        intervention="{{ $view->intervention }}"
+                                        type_training="{{ $view->type_training }}">
+                                        <td>{{ $view->competency_name }}</td>
+                                        <td>{{ Str::limit($view->ps_name, 100) }}</td>
+                                        <td>{{ $view->level }}</td>
+                                        <td>{{ $view->item_id }} - {{ $view->item_name }}</td>
+                                        <td>{{ $view->intervention }} ({{ $view->type_training }})</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
 
-                    </table>
+                        </table>
+                    </div>
+
+
 
                 </div><!-- modal-body -->
             </div><!-- modal-content -->

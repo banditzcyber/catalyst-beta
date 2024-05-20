@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-md-8">
-        <form action="/aldpSection/update" method="post">
+        <form action="/generalAldp/update" method="post">
             @csrf
 
             <div class="form-group row row-xs">
@@ -73,9 +73,7 @@
                 <label class="col-sm-4 col-form-label">Performance Standard</label>
                 <div class="col-sm-8">
                     <textarea name="ps_name" class="form-control @error('ps_name') is-invalid @enderror" id="ps_name" cols="30"
-                        rows="4" value="" readonly>
-                        {{ old('ps_name', $data->ps_name) }}
-                    </textarea>
+                        rows="3" name="desc" value="{{ old('ps_name') }}">{{ $data->ps_name }}</textarea>
                     @error('ps_name')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -116,7 +114,8 @@
                 </div>
                 <div class="col-sm-3">
                     <input type="text" name="type_training" id="type_training" class="form-control " autofocus
-                        placeholder="type training" value="{{ old('competency_name', $data->type_training) }}" readonly />
+                        placeholder="type training" value="{{ old('competency_name', $data->type_training) }}"
+                        readonly />
                 </div>
             </div>
 
@@ -170,6 +169,7 @@
                         </div>
                     @enderror
                 </div>
+
                 @error('remarks')
                     <div class="invalid-feedback">
                         {{ $message }}

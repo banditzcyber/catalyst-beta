@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-md-8">
-        <form action="/submitFormOther" method="post">
+        <form action="/departAldp/saveFormOther" method="post">
             @csrf
 
             <div class="form-group row row-xs">

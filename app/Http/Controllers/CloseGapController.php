@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CloseGap;
-use App\Http\Requests\StoreCompetencyRequest;
 // use App\Http\Requests\UpdateCompetencyRequest;
-use \Cviebrock\EloquentSluggable\Services\SlugService;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Http\RedirectResponse;
+// use App\Models\CloseGap;
+// use App\Http\Requests\StoreCompetencyRequest;
+// use \Cviebrock\EloquentSluggable\Services\SlugService;
+// use Illuminate\Support\Str;
+// use Maatwebsite\Excel\Facades\Excel;
+// use Illuminate\Http\RedirectResponse;
 
+
+//noted : status [1.Submitted, 2.Reviwed, 3.Approved, 4.Rejected]
 
 
 class CloseGapController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         //session
@@ -34,6 +32,7 @@ class CloseGapController extends Controller
                     ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
                     ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
                     ->join('items', 'learnings.item_id', '=', 'items.item_id')
+                    ->where('learnings.status', 1)
                     ->select('learnings.id', 'employees.employee_id', 'employees.employee_name', 'learnings.item_id', 'items.item_name', 'learnings.started_at', 'learnings.finished_at', 'learnings.comment', 'learnings.evidence', 'learnings.status');
 
         if(request('search')) {
@@ -44,11 +43,15 @@ class CloseGapController extends Controller
         }
 
         return view('admin.closegap.index', [
-            'title'     => 'Close Gap Activity',
+            'title'     => 'Close Gap Activity - Submitted',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'data'      => $search->paginate(10)->withQueryString()
+            'data'              => $search->get(),
+            'submitted'         => 'btn-warning',
+            'reviewed'          => 'btn-white',
+            'completed'         => 'btn-white',
+            'all'               => 'btn-white'
         ]);
     }
 
@@ -76,11 +79,15 @@ class CloseGapController extends Controller
         }
 
         return view('admin.closegap.index', [
-            'title'     => 'Close Gap Activity - Completed',
+            'title'             => 'Close Gap Activity - Completed',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'data'      => $search->paginate(10)->withQueryString()
+            'data'              => $search->get(),
+            'submitted'         => 'btn-white',
+            'reviewed'          => 'btn-white',
+            'completed'         => 'btn-warning',
+            'all'               => 'btn-white'
         ]);
     }
 
@@ -108,30 +115,54 @@ class CloseGapController extends Controller
         }
 
         return view('admin.closegap.index', [
-            'title'     => 'Close Gap Activity - Reviewed',
+            'title'             => 'Close Gap Activity - Reviewed',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'data'      => $search->paginate(10)->withQueryString()
+            'data'              => $search->get(),
+            'submitted'         => 'btn-white',
+            'reviewed'          => 'btn-warning',
+            'completed'         => 'btn-white',
+            'all'               => 'btn-white'
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function closegapall(Request $request)
+    {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
+        $search = DB::table('learnings')
+                    ->join('employees', 'learnings.employee_id', '=', 'employees.employee_id')
+                    ->join('aldp_details', 'learnings.aldp_detail_id', '=', 'aldp_details.id')
+                    ->join('items', 'learnings.item_id', '=', 'items.item_id')
+                    ->select('learnings.id', 'employees.employee_id', 'employees.employee_name', 'learnings.item_id', 'items.item_name', 'learnings.started_at', 'learnings.finished_at', 'learnings.comment', 'learnings.evidence', 'learnings.status');
+
+
+        return view('admin.closegap.index', [
+            'title'             => 'Close Gap Activity - All',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $search->get(),
+            'submitted'         => 'btn-white',
+            'reviewed'          => 'btn-white',
+            'completed'         => 'btn-white',
+            'all'               => 'btn-warning'
+        ]);
+    }
+
+
     public function create()
     {
         return view('admin.closegap.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         // $validata = $request->validate([

@@ -32,6 +32,7 @@ use App\Http\Controllers\AssessmentEmployeeController;
 //Section Manager
 use App\Http\Controllers\DashboardSectionController;
 use App\Http\Controllers\AldpSectionController;
+use App\Http\Controllers\SectionAldpController;
 use App\Http\Controllers\SubordinateController;
 use App\Http\Controllers\AssessmentValidationController;
 
@@ -45,6 +46,7 @@ use App\Http\Controllers\DepartAldpController;
 use App\Http\Controllers\GeneralDashboardController;
 use App\Http\Controllers\GeneralSubordinateController;
 use App\Http\Controllers\GeneralAssessmentController;
+use App\Http\Controllers\GeneralAldpController;
 
 
 use Illuminate\Support\Facades\Redirect;
@@ -110,20 +112,24 @@ Route::get('/listItems', [ProfileEmployController::class, 'listItem']);
 Route::resource('/dashboardSection', DashboardSectionController::class);
 
 // # menu ALDP
-Route::resource('/aldpSection', AldpSectionController::class);
-Route::get('/aldpSection/functional/{id_aldp}', [AldpSectionController::class, 'formFunctional']);
-Route::get('/aldpSection/leadership/{id_aldp}', [AldpSectionController::class, 'formLeadership']);
-Route::get('/aldpSection/other/{id_aldp}', [AldpSectionController::class, 'formOther']);
-Route::get('/participant/{aldp_detail_id}/{aldp_id}/{item_id}', [AldpSectionController::class, 'formParticipant']);
-Route::post('/deleteItemAldp', [AldpSectionController::class, 'deleteItemAldp']);
-Route::post('/deleteParticipant', [AldpSectionController::class, 'deleteParticipat']);
-Route::post('/addParticipant', [AldpSectionController::class, 'addParticipant']);
-Route::post('/submitForm', [AldpSectionController::class, 'submitForm']);
-Route::post('/submitFormOther', [AldpSectionController::class, 'submitFormOther']);
-Route::get('/detailVerify/{id}', [AldpSectionController::class, 'showVerify']);
-Route::get('/aldpSection/edit/{id}', [AldpSectionController::class, 'editData']);
-Route::get('/aldpSection/editCnl/{id}', [AldpSectionController::class, 'editData']);
-Route::post('/aldpSection/update', [AldpSectionController::class, 'updateData']);
+Route::get('/sectionAldp', [sectionAldpController::class, 'index']);
+Route::get('/sectionAldpShow/{id}', [sectionAldpController::class, 'show']);
+Route::get('/sectionAldp/functional/{id_aldp}', [sectionAldpController::class, 'formFunctional']);
+Route::get('/sectionAldp/leadership/{id_aldp}', [sectionAldpController::class, 'formLeadership']);
+Route::get('/sectionAldp/other/{id_aldp}', [sectionAldpController::class, 'formOther']);
+Route::post('/sectionAldp/saveForm', [sectionAldpController::class, 'saveForm']);
+Route::post('/sectionAldp/saveFormOther', [sectionAldpController::class, 'saveForm']);
+Route::get('/sectionAldp/edit/{id}', [sectionAldpController::class, 'editData']);
+Route::get('/sectionAldp/editCnl/{id}', [sectionAldpController::class, 'editData']);
+Route::post('/sectionAldp/update', [sectionAldpController::class, 'updateData']);
+Route::post('/sectionAldp/deleteItem', [sectionAldpController::class, 'deleteItemAldp']);
+Route::get('/sectionAldpParticipant/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [sectionAldpController::class, 'formParticipant']);
+Route::post('/sectionAldpAddParticipant', [sectionAldpController::class, 'addParticipant']);
+Route::post('/sectionAldpDeleteParticipant', [sectionAldpController::class, 'deleteParticipat']);
+Route::post('/sectionAldpDeleteParticipant', [sectionAldpController::class, 'deleteParticipat']);
+Route::post('/sectionAldpSubmitForm', [sectionAldpController::class, 'submitForm']);
+Route::get('/sectionAldpShowFinish/{id}', [sectionAldpController::class, 'showDetailFinish']);
+Route::get('/sectionAldpParticipantFinish/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [sectionAldpController::class, 'showParticipantFinish']);
 
 Route::get('/subordinate', [SubordinateController::class, 'index']);
 Route::get('/subordinate/profile/{employee_id}', [SubordinateController::class, 'profile']);
@@ -149,15 +155,24 @@ Route::post('/finishFormValidationDepartment', [DepartAssessmentValidationContro
 
 Route::post('/departSubordinate', [DepartSubordinateController::class, 'finishFormValidation']);
 
-Route::get('/departAldp', [DepartAldpController::class, 'index']);
-Route::get('/departAldpShow/{id}', [DepartAldpController::class, 'show']);
-Route::get('/departAldp/functional/{id_aldp}', [DepartAldpController::class, 'formFunctional']);
-Route::get('/departAldp/leadership/{id_aldp}', [DepartAldpController::class, 'formLeadership']);
-Route::get('/departAldp/other/{id_aldp}', [DepartAldpController::class, 'formOther']);
-Route::post('/departAldp/saveForm', [DepartAldpController::class, 'store']);
-Route::get('/departAldp/edit/{id}', [DepartAldpController::class, 'editData']);
-Route::get('/departAldp/editCnl/{id}', [DepartAldpController::class, 'editData']);
-Route::post('/departAldp/update', [DepartAldpController::class, 'updateData']);
+Route::get('/departAldp', [departAldpController::class, 'index']);
+Route::get('/departAldpShow/{id}', [departAldpController::class, 'show']);
+Route::get('/departAldp/functional/{id_aldp}', [departAldpController::class, 'formFunctional']);
+Route::get('/departAldp/leadership/{id_aldp}', [departAldpController::class, 'formLeadership']);
+Route::get('/departAldp/other/{id_aldp}', [departAldpController::class, 'formOther']);
+Route::post('/departAldp/saveForm', [departAldpController::class, 'saveForm']);
+Route::post('/departAldp/saveFormOther', [departAldpController::class, 'saveForm']);
+Route::get('/departAldp/edit/{id}', [departAldpController::class, 'editData']);
+Route::get('/departAldp/editCnl/{id}', [departAldpController::class, 'editData']);
+Route::post('/departAldp/update', [departAldpController::class, 'updateData']);
+Route::post('/departAldp/deleteItem', [departAldpController::class, 'deleteItemAldp']);
+Route::get('/departAldpParticipant/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [departAldpController::class, 'formParticipant']);
+Route::post('/departAldpAddParticipant', [departAldpController::class, 'addParticipant']);
+Route::post('/departAldpDeleteParticipant', [departAldpController::class, 'deleteParticipat']);
+Route::post('/departAldpDeleteParticipant', [departAldpController::class, 'deleteParticipat']);
+Route::post('/departAldpSubmitForm', [departAldpController::class, 'submitForm']);
+Route::get('/departAldpShowFinish/{id}', [departAldpController::class, 'showDetailFinish']);
+Route::get('/departAldpParticipantFinish/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [departAldpController::class, 'showParticipantFinish']);
 
 // ------------------------------------------ Access from general -----------------------------------------------
 Route::get('/generalDashboard', [GeneralDashboardController::class, 'index']);
@@ -171,6 +186,24 @@ Route::get('/generalAssessment', [GeneralAssessmentController::class, 'index']);
 Route::get('/generalAssessment/show/{id}', [GeneralAssessmentController::class, 'show']);
 Route::post('/generalAssessment/finish', [GeneralAssessmentController::class, 'finishForm']);
 
+Route::get('/generalAldp', [GeneralAldpController::class, 'index']);
+Route::get('/generalAldpShow/{id}', [GeneralAldpController::class, 'show']);
+Route::get('/generalAldp/functional/{id_aldp}', [GeneralAldpController::class, 'formFunctional']);
+Route::get('/generalAldp/leadership/{id_aldp}', [GeneralAldpController::class, 'formLeadership']);
+Route::get('/generalAldp/other/{id_aldp}', [GeneralAldpController::class, 'formOther']);
+Route::post('/generalAldp/saveForm', [GeneralAldpController::class, 'saveForm']);
+Route::post('/generalAldp/saveFormOther', [GeneralAldpController::class, 'saveForm']);
+Route::get('/generalAldp/edit/{id}', [GeneralAldpController::class, 'editData']);
+Route::get('/generalAldp/editCnl/{id}', [GeneralAldpController::class, 'editData']);
+Route::post('/generalAldp/update', [GeneralAldpController::class, 'updateData']);
+Route::post('/generalAldp/deleteItem', [GeneralAldpController::class, 'deleteItemAldp']);
+Route::get('/generalAldpParticipant/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [GeneralAldpController::class, 'formParticipant']);
+Route::post('/generalAldpAddParticipant', [GeneralAldpController::class, 'addParticipant']);
+Route::post('/generalAldpDeleteParticipant', [GeneralAldpController::class, 'deleteParticipat']);
+Route::post('/generalAldpDeleteParticipant', [GeneralAldpController::class, 'deleteParticipat']);
+Route::post('/generalAldpSubmitForm', [GeneralAldpController::class, 'submitForm']);
+Route::get('/generalAldpShowFinish/{id}', [GeneralAldpController::class, 'showDetailFinish']);
+Route::get('/generalAldpParticipantFinish/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [GeneralAldpController::class, 'showParticipantFinish']);
 
 // ------------------------------------- Access for administrator -----------------------------------------------
 Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);
@@ -213,6 +246,8 @@ Route::get('/show/{id}', [CloseGapController::class, 'show']);
 Route::get('/update/{id}', [CloseGapController::class, 'updateData']);
 Route::get('/closegapcompleted', [CloseGapController::class, 'closegapcompleted']);
 Route::get('/closegapreview', [CloseGapController::class, 'closegapreview']);
+Route::get('/closegapreview', [CloseGapController::class, 'closegapreview']);
+Route::get('/closegapall', [CloseGapController::class, 'closegapall']);
 
 // Menu Competency
 Route::resource('/competency', CompetencyController::class);

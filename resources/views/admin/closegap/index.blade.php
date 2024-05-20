@@ -12,47 +12,43 @@
         </div>
         <div class="d-none d-md-block">
 
-        </div>
-    </div>
-
-
-    <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
-        <div>
-            <div class="row ">
-                <div class="col-md">
-                    <form action="/closegap">
-                        <div class="input-group">
-                            <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
-                                value="{{ request('search') }}" style="width: 250px">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-light btn-sm" type="submit" id="button-addon2">
-                                    <i data-feather="search" class="wd-15"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="btn-group mg-0" role="group" aria-label="Basic example">
+                <a href="/closegapall" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
+                    <i data-feather="list" class="wd-10 mg-r-5"></i>
+                    Functional
+                </a>
+                <a href="/closegapall" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
+                    <i data-feather="list" class="wd-10 mg-r-5"></i>
+                    Leardership
+                </a>
+                <a href="/closegapall" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
+                    <i data-feather="list" class="wd-10 mg-r-5"></i>
+                    Other
+                </a>
             </div>
-        </div>
-        <div class="d-none d-md-block">
 
-            <a href="/closegap" class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-l-5">
-                <i data-feather="list" class="wd-10 mg-r-5"></i>
-                All
-            </a>
-            <a href="/closegapreview" class="btn btn-sm pd-x-15 btn-warning btn-uppercase mg-l-5">
-                <i data-feather="refresh-cw" class="wd-10 mg-r-5"></i>
-                Reviewed
-            </a>
-            <a href="/closegapcompleted" class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5">
-                <i data-feather="check-circle" class="wd-10 mg-r-5"></i>
-                Completed
-            </a>
+            <div class="btn-group mg-0" role="group" aria-label="Basic example">
+                <a href="/closegapall" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
+                    <i data-feather="list" class="wd-10 mg-r-5"></i>
+
+                </a>
+                <a href="/closegap" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $submitted }}"
+                    data-toggle="tooltip" data-placement="top" title="Tooltip on top">
+                    <i data-feather="navigation" class="wd-10 mg-r-5"></i>
+
+                </a>
+                <a href="/closegapreview" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $reviewed }}">
+                    <i data-feather="refresh-cw" class="wd-10 mg-r-5"></i>
+
+                </a>
+                <a href="/closegapcompleted" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $completed }}">
+                    <i data-feather="check-circle" class="wd-10 mg-r-5"></i>
+
+                </a>
+            </div>
 
         </div>
     </div>
-
-
 
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">
@@ -65,7 +61,7 @@
         {{-- <div id="read"></div> --}}
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
-                <tr>
+                <tr class="bd-l bd-4 bd-danger">
                     <th>Employee</th>
                     <th>Item ID</th>
                     <th>Item Name</th>
@@ -93,7 +89,7 @@
                             $text = 'Rejected';
                         }
                     @endphp
-                    <tr>
+                    <tr class="bd-l bd-4 bd-danger">
                         <td>{{ $view->employee_name }} - {{ $view->employee_id }}</td>
                         <td>{{ $view->item_id }}</td>
                         <td style="cursor: pointer" onclick ="tampil({{ $view->id }})">{{ $view->item_name }}</td>
@@ -122,7 +118,7 @@
 
     </div>
 
-    {{ $data->links() }}
+    {{-- {{ $data->links() }} --}}
 
     <div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -144,8 +140,8 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            viewData();
-            // $("#viewdata").DataTable();
+            // viewData();
+            $("#viewdata").DataTable();
         })
 
         function addData() {

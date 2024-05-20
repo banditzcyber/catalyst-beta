@@ -44,27 +44,27 @@
                             if ($vData->status == 1) {
                                 $valueBtn = 'Form';
                                 $class = '';
-                                $link = '/departAldpShow/';
+                                $link = '/generalAldpShow/';
                             } elseif ($vData->status == 2) {
                                 $valueBtn = 'View';
                                 $class = 'disabled="disabled"';
-                                $link = '/detailVerify/';
+                                $link = '/generalAldpShowFinish/';
                             }
                         @endphp
 
-                        <div class="card-footer tx-13">
+                        <div class="card-footer tx-13 bg-dark">
                             <div class="row row-xs">
                                 <div class="col-lg-6">
-                                    <a href="{{ $link }}{{ $vData->id }}" class="btn btn-xs btn-outline-dark">
+                                    <a href="{{ $link }}{{ $vData->id }}" class="btn btn-xs btn-secondary">
                                         {{ $valueBtn }}
                                     </a>
                                 </div>
                                 <div class="col-lg-6 tx-right">
-                                    <form action="/submitForm" method="POST" onclick="return confirm('Are you sure?')">
+                                    <form action="/generalAldpSubmitForm" method="POST"
+                                        onclick="return confirm('Are you sure?')">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $vData->id }}">
-                                        <button type="submit" class="btn btn-xs btn-outline-secondary"
-                                            {{ $class }}>Finish
+                                        <button type="submit" class="btn btn-xs btn-secondary" {{ $class }}>Finish
                                             Form</button>
                                     </form>
                                 </div>

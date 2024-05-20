@@ -11,7 +11,7 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/aldpSection/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <a href="/generalAldpShow/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>
@@ -20,24 +20,10 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-            {{-- <div class="row ">
-                <div class="col-md">
-                    <form action="/competency">
-                        <div class="input-group">
-                            <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
-                                value="{{ request('search') }}" style="width: 250px">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-light btn-sm" type="submit" id="button-addon2">
-                                    <i data-feather="search" class="wd-15"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div> --}}
+
         </div>
         <div class="d-none d-md-block">
-            <form action="/addParticipant" method="post">
+            <form action="/generalAldpAddParticipant" method="post">
                 @csrf
 
                 <div class="form-group row row-xs mg-0">
@@ -46,7 +32,7 @@
 
                         <div class="search-form input-group">
                             <input type="hidden" class="form-control tx-11" name="competency_type" id="competency_type"
-                                value="1" required>
+                                value="{{ $type_program }}" required>
                             <input type="hidden" class="form-control tx-11" name="id_aldp" id="id_aldp"
                                 value="{{ $id_aldp }}" required>
                             <input type="hidden" class="form-control tx-11" name="aldp_detail_id" id="aldp_detail_id"
@@ -55,6 +41,9 @@
                                 value="{{ $item_id }}" required>
                             <input type="hidden" class="form-control tx-11" name="item_name" id="item_name"
                                 value="{{ $item_name }}" required>
+                            <input type="hidden" class="form-control tx-11" name="type_program" id="type_program"
+                                value="{{ $type_program }}" required>
+
                             <input type="hidden" class="form-control tx-11" name="employee_id" id="employee_id" required>
 
                             <input type="text" class="form-control tx-11" name="employee_name" id="employee_name"
@@ -118,7 +107,7 @@
                     @endphp
                     <tr>
                         <td>
-                            <form action="/deleteParticipant" method="post" class="d-inline"
+                            <form action="/generalAldpDeleteParticipant" method="post" class="d-inline"
                                 onclick="return confirm('Are you sure?')">
                                 @csrf
                                 <input type="hidden" class="form-control tx-11" name="id_learning" id="id_learning"
@@ -129,6 +118,8 @@
                                     value="{{ $id_aldp_details }}" required>
                                 <input type="hidden" class="form-control tx-11" name="item_id" id="item_id"
                                     value="{{ $item_id }}" required>
+                                <input type="hidden" class="form-control tx-11" name="type_program" id="type_program"
+                                    value="{{ $type_program }}" required>
                                 <button class="badge badge-danger pd-y-0 border-0" type="submit">
                                     <i data-feather="x" class="wd-15"></i>
                                 </button>

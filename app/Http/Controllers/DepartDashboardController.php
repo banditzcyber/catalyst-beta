@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DashboardSection;
-use App\Models\ProfileEmploy;
-use App\Models\User;
+use App\Models\SectionArea;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +13,6 @@ class DepartDashboardController extends Controller
 
     public function index(Request $request)
     {
-
         // session (wajib);
         $area           = $request->session()->get('local');
         $roleId         = $request->session()->get('roleId');
@@ -29,16 +26,15 @@ class DepartDashboardController extends Controller
 
         foreach ($dSubordinate->get() as $vSubordinate) {
             // Append the assessment to the assessments array
-            $assessments[] = $vSubordinate->employee_id;
+            $subEmployee[] = $vSubordinate->employee_id;
         }
 
-        $baseQuery =  new \App\Models\ProfileEmploy();
-        $qResult = $baseQuery->getSubordinate($assessments);
+        $baseQuery =  new \App\Models\SectionArea();
+        $qResult = $baseQuery->getAssessment($subEmployee);
 
-        $competent    = $baseQuery->getSubordinate($assessments)->where('ad.actual_result', 1)->count();
-        $need_improve = $baseQuery->getSubordinate($assessments)->where('ad.actual_result', 2)->count();
-
-        // dd($competent);
+        $competent    = $baseQuery->getAssessment($subEmployee)->where('ad.actual_result', 1)->count();
+        $need_improve = $baseQuery->getAssessment($subEmployee)->where('ad.actual_result', 2)->count();
+        $countLearning  = $baseQuery->getLearning($subEmployee)->count();
 
         if($competent == 0 or $need_improve == 0){
             $resultSum = 0;

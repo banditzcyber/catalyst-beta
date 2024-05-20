@@ -12,46 +12,19 @@
         </div>
         <div class="d-none d-md-block">
             <div class="col-sm-12">
-                <h3 class="">
+
+
+                <button class="btn btn-sm btn-uppercase tx-18">
                     Total Data : {{ $countData }}
-                </h3 class="tx-uppercase">
+                </button>
+                <a href="/assessmentAdmin/create" class="btn btn-sm btn-white btn-uppercase">
+                    <i data-feather="plus" class=""></i> Add Data
+                </a>
+
             </div>
         </div>
     </div>
 
-    <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
-        <div>
-            <div class="row ">
-                <div class="col-md">
-                    <form action="/assessmentAdmin">
-                        <div class="input-group">
-                            <input type="text" class="form-control tx-12" placeholder="Search..." name="search"
-                                value="{{ request('search') }}" style="width: 250px">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-light btn-sm" type="submit" id="button-addon2">
-                                    <i data-feather="search" class="wd-15"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="d-none d-md-block">
-
-
-            <div class="form-group row row-xs mg-0">
-
-                <div class="col-sm-2">
-                    <a href="/assessmentAdmin/create" class="btn btn-sm btn-primary btn-uppercase">
-                        <i data-feather="plus" class=""></i>
-                    </a>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
 
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">
@@ -69,7 +42,7 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
                 <tr>
-                    <th style="width: 135px">#</th>
+                    <th style="width: 145px">#</th>
                     <th>CDX</th>
                     <th>ID</th>
                     <th>Employee Name</th>
@@ -134,5 +107,13 @@
         </table>
     </div>
 
-    {{ $data->links() }}
+    {{-- {{ $data->links() }} --}}
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#viewdata").DataTable();
+        });
+    </script>
+@endpush;

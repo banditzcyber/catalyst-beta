@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-sm-5">
                     <input type="hidden" name="competency_type" id="competency_type" class="form-control " autofocus
-                        value="{{ $comp_type }}" placeholder="position" readonly />
+                        value="{{ $comp_type }}" placeholder="position" />
                 </div>
             </div>
 

@@ -11,7 +11,7 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/departAldpShow/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <a href="/departAldpShowFinish/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>
@@ -23,47 +23,7 @@
 
         </div>
         <div class="d-none d-md-block">
-            <form action="/departAldpAddParticipant" method="post">
-                @csrf
 
-                <div class="form-group row row-xs mg-0">
-
-                    <div class="col-sm-10">
-
-                        <div class="search-form input-group">
-                            <input type="hidden" class="form-control tx-11" name="competency_type" id="competency_type"
-                                value="{{ $type_program }}" required>
-                            <input type="hidden" class="form-control tx-11" name="id_aldp" id="id_aldp"
-                                value="{{ $id_aldp }}" required>
-                            <input type="hidden" class="form-control tx-11" name="aldp_detail_id" id="aldp_detail_id"
-                                value="{{ $id_aldp_details }}" required>
-                            <input type="hidden" class="form-control tx-11" name="item_id" id="item_id"
-                                value="{{ $item_id }}" required>
-                            <input type="hidden" class="form-control tx-11" name="item_name" id="item_name"
-                                value="{{ $item_name }}" required>
-                            <input type="hidden" class="form-control tx-11" name="type_program" id="type_program"
-                                value="{{ $type_program }}" required>
-
-                            <input type="hidden" class="form-control tx-11" name="employee_id" id="employee_id" required>
-
-                            <input type="text" class="form-control tx-11" name="employee_name" id="employee_name"
-                                required>
-                            <button class="btn btn-xs pd-x-15 btn-dark btn-uppercase" data-toggle="modal"
-                                data-target="#modalemployee">
-                                <i data-feather="search" class="wd-15"></i>
-                            </button>
-                        </div>
-
-
-                    </div>
-
-                    <div class="col-sm-2">
-                        <button type="submit" class="btn btn-sm btn-dark btn-uppercase">
-                            Add
-                        </button>
-                    </div>
-                </div>
-            </form>
 
         </div>
     </div>

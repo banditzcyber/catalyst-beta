@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class DepartAldpController extends Controller
+class GeneralAldpController extends Controller
 {
     public function index(Request $request)
     {
@@ -19,7 +19,7 @@ class DepartAldpController extends Controller
         $query      = DB::table('aldps')
             ->where('manager_id', '=', $idLogin);
 
-        return view('department.aldp.index', [
+        return view('general.aldp.index', [
             'title'             => 'Annual Learning Development Plan',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -104,7 +104,7 @@ class DepartAldpController extends Controller
             $other_percent = 0;
         }
 
-        return view('department.aldp.detail', [
+        return view('general.aldp.detail', [
             'title'             => 'ALDP Details',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -141,7 +141,8 @@ class DepartAldpController extends Controller
 
         $dSubordinate = DB::table('employees')
             ->where('sm_code', '-')
-            ->where('dm_code', $idLogin)
+            ->where('dm_code', '-')
+            ->where('gm_code', $idLogin)
             ->get();
 
         foreach ($dSubordinate as $vSubordinate) {
@@ -162,7 +163,7 @@ class DepartAldpController extends Controller
                         ->distinct('ad.item_id')
                         ->get();
 
-        return view('department.aldp.create', [
+        return view('general.aldp.create', [
             'title'             => 'Form Input ALDP (Functional)',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -187,7 +188,7 @@ class DepartAldpController extends Controller
             ->join('competencies', 'competencies.competency_id', '=', 'performance_standards.competency_id')
             ->where('competencies.competency_type', '=', 'leadership')
             ->get();
-        return view('department.aldp.create', [
+        return view('general.aldp.create', [
             'title'             => 'Form Input Leadership Competency',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -207,7 +208,7 @@ class DepartAldpController extends Controller
         $dEmployee      = DB::table('employees')
             ->where('employees.employee_id', '=', $idLogin);
 
-        return view('department.aldp.createother', [
+        return view('general.aldp.createother', [
             'title'             => 'Form Input Other Program or Mandatory Program',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -233,7 +234,7 @@ class DepartAldpController extends Controller
         // dd($validation);
 
         DB::table('aldp_details')->insert($validation);
-        return redirect('/departAldpShow/' . $validation['aldp_id'])->with('success', 'New data has been addedd!');
+        return redirect('/generalAldpShow/' . $validation['aldp_id'])->with('success', 'New data has been addedd!');
     }
 
     public function saveFormOther(Request $request)
@@ -251,7 +252,7 @@ class DepartAldpController extends Controller
         $validation['status_detail'] = 0;
 
         DB::table('aldp_details')->insert($validation);
-        return redirect('/departAldpShow/' . $validation['aldp_id'])->with('success', 'New data has been addedd!');
+        return redirect('/generalAldpShow/' . $validation['aldp_id'])->with('success', 'New data has been addedd!');
     }
 
     public function editData(Request $request, $id)
@@ -281,7 +282,7 @@ class DepartAldpController extends Controller
             ->get();
 
         // dd($id);
-        return view('department.aldp.edit', [
+        return view('general.aldp.edit', [
             'title'             => 'Form Edit ALDP',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -316,7 +317,7 @@ class DepartAldpController extends Controller
         DB::table('aldp_details')->where('id', $aldp_detail_id)->update($validation);
         DB::table('learnings')->where('aldp_detail_id', $aldp_detail_id)->update($learning);
 
-        return redirect('/departAldpShow/' . $aldp_id)->with('success', 'Data has been updated!');
+        return redirect('/generalAldpShow/' . $aldp_id)->with('success', 'Data has been updated!');
     }
 
     public function deleteItemAldp(Request $request)
@@ -328,7 +329,7 @@ class DepartAldpController extends Controller
         DB::table('learnings')->where('aldp_detail_id', $idAldpDetail)->delete();
         DB::table('aldp_details')->where('id', $idAldpDetail)->delete();
 
-        return redirect('/departAldpShow/' . $idAldp)->with('success', 'Data has been deleted!');
+        return redirect('/generalAldpShow/' . $idAldp)->with('success', 'Data has been deleted!');
     }
 
     public function formParticipant(Request $request, $aldp_detail_id, $aldp_id, $item_id, $type_program)
@@ -361,17 +362,20 @@ class DepartAldpController extends Controller
                 $employee   = DB::table('employees')
                     ->whereIn('employee_id', $rowItemEmployee)
                     ->where('sm_code', '-')
-                    ->where('dm_code', $idLogin)->get();
+                    ->where('dm_code', '-')
+                    ->where('gm_code', $idLogin)->get();
             }else{
                 $employee   = DB::table('employees')
                 ->where('sm_code', '-')
-                    ->where('dm_code', $idLogin)->get();
+                    ->where('dm_code', '-')
+                    ->where('gm_code', $idLogin)->get();
             }
 
         }else{
             $employee   = DB::table('employees')
                 ->where('sm_code', '-')
-                ->where('dm_code', $idLogin)->get();
+                ->where('dm_code', '-')
+                ->where('gm_code', $idLogin)->get();
         }
 
 
@@ -386,7 +390,7 @@ class DepartAldpController extends Controller
             $item_name = $vItem->item_name;
         endforeach;
 
-        return view('department.aldp.participant', [
+        return view('general.aldp.participant', [
             'title'             => 'Add Participant',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -419,7 +423,7 @@ class DepartAldpController extends Controller
         $type_program = $request->input('type_program');
 
         DB::table('learnings')->insert($validation);
-        return redirect('/departAldpParticipant/' . $aldp_detail . '/' . $aldp . '/' . $item_id . '/'. $type_program)->with('success', 'New data has been addedd!');
+        return redirect('/generalAldpParticipant/' . $aldp_detail . '/' . $aldp . '/' . $item_id . '/'. $type_program)->with('success', 'New data has been addedd!');
     }
 
     public function deleteParticipat(Request $request)
@@ -432,7 +436,7 @@ class DepartAldpController extends Controller
 
         DB::table('learnings')->where('id', $learning_id)->delete();
 
-        return redirect('/departAldpParticipant/' . $aldp_detail_id . '/' . $aldp_id . '/' . $item_id . '/'. $type_program)->with('success', 'Data has been Deleted!');
+        return redirect('/generalAldpParticipant/' . $aldp_detail_id . '/' . $aldp_id . '/' . $item_id . '/'. $type_program)->with('success', 'Data has been Deleted!');
     }
 
     public function submitForm(Request $request)
@@ -441,7 +445,7 @@ class DepartAldpController extends Controller
         $data = $request->input('id');
 
         DB::table('aldps')->where('id', $data)->update(['status' => 2]);
-        return redirect('/departAldp')->with('success', 'Assessment has been updated!');
+        return redirect('/generalAldp')->with('success', 'Assessment has been updated!');
     }
 
     public function showDetailFinish(Request $request, $id)
@@ -515,7 +519,7 @@ class DepartAldpController extends Controller
 
 
 
-        return view('department.aldp.verified.detailverify', [
+        return view('general.aldp.verified.detailverify', [
             'title'             => 'ALDP Details Verify',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
@@ -568,17 +572,20 @@ class DepartAldpController extends Controller
                 $employee   = DB::table('employees')
                     ->whereIn('employee_id', $rowItemEmployee)
                     ->where('sm_code', '-')
-                    ->where('dm_code', $idLogin)->get();
+                    ->where('dm_code', '-')
+                    ->where('gm_code', $idLogin)->get();
             }else{
                 $employee   = DB::table('employees')
                 ->where('sm_code', '-')
-                    ->where('dm_code', $idLogin)->get();
+                    ->where('dm_code', '-')
+                    ->where('gm_code', $idLogin)->get();
             }
 
         }else{
             $employee   = DB::table('employees')
                 ->where('sm_code', '-')
-                ->where('dm_code', $idLogin)->get();
+                ->where('dm_code', '-')
+                ->where('gm_code', $idLogin)->get();
         }
 
 
@@ -593,7 +600,7 @@ class DepartAldpController extends Controller
             $item_name = $vItem->item_name;
         endforeach;
 
-        return view('department.aldp.verified.participant', [
+        return view('general.aldp.verified.participant', [
             'title'             => 'Add Participant',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,

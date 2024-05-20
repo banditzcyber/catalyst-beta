@@ -16,10 +16,7 @@
         </div>
         <div class="d-none d-md-block">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalItem">
-                    <i data-feather="plus" class="wd-10 mg-r-5"></i> Add Data
-                </button>
-                <a href="/generalAldp" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+                <a href="/departAldp" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                     <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                     back
                 </a>
@@ -114,8 +111,6 @@
 
     </div>
 
-
-
     {{-- functional competency  --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
@@ -133,10 +128,10 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 75px;">
-
+                <div class="table-header" style="width: 50px;">
+                    No
                 </div>
-                <div class="table-header" style="width: 420px;">
+                <div class="table-header" style="width: 445px;">
                     item competency
                 </div>
                 <div class="table-header" style="width: 100px;">
@@ -156,34 +151,21 @@
             <div id="functional">
 
                 @if (!empty($functional))
+                    @php
+                        $no = 1;
+                    @endphp
                     @foreach ($functional as $view)
                         <div class="d-flex tx-12 table-body-hover" id="detail_functional">
 
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 76px;">
 
-                                <a href="/generalAldp/edit/{{ $view->id_aldp_details }}"
-                                    class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
-
-                                <form action="/generalAldp/deleteItem" method="post" class="d-inline"
-                                    onclick="return confirm('Are you sure?')">
-                                    @csrf
-                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
-                                        value="{{ $view->aldp_id }}" required>
-                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
-                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
-                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
-                                        <i data-feather="x" class="wd-15"></i>
-                                    </button>
-                                </form>
-
+                            <div class="table-body tx-center" style="width: 50px;">
+                                {{ $no++ }}
                             </div>
 
-                            <div class="table-body" style="width: 419px;">
+                            <div class="table-body" style="width: 444px;">
 
                                 <div class="tx-uppercase tx-bold">{{ $view->competency_name }}</div>
                                 <div class="mb-2 tx-italic tx-color-02">{{ $view->ps_name }}</div>
@@ -194,11 +176,11 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="table-body tx-center" style="width: 102px;">
+                            <div class="table-body tx-center" style="width: 101px;">
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="/generalAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/1"
+                            <a href="/departAldpParticipantFinish/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/1"
                                 class="table-body" style="width: 340px;">
 
                                 @php
@@ -334,10 +316,10 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 75px;">
-
+                <div class="table-header" style="width: 50px;">
+                    No
                 </div>
-                <div class="table-header" style="width: 420px;">
+                <div class="table-header" style="width: 445px;">
                     item competency
                 </div>
                 <div class="table-header" style="width: 100px;">
@@ -358,32 +340,20 @@
             <div id="cnl">
 
                 @if (!empty($cnl))
+                    @php
+                        $no = 1;
+                    @endphp
                     @foreach ($cnl as $view)
                         <div class="d-flex tx-12 table-body-hover" id="detail_functional">
 
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 76px;">
-                                <a href="/generalAldp/editCnl/{{ $view->id_aldp_details }}"
-                                    class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
-
-                                <form action="/generalAldp/deleteItem" method="post" class="d-inline"
-                                    onclick="return confirm('Are you sure?')">
-                                    @csrf
-                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
-                                        value="{{ $view->aldp_id }}" required>
-                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
-                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
-                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
-                                        <i data-feather="x" class="wd-15"></i>
-                                    </button>
-                                </form>
+                            <div class="table-body tx-center" style="width: 50px;">
+                                {{ $no++ }}
                             </div>
 
-                            <div class="table-body" style="width: 419px;">
+                            <div class="table-body" style="width: 444px;">
                                 <div>{{ $view->item_id }}</div>
                                 <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
@@ -391,11 +361,11 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="table-body tx-center" style="width: 102px;">
+                            <div class="table-body tx-center" style="width: 101px;">
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="/generalAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/2"
+                            <a href="/departAldpParticipantFinish/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/2"
                                 class="table-body" style="width: 340px;">
 
 
@@ -531,10 +501,10 @@
                 <div class="table-line-header" style="width: 5px;">
 
                 </div>
-                <div class="table-header" style="width: 75px;">
-
+                <div class="table-header" style="width: 50px;">
+                    No
                 </div>
-                <div class="table-header" style="width: 420px;">
+                <div class="table-header" style="width: 445px;">
                     item competency
                 </div>
                 <div class="table-header" style="width: 100px;">
@@ -555,31 +525,20 @@
             <div id="other">
 
                 @if (!empty($other))
+                    @php
+                        $no = 1;
+                    @endphp
                     @foreach ($other as $view)
                         <div class="d-flex tx-12 table-body-hover" id="detail_functional">
 
                             <div class="table-line-body" style="width: 5px;">
 
                             </div>
-                            <div class="table-body tx-center tx-15" style="width: 76px;">
-                                <a href="#" class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
-                                </a>
-
-                                <form action="/generalAldp/deleteItem" method="post" class="d-inline"
-                                    onclick="return confirm('Are you sure?')">
-                                    @csrf
-                                    <input type="hidden" class="form-control tx-11" name="idAldp" id="idAldp"
-                                        value="{{ $view->aldp_id }}" required>
-                                    <input type="hidden" class="form-control tx-11" name="idAldpDetail"
-                                        id="idAldpDetail" value="{{ $view->id_aldp_details }}" required>
-                                    <button class="badge badge-danger pd-y-0 border-0" type="submit">
-                                        <i data-feather="x" class="wd-15"></i>
-                                    </button>
-                                </form>
+                            <div class="table-body tx-center" style="width: 50px;">
+                                {{ $no++ }}
                             </div>
 
-                            <div class="table-body" style="width: 419px;">
+                            <div class="table-body" style="width: 444px;">
                                 <div>{{ $view->item_name }}</div>
                                 {{-- <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
@@ -587,11 +546,11 @@
                                     </label>
                                 </div> --}}
                             </div>
-                            <div class="table-body tx-center" style="width: 102px;">
+                            <div class="table-body tx-center" style="width: 101px;">
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
                             </div>
 
-                            <a href="/generalAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/3"
+                            <a href="/departAldpParticipantFinish/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/3"
                                 class="table-body" style="width: 340px;">
 
                                 @php
@@ -721,17 +680,17 @@
                 <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-5">
                     <div class="row row-xs">
                         <div class="col-sm-4 tx-center bg-primary">
-                            <a href="/generalAldp/functional/{{ $id_aldp }}" class=" tx-white">
+                            <a href="/departAldp/functional/{{ $id_aldp }}" class=" tx-white">
                                 Functional Competency
                             </a>
                         </div>
                         <div class="col-sm-4 tx-center bg-success">
-                            <a href="/generalAldp/leadership/{{ $id_aldp }}" class=" tx-white">
+                            <a href="/departAldp/leadership/{{ $id_aldp }}" class=" tx-white">
                                 Leadership Program
                             </a>
                         </div>
                         <div class="col-sm-4 tx-center bg-dark">
-                            <a href="/generalAldp/other/{{ $id_aldp }}" class=" tx-white">
+                            <a href="/departAldp/other/{{ $id_aldp }}" class=" tx-white">
                                 Other Program
                             </a>
                         </div>

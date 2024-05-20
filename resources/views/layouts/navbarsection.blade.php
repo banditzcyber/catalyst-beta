@@ -29,8 +29,8 @@
         <i data-feather="pie-chart"></i> <span>Dashboard</span>
     </a>
 </li>
-<li class="nav-item mg-t-25 {{ request()->is('aldpSection*') ? 'active' : '' }}">
-    <a href="/aldpSection" class="nav-link">
+<li class="nav-item mg-t-25 {{ request()->is('sectionAldp*') ? 'active' : '' }}">
+    <a href="/sectionAldp" class="nav-link">
         <i data-feather="clipboard"></i> <span>ALDP</span>
     </a>
 </li>

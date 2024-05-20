@@ -11,7 +11,7 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/departAldpShow/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <a href="/generalAldpShow/{{ $id_aldp }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="col-md-8">
-        <form action="/departAldp/saveForm" method="post">
+        <form action="/generalAldp/saveForm" method="post">
             @csrf
 
             <div class="form-group row row-xs">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-sm-5">
                     <input type="hidden" name="competency_type" id="competency_type" class="form-control " autofocus
-                        value="{{ $comp_type }}" placeholder="position" readonly />
+                        value="{{ $comp_type }}" placeholder="position" />
                 </div>
             </div>
 
