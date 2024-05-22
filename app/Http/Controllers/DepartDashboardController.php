@@ -22,19 +22,22 @@ class DepartDashboardController extends Controller
             ->where('employees.employee_id', '=', $idLogin);
 
         $assessments = [];
-        $dSubordinate = DB::table('employees')->where('dm_code', $idLogin)->orWhere('employee_id', $idLogin);
+        $dSubordinate = DB::table('employees')->where('dm_code', $idLogin);
 
         foreach ($dSubordinate->get() as $vSubordinate) {
             // Append the assessment to the assessments array
             $subEmployee[] = $vSubordinate->employee_id;
         }
 
-        $baseQuery =  new \App\Models\SectionArea();
+
+        $baseQuery =  new \App\Models\DepartArea();
         $qResult = $baseQuery->getAssessment($subEmployee);
 
-        $competent    = $baseQuery->getAssessment($subEmployee)->where('ad.actual_result', 1)->count();
-        $need_improve = $baseQuery->getAssessment($subEmployee)->where('ad.actual_result', 2)->count();
-        $countLearning  = $baseQuery->getLearning($subEmployee)->count();
+        $competent              = $baseQuery->getAssessment($subEmployee)->where('ad.actual_result', 1)->count();
+        $need_improve           = $baseQuery->getAssessment($subEmployee)->where('ad.actual_result', 2)->count();
+        $countLearning          = $baseQuery->getLearning($subEmployee)->count();
+        $competenctLearning     = $baseQuery->getLearning($subEmployee)->where('l.status', 3)->count();
+        $plannedLearning        = $baseQuery->getLearning($subEmployee)->where('l.status', 1)->count();
 
         if($competent == 0 or $need_improve == 0){
             $resultSum = 0;
@@ -52,8 +55,14 @@ class DepartDashboardController extends Controller
             'area'              => $area,
             'roleId'            => $roleId,
 
-            'percent'  => json_encode($resultSum),
-            'subordinate'       => $qSubordinate->count()
+            'percent'           => json_encode($resultSum),
+            'itemCompetent'     => $competent,
+            'itemNeed'          => $need_improve,
+            'subordinate'       => $qSubordinate->count(),
+            'countLearning'     => $countLearning,
+            'competentLearning' => $competenctLearning,
+            'plannedLearning'   => $plannedLearning
+
 
         ]);
     }
