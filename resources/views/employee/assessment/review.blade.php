@@ -10,10 +10,10 @@
                     </li>
                 </ol>
             </nav>
-            <h4 class="mg-b-0 tx-spacing--1 tx-sans tx-uppercase">{{ $competency_name }}</h4>
+            <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/assessmentEmployee/{{ $assessment_id }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>
@@ -21,32 +21,45 @@
     </div>
 
 
-    <form id="form" action="/saveformassessment" method="post">
+
+    <form id="form" action="/savevalidationform" method="post">
         @csrf
         @foreach ($data as $vData)
             <div class="card mg-b-10">
                 <div class="card-body">
-                    <span class="step-desc tx-bold tx-primary tx-uppercase">Level <?= $vData->level ?></span>
+                    <span class="step-desc tx-bold tx-warning tx-uppercase">Level <?= $vData->level ?></span>
                     <span class="step-desc mb-2 text-muted tx-11"><?= $vData->ps_name ?></span>
                     <span class="card-text tx-14 tx-dark tx-bold">
-                        <label class="tx-uppercase tx-color-03">[<?= $vData->intervention ?>] - </label>
+                        <label>[<?= $vData->item_id ?>]</label>
+                        -
+                        <label class="tx-uppercase">[<?= $vData->intervention ?>]</label>
                         <?= $vData->item_name ?>
                     </span>
                 </div>
                 <div class="card-footer">
+                    <input type="hidden" class="tx-12 mg-b-5 pd-t-5" style="width: 60px; border-radius: 0px; height: 30px;"
+                        name="kd_assessment_detail[]" id="kd_assessment_detail[]" value="<?= $vData->id ?>">
                     <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5"
-                        style="width: 60px; border-radius: 0px; height: 30px;" name="kd_assessment_update"
-                        id="kd_assessment_update" value="<?= $assessment_id ?>">
-                    <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5"
-                        style="width: 60px; border-radius: 0px; height: 30px;" name="assessment_id[]" id="assessment_id"
+                        style="width: 60px; border-radius: 0px; height: 30px;" name="assessment_id" id="assessment_id"
                         value="<?= $assessment_id ?>">
                     <input type="hidden"class="tx-12 custom-select mg-b-5 pd-t-5"
                         style="width: 190px; border-radius: 0px; height: 30px;" name="item_id[]" id="item_id"
                         value="<?= $vData->item_id ?>">
 
+
+
                     <select name="assessment_result[]" id="assessment_result" class="tx-12 custom-select mg-b-5 pd-t-5"
                         style="width: 190px; border-radius: 0px; height: 30px;">
-                        <option value="2" class="tx-italic">--please select--</option>
+
+                        <option value="{{ $vData->assessment_result }}" @selected(old('assessment_result') == $vData->assessment_result)>
+                            @if ($vData->assessment_result == 1)
+                                competent
+                            @elseif($vData->assessment_result == 2)
+                                Need Improvement
+                            @else
+                                Not Applicable
+                            @endif
+                        </option>
                         <option value="1">Competent</option>
                         <option value="2">Need Improvement</option>
                         <option value="3">Not Applicable</option>

@@ -117,7 +117,8 @@
                                         <a href="/formassessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"
                                             class="btn btn-xs btn-outline-secondary">Start</a>
                                     @else
-                                        <a href="" class="btn btn-xs btn-outline-secondary">Update</a>
+                                        <a href="/reviewAssessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"
+                                            class="btn btn-xs btn-outline-secondary">Update</a>
                                     @endif
                                 @else
                                     <a href="/resultAssessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"

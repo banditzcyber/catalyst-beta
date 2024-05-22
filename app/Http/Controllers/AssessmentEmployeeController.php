@@ -117,6 +117,10 @@ class AssessmentEmployeeController extends Controller
             });
         }
 
+        $competency     = DB::table('competencies')->where('competency_id', $id)->select('competency_name')->get();
+        foreach($competency as $vCompetency) :
+            $competency_name    = $vCompetency->competency_name;
+        endforeach;
 
         return view('employee.assessment.form', [
             'title'             => 'Form Assessment',
@@ -124,7 +128,8 @@ class AssessmentEmployeeController extends Controller
             'area'              => $area,
             'roleId'            => $roleId,
             'data'              => $data->get(),
-            'assessment_id'     => $assessment_id
+            'assessment_id'     => $assessment_id,
+            'competency_name'   => $competency_name
         ]);
     }
 
@@ -194,5 +199,36 @@ class AssessmentEmployeeController extends Controller
 
         DB::table('assessments')->where('id', $data)->update(['status' => 2]);
         return redirect('/assessmentEmployee')->with('success', 'Assessment has been updated!');
+    }
+
+    public function reviewAssessment(Request $request, $competency_id, $assessment_id, $jobcode)
+    {
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
+        $id = $assessment_id;
+        // dd($id);
+
+        $data       = DB::table('assessment_details')
+                        ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
+                        ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
+                        ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
+                        ->join('competencies', 'competencies.competency_id', '=', 'performance_standards.competency_id')
+                        ->select('assessment_details.*', 'assessments.id as assessment_id', 'items.item_name', 'items.intervention','performance_standards.ps_name', 'performance_standards.level')
+                        ->where('assessment_details.assessment_id', '=', $id)
+                        ->where('competencies.competency_id', $competency_id);
+
+        return view('section.validations.form', [
+            'title'             => 'Form Edit',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $data->get(),
+            'assessment_id'     => $id
+        ]);
     }
 }
