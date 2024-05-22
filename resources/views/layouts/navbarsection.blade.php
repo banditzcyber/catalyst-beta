@@ -23,12 +23,12 @@
 
 <li class="nav-label mg-t-25">Manager Area</li>
 
-<li class="nav-item {{ request()->is('dashboardSection*') ? 'active' : '' }}">
+{{-- <li class="nav-item {{ request()->is('dashboardSection*') ? 'active' : '' }}">
 
     <a href="/dashboardSection" class="nav-link">
         <i data-feather="pie-chart"></i> <span>Dashboard</span>
     </a>
-</li>
+</li> --}}
 <li class="nav-item mg-t-25 {{ request()->is('sectionAldp*') ? 'active' : '' }}">
     <a href="/sectionAldp" class="nav-link">
         <i data-feather="clipboard"></i> <span>ALDP</span>

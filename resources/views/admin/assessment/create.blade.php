@@ -107,8 +107,8 @@
                 <label class="col-sm-2 col-form-label">Launch</label>
                 <div class="col-sm-3">
                     <select class="custom-select" name="status_launch" id="status_launch">
-                        <option value="1">Actived</option>
                         <option value="2">Not Actived</option>
+                        <option value="1">Actived</option>
                     </select>
                 </div>
                 @error('year')
