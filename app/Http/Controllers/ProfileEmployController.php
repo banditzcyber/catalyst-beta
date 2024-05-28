@@ -337,7 +337,7 @@ class ProfileEmployController extends Controller
     public function listItem(Request $request)
     {
         $area           = $request->session()->get('local');
-        $roleId         = auth()->user()->role_id;
+        $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
             ->where('employees.employee_id', '=', $idLogin);
