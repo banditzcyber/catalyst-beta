@@ -4,12 +4,7 @@
 <head>
 
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="author" content="ThemePixels">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="#">
@@ -24,7 +19,7 @@
     <link href="/lib/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet">
 
     <!-- DashForge CSS -->
-    <link rel="stylesheet" href="/css/dashforge.css">
+    <link rel="stylesheet" href="/css/dashforge.css">+
     <link rel="stylesheet" href="/css/dashforge.dashboard.css">
     <link rel="stylesheet" href="/css/style-cyber.css">
     <link rel="stylesheet" href="/css/dashforge.demo.css">

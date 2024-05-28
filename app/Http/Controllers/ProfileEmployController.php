@@ -139,6 +139,8 @@ class ProfileEmployController extends Controller
         $traningPlanned     = DB::table('learnings')->where('employee_id', $idLogin)->where('status', '!=', 3)->count();
         $trainingTotal      = DB::table('learnings')->where('employee_id', $idLogin)->count();
 
+        // dd($getCompetency);
+
         return view('employee.dashboard.index', [
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),
@@ -337,7 +339,7 @@ class ProfileEmployController extends Controller
     public function listItem(Request $request)
     {
         $area           = $request->session()->get('local');
-        $roleId         = auth()->user()->role_id;
+        $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
             ->where('employees.employee_id', '=', $idLogin);
