@@ -10,11 +10,11 @@
     <!-- Meta -->
     <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
     <meta name="author" content="ThemePixels">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
+    {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.datatables.net">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://via.placeholder.com">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net"> --}}
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="#">
@@ -171,32 +171,32 @@
     </div>
     </div>
 
-    <script src="/lib/jquery/jquery.min.js"></script>
-    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/lib/feather-icons/feather.min.js"></script>
-    <script src="/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="/lib/jquery.flot/jquery.flot.js"></script>
-    <script src="/lib/jquery.flot/jquery.flot.stack.js"></script>
-    <script src="/lib/jquery.flot/jquery.flot.resize.js"></script>
-    <script src="/lib/chart.js/Chart.bundle.min.js"></script>
-    <script src="/lib/jqvmap/jquery.vmap.min.js"></script>
-    <script src="/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <script src="/lib/jqueryui/jquery-ui.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jquery/jquery.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/feather-icons/feather.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jquery.flot/jquery.flot.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jquery.flot/jquery.flot.stack.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jquery.flot/jquery.flot.resize.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/chart.js/Chart.bundle.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jqvmap/jquery.vmap.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jqueryui/jquery-ui.min.js"></script>
 
-    <script src="/js/dashforge.js"></script>
-    <script src="/js/dashforge.aside.js"></script>
-    <script src="/js/dashforge.sampledata.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/js/dashforge.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/js/dashforge.aside.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/js/dashforge.sampledata.js"></script>
 
     <!-- append theme customizer -->
-    <script src="/lib/js-cookie/js.cookie.js"></script>
-    {{-- <script src="/js/dashforge.settings.js"></script> --}}
-    {{-- <script src="/lib/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
-    <script src="/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script> --}}
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="/lib/cleave.js/cleave.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/js-cookie/js.cookie.js"></script>
+    {{-- <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/js/dashforge.settings.js"></script> --}}
+    {{-- <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script> --}}
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/cleave.js/cleave.min.js"></script>
     <script src="/lib/cleave.js/addons/cleave-phone.us.js"></script>
     @stack('scripts')
 
