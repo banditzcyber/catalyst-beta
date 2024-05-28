@@ -10,19 +10,10 @@
     <!-- Meta -->
     <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
     <meta name="author" content="ThemePixels">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.datatables.net">
-    <meta http-equiv="Content-Security-Policy"
-        content="style-src 'self' https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css">
-
-    {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://via.placeholder.com">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net"> --}}
+    {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;"> --}}
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="#">
-
-
 
     <title>{{ $title }} | MyCatalyst</title>
 
@@ -34,13 +25,13 @@
     <link href="/lib/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet">
 
     <!-- DashForge CSS -->
-    <link rel="stylesheet" href="/css/dashforge.css">+
+    <link rel="stylesheet" href="/css/dashforge.css">
     <link rel="stylesheet" href="/css/dashforge.dashboard.css">
     <link rel="stylesheet" href="/css/style-cyber.css">
     <link rel="stylesheet" href="/css/dashforge.demo.css">
-    {{-- <link href="/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet"> --}}
-    <link nonce="EDNnf03nceIOfn39fn3e9h3sdfa" rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+    <link href="/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" /> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.semanticui.css" /> --}}
 
@@ -174,33 +165,35 @@
     </div>
     </div>
 
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jquery/jquery.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/feather-icons/feather.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jquery.flot/jquery.flot.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jquery.flot/jquery.flot.stack.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jquery.flot/jquery.flot.resize.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/chart.js/Chart.bundle.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jqvmap/jquery.vmap.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/jqueryui/jquery-ui.min.js"></script>
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/feather-icons/feather.min.js"></script>
+    <script src="/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/lib/jquery.flot/jquery.flot.js"></script>
+    <script src="/lib/jquery.flot/jquery.flot.stack.js"></script>
+    <script src="/lib/jquery.flot/jquery.flot.resize.js"></script>
+    <script src="/lib/chart.js/Chart.bundle.min.js"></script>
+    <script src="/lib/jqvmap/jquery.vmap.min.js"></script>
+    <script src="/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <script src="/lib/jqueryui/jquery-ui.min.js"></script>
 
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/js/dashforge.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/js/dashforge.aside.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/js/dashforge.sampledata.js"></script>
+    <script src="/js/dashforge.js"></script>
+    <script src="/js/dashforge.aside.js"></script>
+    <script src="/js/dashforge.sampledata.js"></script>
 
     <!-- append theme customizer -->
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/js-cookie/js.cookie.js"></script>
-    {{-- <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/js/dashforge.settings.js"></script> --}}
-    {{-- <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script> --}}
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script nonce="EDNnf03nceIOfn39fn3e9h3sdfa" src="/lib/cleave.js/cleave.min.js"></script>
+    <script src="/lib/js-cookie/js.cookie.js"></script>
+    <script src="/js/dashforge.settings.js"></script>
+    <script src="/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+    <script src="/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
+    {{-- <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="/lib/cleave.js/cleave.min.js"></script>
     <script src="/lib/cleave.js/addons/cleave-phone.us.js"></script>
+    <script src="/vendor/apexcharts/apexcharts.js"></script>
     @stack('scripts')
 
 

@@ -31,8 +31,8 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 85px">#</th>
-                    <th style="width: 90px">ID</th>
+                    <th style="width: 75px">#</th>
+                    <th style="width: 100px">ID</th>
                     <th>Name</th>
                     <th>Position</th>
                     <th>Years</th>
@@ -44,20 +44,6 @@
             <tbody>
                 @foreach ($data as $view)
                     @php
-
-                        if (empty($view->created_at)) {
-                            $tgl_create = '-';
-                        } else {
-                            $dCreate = new DateTimeImmutable($view->created_at);
-                            $tgl_create = $dCreate->format('D, j F Y');
-                        }
-
-                        if (empty($view->updated_at)) {
-                            $tgl_update = '-';
-                        } else {
-                            $dUpdate = new DateTimeImmutable($view->created_at);
-                            $tgl_update = $dUpdate->format('D, j F Y');
-                        }
 
                         if ($view->status == 1) {
                             $color = 'bg-light';
@@ -94,8 +80,8 @@
                         <td>{{ $view->employee_name }}</td>
                         <td>{{ $view->position }}</td>
                         <td>{{ $view->year }}</td>
-                        <td class="tx-center">{{ $tgl_create }}</td>
-                        <td class="tx-center">{{ $tgl_update }}</td>
+                        <td>{{ $view->created_at }}</td>
+                        <td>{{ $view->updated_at }}</td>
                         <td class="{{ $color }} tx-center" style="cursor: pointer"
                             onclick="show({{ $view->id }})">
                             {{ $text }}
