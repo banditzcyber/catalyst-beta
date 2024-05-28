@@ -140,8 +140,7 @@ class SectionAldpController extends Controller
         $assessments = []; // Array to store all assessments
 
         $dSubordinate = DB::table('employees')
-            ->where('sm_code', '-')
-            ->where('dm_code', $idLogin)
+            ->where('sm_code', $idLogin)
             ->get();
 
         foreach ($dSubordinate as $vSubordinate) {
@@ -360,18 +359,15 @@ class SectionAldpController extends Controller
 
                 $employee   = DB::table('employees')
                     ->whereIn('employee_id', $rowItemEmployee)
-                    ->where('sm_code', '-')
-                    ->where('dm_code', $idLogin)->get();
+                    ->where('sm_code', $idLogin)->get();
             }else{
                 $employee   = DB::table('employees')
-                ->where('sm_code', '-')
-                    ->where('dm_code', $idLogin)->get();
+                    ->where('sm_code', $idLogin)->get();
             }
 
         }else{
             $employee   = DB::table('employees')
-                ->where('sm_code', '-')
-                ->where('dm_code', $idLogin)->get();
+                ->where('sm_code', $idLogin)->get();
         }
 
 
@@ -567,18 +563,15 @@ class SectionAldpController extends Controller
 
                 $employee   = DB::table('employees')
                     ->whereIn('employee_id', $rowItemEmployee)
-                    ->where('sm_code', '-')
-                    ->where('dm_code', $idLogin)->get();
+                    ->where('sm_code', $idLogin)->get();
             }else{
                 $employee   = DB::table('employees')
-                ->where('sm_code', '-')
-                    ->where('dm_code', $idLogin)->get();
+                    ->where('sm_code', $idLogin)->get();
             }
 
         }else{
             $employee   = DB::table('employees')
-                ->where('sm_code', '-')
-                ->where('dm_code', $idLogin)->get();
+                ->where('sm_code', $idLogin)->get();
         }
 
 

@@ -42,7 +42,7 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
                 <tr>
-                    <th style="width: 145px">#</th>
+                    <th style="width: 155px">#</th>
                     <th>CDX</th>
                     <th>ID</th>
                     <th>Employee Name</th>
@@ -62,7 +62,7 @@
                             $text = 'Self Assessment';
                         } elseif ($view->status == 2) {
                             $color = 'bg-kuning';
-                            $text = 'Review by Superior';
+                            $text = 'Review';
                         } else {
                             $color = 'bg-hijau';
                             $text = 'Completed';

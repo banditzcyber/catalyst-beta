@@ -117,7 +117,7 @@ class AssessmentEmployeeController extends Controller
             });
         }
 
-        $competency     = DB::table('competencies')->where('competency_id', $id)->select('competency_name')->get();
+        $competency             = DB::table('competencies')->where('competency_id', $id)->select('competency_name')->get();
         foreach($competency as $vCompetency) :
             $competency_name    = $vCompetency->competency_name;
         endforeach;
