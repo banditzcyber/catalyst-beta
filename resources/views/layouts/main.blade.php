@@ -11,6 +11,10 @@
     <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
     <meta name="author" content="ThemePixels">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.datatables.net">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://via.placeholder.com">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="#">
