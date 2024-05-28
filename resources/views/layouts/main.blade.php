@@ -11,6 +11,8 @@
     <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
     <meta name="author" content="ThemePixels">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.datatables.net">
+    <meta http-equiv="Content-Security-Policy"
+        content="style-src 'self' https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css">
 
     {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://fonts.googleapis.com">
