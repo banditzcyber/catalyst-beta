@@ -139,6 +139,8 @@ class ProfileEmployController extends Controller
         $traningPlanned     = DB::table('learnings')->where('employee_id', $idLogin)->where('status', '!=', 3)->count();
         $trainingTotal      = DB::table('learnings')->where('employee_id', $idLogin)->count();
 
+        // dd($getCompetency);
+
         return view('employee.dashboard.index', [
             'title'         => 'Dashboard',
             'employeeSession'   => $dEmployee->first(),

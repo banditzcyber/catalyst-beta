@@ -467,6 +467,9 @@
                 $('#viewdata').DataTable();
             })
 
+            var dataCompetency = <?= $competency ?>;
+            var dataCompetent = {{ $competent }};
+            var dataNeed = {{ $need }};
             var options = {
                 chart: {
                     type: 'bar',
@@ -483,15 +486,15 @@
                 },
                 series: [{
                     name: 'Competent',
-                    data: {{ $competent }},
+                    data: dataCompetent,
                     color: '#219C90'
                 }, {
                     name: 'Need Improvement',
-                    data: {{ $need }},
+                    data: dataNeed,
                     color: '#FC5185'
                 }],
                 xaxis: {
-                    categories: <?= $competency ?>
+                    categories: dataCompetency
                 }
             }
 
