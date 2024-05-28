@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="/css/dashforge.demo.css">
     {{-- <link href="/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet"> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+    <link nonce="EDNnf03nceIOfn39fn3e9h3sdfa" rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.semanticui.css" /> --}}
 
