@@ -35,12 +35,12 @@
                     <span class="mb-5 tx-13">
                         <?= $vData->ps_name ?>
                         <lavel class="tx-italic tx-color-03">
-                            <?= $vData->ps_bahasa ?>
+                            (<?= $vData->ps_bahasa ?>)
                         </lavel>
-                    </span><br />
-                    <span class="card-text tx-14 tx-dark">
+                    </span><br /><br />
+
+                    <span class="card-text tx-14 tx-dark mg-t-5">
                         <?= $vData->item_name ?><br />
-                        <label class="tx-italic tx-color-03"><?= $vData->item_bahasa ?></label><br />
                         <label class="tx-uppercase tx-color-03 mt-2">[<?= $vData->intervention ?>]</label>
                     </span>
                 </div>
