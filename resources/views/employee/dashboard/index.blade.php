@@ -164,15 +164,15 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card">
+                    <div class="card" style="height: 150px">
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingCompleted }}</h3>
-                                    <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Completed
-                                        Training
+                                    <h6 class="tx-11 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Completed
+                                        Dev. Program
                                     </h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">completed training based on ALDP.</p>
+                                    <p class="tx-11 tx-color-03 mg-b-0">completed development program based on ALDP.</p>
                                 </div>
                                 <div class="col-5">
                                     <div class="chart-ten">
@@ -184,14 +184,16 @@
                     </div><!-- card -->
                 </div><!-- col -->
                 <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card">
+                    <div class="card" style="height: 150px">
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingPlanned }}</h3>
-                                    <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Planned Training
+                                    <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Planned Dev.
+                                        Program
                                     </h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">training planned or not complete yet based on ALDP
+                                    <p class="tx-11 tx-color-03 mg-b-0">development program planned or not complete yet
+                                        based on ALDP
                                     </p>
                                 </div>
                                 <div class="col-5">
@@ -204,14 +206,14 @@
                     </div><!-- card -->
                 </div><!-- col -->
                 <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card">
+                    <div class="card" style="height: 150px">
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingTotal }}</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-pink mg-b-5">Total
-                                        Training</h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">total training based on ALDP.</p>
+                                        Dev. Program</h6>
+                                    <p class="tx-11 tx-color-03 mg-b-0">total development program based on ALDP.</p>
                                 </div>
                                 <div class="col-5">
                                     <div class="chart-ten">

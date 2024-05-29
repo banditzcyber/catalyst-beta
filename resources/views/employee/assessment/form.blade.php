@@ -14,9 +14,8 @@
         </div>
         <div class="d-none d-md-block">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">General</button>
-                <button type="button" class="btn btn-secondary">Privacy</button>
-                <button type="button" class="btn btn-secondary">Account</button>
+                <button type="button" class="btn btn-warning">US</button>
+                <button type="button" class="btn btn-white">IND</button>
             </div>
             <a href="/assessmentEmployee/{{ $assessment_id }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
