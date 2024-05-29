@@ -13,6 +13,11 @@
             <h4 class="mg-b-0 tx-spacing--1 tx-sans tx-uppercase">{{ $competency_name }}</h4>
         </div>
         <div class="d-none d-md-block">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">General</button>
+                <button type="button" class="btn btn-secondary">Privacy</button>
+                <button type="button" class="btn btn-secondary">Account</button>
+            </div>
             <a href="/assessmentEmployee/{{ $assessment_id }}" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
@@ -26,11 +31,17 @@
         @foreach ($data as $vData)
             <div class="card mg-b-10">
                 <div class="card-body">
-                    <span class="step-desc tx-bold tx-primary tx-uppercase">Level <?= $vData->level ?></span>
-                    <span class="step-desc mb-2 text-muted tx-11"><?= $vData->ps_name ?></span>
-                    <span class="card-text tx-14 tx-dark tx-bold">
-                        <label class="tx-uppercase tx-color-03">[<?= $vData->intervention ?>] - </label>
-                        <?= $vData->item_name ?>
+                    <span class="step-desc tx-bold tx-primary tx-uppercase tx-sans">Level <?= $vData->level ?></span>
+                    <span class="mb-5 tx-13">
+                        <?= $vData->ps_name ?>
+                        <lavel class="tx-italic tx-color-03">
+                            <?= $vData->ps_bahasa ?>
+                        </lavel>
+                    </span><br />
+                    <span class="card-text tx-14 tx-dark">
+                        <?= $vData->item_name ?><br />
+                        <label class="tx-italic tx-color-03"><?= $vData->item_bahasa ?></label><br />
+                        <label class="tx-uppercase tx-color-03 mt-2">[<?= $vData->intervention ?>]</label>
                     </span>
                 </div>
                 <div class="card-footer">
