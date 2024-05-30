@@ -13,10 +13,26 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
-                <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
-                back
-            </a>
+            <div class="row row-xs pd-0" style="width: 250px">
+                <div class="col-lg-7 pd-0">
+                    <form action="/finishForm" method="POST" onclick="return confirm('Are you sure?')">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $id }}">
+                        <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase">
+                            <i data-feather="save" class="wd-10 mg-r-5"></i>
+                            Finish Form</button>
+                    </form>
+                </div>
+                <div class="col-lg-5 pd-0">
+                    <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
+                        <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
+                        back
+                    </a>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 

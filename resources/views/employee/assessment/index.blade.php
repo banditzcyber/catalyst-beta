@@ -36,10 +36,10 @@
             <div class="col-sm-6 col-lg-4 mg-t-10">
                 <div class="card shadow-sm mb-03">
                     <div class="card-body pd-x-20 pd-b-10">
-                        <p class="tx-10 tx-spacing-1 tx-color-03 tx-medium mg-b-5">Form Assessment</p>
+                        <p class="tx-10 tx-spacing-1 tx-color-03 tx-medium mg-b-5">Form Assessment Functional Competency</p>
                         <h3 class="tx-18 tx-normal tx-rubik tx-spacing--2 mg-b-5">{{ $vData->employee_name }}</h3>
 
-                        <div class="d-flex mg-b-20">
+                        <div class="d-flex mg-b-10">
                             <p class="tx-10 tx-rubik mg-b-0">
                                 <span class="tx-medium tx-color-03 mg-r-5">
                                     ID :
@@ -47,8 +47,8 @@
                             </p>
                             <p class="tx-10 tx-rubik mg-b-0 mg-l-10">
                                 <span class="tx-medium tx-color-03 mg-r-5">
-                                    Job Code :
-                                </span>{{ $vData->jobcode }}
+                                    Position :
+                                </span>{{ $vData->position }}
                             </p>
                         </div>
 
@@ -75,7 +75,7 @@
                             $disable = 'disabled="disabled"';
                         }
                     @endphp
-                    <div class="card-footer tx-13">
+                    <div class="card-footer tx-13 bg-dark">
                         <div class="row row-xs">
                             <div class="col-lg-6">
                                 <a href="/assessmentEmployee/{{ $vData->id }}"

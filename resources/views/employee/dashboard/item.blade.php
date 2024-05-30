@@ -9,14 +9,7 @@
                         </ol>
                     </nav>
                     @foreach ($employee as $vEmployee)
-                        @php
-                            if ($vEmployee->gender == 'M') {
-                                $gender = 'Mr.';
-                            } else {
-                                $gender = 'Mrs.';
-                            }
-                        @endphp
-                        <h4 class="mg-b-0 tx-spacing--1">Welcome {{ $gender }} {{ $vEmployee->employee_name }}</h4>
+                        <h4 class="mg-b-0 tx-spacing--1">Hallo! {{ $vEmployee->employee_name }}</h4>
                     @endforeach
                 </div>
                 <div class="d-none d-md-block">
@@ -31,28 +24,28 @@
 
             <div class="row row-xs">
                 <div class="col-lg-12 mg-b-10">
+
+
                     <div class="card">
                         <div class="card-header tx-uppercase tx-bold">
-                            Item Competent
+                            Item Need Improvement
                         </div>
                         <div class="card-body pd-y-10 pd-x-10">
                             <div class="table-responsive">
-                                <table id="competent" class="table table-bordered tx-11">
+                                <table id="need" class="table table-bordered table-secondary tx-11">
                                     <thead class="thead-primary">
-                                        <tr>
-                                            <th class="">Item ID</th>
+                                        <tr class="tx-uppercase tx-center">
                                             <th class="">Competency</th>
                                             <th class="">Performance Standard</th>
                                             <th class="">level</th>
                                             <th>Item Name</th>
                                             <th>Intervention</th>
-                                            <th class="wd-10p">Type Training</th>
+                                            <th class="wd-10p">Type</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($competent as $view)
+                                        @foreach ($need as $view)
                                             <tr>
-                                                <td>{{ $view->item_id }}</td>
                                                 <td>{{ $view->competency_name }}</td>
                                                 <td>{{ $view->ps_name }}</td>
                                                 <td>{{ $view->level }}</td>
@@ -71,29 +64,27 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header tx-uppercase tx-bold">
-                            Item Need Improvement
+                            Item Competent
                         </div>
                         <div class="card-body pd-y-10 pd-x-10">
                             <div class="table-responsive">
-                                <table id="need" class="table table-bordered table-secondary tx-11">
+                                <table id="competent" class="table table-bordered tx-11">
                                     <thead class="thead-primary">
-                                        <tr>
-                                            <th class="">Item ID</th>
+                                        <tr class="tx-uppercase">
                                             <th class="">Competency</th>
                                             <th class="">Performance Standard</th>
                                             <th class="">level</th>
                                             <th>Item Name</th>
                                             <th>Intervention</th>
-                                            <th class="wd-10p">Type Training</th>
+                                            <th>Type</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($need as $view)
+                                        @foreach ($competent as $view)
                                             <tr>
-                                                <td>{{ $view->item_id }}</td>
                                                 <td>{{ $view->competency_name }}</td>
                                                 <td>{{ $view->ps_name }}</td>
-                                                <td>{{ $view->level }}</td>
+                                                <td style="text-center">{{ $view->level }}</td>
                                                 <td>{{ $view->item_name }}</td>
                                                 <td>{{ $view->intervention }}</td>
                                                 <td>{{ $view->type_training }}</td>
@@ -111,16 +102,13 @@
     </div><!-- content -->
     @push('scripts')
         <script>
-            $(document).ready(function() {
-                $("#competent").DataTable({
-                    language: {
-                        searchPlaceholder: 'Search...',
-                        sSearch: '',
-                        lengthMenu: '_MENU_ items/page',
-                    }
-                });
-                $("#need").DataTable();
-                $("#dataCompetency").DataTable();
+            new DataTable('#need', {
+                scrollX: true,
+                scrollY: 300
+            });
+            new DataTable('#competent', {
+                scrollX: true,
+                scrollY: 300
             });
         </script>
     @endpush

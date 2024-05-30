@@ -9,16 +9,9 @@
                         </ol>
                     </nav>
                     @foreach ($employee as $vEmployee)
-                        @php
-                            if ($vEmployee->gender == 'Male' or $vEmployee->gender == 'M') {
-                                $gender = 'Mr.';
-                            } else {
-                                $gender = 'Mrs.';
-                            }
-                        @endphp
-                        <h4 class="mg-b-0 tx-spacing--1">Welcome {{ $gender }} {{ $vEmployee->employee_name }}
+                        <h5 class="mg-b-0 tx-spacing--1">Hallo! {{ $vEmployee->employee_name }}
                             ({{ $vEmployee->employee_id }})
-                        </h4>
+                        </h5>
                     @endforeach
                 </div>
                 <div class="d-none d-md-block">
@@ -169,8 +162,8 @@
                             <div class="row row-sm">
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingCompleted }}</h3>
-                                    <h6 class="tx-11 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Completed
-                                        Dev. Program
+                                    <h6 class="tx-11 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">
+                                        Development Program Completed
                                     </h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">completed development program based on ALDP.</p>
                                 </div>
@@ -189,8 +182,8 @@
                             <div class="row row-sm">
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingPlanned }}</h3>
-                                    <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Planned Dev.
-                                        Program
+                                    <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Development
+                                        Program Plan
                                     </h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">development program planned or not complete yet
                                         based on ALDP
@@ -212,7 +205,7 @@
                                 <div class="col-7">
                                     <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">{{ $trainingTotal }}</h3>
                                     <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-pink mg-b-5">Total
-                                        Dev. Program</h6>
+                                        Development Program</h6>
                                     <p class="tx-11 tx-color-03 mg-b-0">total development program based on ALDP.</p>
                                 </div>
                                 <div class="col-5">

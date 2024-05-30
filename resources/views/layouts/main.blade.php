@@ -29,13 +29,7 @@
     <link rel="stylesheet" href="/css/dashforge.dashboard.css">
     <link rel="stylesheet" href="/css/style-cyber.css">
     <link rel="stylesheet" href="/css/dashforge.demo.css">
-    <link href="/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" /> --}}
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.semanticui.css" /> --}}
-
-
+    <link rel="stylesheet" href="/css/datatables.min.css">
 
 
 </head>
@@ -68,19 +62,6 @@
                         <i data-feather="chevron-down"></i>
                     </a>
                     <p class="tx-color-03 tx-12 mg-b-0">
-
-                        {{-- @if (auth()->user()->role_id == 1)
-                            Employee
-                        @elseif (auth()->user()->role_id == 2)
-                            Section Manager
-                        @elseif (auth()->user()->role_id == 3)
-                            Department Manager
-                        @elseif (auth()->user()->role_id == 4)
-                            General Manager
-                        @elseif (auth()->user()->role_id == 5)
-                            Admin Functional
-                        @else
-                            Root @endif --}}
 
                         {{ $employeeSession->position }}
 
@@ -129,14 +110,6 @@
                     @elseif ($roleId == 6)
                         @include('layouts.navbaradmin') @endif @endif
 
-
-                {{-- @if ($employeeSession->job_level == 'SM')
-        @include('layouts.navbarsection')
-        @else
-        @include('layouts.navbaremployee') @endif --}}
-
-
-
             </ul>
         </div>
     </aside>
@@ -181,21 +154,16 @@
     <script src="/js/dashforge.aside.js"></script>
     <script src="/js/dashforge.sampledata.js"></script>
 
+    <script src="/js/datatables.min.js"></script>
+
     <!-- append theme customizer -->
     <script src="/lib/js-cookie/js.cookie.js"></script>
     <script src="/js/dashforge.settings.js"></script>
-    <script src="/lib/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
-    <script src="/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
-    {{-- <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="/lib/cleave.js/cleave.min.js"></script>
     <script src="/lib/cleave.js/addons/cleave-phone.us.js"></script>
     <script src="/vendor/apexcharts/apexcharts.js"></script>
-    @stack('scripts')
 
+    @stack('scripts')
 
     </body>
 
