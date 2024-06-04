@@ -38,7 +38,7 @@
 
     <aside class="aside aside-fixed">
         <div class="aside-header">
-            <a href="../../index.html" class="aside-logo">
+            <a href="#" class="aside-logo">
                 <img src="/images/logo_mycatalyst_full.png" width="170" alt="">
             </a>
             <a href="" class="aside-menu-link">
@@ -49,8 +49,9 @@
         <div class="aside-body">
             <div class="aside-loggedin">
                 <div class="d-flex align-items-center justify-content-start">
-                    <a href="" class="avatar"><img src="https://via.placeholder.com/500" class="rounded-circle"
-                            alt=""></a>
+                    <a href="" class="avatar">
+                        <img src="/images/users.png" class="rounded-circle"alt="">
+                    </a>
                 </div>
                 <div class="aside-loggedin-user">
                     <a href="#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2"
@@ -129,7 +130,7 @@
             </form>
         </nav>
     </div><!-- content-header -->
-    <div class="content-body">
+    <div class="content-body pd-y-0">
         <div class="container pd-x-0">
 
 
@@ -158,7 +159,7 @@
 
     <!-- append theme customizer -->
     <script src="/lib/js-cookie/js.cookie.js"></script>
-    <script src="/js/dashforge.settings.js"></script>
+    {{-- <script src="/js/dashforge.settings.js"></script> --}}
     <script src="/lib/cleave.js/cleave.min.js"></script>
     <script src="/lib/cleave.js/addons/cleave-phone.us.js"></script>
     <script src="/vendor/apexcharts/apexcharts.js"></script>

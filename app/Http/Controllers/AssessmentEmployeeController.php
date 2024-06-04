@@ -117,9 +117,11 @@ class AssessmentEmployeeController extends Controller
             });
         }
 
-        $competency             = DB::table('competencies')->where('competency_id', $id)->select('competency_name')->get();
+        $competency             = DB::table('competencies')->where('competency_id', $id)->select('competency_name', 'description', 'description_bahasa')->get();
         foreach($competency as $vCompetency) :
             $competency_name    = $vCompetency->competency_name;
+            $competency_desc    = $vCompetency->description;
+            $competency_desc_bahasa    = $vCompetency->description_bahasa;
         endforeach;
 
         return view('employee.assessment.form', [
@@ -129,7 +131,9 @@ class AssessmentEmployeeController extends Controller
             'roleId'            => $roleId,
             'data'              => $data->get(),
             'assessment_id'     => $assessment_id,
-            'competency_name'   => $competency_name
+            'competency_name'   => $competency_name,
+            'competency_desc'   => $competency_desc,
+            'competency_desc_bahasa'   => $competency_desc_bahasa
         ]);
     }
 
@@ -218,17 +222,54 @@ class AssessmentEmployeeController extends Controller
                         ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
                         ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
                         ->join('competencies', 'competencies.competency_id', '=', 'performance_standards.competency_id')
-                        ->select('assessment_details.*', 'assessments.id as assessment_id', 'items.item_name', 'items.intervention','performance_standards.ps_name', 'performance_standards.level')
+                        ->select('assessment_details.*', 'assessments.id as assessment_id', 'items.item_name', 'items.intervention','performance_standards.ps_name', 'performance_standards.ps_bahasa', 'performance_standards.level')
                         ->where('assessment_details.assessment_id', '=', $id)
                         ->where('competencies.competency_id', $competency_id);
 
-        return view('section.validations.form', [
-            'title'             => 'Form Edit',
+        $competency             = DB::table('competencies')->where('competency_id', $competency_id)->select('competency_name', 'description', 'description_bahasa')->get();
+        foreach($competency as $vCompetency) :
+            $competency_name    = $vCompetency->competency_name;
+            $competency_desc    = $vCompetency->description;
+            $competency_desc_bahasa    = $vCompetency->description_bahasa;
+        endforeach;
+
+        return view('employee.assessment.review', [
+            'title'             => 'Form Update Assessment',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
             'data'              => $data->get(),
+            'competency_name'   => $competency_name,
+            'competency_desc'   => $competency_desc,
+            'competency_desc_bahasa'   => $competency_desc_bahasa,
             'assessment_id'     => $id
         ]);
     }
+
+    public function saveAssessmentUpdate(Request $request)
+    {
+        $item_id  = $request->input('item_id');
+        $assessment_id  = $request->input('assessment_id');
+        $assessment_result  = $request->input('assessment_result');
+        $actual_result  = $request->input('assessment_result');
+        $comment  = $request->input('comment');
+        $assessment_update = $request->input('kd_assessment_update');
+
+        $kd_assessment_detail = $request->input('kd_assessment_detail');
+
+        foreach($request->kd_assessment_detail as $kode => $id){
+            $data['id']                     = $request->kd_assessment_detail[$kode];
+            $data['assessment_result']      = $request->assessment_result[$kode];
+            $data['actual_result']          = $request->assessment_result[$kode];
+            $data['comment']                = $request->comment[$kode];
+
+            // dd($request->kd_assessment_detail[$kode], $data);
+
+            DB::table('assessment_details')->where('id', $request->kd_assessment_detail[$kode])->update($data);
+        }
+
+        // dd($data);
+        return redirect('/assessmentEmployee/'.$assessment_update)->with('success', 'Assessment has been updated!');
+    }
+
 }

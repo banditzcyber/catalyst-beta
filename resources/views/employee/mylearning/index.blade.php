@@ -1,6 +1,9 @@
 @extends('layouts.main') @section('body')
+    <div class="mg-t-0 mg-b-5 pd-0">
+        <img src="/images/cap/bnr2.png" alt="">
+    </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
-        <div>
+        {{-- <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                     <li class="breadcrumb-item">
@@ -9,7 +12,7 @@
                 </ol>
             </nav>
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
-        </div>
+        </div> --}}
         <div class="d-none d-md-block">
             {{-- <button class="btn btn-sm pd-x-15 btn-white btn-uppercase mg-l-5">
                 <i data-feather="share" class="wd-10 mg-r-5"></i>
@@ -65,7 +68,7 @@
                                 <div class="col-4">
                                     <div class="marker marker-ribbon marker-{{ $color }} pos-absolute t-10 l-0">
                                         {{ $view }}</div>
-                                    <img src="/images/learning/test.png" class="card-img" alt=""
+                                    <img src="/images/cap/card.png" class="card-img" alt=""
                                         style="max-width: 100px">
                                 </div>
 
@@ -73,7 +76,7 @@
                                     <div class="chart-ten pd-t-5 pd-b-15">
 
                                         <p class="mg-b-0 tx-10">
-                                            {{ $post->item_id }}
+                                            Functional Competency
                                         </p>
 
                                         <p class="tx-13 tx-bold mg-b-0">
@@ -84,11 +87,11 @@
 
                                     </div>
                                     <a href="/mylearnig/form/{{ $post->id }}"
-                                        class="btn btn-xs btn-outline-warning {{ $action }}">
+                                        class="btn btn-xs btn-warning {{ $action }}">
                                         Action
                                     </a>
                                     <a href="/mylearnig/details/{{ $post->id }}"
-                                        class="btn btn-xs btn-outline-secondary {{ $detail }}">
+                                        class="btn btn-xs btn-dark {{ $detail }}">
                                         Detail
                                     </a>
                                 </div>

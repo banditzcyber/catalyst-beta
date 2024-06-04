@@ -1,16 +1,13 @@
 @extends('layouts.main')
 
 @section('body')
+    <div class="mg-t-0 mg-b-5 pd-0">
+
+        <img src="/images/cap/bnr.png" alt="">
+    </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                    <li class="breadcrumb-item">
-                        <a href="#">{{ $title }}</a>
-                    </li>
-                </ol>
-            </nav>
-            <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
+
         </div>
         <div class="d-none d-md-block">
             <div class="row row-xs pd-0" style="width: 250px">
@@ -30,9 +27,6 @@
                     </a>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 
@@ -121,25 +115,42 @@
                             ->where('assessment_details.assessment_id', '=', $id)
                             ->where('competencies.competency_id', '=', $vData->competency_id)
                             ->count();
+
+                        if ($vStatus->status == 1) {
+                            if ($dValid == 0) {
+                                $link =
+                                    '/formassessment/' . $vData->competency_id . '/' . $kd_assessment . '/' . $jobcode;
+                                $btn = 'btn-outline-secondary';
+                                $title = 'Start';
+                                $bg = 'bg-light';
+                            } else {
+                                $link =
+                                    '/updateAssessment/' .
+                                    $vData->competency_id .
+                                    '/' .
+                                    $kd_assessment .
+                                    '/' .
+                                    $jobcode;
+                                $btn = 'btn-light';
+                                $title = 'Update';
+                                $bg = 'bg-success';
+                            }
+                        } else {
+                            $link =
+                                '/resultAssessment/' . $vData->competency_id . '/' . $kd_assessment . '/' . $jobcode;
+                            $btn = 'btn-light';
+                            $title = 'View';
+                            $bg = 'bg-success';
+                        }
                     @endphp
 
 
-                    <div class="card-footer" style="">
+                    <div class="card-footer {{ $bg }}" style="">
                         <div class="row row-xs">
                             <div class="col-lg-6">
-                                @if ($vStatus->status == 1)
-                                    @if ($dValid == 0)
-                                        {{-- <a href="/sig/edit/{$value->id}/{$value->ticketid}" title="Edit signature"> --}}
-                                        <a href="/formassessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"
-                                            class="btn btn-xs btn-outline-secondary">Start</a>
-                                    @else
-                                        <a href="/reviewAssessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"
-                                            class="btn btn-xs btn-outline-secondary">Update</a>
-                                    @endif
-                                @else
-                                    <a href="/resultAssessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"
-                                        class="btn btn-xs btn-outline-secondary">View</a>
-                                @endif
+
+
+                                <a href="{{ $link }}" class="btn btn-xs {{ $btn }}">{{ $title }}</a>
                             </div>
                             <div class="col-lg-6 tx-right">
 

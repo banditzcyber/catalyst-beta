@@ -102,6 +102,8 @@ Route::get('/formassessment/{id}/{kd_assessment}/{jobcode}', [AssessmentEmployee
 Route::post('/saveformassessment', [AssessmentEmployeeController::class, 'saveFormAssessment']);
 Route::get('/resultAssessment/{id}/{kd_assessment}/{jobcode}', [AssessmentEmployeeController::class, 'resultAssessment']);
 Route::post('/finishForm', [AssessmentEmployeeController::class, 'finishForm']);
+Route::get('/updateAssessment/{id}/{kd_assessment}/{jobcode}', [AssessmentEmployeeController::class, 'reviewAssessment']);
+Route::post('/saveAssessmentUpdate', [AssessmentEmployeeController::class, 'saveAssessmentUpdate']);
 
 // dashboard
 Route::get('/profileEmploy/current', [ProfileEmployController::class, 'show']);

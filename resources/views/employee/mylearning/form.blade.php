@@ -1,4 +1,7 @@
 @extends('layouts.main') @section('body')
+    <div class="mg-t-0 mg-b-5 pd-0">
+        <img src="/images/cap/bnr2.png" alt="">
+    </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
             <nav aria-label="breadcrumb">
@@ -24,27 +27,24 @@
                 <div class="row row-xs">
                     <div class="col-md-6">
                         <h6 class="mg-b-0 tx-10">Competency</h6>
-                        <p class="tx-12 tx-color-03 mg-b-10">{{ $view->competency_name }}</p>
+                        <p class="tx-13 tx-color-03 mg-b-10">{{ $view->competency_name }}</p>
 
                         <h6 class="mg-b-0 tx-10">Performance Standards</h6>
-                        <p class="tx-12 tx-color-03 mg-b-10">{{ $view->ps_name }}</p>
+                        <p class="tx-13 tx-color-03 mg-b-10">{{ $view->ps_name }}</p>
 
                         <h6 class="mg-b-0 tx-10">Level</h6>
-                        <p class="tx-12 tx-color-03 mg-b-0">{{ $view->level }}</p>
+                        <p class="tx-13 tx-color-03 mg-b-0">{{ $view->level }}</p>
 
                     </div>
                     <div class="col-md-5 mg-l-5">
-                        <h6 class="mg-b-0 tx-10">Item ID</h6>
-                        <p class="tx-12 tx-color-03 mg-b-10">{{ $view->item_id }}</p>
-
-                        <h6 class="mg-b-0 tx-10">Leanring Items</h6>
-                        <p class="tx-12 tx-color-03 mg-b-10">{{ $view->item_name }}</p>
+                        <h6 class="mg-b-0 tx-10">Learning Item</h6>
+                        <p class="tx-13 tx-color-03 mg-b-10">{{ $view->item_name }}</p>
 
                         <h6 class="mg-b-0 tx-10">Intervention</h6>
-                        <p class="tx-12 tx-color-03 mg-b-10">{{ $view->intervention }}</p>
+                        <p class="tx-13 tx-color-03 mg-b-10">{{ $view->intervention }}</p>
 
-                        <h6 class="mg-b-0 tx-10">Type Training</h6>
-                        <p class="tx-12 tx-color-03 mg-b-0">{{ $view->type_training }}</p>
+                        <h6 class="mg-b-0 tx-10">Type of Training</h6>
+                        <p class="tx-13 tx-color-03 mg-b-0">{{ $view->type_training }}</p>
                     </div>
                 </div>
             </div>
@@ -54,92 +54,75 @@
             @csrf
 
             <input type="hidden" name="learning_id" id="learning_id" value="{{ $learning_id }}">
-            <div data-label="Example" class="df-example">
-                {{-- <div class="form-group row row-xs">
-                    <label class="col-sm-4 col-form-label">Date</label>
-                    <div class="col-sm-4">
-                        <input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="text" id="dateTo" class="form-control" placeholder="To">
-                    </div>
-                    <div id="datepicker2"></div>
-                </div> --}}
 
-                <div class="form-group row row-xs">
+            <div data-label="Form Close Gap Activity" class="df-example pd-0">
 
-                    <label class="col-sm-4 col-form-label">Date</label>
-                    <div class="col-sm-4">
-                        <input type="date" name="started_at" id="started_at"
-                            class="form-control @error('started_at') is-invalid @enderror" autofocus
-                            placeholder="started_at" />
-                    </div>
-                    @error('started_at')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                <form>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-4 col-form-label">Date <span
+                                class="tx-danger">*</span></label>
+                        <div class="col-sm-4">
+                            <input type="date" name="started_at" id="started_at"
+                                class="form-control @error('started_at') is-invalid @enderror" autofocus
+                                placeholder="started_at" />
                         </div>
-                    @enderror
-                    <div class="col-sm-4">
-                        <input type="date" name="finished_at" id="finished_at"
-                            class="form-control @error('finished_at') is-invalid @enderror" autofocus
-                            placeholder="finished_date" />
-                    </div>
-                    @error('finished_at')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-
-                <div class="form-group row row-xs">
-                    <label class="col-sm-4 col-form-label">Evidence (.pdf)</label>
-                    <div class="form-group">
-                        {{-- <input type="file" class="form-control-file @error('evidence') is-invalid @enderror"
-                            id="evidence" name="evidence" accept="application/pdf"> --}}
-
-                        <input type="file" name="evidence" id="inputFile"
-                            class="form-control @error('evidence') is-invalid @enderror">
-                        @error('evidence')
-                            <span class="text-danger">{{ $message }}</span>
+                        @error('started_at')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                         @enderror
-                    </div>
-                </div>
-
-
-
-                @error('evidence')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-
-                <div class="form-group row row-xs">
-                    <label class="col-sm-4 col-form-label">Remarks</label>
-                    <div class="col-sm-8">
-                        <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment" cols="30"
-                            rows="3" value="{{ old('comment') }}"></textarea>
-                        @error('comment')
+                        <div class="col-sm-4">
+                            <input type="date" name="finished_at" id="finished_at"
+                                class="form-control @error('finished_at') is-invalid @enderror" autofocus
+                                placeholder="finished_date" />
+                        </div>
+                        @error('finished_at')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                    @error('competency_bahasa')
+                    <div class="form-group row">
+                        <label for="inputPassword3" class="col-sm-4 col-form-label">Document (.pdf)<span
+                                class="tx-danger">*</span></label>
+                        <div class="col-sm-8">
+                            <input type="file" name="evidence" id="inputFile"
+                                class="form-control @error('evidence') is-invalid @enderror">
+                            @error('evidence')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    @error('evidence')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
-
-
-                <div class="form-group row mg-b-0">
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-sm btn-primary">
-                            <i data-feather="save" class="wd-10 mg-r-5"></i>
-                            Submit Form
-                        </button>
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-4 pt-0">Remarks</label>
+                        <div class="col-sm-8">
+                            <textarea name="comment" class="form-control @error('comment') is-invalid @enderror" id="comment" cols="30"
+                                rows="3" value="{{ old('comment') }}"></textarea>
+                            @error('comment')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        @error('competency_bahasa')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                </div>
+                    <div class="form-group row mg-b-0">
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-sm btn-primary">Submit Form</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </form>
     </div>
