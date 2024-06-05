@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginLocalController;
 
 use App\Http\Controllers\SSO\ProfileEmployeeController;
 
+use App\Http\Controllers\LandingController;
 // Administrator
 use App\Http\Controllers\CompetencyController;
 use App\Http\Controllers\PerformanceStandardController;
@@ -67,14 +68,14 @@ use App\Http\Controllers\MicrosoftAuthController;
 */
 
 
-
+Route::get('/landingPage', [LandingController::class, 'index']);
 Route::get('/login', 'LoginController@redirectToAzure');
 Route::get('/connect', 'LoginController@handleAzureCallback');
 
 
 // MICROSOFT LOGIN
 // Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
-Route::get('/', [LoginController::class, 'signInForm'])->name('sign.in');
+Route::get('/', [LandingController::class, 'index'])->name('sign.in');
 Route::get('microsoft-oAuth', [LoginController::class, 'microsoftOAuth'])->name('microsoft.oAuth');
 Route::get('authenticate', [LoginController::class, 'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
 

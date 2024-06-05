@@ -16,6 +16,7 @@
                         <img src="/images/admin-2.png" class="img-fluid wd-100 wd-sm-200 mg-b-30" alt="">
                     </a>
                 </div>
+                <a href="/landingPage">Landing Page</a>
             </div>
         </div><!-- container -->
     </div><!-- content -->
