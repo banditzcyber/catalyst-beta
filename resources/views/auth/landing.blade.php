@@ -11,23 +11,28 @@
 <body>
     <header style="">
         <div class="topnav">
-            <img src="/images/cap/logo-white.png" alt="" style="max-width: 450px">
+            <div class="topnav-left">
 
-            <div class="nav-right">
+                <img src="/images/cap/logo-white.png">
+            </div>
+
+            <div class="topnav-right">
                 {{ date('l, d F Y') }} | <a href="/formLogin" style="text-decoration: none; color: #fff;">Admin</a>
             </div>
         </div>
 
         <div class="content">
             <h1>Welcome to MyCatalyst!</h1>
-            <p class="judul" style="margin-bottom: 40px">Develop Yourself, Develop Your Company!</p>
-            <a href="{{ route('microsoft.oAuth') }}" class="dashboard-link button-link">Go to Your Dashboard</a>
+            <p class="judul">Develop Yourself, Develop Your Company!</p>
+            <a href="{{ route('microsoft.oAuth') }}" class="button-link">Go to Your Dashboard</a>
         </div>
     </header>
     <main>
         <div class="card">
             <div class="card-header">
-                <img src="/images/cap/02.jpg" alt="">
+                <picture>
+                    <img src="/images/cap/02.jpg">
+                </picture>
             </div>
             <div class="card-content">
                 <h2>Competency</h2>

@@ -1,7 +1,11 @@
-
+@font-face /*perintah untuk memanggil font eksternal*/
+{
+    font-family: 'GTEsti'; /*memberikan nama bebas untuk font*/
+    src: url('/fonts/GTEsti/GTEestiProText-light.otf');/*memanggil file font eksternalnya di folder nexa*/
+}
 
 body {
-    font-family: 'Arial', Arial, sans-serif;
+    font-family: GTEsti;
     margin: 0;
     padding: 0;
 }
@@ -17,6 +21,34 @@ header {
     height: 100%;
     color: white;
 }
+.topnav {
+    overflow: hidden;
+    /* background-color: #0e0a0a; */
+    margin-top: 30px;
+  }
+
+.topnav-left img{
+    float: left;
+    width: 430px;
+    margin-left: 70px;
+}
+
+.topnav-right {
+    float: right;
+    color: #fff;
+    font-size: 16px;
+    margin-right: 40px;
+    margin-top: 20px;
+}
+
+.topnav-right a {
+    text-decoration: none;
+}
+
+.topnav-right a:hover{
+    color: #93c5f0;
+}
+
 .content {
     margin-top: 300px;
     margin-bottom: 250px;
@@ -29,31 +61,23 @@ header h1 {
 }
 
 .judul {
-    margin-bottom: 20px;
     font-size: 35px;
 }
 
 .button-link {
-    width: 250px;
-    height: 250px;
-    background: blue;
-    padding: 15px 60px;
+    background-color: #2477b9; /* Green */
+    border: none;
+    color: white;
+    padding: 17px 72px;
+    text-align: center;
     text-decoration: none;
-    margin-top: 20px;
-    font-size: 25px;
+    display: inline-block;
+    font-size: 27px;
+    border-radius: 5px;
 }
 
 .button-link:hover {
-    color: white;
-}
-
-.dashboard-link {
-    text-decoration: none;
-    color: #ffffff;
-}
-
-.dashboard-link:hover {
-    color: #93c5f0;
+    color: rgb(174, 174, 180);
 }
 
 main {
@@ -68,6 +92,7 @@ main {
     margin: 10px;
     width: calc(25% - 40px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
 }
 
 .card-header img{
@@ -122,36 +147,6 @@ footer p {
     margin: 0;
 }
 
-.topnav {
-    overflow: hidden;
-    /* background-color: #333; */
-  }
 
-.topnav img {
-    text-decoration: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: 0%;
-    left: 25%;
-    transform: translate(-50%);
-}
-
-.nav-right {
-    text-decoration: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    top: 10%;
-    left: 80%;
-    transform: translate(-50%);
-    color: #fff;
-    font-size: 16px;
-}
-
-  .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
 
 
