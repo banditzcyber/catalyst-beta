@@ -3,7 +3,7 @@
 
 <li class="nav-item {{ request()->is('profileEmploy*') ? 'active' : '' }}">
     <a href="/profileEmploy" class="nav-link">
-        <i data-feather="user"></i> <span>Profile</span>
+        <i data-feather="monitor"></i> <span>Dashboard</span>
     </a>
 </li>
 

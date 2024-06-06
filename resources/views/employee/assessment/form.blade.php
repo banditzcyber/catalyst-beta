@@ -3,14 +3,14 @@
 @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
 
-        <img src="/images/cap/bnr.png" alt="">
+        <img src="/images/cap/bnr.jpg" alt="">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                     <li class="breadcrumb-item">
-                        <a href="#">{{ $title }}</a>
+                        {{-- <a href="#">{{ $title }}</a> --}}
                     </li>
                 </ol>
             </nav>
@@ -24,9 +24,9 @@
         </div>
     </div>
     <h5 class="x-spacing--4 tx-sans tx-indigo tx-uppercase mb-1">{{ $competency_name }}</h5>
-    <p class="tx-12">{{ $competency_desc }}
-        <label class="tx-12 tx-italic">{{ $competency_desc_bahasa }}</label>
-    </p>
+    <p class="tx-12 mg-t-20">{{ $competency_desc }}</p>
+    <label class="tx-12 tx-italic">{{ $competency_desc_bahasa }}</label>
+
 
 
 
@@ -62,7 +62,7 @@
                     <select name="assessment_result[]" id="assessment_result" class="tx-12 custom-select mg-b-5 pd-t-5"
                         style="width: 190px; border-radius: 0px; height: 30px;">
                         <option value="2" class="tx-italic">--please select--</option>
-                        <option value="1">Competent</option>
+                        <option value="1">Complete</option>
                         <option value="2">Need Improvement</option>
                         <option value="3">Not Applicable</option>
                     </select>&nbsp;<span class="badge badge-warning tx-italic">if not selected, it will automatically
@@ -73,7 +73,7 @@
                 </div>
             </div>
         @endforeach
-        <input type="submit" class="btn btn-info btn-block" value="Save"
+        <input type="submit" class="btn btn-primary btn-block tx-16" value="SAVE"
             onclick="return confirm('Are you sure you want to submit this form?');">
     </form>
     </div>

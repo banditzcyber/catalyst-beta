@@ -1,6 +1,6 @@
 @extends('layouts.main') @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
-        <img src="/images/cap/bnr2.png" alt="">
+        <img src="/images/cap/bnr2.jpg" alt="">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         {{-- <div>
@@ -82,18 +82,24 @@
                                         <p class="tx-13 tx-bold mg-b-0">
                                             {{ str_word_count($post->item_name) > 5 ? substr($post->item_name, 0, 25) . ' [...]' : $post->item_name }}
                                         </p>
-                                        <label class="badge badge-light">{{ $post->intervention }}</label>
+                                        <label class="badge badge-light">
+                                            {{ str_word_count($post->intervention) > 2 ? substr($post->intervention, 0, 10) . ' [...]' : $post->intervention }}
+                                            {{-- {{ $post->intervention }} --}}
+                                        </label>
                                         <label class="badge badge-light">{{ $post->type_training }}</label>
 
                                     </div>
-                                    <a href="/mylearnig/form/{{ $post->id }}"
-                                        class="btn btn-xs btn-warning {{ $action }}">
-                                        Action
-                                    </a>
-                                    <a href="/mylearnig/details/{{ $post->id }}"
-                                        class="btn btn-xs btn-dark {{ $detail }}">
-                                        Detail
-                                    </a>
+                                    <div class="mg-b-10">
+
+                                        <a href="/mylearnig/form/{{ $post->id }}"
+                                            class="btn btn-xs btn-warning {{ $action }}">
+                                            Action
+                                        </a>
+                                        <a href="/mylearnig/details/{{ $post->id }}"
+                                            class="btn btn-xs btn-dark {{ $detail }}">
+                                            Detail
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div><!-- card-body -->

@@ -3,7 +3,7 @@
 @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
 
-        <img src="/images/cap/bnr.png" alt="">
+        <img src="/images/cap/bnr.jpg" alt="">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
@@ -98,7 +98,7 @@
                         </label>
 
                         <label class="tx-10 tx-italic">
-                            {{ str_word_count($vData->description) > 30 ? substr($vData->description, 0, 230) . ' [...]' : $vData->description }}
+                            {{ str_word_count($vData->description) > 30 ? substr($vData->description, 0, 183) . ' [...]' : $vData->description }}
                             <label>
                     </div>
 

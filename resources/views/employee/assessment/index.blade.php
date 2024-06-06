@@ -3,7 +3,7 @@
 @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
 
-        <img src="/images/cap/bnr.png" alt="">
+        <img src="/images/cap/bnr.jpg" alt="">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
@@ -60,7 +60,7 @@
                             <span class="badge badge-pill badge-dark mg-r-5 tx-12">{{ $vData->year }}</span>
 
                             @if ($vData->status == 1)
-                                <span class="badge badge-pill badge-dark mg-r-5 tx-12">Self Assessment</span>
+                                <span class="badge badge-pill badge-danger mg-r-5 tx-12">Self Assessment</span>
                             @elseif($vData->status == 2)
                                 <span class="badge badge-pill badge-warning mg-r-5 tx-12">Review by superior</span>
                             @else

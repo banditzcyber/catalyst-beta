@@ -9,8 +9,9 @@
                         </ol>
                     </nav>
                     @foreach ($employee as $vEmployee)
-                        <h5 class="mg-b-0 tx-spacing--1">Hallo! {{ $vEmployee->employee_name }}
+                        <h5 class="mg-b-0 tx-spacing--1">Hello, {{ $vEmployee->employee_name }}
                             ({{ $vEmployee->employee_id }})
+                            !
                         </h5>
                     @endforeach
                 </div>
@@ -146,7 +147,7 @@
                                     <p class="tx-10 tx-uppercase tx-medium tx-color-03 tx-spacing-1 mg-b-5">Need Improve
                                     </p>
                                     <div class="d-flex align-items-center">
-                                        <div class="wd-10 ht-10 rounded-circle bg-orange mg-r-5"></div>
+                                        <div class="wd-10 ht-10 rounded-circle bg-danger mg-r-5"></div>
                                         <h5 class="tx-normal tx-rubik mg-b-0">{{ $sumNeed }}</small>
                                         </h5>
                                     </div>

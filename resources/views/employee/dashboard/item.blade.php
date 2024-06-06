@@ -9,7 +9,7 @@
                         </ol>
                     </nav>
                     @foreach ($employee as $vEmployee)
-                        <h4 class="mg-b-0 tx-spacing--1">Hallo! {{ $vEmployee->employee_name }}</h4>
+                        <h4 class="mg-b-0 tx-spacing--1">Hallo, {{ $vEmployee->employee_name }} !</h4>
                     @endforeach
                 </div>
                 <div class="d-none d-md-block">
@@ -27,20 +27,20 @@
 
 
                     <div class="card">
-                        <div class="card-header tx-uppercase tx-bold">
+                        <div class="card-header tx-uppercase tx-bold bg-danger tx-white">
                             Item Need Improvement
                         </div>
                         <div class="card-body pd-y-10 pd-x-10">
                             <div class="table-responsive">
-                                <table id="need" class="table table-bordered table-secondary tx-11">
+                                <table id="need" class="table table-bordered table-danger tx-11">
                                     <thead class="thead-primary">
                                         <tr class="tx-uppercase tx-center">
                                             <th class="">Competency</th>
-                                            <th class="">Performance Standard</th>
+                                            <th>Performance Standard</th>
                                             <th class="">level</th>
-                                            <th>Item Name</th>
+                                            <th class="tx-center">Item Name</th>
                                             <th>Intervention</th>
-                                            <th class="wd-10p">Type</th>
+                                            <th class="tx-center">Type</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,10 +48,10 @@
                                             <tr>
                                                 <td>{{ $view->competency_name }}</td>
                                                 <td>{{ $view->ps_name }}</td>
-                                                <td>{{ $view->level }}</td>
+                                                <td style="text-align: center">{{ $view->level }}</td>
                                                 <td>{{ $view->item_name }}</td>
                                                 <td>{{ $view->intervention }}</td>
-                                                <td>{{ $view->type_training }}</td>
+                                                <td class="tx-center">{{ $view->type_training }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -63,8 +63,8 @@
 
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header tx-uppercase tx-bold">
-                            Item Competent
+                        <div class="card-header tx-uppercase tx-bold bg-primary tx-white">
+                            Item completed
                         </div>
                         <div class="card-body pd-y-10 pd-x-10">
                             <div class="table-responsive">
