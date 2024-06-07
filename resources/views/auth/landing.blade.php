@@ -28,6 +28,20 @@
             <a href="{{ route('microsoft.oAuth') }}" class="button-link">Go to Your Dashboard</a>
         </div>
     </header>
+
+    @php
+        $competency =
+            'Competency is the ability to apply knowledge, skills and behavior in performing activities within an occupation or function to the standards expected. In Chandra Asri, we have Leadership and Functional Competencies.';
+        $assessment = "Competency assessment to evaluate proficiency and effectiveness in executing specific tasks and
+                    responsibilities within your role. After finalizing self-assessment, the result will be validated by
+                    your superior to get the final result.";
+        $development = "The competency assessment results will be analyzed to develop planning and implementation of a
+                    learning and development program for employees. In Chandra Asri, we adopt the Blended Learning Model
+                    (70:20:10)
+for learning implementation.";
+        $why = "The process of competency and employee’s development management is linked with other HR processes in
+                    line with business strategy to drive excellence in employee performance";
+    @endphp
     <main>
         <div class="card">
             <div class="card-header">
@@ -37,9 +51,8 @@
             </div>
             <div class="card-content">
                 <label>Competency</label>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis eleifend libero, ac tristique
-                    magna
-                    tincidunt et.</p>
+                <p>{{ str_word_count($competency) > 30 ? substr($competency, 0, 183) . ' [...]' : $competency }}
+                </p>
             </div>
             <div class="card-footer">
                 <a href="#" class="read-more">Read more ></a>
@@ -51,9 +64,7 @@
             </div>
             <div class="card-content">
                 <label>Assessment</label>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis eleifend libero, ac tristique
-                    magna
-                    tincidunt et.</p>
+                <p>{{ str_word_count($assessment) > 30 ? substr($assessment, 0, 183) . ' [...]' : $assessment }}</p>
             </div>
             <div class="card-footer">
                 <a href="#" class="read-more">Read more ></a>
@@ -65,9 +76,7 @@
             </div>
             <div class="card-content">
                 <label>Development</label>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis eleifend libero, ac tristique
-                    magna
-                    tincidunt et.</p>
+                <p>{{ str_word_count($development) > 30 ? substr($development, 0, 183) . ' [...]' : $development }}</p>
             </div>
             <div class="card-footer">
                 <a href="#" class="read-more">Read more ></a>
@@ -79,9 +88,7 @@
             </div>
             <div class="card-content">
                 <label>Why is this important?</label>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis eleifend libero, ac tristique
-                    magna
-                    tincidunt et.</p>
+                <p>{{ str_word_count($why) > 30 ? substr($why, 0, 183) . ' [...]' : $why }}</p>
             </div>
             <div class="card-footer">
                 <a href="#" class="read-more">Read more ></a>
