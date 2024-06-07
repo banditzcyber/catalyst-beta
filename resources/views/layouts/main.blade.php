@@ -10,8 +10,8 @@
     <!-- Meta -->
     <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
     <meta name="author" content="ThemePixels">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src https://fonts.googleapis.com; child-src 'none'; object-src 'none'">
+    {{-- <meta http-equiv="Content-Security-Policy"
+        content="default-src https://fonts.googleapis.com; child-src 'none'; object-src 'none'"> --}}
     {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;"> --}}
 
     <!-- Favicon -->
