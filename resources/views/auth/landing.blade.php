@@ -23,8 +23,8 @@
         </div>
 
         <div class="content">
-            <h1>Welcome to MyCatalyst</h1>
-            <p class="judul">Develop Yourself, Develop Your Company!</p>
+            <label>Welcome to MyCatalyst!</label>
+            <p class="judul">Grow what matters. when you grow. we do too.</p>
             <a href="{{ route('microsoft.oAuth') }}" class="button-link">Go to Your Dashboard</a>
         </div>
     </header>
@@ -36,10 +36,12 @@
                 </picture>
             </div>
             <div class="card-content">
-                <h2>Competency</h2>
+                <label>Competency</label>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis eleifend libero, ac tristique
                     magna
                     tincidunt et.</p>
+            </div>
+            <div class="card-footer">
                 <a href="#" class="read-more">Read more ></a>
             </div>
         </div>
@@ -48,10 +50,12 @@
                 <img src="/images/cap/03.jpg" alt=""">
             </div>
             <div class="card-content">
-                <h2>Assessment</h2>
+                <label>Assessment</label>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis eleifend libero, ac tristique
                     magna
                     tincidunt et.</p>
+            </div>
+            <div class="card-footer">
                 <a href="#" class="read-more">Read more ></a>
             </div>
         </div>
@@ -60,10 +64,12 @@
                 <img src="/images/cap/04.jpg" alt=""">
             </div>
             <div class="card-content">
-                <h2>Development</h2>
+                <label>Development</label>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis eleifend libero, ac tristique
                     magna
                     tincidunt et.</p>
+            </div>
+            <div class="card-footer">
                 <a href="#" class="read-more">Read more ></a>
             </div>
         </div>
@@ -72,10 +78,12 @@
                 <img src="/images/cap/05.jpg" alt=""">
             </div>
             <div class="card-content">
-                <h2>Why is this important?</h2>
+                <label>Why is this important?</label>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam mollis eleifend libero, ac tristique
                     magna
                     tincidunt et.</p>
+            </div>
+            <div class="card-footer">
                 <a href="#" class="read-more">Read more ></a>
             </div>
         </div>

@@ -1,29 +1,24 @@
 
 @font-face {
     font-family: 'GTEsti';
-    src: url('/fonts/GTEsti/GTEestiProDisplay-Regular.woff2') format('woff2');
+    src: url('/fonts/GTEsti/GTEestiProDisplay-Light.woff2') format('woff2'),
+         url('/fonts/GTEsti/GTEestiProDisplay-Light.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'GTEsti';
-    src: url('/fonts/GTEsti/GTEestiProDisplay-Medium.woff2') format('woff2');
-    font-weight: bold;
+    font-family: 'GTEstiUltra';
+    src: url('/fonts/GTEsti/GTEestiProDisplay-UltraLight.woff2') format('woff2'),
+         url('/fonts/GTEsti/GTEestiProDisplay-UltraLight.woff') format('woff');
+    font-weight: light;
     font-style: normal;
 }
-@font-face {
-    font-family: 'GTEsti';
-    src: url('/fonts/GTEsti/GTEestiProDisplay-thin.woff2') format('woff2');
-    font-weight: thin;
-    font-style: normal;
-}
-
-
 
 body {
     font-family: GTEsti;
     margin: 0;
     padding: 0;
+    font-weight: normal;
 }
 
 header {
@@ -47,18 +42,20 @@ header {
 .topnav-left img{
     float: left;
     width: 430px;
-    margin-left: 70px;
+    margin-left: 90px;
 }
 
 .topnav-right {
     float: right;
-    font-size: 16px;
+    font-size: 20px;
     margin-right: 40px;
     margin-top: 20px;
+    font-family: GTEstiUltra;
 }
 
 .topnav-right a {
     text-decoration: none;
+    color: #fff;
 }
 
 .topnav-right a:hover{
@@ -66,10 +63,14 @@ header {
 }
 
 .content {
-    margin-top: 300px;
+    margin-top: 250px;
     margin-bottom: 250px;
 }
 
+.content label {
+    font-size: 50px;
+    font-weight: bold;
+}
 
 header h1 {
     margin-top: 0;
@@ -89,12 +90,13 @@ header h1 {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 27px;
+    font-size: 28px;
     border-radius: 5px;
 }
 
 .button-link:hover {
-    color: rgb(174, 174, 180);
+    /* color: rgb(174, 174, 180); */
+    font-weight: bold;
 }
 
 main {
@@ -122,7 +124,19 @@ main {
     height: 180px;
 }
 .card-content {
+    padding: 15px 18px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+.card-content label{
+    font-size: 25px;
+}
+.card-footer {
     padding: 10px;
+    float: right;
+    padding-right: 30px;
+    padding-bottom: 20px;
+    font-size: 15px;
 }
 
 .section {
@@ -141,22 +155,21 @@ main {
 .read-more {
     text-decoration: none;
     color: #337ab7;
-    font-size: 12px;
-    flex: right;
 }
 
 .read-more:hover {
     color: #23527c;
+    font-weight: bold;
 }
 
 footer {
-    background-color: #3269e9;
-    padding: 30px;
+    background-color: #2477b9;
+    padding: 20px 0px;
     text-align: center;
     clear: both;
     text-align: center;
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
 
 }
 
