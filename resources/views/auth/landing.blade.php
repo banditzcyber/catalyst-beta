@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
     <title>MyCatalyst</title>
     <link rel="stylesheet" href="/css/landing.css">
 </head>
 
 <body>
-    <header style="">
+    <header>
         <div class="topnav">
             <div class="topnav-left">
 
@@ -17,12 +18,12 @@
             </div>
 
             <div class="topnav-right">
-                {{ date('l, d F Y') }} | <a href="/formLogin" style="text-decoration: none; color: #fff;">Admin</a>
+                {{ date('l, d F Y') }} | <a href="/formLogin">Admin</a>
             </div>
         </div>
 
         <div class="content">
-            <h1>Welcome to MyCatalyst! apakah ini sudah sama</h1>
+            <h1>Welcome to MyCatalyst</h1>
             <p class="judul">Develop Yourself, Develop Your Company!</p>
             <a href="{{ route('microsoft.oAuth') }}" class="button-link">Go to Your Dashboard</a>
         </div>

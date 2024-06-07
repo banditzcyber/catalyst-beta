@@ -35,7 +35,6 @@ header {
 
 .topnav-right {
     float: right;
-    color: #fff;
     font-size: 16px;
     margin-right: 40px;
     margin-top: 20px;
@@ -46,7 +45,7 @@ header {
 }
 
 .topnav-right a:hover{
-    color: #93c5f0;
+    color: #676869;
 }
 
 .content {
