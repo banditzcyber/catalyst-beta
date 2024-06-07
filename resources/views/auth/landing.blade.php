@@ -22,7 +22,7 @@
         </div>
 
         <div class="content">
-            <h1>Welcome to MyCatalyst!</h1>
+            <h1>Welcome to MyCatalyst! apakah ini sudah sama</h1>
             <p class="judul">Develop Yourself, Develop Your Company!</p>
             <a href="{{ route('microsoft.oAuth') }}" class="button-link">Go to Your Dashboard</a>
         </div>
