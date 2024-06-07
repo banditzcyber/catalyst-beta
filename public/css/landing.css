@@ -1,11 +1,20 @@
-@font-face /*perintah untuk memanggil font eksternal*/
-{
-    font-family: 'GTEsti'; /*memberikan nama bebas untuk font*/
-    src: url('/fonts/GTEsti/GTEestiProText-light.otf');/*memanggil file font eksternalnya di folder nexa*/
+
+@font-face {
+    font-family: 'GTEsti';
+    src: url('/fonts/GTEsti/GTEestiProText-light.otf') format('otf');
+    font-weight: light;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GTEsti';
+    src: url('/fonts/GTEsti/GTEestiProText-Bold.otf') format('otf');
+    font-weight: light;
+    font-style: normal;
 }
 
 body {
-    font-family: GTEsti;
+    font-family: 'GTEsti';
     margin: 0;
     padding: 0;
 }
