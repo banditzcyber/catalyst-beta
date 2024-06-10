@@ -222,7 +222,7 @@
         </div><!-- container -->
     </div><!-- content -->
     @push('scripts')
-        <script nonce="randomNonceValue">
+        <script>
             $(document).ready(function() {
                 $('#viewdata').DataTable();
             })

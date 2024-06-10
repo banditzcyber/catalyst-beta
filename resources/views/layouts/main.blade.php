@@ -10,16 +10,13 @@
     <!-- Meta -->
     <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
     <meta name="author" content="ThemePixels">
-    {{-- <meta http-equiv="Content-Security-Policy"
-        content="default-src https://fonts.googleapis.com; child-src 'none'; object-src 'none'"> --}}
-    {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;"> --}}
 
     {{-- <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudfront.net *.apis.google.com *.googleadservices.com *.googletraveladservices.com *.adroll.com *.cloudfront.net everesttech.net" />
-    <meta http-equiv="Content-Security-Policy" content="font-src 'self' https://fonts.googleapis.com"> --}}
+        content="default-src 'self'; img-src 'self'; object-src 'none'; script-src 'self'; style-src 'self'; script-src-attr 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self';"> --}}
 
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; img-src 'self'; object-src 'none'; script-src 'self' 'nonce-randomNonceValue'; style-src 'self' 'nonce-randomNonceValue' 'unsafe-inline'; frame-ancestors 'self'; base-uri 'self'; form-action 'self';">
+    {{-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';"> --}}
+    {{-- <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' unsafe-inline;"> --}}
 
     <!-- Favicon -->
     <link rel="shortcut
