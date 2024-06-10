@@ -224,13 +224,6 @@
     @push('scripts')
         <script nonce="randomNonceValue">
             $(document).ready(function() {
-                const scroll1 = new PerfectScrollbar('#scroll1', {
-                    suppressScrollX: true
-                });
-            })
-
-
-            $(document).ready(function() {
                 $('#viewdata').DataTable();
             })
 
