@@ -12,16 +12,10 @@
                         </ol>
                     </nav>
                     @foreach ($employee as $vEmployee)
-                        @php
-                            if ($vEmployee->gender == 'Male' or $vEmployee->gender == 'M') {
-                                $gender = 'Mr.';
-                            } else {
-                                $gender = 'Mrs.';
-                            }
-                        @endphp
-                        <h4 class="tx-sans mg-b-0 tx-spacing--1">Welcome {{ $gender }} {{ $vEmployee->employee_name }}
+                        <h5 class="mg-b-0 tx-spacing--1">Hello, {{ $vEmployee->employee_name }}
                             ({{ $vEmployee->employee_id }})
-                        </h4>
+                            !
+                        </h5>
                     @endforeach
                 </div>
                 <div class="d-none d-md-block">
@@ -75,7 +69,7 @@
 
                     <div class="card">
                         <div class="card-header d-flex align-items-center justify-content-between tx-uppercase">
-                            <h6 class="mg-b-0 tx-sans ">Progress Competency your teams</h6>
+                            <h6 class="mg-b-0 tx-sans ">Annual Learning Development Plan teams</h6>
 
                         </div><!-- card-header -->
 
@@ -125,71 +119,6 @@
 
             </div>
 
-            <div class="row row-xs">
-
-
-                <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card">
-                        <div class="card-body pd-y-20 pd-x-25">
-                            <div class="row row-sm">
-                                <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">1</h3>
-                                    <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-primary mg-b-5">Completed
-                                        Training
-                                    </h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">completed training based on ALDP.</p>
-                                </div>
-                                <div class="col-5">
-                                    <div class="chart-ten">
-                                        <div id="flotChart4" class="flot-chart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- card-body -->
-                    </div><!-- card -->
-                </div><!-- col -->
-                <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card">
-                        <div class="card-body pd-y-20 pd-x-25">
-                            <div class="row row-sm">
-                                <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">1</h3>
-                                    <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-teal mg-b-5">Planned
-                                        Training
-                                    </h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">training planned or not complete yet based on ALDP
-                                    </p>
-                                </div>
-                                <div class="col-5">
-                                    <div class="chart-ten">
-                                        <div id="flotChart4" class="flot-chart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- card-body -->
-                    </div><!-- card -->
-                </div><!-- col -->
-                <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card">
-                        <div class="card-body pd-y-20 pd-x-25">
-                            <div class="row row-sm">
-                                <div class="col-7">
-                                    <h3 class="tx-normal tx-rubik tx-spacing--1 mg-b-5">1</h3>
-                                    <h6 class="tx-12 tx-semibold tx-uppercase tx-spacing-1 tx-pink mg-b-5">Total
-                                        Training</h6>
-                                    <p class="tx-11 tx-color-03 mg-b-0">total training based on ALDP.</p>
-                                </div>
-                                <div class="col-5">
-                                    <div class="chart-ten">
-                                        <div id="flotChart5" class="flot-chart"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- card-body -->
-                    </div><!-- card -->
-                </div><!-- col -->
-
-            </div><!-- row -->
 
         </div><!-- container -->
     </div><!-- content -->
@@ -283,9 +212,9 @@
             $(function() {
                 'use strict'
 
-                var ctxLabel = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                var ctxData1 = [20, 60, 50, 45, 50, 60, 70, 40, 45, 35, 25, 30];
-                var ctxData2 = [10, 40, 30, 40, 60, 55, 45, 35, 30, 20, 15, 20];
+                var ctxLabel = ["Jan", 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                var ctxData1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var ctxData2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 var ctxColor1 = '#001737';
                 var ctxColor2 = '#1ce1ac';
 

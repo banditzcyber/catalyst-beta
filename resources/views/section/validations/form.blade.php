@@ -1,6 +1,10 @@
 @extends('layouts.main')
 
 @section('body')
+    <div class="mg-t-0 mg-b-5 pd-0">
+
+        <img src="/images/cap/bnr4.jpg" alt="">
+    </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
             <nav aria-label="breadcrumb">
@@ -13,13 +17,16 @@
             <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
         </div>
         <div class="d-none d-md-block">
-            <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+            <a href="/assessmentValidation/show/{{ $assessment_id }}"
+                class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
                 <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                 back
             </a>
         </div>
     </div>
-
+    <h5 class="x-spacing--4 tx-sans tx-indigo tx-uppercase mb-1">{{ $competency_name }}</h5>
+    <p class="tx-12 mg-t-20">{{ $competency_desc }}</p>
+    <label class="tx-12 tx-italic">{{ $competency_desc_bahasa }}</label>
 
 
     <form id="form" action="/savevalidationform" method="post">

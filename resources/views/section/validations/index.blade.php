@@ -1,23 +1,27 @@
 @extends('layouts.main') @section('body')
+    <div class="mg-t-0 mg-b-5 pd-0">
+
+        <img src="/images/cap/bnr4.jpg" alt="">
+    </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-            <nav aria-label="breadcrumb">
+            {{-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                     <li class="breadcrumb-item">
                         <a href="#">{{ $title }}</a>
                     </li>
                 </ol>
             </nav>
-            <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
+            <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4> --}}
         </div>
 
-        <div class="d-none d-md-block">
+        {{-- <div class="d-none d-md-block">
             <div class="col-sm-12">
                 <h3 class="">
                     Total Data : {{ $countData }}
                 </h3 class="tx-uppercase">
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
@@ -48,33 +52,33 @@
                         if ($view->status == 1) {
                             $color = 'bg-light';
                             $text = 'Self Assessment';
-                            $btn = 'disabled="disabled"';
-                            $btnColor = 'badge-primary';
+                            $btn = 'disabled';
+                            $link = '#';
+                            $onclick = "alert('assessment is still blank!')";
+                            $btnColor = 'badge-light';
                         } elseif ($view->status == 2) {
                             $color = 'bg-warning';
                             $text = 'Review by Superior';
                             $btn = '';
-                            $btnColor = 'badge-primary';
+                            $btnColor = 'badge-warning';
+                            $link = '/assessmentValidation/show/' . $view->id;
+                            $onclick = '#';
                         } else {
                             $color = 'bg-success';
                             $text = 'Completed';
-                            $btn = 'disabled="disabled"';
-                            $btnColor = 'badge-light';
+                            $btn = '';
+                            $btnColor = 'badge-warning';
+                            $link = '/assessmentValidation/show/' . $view->id;
+                            $onclick = '#';
                         }
                     @endphp
 
                     <tr>
                         <td class="tx-center">
-                            <a href="/assessmentValidation/show/{{ $view->id }}" class="badge badge-warning pd-y-0"><i
-                                    data-feather="eye" class="wd-15"></i></a>
-
-                            <form action="/finishFormValidation" method="POST" onclick="return confirm('Are you sure?')"
-                                class="d-inline">
-                                @csrf
-                                <input type="hidden" name="assessment_id" value="{{ $view->id }}">
-                                <button class="badge  pd-y-0 border-0  {{ $btnColor }}" {{ $btn }}
-                                    title="update status"><i data-feather="arrow-up-circle" class="wd-15"></i></button>
-                            </form>
+                            <a href="{{ $link }}" onclick="{{ $onclick }}"
+                                class="badge {{ $btnColor }} pd-y-0 {{ $btn }}" title="Review Assessment">
+                                <i data-feather="feather" class="wd-15"></i>
+                            </a>
                         </td>
                         <td class="pd-t-25">{{ $view->employee_id }}</td>
                         <td>{{ $view->employee_name }}</td>

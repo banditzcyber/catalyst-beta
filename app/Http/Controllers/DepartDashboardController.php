@@ -47,6 +47,10 @@ class DepartDashboardController extends Controller
 
         $qSubordinate       = DB::table('employees')->where('dm_code', $idLogin);
 
+        $bulan  = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+
+        // dd($bulan);
+
         return view('department.dashboard.index', [
             'title'             => 'Dashboard',
             //penting
@@ -61,7 +65,8 @@ class DepartDashboardController extends Controller
             'subordinate'       => $qSubordinate->count(),
             'countLearning'     => $countLearning,
             'competentLearning' => $competenctLearning,
-            'plannedLearning'   => $plannedLearning
+            'plannedLearning'   => $plannedLearning,
+            'bulan'             => json_encode($bulan)
 
 
         ]);

@@ -222,7 +222,7 @@
         </div><!-- container -->
     </div><!-- content -->
     @push('scripts')
-        <script nonce="{{ nonce }}">
+        <script>
             $(document).ready(function() {
                 const scroll1 = new PerfectScrollbar('#scroll1', {
                     suppressScrollX: true

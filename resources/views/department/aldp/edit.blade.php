@@ -1,4 +1,7 @@
 @extends('layouts.main') @section('body')
+    <div class="mg-t-0 mg-b-15 pd-0">
+        <img src="/images/cap/bnr3.jpg" alt="">
+    </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
             <nav aria-label="breadcrumb">
@@ -33,13 +36,18 @@
                 </div>
             </div>
 
+            <input type="hidden" class="form-control @error('item_id') is-invalid @enderror" placeholder="Search..."
+                name="item_id" id="item_id" value="{{ old('item_id', $data->item_id) }}" readonly />
+
             <div class="form-group row row-xs">
-                <label class="col-sm-4 col-form-label">Item ID</label>
+                <label class="col-sm-4 col-form-label">Competency</label>
                 <div class="col-sm-8">
                     <div class="input-group">
-                        <input type="text" class="form-control @error('item_id') is-invalid @enderror"
-                            placeholder="Search..." name="item_id" id="item_id"
-                            value="{{ old('item_id', $data->item_id) }}" readonly />
+
+                        <input type="text" name="competency_name" id="competency_name"
+                            class="form-control @error('competency_name') is-invalid @enderror" autofocus
+                            value="{{ old('competency_name', $data->competency_name) }}" placeholder="competency_name"
+                            readonly />
                         <div class="input-group-append">
                             <button class="btn btn-outline-light" type="button" data-toggle="modal"
                                 data-target="#modalItem">
@@ -48,21 +56,7 @@
                         </div>
                     </div>
                 </div>
-                @error('item_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
-            <div class="form-group row row-xs">
-                <label class="col-sm-4 col-form-label">Item Name</label>
-                <div class="col-sm-8">
-                    <input type="text" name="item_name" id="item_name"
-                        class="form-control @error('item_name') is-invalid @enderror"
-                        value="{{ old('item_name', $data->item_name) }}" placeholder="item_name" readonly />
-                </div>
-                @error('item_name')
+                @error('competency_name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
@@ -88,14 +82,13 @@
             </div>
 
             <div class="form-group row row-xs">
-                <label class="col-sm-4 col-form-label">Competency</label>
+                <label class="col-sm-4 col-form-label">Learning Item</label>
                 <div class="col-sm-8">
-                    <input type="text" name="competency_name" id="competency_name"
-                        class="form-control @error('competency_name') is-invalid @enderror" autofocus
-                        value="{{ old('competency_name', $data->competency_name) }}" placeholder="competency_name"
-                        readonly />
+
+                    <textarea name="item_name" class="form-control @error('item_name') is-invalid @enderror" id="item_name" cols="30"
+                        rows="3" name="desc" value="{{ old('item_name') }}">{{ $data->item_name }}</textarea>
                 </div>
-                @error('competency_name')
+                @error('item_name')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

@@ -27,11 +27,6 @@ class AssessmentValidationController extends Controller
                     ->select('assessments.*', 'employees.employee_name', 'employees.position')
                     ->where('employees.sm_code', $idLogin);
 
-        if(request('search')) {
-            $search->where('assessments.employee_id', 'like', '%' . request('search') . '%')
-                   ->orWhere('employees.employee_name', 'like', '%' . request('search') . '%')
-                   ->orWhere('assessments.year', 'like', '%' . request('search') . '%');
-        }
 
         return view('section.validations.index', [
             'title'             => 'Assessment Validation',
@@ -53,9 +48,10 @@ class AssessmentValidationController extends Controller
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 
-        $status     = DB::table('assessments')
-                        ->where('id', $id)
-                        ->select('status', 'id', 'jobcode')
+        $status     = DB::table('assessments as a')
+                        ->join('employees as e', 'e.employee_id', '=', 'a.employee_id')
+                        ->where('a.id', $id)
+                        ->select('a.status', 'a.id', 'a.jobcode', 'e.employee_name', 'a.employee_id')
                         ->get();
 
         $competency     = DB::table('profile_matrices')
@@ -69,16 +65,27 @@ class AssessmentValidationController extends Controller
                             ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
                             ->join('competencies', 'performance_standards.competency_id', '=', 'competencies.competency_id')
                             ->where('assessment_details.assessment_id', '=', $id);
+        foreach ($status as $vStatus) :
+            $dStatus        = $vStatus->status;
+            $dJobcode       = $vStatus->jobcode;
+            $dEmployeeName  = $vStatus->employee_name;
+            $dEmployee_id   = $vStatus->employee_id;
+            $kd_assessment  = $vStatus->id;
+        endforeach;
 
         return view('section.validations.detail', [
             'title'             => 'Assessment Detail',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'status'            => $status,
             'data'              => $competency->get(),
             'valid'             => $valid,
-            'id'                => $id
+            'id'                => $id,
+            'status'            => $dStatus,
+            'jobcode'           => $dJobcode,
+            'employee_name'     => $dEmployeeName,
+            'employee_id'       => $dEmployee_id,
+            'kd_assessment'     => $kd_assessment
         ]);
     }
 
@@ -112,13 +119,23 @@ class AssessmentValidationController extends Controller
                         ->where('assessment_details.assessment_id', '=', $id)
                         ->where('competencies.competency_id', $competency_id);
 
+        $competency             = DB::table('competencies')->where('competency_id', $competency_id)->select('competency_name', 'description', 'description_bahasa')->get();
+        foreach($competency as $vCompetency) :
+            $competency_name    = $vCompetency->competency_name;
+            $competency_desc    = $vCompetency->description;
+            $competency_desc_bahasa    = $vCompetency->description_bahasa;
+        endforeach;
+
         return view('section.validations.form', [
             'title'             => 'Form Edit',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
             'data'              => $data->get(),
-            'assessment_id'     => $id
+            'assessment_id'     => $id,
+            'competency_name'   => $competency_name,
+            'competency_desc'   => $competency_desc,
+            'competency_desc_bahasa'   => $competency_desc_bahasa,
         ]);
     }
 

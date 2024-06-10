@@ -14,8 +14,12 @@
         content="default-src https://fonts.googleapis.com; child-src 'none'; object-src 'none'"> --}}
     {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;"> --}}
 
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudfront.net *.btttag.com *.googleadservices.com *.googletraveladservices.com *.adroll.com *.cloudfront.net everesttech.net ... />
+
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="#">
+    <link rel="shortcut
+        icon" type="image/x-icon" href="#">
 
     <title>{{ $title }} | MyCatalyst</title>
 

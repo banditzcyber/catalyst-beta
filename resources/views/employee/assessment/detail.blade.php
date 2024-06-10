@@ -2,7 +2,6 @@
 
 @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
-
         <img src="/images/cap/bnr.jpg" alt="">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">

@@ -1,46 +1,52 @@
 @extends('layouts.main')
 
 @section('body')
+    <div class="mg-t-0 mg-b-15 pd-0">
+        <img src="/images/cap/bnr4.jpg" alt="">
+    </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                    <li class="breadcrumb-item">
-                        <a href="#">{{ $title }}</a>
-                    </li>
-                </ol>
-            </nav>
-            <h4 class="mg-b-0 tx-spacing--1">{{ $title }}</h4>
+            <h4 class="mg-b-0 tx-spacing--1">{{ $employee_name }} ({{ $employee_id }})</h4>
         </div>
         <div class="d-none d-md-block">
-            {{-- <a href="/assessmentValidationDepartment" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
-                <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
-                back
-            </a> --}}
+            <div class="row row-xs pd-0" style="width: 250px">
+                <div class="col-lg-7 pd-0">
+                    <form action="/finishFormValidationDepartment" method="POST" onclick="return confirm('Are you sure?')">
+                        @csrf
+                        <input type="hidden" name="assessment_id" value="{{ $id }}">
+                        <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase">
+                            <i data-feather="save" class="wd-10 mg-r-5"></i>
+                            Finish Form</button>
+                    </form>
+                </div>
+                <div class="col-lg-5 pd-0">
+                    <a href="/assessmentValidationDepartment" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+                        <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
+                        back
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row row-xs mg-b-30">
-        @foreach ($status as $vStatus)
-            @php
-                $kd_assessment = $vStatus->id;
-                $jobcode = $vStatus->jobcode;
-                if ($vStatus->status == 1) {
-                    $person = 'active';
-                    $superior = '';
-                    $completed = '';
-                } elseif ($vStatus->status == 2) {
-                    $person = 'complete';
-                    $superior = 'active';
-                    $completed = '';
-                } else {
-                    $person = 'complete';
-                    $superior = 'complete';
-                    $completed = 'complete';
-                }
+    <div class="row row-xs mg-b-20">
+        @php
 
-            @endphp
-        @endforeach
+            if ($status == 1) {
+                $person = 'active';
+                $superior = '';
+                $completed = '';
+            } elseif ($status == 2) {
+                $person = 'complete';
+                $superior = 'active';
+                $completed = '';
+            } else {
+                $person = 'complete';
+                $superior = 'complete';
+                $completed = 'complete';
+            }
+
+        @endphp
 
         <ul class="steps">
             <li class="step-item <?= $person ?>">
@@ -116,7 +122,7 @@
                     <div class="card-footer" style="">
                         <div class="row row-xs">
                             <div class="col-lg-6">
-                                @if ($vStatus->status == 2)
+                                @if ($status == 2)
                                     @if ($dValid == 0)
                                         {{-- <a href="/sig/edit/{$value->id}/{$value->ticketid}" title="Edit signature"> --}}
                                         <a href="/formassessment/{{ $vData->competency_id }}/{{ $kd_assessment }}/{{ $jobcode }}"

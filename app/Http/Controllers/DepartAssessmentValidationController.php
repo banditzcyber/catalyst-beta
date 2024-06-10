@@ -42,9 +42,11 @@ class DepartAssessmentValidationController extends Controller
         $dEmployee      = DB::table('employees')
                             ->where('employees.employee_id', '=', $idLogin );
 
-        $status     = DB::table('assessments')
-                        ->where('id', $id)
-                        ->select('status', 'id', 'jobcode');
+        $status     = DB::table('assessments as a')
+                            ->join('employees as e', 'e.employee_id', '=', 'a.employee_id')
+                            ->where('a.id', $id)
+                            ->select('a.status', 'a.id', 'a.jobcode', 'e.employee_name', 'a.employee_id')
+                            ->get();
 
         $competency     = DB::table('profile_matrices')
                             ->join('competencies', 'profile_matrices.competency_id', '=', 'competencies.competency_id')
@@ -61,18 +63,30 @@ class DepartAssessmentValidationController extends Controller
         // dd($dEmployee->first());
 
 
+
+        foreach ($status as $vStatus) :
+            $dStatus        = $vStatus->status;
+            $dJobcode       = $vStatus->jobcode;
+            $dEmployeeName  = $vStatus->employee_name;
+            $dEmployee_id   = $vStatus->employee_id;
+            $kd_assessment  = $vStatus->id;
+        endforeach;
+
+
         return view('department.validation.detail', [
             'title'             => 'Assessment Detail',
             'employeeSession'   => $dEmployee->first(),
             'area'              => $area,
             'roleId'            => $roleId,
-            'status'            => $status->get(),
+            // 'status'            => $status->get(),s
             'data'              => $competency->get(),
             'valid'             => $valid,
             'id'                => $id,
-            // 'person'            => $person,
-            // 'superior'          => $superior,
-            // 'completed'         => $completed
+            'status'            => $dStatus,
+            'jobcode'           => $dJobcode,
+            'employee_name'     => $dEmployeeName,
+            'employee_id'       => $dEmployee_id,
+            'kd_assessment'     => $kd_assessment
         ]);
     }
 

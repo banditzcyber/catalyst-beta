@@ -1,6 +1,6 @@
 @extends('layouts.main') @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
-        <img src="/images/cap/bnr3.png" alt="">
+        <img src="/images/cap/bnr3.jpg" alt="">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
@@ -58,7 +58,7 @@
                         <div class="card-footer tx-13 bg-dark">
                             <div class="row row-xs">
                                 <div class="col-lg-6">
-                                    <a href="{{ $link }}{{ $vData->id }}" class="btn btn-xs btn-secondary">
+                                    <a href="{{ $link }}{{ $vData->id }}" class="btn btn-xs btn-outline-warning">
                                         {{ $valueBtn }}
                                     </a>
                                 </div>

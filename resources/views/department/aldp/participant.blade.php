@@ -1,4 +1,7 @@
 @extends('layouts.main') @section('body')
+    <div class="mg-t-0 mg-b-15 pd-0">
+        <img src="/images/cap/bnr3.jpg" alt="">
+    </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
             <nav aria-label="breadcrumb">
