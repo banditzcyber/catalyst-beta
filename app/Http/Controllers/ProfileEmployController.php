@@ -141,8 +141,6 @@ class ProfileEmployController extends Controller
 
         // dd($getCompetency);
 
-        $csp = "default-src 'self'; style-src 'self' font-src 'self'";
-            $this->output->set_header("Content-Security-Policy: $csp");
 
         return view('employee.dashboard.index', [
             'title'         => 'Dashboard',
