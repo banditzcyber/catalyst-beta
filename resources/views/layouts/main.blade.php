@@ -15,7 +15,7 @@
     {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;"> --}}
 
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudfront.net *.btttag.com *.googleadservices.com *.googletraveladservices.com *.adroll.com *.cloudfront.net everesttech.net" />
+        content="default-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudfront.net *.apis.google.com *.googleadservices.com *.googletraveladservices.com *.adroll.com *.cloudfront.net everesttech.net" />
 
     <!-- Favicon -->
     <link rel="shortcut
