@@ -16,8 +16,7 @@
 
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudfront.net *.apis.google.com *.googleadservices.com *.googletraveladservices.com *.adroll.com *.cloudfront.net everesttech.net" />
-
-    <!-- Favicon -->
+    <meta http-equiv="Content-Security-Policy" content="font-src https://fonts.googleapis.com"> <!-- Favicon -->
     <link rel="shortcut
         icon" type="image/x-icon" href="#">
 
