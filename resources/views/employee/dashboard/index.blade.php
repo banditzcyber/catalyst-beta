@@ -158,7 +158,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card" style="height: 150px">
+                    <div class="card">
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
@@ -178,7 +178,7 @@
                     </div><!-- card -->
                 </div><!-- col -->
                 <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card" style="height: 150px">
+                    <div class="card">
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
@@ -200,7 +200,7 @@
                     </div><!-- card -->
                 </div><!-- col -->
                 <div class="col-lg-4 col-md-6 mg-t-10">
-                    <div class="card" style="height: 150px">
+                    <div class="card">
                         <div class="card-body pd-y-20 pd-x-25">
                             <div class="row row-sm">
                                 <div class="col-7">
