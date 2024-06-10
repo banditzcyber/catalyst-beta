@@ -40,11 +40,6 @@ class ProfileMatrixController extends Controller
 
         $data = DB::table('profile_matrices')->orderby('created_at', 'desc');
 
-
-            $csp = "default-src 'self'; style-src 'self' font-src 'self'";
-            $this->output->set_header("Content-Security-Policy: $csp");
-
-
         return view('admin.matrix.index', [
             'title'     => 'Profile Matrices',
             'employeeSession'   => $dEmployee->first(),
