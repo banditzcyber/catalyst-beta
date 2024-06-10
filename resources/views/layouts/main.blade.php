@@ -14,9 +14,14 @@
         content="default-src https://fonts.googleapis.com; child-src 'none'; object-src 'none'"> --}}
     {{-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;"> --}}
 
-    <meta http-equiv="Content-Security-Policy"
+    {{-- <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' 'unsafe-inline' 'unsafe-eval' *.cloudfront.net *.apis.google.com *.googleadservices.com *.googletraveladservices.com *.adroll.com *.cloudfront.net everesttech.net" />
-    <meta http-equiv="Content-Security-Policy" content="font-src 'self' https://fonts.googleapis.com"> <!-- Favicon -->
+    <meta http-equiv="Content-Security-Policy" content="font-src 'self' https://fonts.googleapis.com"> --}}
+
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self'; object-src 'none'; script-src 'self' 'nonce-randomNonceValue'; style-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self';">
+
+    <!-- Favicon -->
     <link rel="shortcut
         icon" type="image/x-icon" href="#">
 

@@ -222,7 +222,7 @@
         </div><!-- container -->
     </div><!-- content -->
     @push('scripts')
-        <script>
+        <script nonce="randomNonceValue">
             $(document).ready(function() {
                 const scroll1 = new PerfectScrollbar('#scroll1', {
                     suppressScrollX: true
