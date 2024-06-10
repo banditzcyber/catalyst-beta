@@ -19,7 +19,7 @@
     <meta http-equiv="Content-Security-Policy" content="font-src 'self' https://fonts.googleapis.com"> --}}
 
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; img-src 'self'; object-src 'none'; script-src 'self' 'nonce-randomNonceValue'; style-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self';">
+        content="default-src 'self'; img-src 'self'; object-src 'none'; script-src 'self' 'nonce-randomNonceValue'; style-src 'self' 'nonce-randomNonceValue' 'unsafe-inline'; frame-ancestors 'self'; base-uri 'self'; form-action 'self';">
 
     <!-- Favicon -->
     <link rel="shortcut
