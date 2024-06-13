@@ -23,6 +23,7 @@ class Extended extends Basic
 
             $this->addDirective(Directive::STYLE, 'fonts.googleapis.com');
             $this->addDirective(Directive::FONT, 'fonts.googleapis.com');
+            $this->addDirective(Directive::FONT, 'fonts.gstatic.com');
             $this->addDirective(Directive::FONT, 'self');
             $this->addDirective(Directive::DEFAULT, 'fonts.gstatic.com');
 
