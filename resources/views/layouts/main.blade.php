@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="#">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
 
     <title>{{ $title }} | MyCatalyst</title>
 
