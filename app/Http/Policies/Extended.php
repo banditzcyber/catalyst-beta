@@ -22,6 +22,7 @@ class Extended extends Basic
         //     ->addNonceForDirective(Directive::STYLE_ELEM);
 
             $this->addDirective(Directive::STYLE, 'fonts.googleapis.com');
+            $this->addDirective(Directive::FONT, 'fonts.googleapis.com');
             $this->addDirective(Directive::DEFAULT, 'fonts.gstatic.com');
     }
 }
