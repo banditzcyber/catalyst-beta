@@ -222,7 +222,7 @@
         </div><!-- container -->
     </div><!-- content -->
     @push('scripts')
-        <script>
+        <script nonce="{{ csp_nonce() }}">
             $(document).ready(function() {
                 $('#viewdata').DataTable();
             })
@@ -266,7 +266,7 @@
                     height: 270,
                     type: 'radialBar',
                     toolbar: {
-                        show: true
+                        show: false
                     }
                 },
                 plotOptions: {

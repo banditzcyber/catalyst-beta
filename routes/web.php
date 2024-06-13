@@ -7,7 +7,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\LoginLocalController;
 // use App\Http\Controllers\RegisterController;
 
-use App\Http\Controllers\SSO\ProfileEmployeeController;
+use Spatie\Csp\AddCspHeaders;
+
 
 use App\Http\Controllers\LandingController;
 // Administrator
@@ -66,7 +67,6 @@ use App\Http\Controllers\MicrosoftAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Route::get('/landingPage', [LandingController::class, 'index']);
 Route::get('/login', 'LoginController@redirectToAzure');

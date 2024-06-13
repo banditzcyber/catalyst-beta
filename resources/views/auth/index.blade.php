@@ -1,7 +1,7 @@
 @extends('layouts.loginLayout')
 
 @section('container')
-    <style>
+    <style nonce="{{ csp_nonce() }}">
         .form-signin .form-floating:focus-within {
             z-index: 2;
         }

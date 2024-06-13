@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
 
@@ -7,26 +7,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="author" content="ThemePixels">
-
-    {{-- <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; img-src 'self'; object-src 'none'; script-src 'self'; style-src 'self'; script-src-attr 'none'; frame-ancestors 'self'; base-uri 'self'; form-action 'self';"> --}}
-
-    {{-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';"> --}}
-    {{-- <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self'; style-src 'self' unsafe-inline;"> --}}
-
     <!-- Favicon -->
-    <link rel="shortcut
-        icon" type="image/x-icon" href="#">
+    <link rel="shortcut icon" type="image/x-icon" href="#">
 
     <title>{{ $title }} | MyCatalyst</title>
 
     <!-- vendor css -->
-    <link
-        href="/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="/lib/fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
     <link href="/lib/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet">
@@ -57,7 +44,7 @@
             <div class="aside-loggedin">
                 <div class="d-flex align-items-center justify-content-start">
                     <a href="" class="avatar">
-                        <img src="/images/users.png" class="rounded-circle"alt="">
+                        <img src="/images/users.png" class="rounded-circle" alt="">
                     </a>
                 </div>
                 <div class="aside-loggedin-user">
@@ -80,7 +67,7 @@
                     <ul class="nav nav-aside mg-b-0">
 
                         <li class="nav-item">
-                            <form action="/signout" method="POST" onclick="return confirm('Are you sure?')">
+                            <form action="/signout" method="POST">
                                 @csrf
                                 <button type="submit" class="nav-link dropdown-item">
                                     <i data-feather="log-out"></i>
@@ -103,7 +90,8 @@
                     @elseif ($employeeSession->job_level == 'DM')
                         @include('layouts.navbardepart')
                     @else
-                        @include('layouts.navbaremployee') @endif
+                        @include('layouts.navbaremployee')
+                    @endif
                 @else
                     @if ($roleId == 1)
                         @include('layouts.navbaremployee')
@@ -116,7 +104,9 @@
                     @elseif ($roleId == 5)
                         @include('layouts.navbaradmin')
                     @elseif ($roleId == 6)
-                        @include('layouts.navbaradmin') @endif @endif
+                        @include('layouts.navbaradmin')
+                    @endif
+                @endif
 
             </ul>
         </div>
@@ -124,26 +114,26 @@
 
     <div class="content
         ht-50v pd-0">
-    <div class="content-header">
-        <div class="content-search">
-            {{ date('l, d F Y') }}
+        <div class="content-header">
+            <div class="content-search">
+                {{ date('l, d F Y') }}
+            </div>
+            <nav class="nav">
+                <form action="/signout" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link dropdown-item">
+                        <i data-feather="power"></i>
+                    </button>
+                </form>
+            </nav>
+        </div><!-- content-header -->
+        <div class="content-body pd-y-0">
+            <div class="container pd-x-0">
+
+
+                @yield('body')
+            </div><!-- container -->
         </div>
-        <nav class="nav">
-            <form action="/signout" method="POST" onclick="return confirm('Are you sure?')">
-                @csrf
-                <button type="submit" class="nav-link dropdown-item">
-                    <i data-feather="power"></i>
-                </button>
-            </form>
-        </nav>
-    </div><!-- content-header -->
-    <div class="content-body pd-y-0">
-        <div class="container pd-x-0">
-
-
-            @yield('body')
-        </div><!-- container -->
-    </div>
     </div>
 
     <script src="/lib/jquery/jquery.min.js"></script>
@@ -173,6 +163,6 @@
 
     @stack('scripts')
 
-    </body>
+</body>
 
 </html>

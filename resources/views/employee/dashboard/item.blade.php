@@ -48,7 +48,7 @@
                                             <tr>
                                                 <td>{{ $view->competency_name }}</td>
                                                 <td>{{ $view->ps_name }}</td>
-                                                <td style="text-align: center">{{ $view->level }}</td>
+                                                <td>{{ $view->level }}</td>
                                                 <td>{{ $view->item_name }}</td>
                                                 <td>{{ $view->intervention }}</td>
                                                 <td class="tx-center">{{ $view->type_training }}</td>
@@ -101,7 +101,7 @@
         </div><!-- container -->
     </div><!-- content -->
     @push('scripts')
-        <script>
+        <script nonce="{{ csp_nonce() }}">
             new DataTable('#need', {
                 scrollX: true,
                 scrollY: 300
