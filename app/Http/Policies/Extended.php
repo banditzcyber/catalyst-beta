@@ -15,10 +15,13 @@ class Extended extends Basic
         //     ->addDirective(Directive::DEFAULT, 'google.analytics.com')
         //     ->addDirective(Directive::FONT, 'self')
         //     ->addDirective(Directive::FONT, 'fonts.googleapis.com')
-        //     ->addDirective(Directive::FONT, 'fonts.gstatic.com');
+        //     ->addDirective(Directive::FONT, 'fonts.gstatic.com')
         //     ->addDirective(Directive::SCRIPT_ELEM, 'self')
         //     ->addDirective(Directive::STYLE_ELEM, 'self');
         //     ->addNonceForDirective(Directive::SCRIPT_ELEM)
         //     ->addNonceForDirective(Directive::STYLE_ELEM);
+
+            $this->addDirective(Directive::STYLE, 'fonts.googleapis.com');
+            $this->addDirective(Directive::DEFAULT, 'fonts.gstatic.com');
     }
 }
