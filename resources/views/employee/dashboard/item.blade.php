@@ -84,7 +84,7 @@
                                             <tr>
                                                 <td>{{ $view->competency_name }}</td>
                                                 <td>{{ $view->ps_name }}</td>
-                                                <td style="text-center">{{ $view->level }}</td>
+                                                <td>{{ $view->level }}</td>
                                                 <td>{{ $view->item_name }}</td>
                                                 <td>{{ $view->intervention }}</td>
                                                 <td>{{ $view->type_training }}</td>
