@@ -12,6 +12,7 @@ class Extended extends Basic
 
         $this
             ->addDirective(Directive::STYLE, 'fonts.googleapis.com')
+            ->addDirective(Directive::DEFAULT, 'google.analytics.com')
             ->addDirective(Directive::FONT, 'self')
             ->addDirective(Directive::FONT, 'fonts.googleapis.com')
             ->addDirective(Directive::FONT, 'fonts.gstatic.com');
