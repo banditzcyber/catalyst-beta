@@ -22,6 +22,8 @@ class Extended extends Basic
         //     ->addNonceForDirective(Directive::STYLE_ELEM);
 
             $this->addDirective(Directive::STYLE, 'fonts.googleapis.com');
+            $this->addDirective(Directive::STYLE_ELEM, ['fonts.googleapis.com', 'unsafe-inline']);
+            $this->addDirective(Directive::STYLE_ELEM, 'self');
             $this->addDirective(Directive::FONT, 'fonts.googleapis.com');
             $this->addDirective(Directive::FONT, 'fonts.gstatic.com');
             $this->addDirective(Directive::FONT, 'self');
