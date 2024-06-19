@@ -1,4 +1,9 @@
 @extends('layouts.main') @section('body')
+    <style nonce="{{ csp_nonce() }}">
+        .table-modal {
+            width: 100%;
+        }
+    </style>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
             <nav aria-label="breadcrumb">
@@ -133,15 +138,14 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="exampleModalLabel2" style="margin-top: 5px;">Modal Title</h6>
+                    <h6 class="modal-title" id="exampleModalLabel2">Modal Title</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-20">
 
-                    <table id="data_detail" class="table table-bordered table-hover table-striped"
-                        style="width: 100%; font-size: 12px;">
+                    <table id="data_detail" class="table table-bordered table-hover table-striped table-modal">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -168,16 +172,12 @@
                     </table>
 
                 </div><!-- modal-body -->
-                <div class="modal-footer pd-x-20 pd-y-15">
-                    <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">Cancel</button>
-                    <button type="button" onclick="save()" class="btn btn-xs btn-primary btnSave">Save</button>
-                </div>
             </div><!-- modal-content -->
         </div><!-- modal-dialog -->
     </div><!-- modal -->
 
     @push('scripts')
-        <script>
+        <script nonce="{{ csp_nonce() }}">
             $(document).ready(function() {
                 $("#data_detail").DataTable();
             });

@@ -1,6 +1,11 @@
 @extends('layouts.main')
 
 @section('body')
+    <style nonce="{{ csp_nonce() }}" rel="stylesheet">
+        .card-cyber {
+            height: 230px;
+        }
+    </style>
     <div class="mg-t-0 mg-b-5 pd-0">
         <img src="/images/cap/bnr.jpg" alt="">
     </div>
@@ -9,23 +14,20 @@
 
         </div>
         <div class="d-none d-md-block">
-            <div class="row row-xs pd-0" style="width: 250px">
-                <div class="col-lg-7 pd-0">
-                    <form action="/finishForm" method="POST" onclick="return confirm('Are you sure?')">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $id }}">
-                        <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase">
-                            <i data-feather="save" class="wd-10 mg-r-5"></i>
-                            Finish Form</button>
-                    </form>
-                </div>
-                <div class="col-lg-5 pd-0">
-                    <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
-                        <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
-                        back
-                    </a>
-                </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <form action="/finishForm" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $id }}">
+                    <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase">
+                        <i data-feather="save" class="wd-10 mg-r-5"></i>
+                        Finish Form</button>
+                </form>
+                <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
+                    <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
+                    back
+                </a>
             </div>
+
         </div>
     </div>
 
@@ -90,7 +92,7 @@
         @foreach ($data as $vData)
             <div class="col-sm-6 col-lg-3 mg-t-10">
 
-                <div class="card" style="height: 190px;">
+                <div class="card card-cyber">
                     <div class="card-body pd-b-0">
                         <label class="tx-bold tx-success tx-13 tx-uppercase">
                             {{ str_word_count($vData->competency_name) > 3 ? substr($vData->competency_name, 0, 27) . ' [...]' : $vData->competency_name }}
@@ -144,7 +146,7 @@
                     @endphp
 
 
-                    <div class="card-footer {{ $bg }}" style="">
+                    <div class="card-footer {{ $bg }}">
                         <div class="row row-xs">
                             <div class="col-lg-6">
 
@@ -168,18 +170,9 @@
     </div>
 
 
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         function refresh() {
             location.reload();
         }
-
-        $(function() {
-            'use strict'
-
-            $('.img-caption').on('mouseover mouseout', function() {
-                $(this).find('figcaption').toggleClass('op-0');
-            });
-
-        });
     </script>
 @endsection

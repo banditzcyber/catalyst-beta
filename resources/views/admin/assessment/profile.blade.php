@@ -232,14 +232,7 @@
         </div><!-- container -->
     </div><!-- content -->
     @push('scripts')
-        <script>
-            $(document).ready(function() {
-                const scroll1 = new PerfectScrollbar('#scroll1', {
-                    suppressScrollX: true
-                });
-            })
-
-
+        <script nonce="{{ csp_nonce() }}">
             $(document).ready(function() {
                 $('#viewdata').DataTable();
             })

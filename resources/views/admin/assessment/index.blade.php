@@ -42,15 +42,15 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
                 <tr>
-                    <th style="width: 145px">#</th>
+                    <th>#</th>
                     <th>CDX</th>
                     <th>ID</th>
                     <th>Employee Name</th>
                     <th>Position</th>
                     <th>Jobcode</th>
                     <th>Year</th>
-                    <th style="width: 130px" class="tx-center">Status</th>
-                    <th style="width: 95px" class="tx-center">Launch</th>
+                    <th class="tx-center">Status</th>
+                    <th class="tx-center">Launch</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,8 +85,7 @@
                                     data-feather="align-justify" class="wd-15"></i></a>
                             <a href="/assessmentAdmin/edit/{{ $view->id }}" class="badge badge-warning pd-y-0"><i
                                     data-feather="edit-2" class="wd-15"></i></a>
-                            <form action="/assessmentAdmin/{{ $view->id }}" method="post" class="d-inline"
-                                onclick="return confirm('Are you sure?')">
+                            <form action="/assessmentAdmin/{{ $view->id }}" method="post" class="d-inline">
                                 @method('delete') @csrf
                                 <button class="badge badge-danger pd-y-0 border-0">
                                     <i data-feather="x" class="wd-15"></i>
@@ -111,9 +110,9 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         $(document).ready(function() {
             $("#viewdata").DataTable();
         });
     </script>
-@endpush;
+@endpush

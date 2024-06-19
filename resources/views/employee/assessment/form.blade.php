@@ -28,8 +28,6 @@
     <label class="tx-12 tx-italic">{{ $competency_desc_bahasa }}</label>
 
 
-
-
     <form id="form" action="/saveformassessment" method="post">
         @csrf
         @foreach ($data as $vData)
@@ -49,32 +47,36 @@
                     </p>
                 </div>
                 <div class="card-footer">
-                    <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5"
-                        style="width: 60px; border-radius: 0px; height: 30px;" name="kd_assessment_update"
+                    <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5" name="kd_assessment_update"
                         id="kd_assessment_update" value="<?= $assessment_id ?>">
-                    <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5"
-                        style="width: 60px; border-radius: 0px; height: 30px;" name="assessment_id[]" id="assessment_id"
-                        value="<?= $assessment_id ?>">
-                    <input type="hidden"class="tx-12 custom-select mg-b-5 pd-t-5"
-                        style="width: 190px; border-radius: 0px; height: 30px;" name="item_id[]" id="item_id"
+                    <input type="hidden" class="tx-12 custom-select mg-b-5 pd-t-5" name="assessment_id[]"
+                        id="assessment_id" value="<?= $assessment_id ?>">
+                    <input type="hidden"class="tx-12 custom-select mg-b-5 pd-t-5" name="item_id[]" id="item_id"
                         value="<?= $vData->item_id ?>">
-
-                    <select name="assessment_result[]" id="assessment_result" class="tx-12 custom-select mg-b-5 pd-t-5"
-                        style="width: 190px; border-radius: 0px; height: 30px;">
+                    <span class="badge badge-warning tx-italic">if not selected, it will automatically
+                        counted as "Need Improvement"</span>
+                    <select name="assessment_result[]" id="assessment_result" class="tx-12 custom-select mg-b-5 pd-t-5">
                         <option value="2" class="tx-italic">--please select--</option>
                         <option value="1">Complete</option>
                         <option value="2">Need Improvement</option>
                         <option value="3">Not Applicable</option>
-                    </select>&nbsp;<span class="badge badge-warning tx-italic">if not selected, it will automatically
-                        counted as "Need Improvement"</span>
-                    <textarea id="" class="form-control col-lg-6 tx-12 pd-t-5" name="comment[]" placeholder="Comment"
-                        style="border-radius: 0px;"></textarea>
+                    </select>
+                    <textarea id="" class="form-control col-lg-6 tx-12 pd-t-5" name="comment[]" placeholder="Comment"></textarea>
 
                 </div>
             </div>
         @endforeach
-        <input type="submit" class="btn btn-primary btn-block tx-16" value="SAVE"
-            onclick="return confirm('Are you sure you want to submit this form?');">
+        <input type="submit" class="btn btn-primary btn-block tx-16 confirmation" value="SAVE">
     </form>
     </div>
+
+    <script type="text/javascript" nonce="{{ csp_nonce() }}">
+        var elems = document.getElementsByClassName('confirmation');
+        var confirmIt = function(e) {
+            if (!confirm('Are you sure?')) e.preventDefault();
+        };
+        for (var i = 0, l = elems.length; i < l; i++) {
+            elems[i].addEventListener('click', confirmIt, false);
+        }
+    </script>
 @endsection

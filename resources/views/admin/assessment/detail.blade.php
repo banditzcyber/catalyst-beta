@@ -76,14 +76,13 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 45px">#</th>
-                    <th style="width: 190px">Item ID</th>
+                    <th>#</th>
+                    <th>Item ID</th>
                     <th>Item Name</th>
                     <th>Intervention</th>
                     <th>Type</th>
-                    <th style="width:
-                        90px">Current</th>
-                    <th style="width: 90px">Actual</th>
+                    <th>Current</th>
+                    <th>Actual</th>
                     <th>Comment</th>
                 </tr>
             </thead>
@@ -114,7 +113,7 @@
                     @endphp
                     <tr>
                         <td class="tx-center">
-                            <a onclick="show({{ $view->id }})" style="cursor: pointer">
+                            <a onclick="show({{ $view->id }})">
                                 <i data-feather="edit-2" class="wd-15"></i>
                             </a>
                         </td>
@@ -140,7 +139,7 @@
             <div class="modal-content">
 
                 <div class="modal-header pd-0 pd-t-10 pd-x-10 bg-warning">
-                    <h6 class="modal-title tx-uppercase" id="titleModel" style="margin-top: 0px;"></h6>
+                    <h6 class="modal-title tx-uppercase" id="titleModel"></h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -153,7 +152,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         $(document).ready(function() {
             $("#viewdata").DataTable();
         });
