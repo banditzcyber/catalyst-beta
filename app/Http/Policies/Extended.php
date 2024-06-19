@@ -14,7 +14,7 @@ class Extended extends Basic
             $this->addDirective(Directive::STYLE_ELEM, ['self', 'fonts.googleapis.com', 'unsafe-inline']);
             $this->addDirective(Directive::STYLE_ATTR, ['self', 'unsafe-inline', 'fonts.googleapis.com']);
             $this->addDirective(Directive::FONT, ['self','fonts.gstatic.com']);
-            $this->addDirective(Directive::DEFAULT, ['self','google-analytics.com','unsafe-inline']);
+            $this->addDirective(Directive::DEFAULT, ['self', 'google-analytics.com', 'ajax.googleapis.com', 'google.com', 'google.com', 'gstatic.com', 'gstatic.com', 'connect.facebook.net', 'facebook.com']);
 
             // $this->reportOnly();
     }
