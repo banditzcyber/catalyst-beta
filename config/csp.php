@@ -8,7 +8,49 @@ return [
      */
     // 'policy' => Spatie\Csp\Policies\Basic::class,
     'policy' => App\Http\Policies\Extended::class,
-    'report_only_policy' => App\Http\Policies\Extended::class,
+    // 'report_only_policy' => App\Http\Policies\Extended::class,
+
+    'policies' => [
+
+        Spatie\Csp\Policies\Basic::class => [
+            'default-src' => [
+                'self' => true,
+                'https://www.google-analytics.com',
+                'https://ajax.googleapis.com',
+                'https://www.google.com',
+                'https://google.com',
+                'https://gstatic.com',
+                'https://www.gstatic.com',
+                'https://connect.facebook.net',
+                'https://facebook.com',
+            ],
+            'script-src' => [
+                'self' => true,
+                'https://ajax.googleapis.com',
+            ],
+            'style-src' => [
+                'self' => true,
+                'https://fonts.googleapis.com',
+            ],
+            'style-src-elem' => [
+                'self' => true,
+                'https://fonts.googleapis.com',
+            ],
+            'img-src' => [
+                'self' => true,
+                'data:',
+            ],
+            'font-src' => [
+                'self' => true,
+                'https://fonts.gstatic.com',
+            ],
+            'connect-src' => [
+                'self' => true,
+                'https://www.google-analytics.com',
+            ],
+            // Add other directives as needed
+        ],
+    ],
 
     /*
      * This policy which will be put in report only mode. This is great for testing out
