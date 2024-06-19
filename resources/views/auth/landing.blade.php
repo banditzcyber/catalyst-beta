@@ -60,7 +60,7 @@ for learning implementation.";
         </div>
         <div class="card">
             <div class="card-header">
-                <img src="/images/cap/03.jpg" alt=""">
+                <img src="/images/cap/03.jpg" alt="">
             </div>
             <div class="card-content">
                 <label>Assessment</label>
@@ -72,7 +72,7 @@ for learning implementation.";
         </div>
         <div class="card">
             <div class="card-header">
-                <img src="/images/cap/04.jpg" alt=""">
+                <img src="/images/cap/04.jpg" alt="">
             </div>
             <div class="card-content">
                 <label>Development</label>
@@ -84,7 +84,7 @@ for learning implementation.";
         </div>
         <div class="card">
             <div class="card-header">
-                <img src="/images/cap/05.jpg" alt=""">
+                <img src="/images/cap/05.jpg" alt="">
             </div>
             <div class="card-content">
                 <label>Why is this important?</label>
