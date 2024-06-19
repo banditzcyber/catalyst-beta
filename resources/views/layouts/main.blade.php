@@ -9,6 +9,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <head>
+        @cspMetaTag(App\Http\Policies\Extended::class)
+    </head>
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
 

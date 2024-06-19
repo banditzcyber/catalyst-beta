@@ -15,6 +15,6 @@ class Extended extends Basic
             $this->addDirective(Directive::FONT, ['self','fonts.googleapis.com', 'fonts.gstatic.com']);
             $this->addDirective(Directive::SCRIPT, ['self','fonts.googleapis.com', 'fonts.gstatic.com']);
 
-            $this->reportOnly();
+            // $this->reportOnly();
     }
 }
