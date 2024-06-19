@@ -10,25 +10,11 @@ class Extended extends Basic
     {
         parent::configure();
 
-        // $this
-        //     ->addDirective(Directive::STYLE, 'fonts.googleapis.com')
-        //     ->addDirective(Directive::DEFAULT, 'google.analytics.com')
-        //     ->addDirective(Directive::FONT, 'self')
-        //     ->addDirective(Directive::FONT, 'fonts.googleapis.com')
-        //     ->addDirective(Directive::FONT, 'fonts.gstatic.com')
-        //     ->addDirective(Directive::SCRIPT_ELEM, 'self')
-        //     ->addDirective(Directive::STYLE_ELEM, 'self');
-        //     ->addNonceForDirective(Directive::SCRIPT_ELEM)
-        //     ->addNonceForDirective(Directive::STYLE_ELEM);
-
-            $this->addDirective(Directive::STYLE, 'fonts.googleapis.com');
+            $this->addDirective(Directive::STYLE, ['self','fonts.googleapis.com']);
             $this->addDirective(Directive::STYLE_ELEM, ['self','fonts.googleapis.com', 'unsafe-inline']);
-            // $this->addDirective(Directive::STYLE_ELEM, 'self');
-            $this->addDirective(Directive::FONT, 'fonts.googleapis.com');
-            $this->addDirective(Directive::FONT, 'fonts.gstatic.com');
-            $this->addDirective(Directive::FONT, 'self');
-            $this->addDirective(Directive::DEFAULT, ['fonts.gstatic.com', 'google-analytics.com', 'ajax.googleapis.com', 'google.com', 'gstatic.com', 'connect.facebook.net', 'facebook.com']);
+            $this->addDirective(Directive::FONT, ['self','fonts.googleapis.com', 'fonts.gstatic.com']);
+            $this->addDirective(Directive::SCRIPT, ['self','fonts.googleapis.com', 'fonts.gstatic.com']);
 
-            // $this->reportOnly();
+            $this->reportOnly();
     }
 }

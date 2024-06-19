@@ -8,7 +8,7 @@ return [
      */
     // 'policy' => Spatie\Csp\Policies\Basic::class,
     'policy' => App\Http\Policies\Extended::class,
-    'report_only_policy' => App\Http\Policies\Extended::class,
+    // 'report_only_policy' => App\Http\Policies\Extended::class,
 
     /*
      * This policy which will be put in report only mode. This is great for testing out
