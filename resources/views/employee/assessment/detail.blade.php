@@ -3,15 +3,17 @@
 @section('body')
     <style nonce="{{ csp_nonce() }}" rel="stylesheet">
         .card-cyber {
-            height: 230px;
+            height: 200px;
         }
     </style>
-    <div class="mg-t-0 mg-b-5 pd-0">
+
+    <div class="mg-t-0 mg-b-10 pd-0">
         <img src="/images/cap/bnr.jpg" alt="">
     </div>
+
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-
+            <h5 class="tx-uppercase">Assessment Detail</h5>
         </div>
         <div class="d-none d-md-block">
             <div class="btn-group" role="group" aria-label="Basic example">
@@ -165,14 +167,4 @@
         @endforeach
 
     </div><!-- row -->
-
-    </div><!-- container -->
-    </div>
-
-
-    <script nonce="{{ csp_nonce() }}">
-        function refresh() {
-            location.reload();
-        }
-    </script>
 @endsection
