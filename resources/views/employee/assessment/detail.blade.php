@@ -13,7 +13,7 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-            <h5 class="tx-uppercase">Assessment Detail</h5>
+            <h5 class="tx-uppercase">Assessment Detail loh</h5>
         </div>
         <div class="d-none d-md-block">
             <div class="btn-group" role="group" aria-label="Basic example">
