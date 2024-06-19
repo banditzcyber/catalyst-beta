@@ -8,49 +8,49 @@ return [
      */
     // 'policy' => Spatie\Csp\Policies\Basic::class,
     'policy' => App\Http\Policies\Extended::class,
-    // 'report_only_policy' => App\Http\Policies\Extended::class,
+    'report_only_policy' => App\Http\Policies\Extended::class,
 
-    'policies' => [
+    // 'policies' => [
 
-        Spatie\Csp\Policies\Basic::class => [
-            'default-src' => [
-                'self' => true,
-                'google-analytics.com',
-                'ajax.googleapis.com',
-                'google.com',
-                'google.com',
-                'gstatic.com',
-                'gstatic.com',
-                'connect.facebook.net',
-                'facebook.com',
-            ],
-            'script-src' => [
-                'self' => true,
-                'ajax.googleapis.com',
-            ],
-            'style-src' => [
-                'self' => true,
-                'fonts.googleapis.com',
-            ],
-            'style-src-elem' => [
-                'self' => true,
-                'fonts.googleapis.com',
-            ],
-            'img-src' => [
-                'self' => true,
-                'data:',
-            ],
-            'font-src' => [
-                'self' => true,
-                'fonts.gstatic.com',
-            ],
-            'connect-src' => [
-                'self' => true,
-                'www.google-analytics.com',
-            ],
-            // Add other directives as needed
-        ],
-    ],
+    //     Spatie\Csp\Policies\Basic::class => [
+    //         'default-src' => [
+    //             'self' => true,
+    //             'google-analytics.com',
+    //             'ajax.googleapis.com',
+    //             'google.com',
+    //             'google.com',
+    //             'gstatic.com',
+    //             'gstatic.com',
+    //             'connect.facebook.net',
+    //             'facebook.com',
+    //         ],
+    //         'script-src' => [
+    //             'self' => true,
+    //             'ajax.googleapis.com',
+    //         ],
+    //         'style-src' => [
+    //             'self' => true,
+    //             'fonts.googleapis.com',
+    //         ],
+    //         'style-src-elem' => [
+    //             'self' => true,
+    //             'fonts.googleapis.com',
+    //         ],
+    //         'img-src' => [
+    //             'self' => true,
+    //             'data:',
+    //         ],
+    //         'font-src' => [
+    //             'self' => true,
+    //             'fonts.gstatic.com',
+    //         ],
+    //         'connect-src' => [
+    //             'self' => true,
+    //             'www.google-analytics.com',
+    //         ],
+    //         // Add other directives as needed
+    //     ],
+    // ],
 
     /*
      * This policy which will be put in report only mode. This is great for testing out
