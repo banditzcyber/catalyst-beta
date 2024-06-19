@@ -22,13 +22,12 @@ class Extended extends Basic
         //     ->addNonceForDirective(Directive::STYLE_ELEM);
 
             $this->addDirective(Directive::STYLE, 'fonts.googleapis.com');
-            $this->addDirective(Directive::STYLE_ELEM, ['self','fonts.googleapis.com', 'unsafe-inline']);
+            $this->addDirective(Directive::STYLE_ELEM, ['self', 'fonts.googleapis.com', 'fonts.gstatic.com', 'google-analytics.com', 'ajax.googleapis.com', 'google.com', 'gstatic.com', 'connect.facebook.net', 'facebook.com', 'unsafe-inline']);
             $this->addDirective(Directive::STYLE_ATTR, 'self', 'unsafe-inline', 'fonts.googleapis.com');
             $this->addDirective(Directive::FONT, 'fonts.googleapis.com');
-            // $this->addDirective(Directive::SCRIPT_ATTR, 'self');
             $this->addDirective(Directive::FONT, 'fonts.gstatic.com');
             $this->addDirective(Directive::FONT, 'self');
-            $this->addDirective(Directive::DEFAULT, ['self', 'fonts.googleapis.com', 'fonts.gstatic.com', 'google-analytics.com', 'ajax.googleapis.com', 'google.com', 'gstatic.com', 'connect.facebook.net', 'facebook.com']);
+            $this->addDirective(Directive::DEFAULT, ['self', 'fonts.googleapis.com', 'fonts.gstatic.com', 'google-analytics.com', 'ajax.googleapis.com', 'google.com', 'gstatic.com', 'connect.facebook.net', 'facebook.com', 'unsafe-inline']);
 
             // $this->reportOnly();
     }
