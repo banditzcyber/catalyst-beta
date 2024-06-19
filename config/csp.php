@@ -15,26 +15,26 @@ return [
         Spatie\Csp\Policies\Basic::class => [
             'default-src' => [
                 'self' => true,
-                'https://www.google-analytics.com',
-                'https://ajax.googleapis.com',
-                'https://www.google.com',
-                'https://google.com',
-                'https://gstatic.com',
-                'https://www.gstatic.com',
-                'https://connect.facebook.net',
-                'https://facebook.com',
+                'google-analytics.com',
+                'ajax.googleapis.com',
+                'google.com',
+                'google.com',
+                'gstatic.com',
+                'gstatic.com',
+                'connect.facebook.net',
+                'facebook.com',
             ],
             'script-src' => [
                 'self' => true,
-                'https://ajax.googleapis.com',
+                'ajax.googleapis.com',
             ],
             'style-src' => [
                 'self' => true,
-                'https://fonts.googleapis.com',
+                'fonts.googleapis.com',
             ],
             'style-src-elem' => [
                 'self' => true,
-                'https://fonts.googleapis.com',
+                'fonts.googleapis.com',
             ],
             'img-src' => [
                 'self' => true,
@@ -42,11 +42,11 @@ return [
             ],
             'font-src' => [
                 'self' => true,
-                'https://fonts.gstatic.com',
+                'fonts.gstatic.com',
             ],
             'connect-src' => [
                 'self' => true,
-                'https://www.google-analytics.com',
+                'www.google-analytics.com',
             ],
             // Add other directives as needed
         ],
