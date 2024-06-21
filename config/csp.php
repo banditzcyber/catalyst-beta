@@ -6,8 +6,8 @@ return [
      * A policy will determine which CSP headers will be set. A valid CSP policy is
      * any class that extends `Spatie\Csp\Policies\Policy`
      */
-    // 'policy' => Spatie\Csp\Policies\Basic::class,
-    'policy' => App\Http\Policies\Extended::class,
+    'policy' => Spatie\Csp\Policies\Basic::class,
+    // 'policy' => App\Http\Policies\Extended::class,
     // 'report_only_policy' => App\Http\Policies\Extended::class,
 
     /*
