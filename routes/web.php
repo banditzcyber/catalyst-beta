@@ -77,7 +77,7 @@ Route::get('/connect', 'LoginController@handleAzureCallback');
 // Route::get('/',[LoginController::class,'signInForm'])->name('sign.in');
 Route::get('/', [LandingController::class, 'index'])->name('sign.in');
 // Route::get('/', [LoginController::class, 'microsoftOAuth'])->name('microsoft.oAuth');
-// Route::get('microsoft-oAuth', [LoginController::class, 'microsoftOAuth'])->name('microsoft.oAuth');
+Route::get('microsoft-oAuth', [LoginController::class, 'microsoftOAuth'])->name('microsoft.oAuth');
 Route::get('authenticate', [LoginController::class, 'microsoftOAuthCallback'])->name('microsoft.oAuth.callback');
 
 
