@@ -32,8 +32,6 @@ class LoginController extends Controller
 
         $url = $microsoft->getAuthUrl();
 
-        dd($url);
-
         return redirect($url);
     }
 
