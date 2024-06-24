@@ -37,7 +37,7 @@ class LoginController extends Controller
 
         $microsoft = new Auth($tenan_id,
                               $client_id,
-                              env('CLIENT_SECRET'),
+                              'xKl8Q~FYfswodTu54fQgDsMiIJ.nLecT5.jQQcxq',
                               $callback_url,
                               ["User.Read"]);
 
