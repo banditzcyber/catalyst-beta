@@ -28,7 +28,16 @@ class LoginController extends Controller
 
     public function microsoftOAuth()
     {
-        $microsoft = new Auth(env('TENANT_ID'),env('CLIENT_ID'),env('CLIENT_SECRET'),env('CALLBACK_URL') ,["User.Read"]);
+        $tenan_id   = env('TENANT_ID');
+        if(is_null($tenan_id)){
+            throw new \Exception('Tenant ID is not set.');
+        };
+
+        $microsoft = new Auth(env('TENANT_ID'),
+                              env('CLIENT_ID'),
+                              env('CLIENT_SECRET'),
+                              env('CALLBACK_URL'),
+                              ["User.Read"]);
 
         $url = $microsoft->getAuthUrl();
 
