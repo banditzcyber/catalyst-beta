@@ -29,6 +29,7 @@ class LoginController extends Controller
     public function microsoftOAuth()
     {
         $tenan_id   = 'a289e960-a538-4db3-adf0-845b57e616cf';
+        dd($tenan_id);
         if(is_null($tenan_id)){
             throw new \Exception('Tenant ID is not set.');
         };
