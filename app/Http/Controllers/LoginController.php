@@ -28,12 +28,12 @@ class LoginController extends Controller
 
     public function microsoftOAuth()
     {
-        $tenan_id   = env('TENANT_ID');
+        $tenan_id   = 'a289e960-a538-4db3-adf0-845b57e616cf';
         if(is_null($tenan_id)){
             throw new \Exception('Tenant ID is not set.');
         };
 
-        $microsoft = new Auth(env('TENANT_ID'),
+        $microsoft = new Auth($tenan_id,
                               env('CLIENT_ID'),
                               env('CLIENT_SECRET'),
                               env('CALLBACK_URL'),
