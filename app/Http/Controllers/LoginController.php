@@ -30,6 +30,7 @@ class LoginController extends Controller
     {
         $tenan_id   = 'a289e960-a538-4db3-adf0-845b57e616cf';
         $client_id  = '5c2ce04a-9305-468d-9fe1-cb5e071e8c44';
+        $callback_url   = 'https://mycatalyst.capcx.com/authenticate';
         if(is_null($tenan_id)){
             throw new \Exception('Tenant ID is not set.');
         };
@@ -37,7 +38,7 @@ class LoginController extends Controller
         $microsoft = new Auth($tenan_id,
                               $client_id,
                               env('CLIENT_SECRET'),
-                              env('CALLBACK_URL'),
+                              $callback_url,
                               ["User.Read"]);
 
         $url = $microsoft->getAuthUrl();
