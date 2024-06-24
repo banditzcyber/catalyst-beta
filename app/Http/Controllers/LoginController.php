@@ -30,14 +30,16 @@ class LoginController extends Controller
     {
         $tenan_id   = 'a289e960-a538-4db3-adf0-845b57e616cf';
         $client_id  = '5c2ce04a-9305-468d-9fe1-cb5e071e8c44';
+        $client_secret = 'xKl8Q~FYfswodTu54fQgDsMiIJ.nLecT5.jQQcxq';
         $callback_url   = 'https://mycatalyst.capcx.com/authenticate';
+
         if(is_null($tenan_id)){
             throw new \Exception('Tenant ID is not set.');
         };
 
         $microsoft = new Auth($tenan_id,
                               $client_id,
-                              'xKl8Q~FYfswodTu54fQgDsMiIJ.nLecT5.jQQcxq',
+                              $client_secret,
                               $callback_url,
                               ["User.Read"]);
 
@@ -49,7 +51,17 @@ class LoginController extends Controller
     public function microsoftOAuthCallback(Request $request)
     {
 
-        $microsoft = new Auth(env('TENANT_ID'),env('CLIENT_ID'),env('CLIENT_SECRET'),env('CALLBACK_URL') ,["User.Read"]);
+        $tenan_id   = 'a289e960-a538-4db3-adf0-845b57e616cf';
+        $client_id  = '5c2ce04a-9305-468d-9fe1-cb5e071e8c44';
+        $client_secret = 'xKl8Q~FYfswodTu54fQgDsMiIJ.nLecT5.jQQcxq';
+        $callback_url   = 'https://mycatalyst.capcx.com/authenticate';
+
+        // $microsoft = new Auth(env('TENANT_ID'),env('CLIENT_ID'),env('CLIENT_SECRET'),env('CALLBACK_URL') ,["User.Read"]);
+        $microsoft = new Auth($tenan_id,
+                              $client_id,
+                              $client_secret,
+                              $callback_url,
+                              ["User.Read"]);
         $tokens = $microsoft->getToken($request->code);
         $accessToken = $tokens->access_token;
         $microsoft->setAccessToken($accessToken);
