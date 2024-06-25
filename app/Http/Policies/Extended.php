@@ -10,10 +10,10 @@ class Extended extends Basic
     {
         parent::configure();
 
-            $this->addDirective(Directive::STYLE, 'fonts.googleapis.com');
-            $this->addDirective(Directive::STYLE_ELEM, 'fonts.googleapis.com');
-            $this->addDirective(Directive::FONT, 'fonts.googleapis.com');
-            $this->addDirective(Directive::SCRIPT, 'fonts.googleapis.com');
+            $this->addDirective(Directive::STYLE, ['self','fonts.googleapis.com']);
+            $this->addDirective(Directive::STYLE_ELEM, ['self','fonts.googleapis.com']);
+            $this->addDirective(Directive::FONT, ['self','fonts.googleapis.com']);
+            $this->addDirective(Directive::SCRIPT, ['self','fonts.googleapis.com']);
 
             // $this->reportOnly();
     }
