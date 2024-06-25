@@ -64,9 +64,6 @@
         @endforeach
     </div>
 
-
-
-
     @push('scripts')
     @endpush
 @endsection
