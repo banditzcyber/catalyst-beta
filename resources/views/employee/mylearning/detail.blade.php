@@ -68,21 +68,5 @@
 
 
     @push('scripts')
-        <script>
-            var cleaveI = new Cleave('#competency_id', {
-                delimiters: ['-', '-', '-'],
-                blocks: [2, 3, 1, 3]
-            });
-
-            $(document).ready(function() {
-                $("#data_detail").DataTable();
-            });
-
-            $(document).on("click", ".get", function(e) {
-                $("#competency_id").val($(this).attr("competencyId"));
-                $("#competency_name").val($(this).attr("competencyName"));
-                $("#modalCompetency").modal("hide");
-            });
-        </script>
     @endpush
 @endsection

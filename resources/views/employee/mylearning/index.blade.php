@@ -68,8 +68,7 @@
                                 <div class="col-4">
                                     <div class="marker marker-ribbon marker-{{ $color }} pos-absolute t-10 l-0">
                                         {{ $view }}</div>
-                                    <img src="/images/cap/card.jpg" class="card-img" alt=""
-                                        style="max-width: 100px">
+                                    <img src="/images/cap/card.jpg" class="card-img" alt="">
                                 </div>
 
                                 <div class="col-8">
