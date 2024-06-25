@@ -9,14 +9,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <head>
-        @cspMetaTag(App\Http\Policies\Extended::class)
-    </head>
-
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' fonts.googleapis.com">
 
     <title>{{ $title }} | MyCatalyst</title>
 
