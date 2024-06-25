@@ -20,6 +20,7 @@ class Extended extends Basic
             // $this->reportOnly();
 
             $this
-                ->addDirective(Directive::SCRIPT, 'cdn.jsdelivr.net');
+                // ->addDirective(Directive::STYLE, 'cdn.jsdelivr.net', 'unsafe-inline')
+                ->addDirective(Directive::SCRIPT, 'cdn.jsdelivr.net', 'unsafe-inline');
     }
 }
