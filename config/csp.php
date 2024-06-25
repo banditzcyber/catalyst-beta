@@ -14,7 +14,7 @@ return [
      * This policy which will be put in report only mode. This is great for testing out
      * a new policy or changes to existing csp policy without breaking anything.
      */
-    'report_only_policy' => '',
+    'report_only_policy' => App\Http\Policies\Extended::class,
 
     /*
      * All violations against the policy will be reported to this url.
