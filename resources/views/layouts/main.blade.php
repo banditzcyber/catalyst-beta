@@ -161,7 +161,8 @@
     {{-- <script src="/js/dashforge.settings.js"></script> --}}
     <script src="/lib/cleave.js/cleave.min.js"></script>
     <script src="/lib/cleave.js/addons/cleave-phone.us.js"></script>
-    <script src="/vendor/apexcharts/apexcharts.js"></script>
+    {{-- <script src="/vendor/apexcharts/apexcharts.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     @stack('scripts')
 
