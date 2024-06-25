@@ -222,7 +222,7 @@
         </div><!-- container -->
     </div><!-- content -->
     @push('scripts')
-        <script nonce="{{ csp_nonce() }}">
+        <script>
             $(document).ready(function() {
                 $('#viewdata').DataTable();
             })
