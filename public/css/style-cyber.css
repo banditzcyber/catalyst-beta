@@ -161,3 +161,34 @@
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+
+  /* ALDP style  */
+
+.w-list {
+    width: 105px;
+    text-align: center;
+}
+
+.w-number {
+    width: 35px;
+}
+.bg-status-red {
+    background: #E2445C;
+    color: #FFFDE7
+}
+
+.bg-status-yellow {
+    background: #FDAB3D;
+    color: #FFFDE7
+}
+
+.bg-status-blue {
+    background: #0086C0;
+    color: #FFFDE7
+}
+
+.bg-status-green {
+    background: #00C875;
+    color: #FFFDE7
+}
