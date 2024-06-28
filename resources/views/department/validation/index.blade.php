@@ -17,8 +17,8 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 65px">#</th>
-                    <th style="width: 100px">ID</th>
+                    <th>#</th>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Position</th>
                     <th>Years</th>
@@ -68,8 +68,7 @@
                         <td>{{ $view->year }}</td>
                         <td>{{ $view->created_at }}</td>
                         <td>{{ $view->updated_at }}</td>
-                        <td class="{{ $color }} tx-center" style="cursor: pointer"
-                            onclick="show({{ $view->id }})">
+                        <td class="{{ $color }} tx-center" onclick="show({{ $view->id }})">
                             {{ $text }}
                         </td>
                     </tr>
@@ -84,7 +83,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title" id="titleModel" style="margin-top: 5px;"></h6>
+                    <h6 class="modal-title" id="titleModel"></h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -98,7 +97,7 @@
     </div><!-- modal -->
 
     @push('scripts')
-        <script>
+        <script nonce="{{ csp_nonce() }}">
             $(document).ready(function() {
                 $("#viewdata").DataTable();
             });

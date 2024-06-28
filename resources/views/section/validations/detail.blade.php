@@ -7,31 +7,28 @@
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-            <h4 class="mg-b-0 tx-spacing--1">{{ $employee_name }} ({{ $employee_id }})</h4>
+            <h5 class="mg-b-0 tx-spacing--1">{{ $employee_name }} ({{ $employee_id }})</h5>
         </div>
         <div class="d-none d-md-block">
-            <div class="row row-xs pd-0" style="width: 250px">
-                <div class="col-lg-7 pd-0">
-                    <form action="/finishFormValidation" method="POST" onclick="return confirm('Are you sure?')">
+            <div class="row row-xs pd-0">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <form action="/finishFormValidation" method="POST">
                         @csrf
                         <input type="hidden" name="assessment_id" value="{{ $id }}">
                         <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase">
                             <i data-feather="save" class="wd-10 mg-r-5"></i>
                             Finish Form</button>
                     </form>
-                </div>
-                <div class="col-lg-5 pd-0">
-                    <a href="/assessmentValidation" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+                    <a href="/assessmentValidation" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
                         <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                         back
                     </a>
                 </div>
+
             </div>
 
         </div>
     </div>
-
-
 
     <div class="row row-xs mg-b-30">
 
@@ -96,7 +93,7 @@
         @foreach ($data as $vData)
             <div class="col-sm-6 col-lg-3 mg-t-10">
 
-                <div class="card" style="height: 190px;">
+                <div class="card card-cyber">
                     <div class="card-body pd-b-0">
                         <label class="tx-bold tx-success tx-13 tx-uppercase">
                             {{ str_word_count($vData->competency_name) > 3 ? substr($vData->competency_name, 0, 27) . ' [...]' : $vData->competency_name }}
@@ -123,7 +120,7 @@
                     @endphp
 
 
-                    <div class="card-footer" style="">
+                    <div class="card-footer">
                         <div class="row row-xs">
                             <div class="col-lg-6">
                                 @if ($status == 2)
@@ -152,23 +149,4 @@
         @endforeach
 
     </div><!-- row -->
-
-    </div><!-- container -->
-    </div>
-
-
-    <script>
-        function refresh() {
-            location.reload();
-        }
-
-        $(function() {
-            'use strict'
-
-            $('.img-caption').on('mouseover mouseout', function() {
-                $(this).find('figcaption').toggleClass('op-0');
-            });
-
-        });
-    </script>
 @endsection

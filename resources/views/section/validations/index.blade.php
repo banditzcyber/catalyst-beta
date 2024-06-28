@@ -33,16 +33,16 @@
 
     <div class="table-responsive">
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
-            <thead class="thead-primary">
+            <thead class="thead-primary tx-uppercase">
                 <tr>
-                    <th style="width: 75px">#</th>
-                    <th style="width: 100px">ID</th>
+                    <th>#</th>
+                    <th>ID</th>
                     <th>Name</th>
                     <th>Position</th>
                     <th>Years</th>
                     <th>Created at</th>
                     <th>Updated at</th>
-                    <th>Status</th>
+                    <th class="tx-tengah">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -86,8 +86,7 @@
                         <td>{{ $view->year }}</td>
                         <td>{{ $view->created_at }}</td>
                         <td>{{ $view->updated_at }}</td>
-                        <td class="{{ $color }} tx-center" style="cursor: pointer"
-                            onclick="show({{ $view->id }})">
+                        <td class="{{ $color }} tx-center" onclick="show({{ $view->id }})">
                             {{ $text }}
                         </td>
                     </tr>
@@ -116,7 +115,7 @@
     </div><!-- modal -->
 
     @push('scripts')
-        <script>
+        <script nonce="{{ csp_nonce() }}">
             $(document).ready(function() {
                 $("#viewdata").DataTable();
             });
@@ -142,8 +141,6 @@
                 const competency_bahasa = $('#competency_bahasa').val();
                 const description = $('#description').val();
                 const description_bahasa = $('#description_bahasa').val();
-
-
             }
         </script>
     @endpush

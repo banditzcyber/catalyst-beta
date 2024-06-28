@@ -120,6 +120,7 @@
             <div class="content-search">
                 {{ date('l, d F Y') }}
             </div>
+
             <nav class="nav">
                 <form action="/signout" method="POST">
                     @csrf
@@ -164,6 +165,12 @@
     {{-- <script src="/vendor/apexcharts/apexcharts.js"></script> --}}
     <script src="{{ asset('vendor/apexcharts/apexcharts.js') }}"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> --}}
+
+    <script nonce="{{ csp_nonce() }}">
+        function close() {
+            confirm("Are you sure!");
+        }
+    </script>
 
     @stack('scripts')
 
