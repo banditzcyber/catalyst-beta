@@ -146,6 +146,7 @@ Route::post('/savevalidationform', [AssessmentValidationController::class, 'save
 
 Route::get('/reviewAssessment/{id}/{kd_assessment}/{jobcode}', [AssessmentValidationController::class, 'reviewAssessment']);
 Route::post('/finishFormValidation', [AssessmentValidationController::class, 'finishFormValidation']);
+Route::post('/returnForm', [AssessmentValidationController::class, 'returnForm']);
 
 
 // ------------------------------------------ Access from department -----------------------------------------------

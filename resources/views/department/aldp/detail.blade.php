@@ -1,6 +1,6 @@
 @extends('layouts.main') @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
-        <img src="/images/cap/bnr3.jpg" alt="">
+        <img src="/images/cap/bnr3.jpg" alt="" class="bg-banner">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
@@ -117,8 +117,6 @@
 
     </div>
 
-
-
     {{-- functional competency  --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
@@ -131,45 +129,28 @@
 
             <!-- table -->
 
-            <div class="d-flex tx-center tx-uppercase">
-
-                <div class="table-line-header" style="width: 5px;">
-
-                </div>
-                <div class="table-header" style="width: 75px;">
-
-                </div>
-                <div class="table-header" style="width: 420px;">
-                    item competency
-                </div>
-                <div class="table-header" style="width: 100px;">
-                    target
-                </div>
-                <div class="table-header" style="width: 340px;">
-                    participant
-                </div>
-                <div class="table-header" style="width: 185px;">
-                    remarks
-                </div>
-                <div class="table-header-right" style="width: 60px;">
-                    %
-                </div>
-            </div>
-
-            <div id="functional">
-
-                @if (!empty($functional))
+            <table id="viewdata" class="table table-bordered tx-12 table-hover">
+                <thead class="tx-uppercase">
+                    <tr class="bd-l bd-5 bd-primary">
+                        <th class="w-list">#</th>
+                        <th>Item Competency</th>
+                        <th>Target</th>
+                        <th>Participant</th>
+                        <th>Comment</th>
+                        <th class="tx-center">%</th>
+                    </tr>
+                </thead>
+                <tbody id="functional">
                     @foreach ($functional as $view)
-                        <div class="d-flex tx-12 table-body-hover" id="detail_functional">
-
-                            <div class="table-line-body" style="width: 5px;">
-
-                            </div>
-                            <div class="table-body tx-center tx-15" style="width: 76px;">
-
+                        <tr class="bd-l bd-5 bd-primary rounded-10">
+                            <td>
+                                <a href="/departAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/1"
+                                    class="badge badge-primary pd-y-0 border-0y">
+                                    <i data-feather="user" class="wd-15"></i>
+                                </a>
                                 <a href="/departAldp/edit/{{ $view->id_aldp_details }}"
-                                    class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
+                                    class="badge badge-warning pd-y-0 border-0y">
+                                    <i data-feather="edit-2" class="wd-15"></i>
                                 </a>
 
                                 <form action="/departAldp/deleteItem" method="post" class="d-inline"
@@ -183,11 +164,8 @@
                                         <i data-feather="x" class="wd-15"></i>
                                     </button>
                                 </form>
-
-                            </div>
-
-                            <div class="table-body" style="width: 419px;">
-
+                            </td>
+                            <td>
                                 <div class="tx-uppercase tx-bold">{{ $view->competency_name }}</div>
                                 <div class="mb-2 tx-italic tx-color-02">{{ $view->ps_name }}</div>
                                 <div>{{ $view->item_id }}</div>
@@ -196,42 +174,44 @@
                                         [{{ $view->intervention }}, {{ $view->type_training }}]
                                     </label>
                                 </div>
-                            </div>
-                            <div class="table-body tx-center" style="width: 102px;">
+                            </td>
+                            <td>
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
-                            </div>
+                            </td>
+                            <a href="#">
+                                <td>
+                                    @php
+                                        $detail = DB::table('learnings')
+                                            ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
+                                            ->leftjoin(
+                                                'employees',
+                                                'employees.employee_id',
+                                                '=',
+                                                'learnings.employee_id',
+                                            )
+                                            ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
+                                            ->get();
+                                    @endphp
 
-                            <a href="/departAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/1"
-                                class="table-body" style="width: 340px;">
+                                    @foreach ($detail as $vDetail)
+                                        <span
+                                            class="badge
+                                    @if ($vDetail->status == 1) badge-primary
 
-                                @php
-                                    $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
-                                        ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
-                                        ->get();
-                                @endphp
+                                    @elseif ($vDetail->status == 2)
+                                        badge-warning
+                                    @else
+                                        badge-success @endif
+                                ">
+                                            {{ $vDetail->employee_name }}
+                                        </span>
+                                    @endforeach
 
-                                @foreach ($detail as $vDetail)
-                                    <span
-                                        class="badge
-                                        @if ($vDetail->status == 1) badge-primary
-
-                                        @elseif ($vDetail->status == 2)
-                                            badge-warning
-                                        @else
-                                            badge-success @endif
-                                    ">
-                                        {{ $vDetail->employee_name }}
-                                    </span>
-                                @endforeach
-
+                                </td>
                             </a>
-
-                            <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remarks }}</div>
-                            </div>
-
+                            <td>
+                                {{ $view->remarks }}
+                            </td>
                             @php
                                 $propose = DB::table('learnings')
                                     ->where('aldp_detail_id', '=', $view->id_aldp_details)
@@ -246,62 +226,47 @@
                                 } else {
                                     $total = ($actual / $propose) * 100;
                                 }
+
+                                if ($total == 0) {
+                                    $bg_color = 'bg-status-red';
+                                } elseif ($total <= 75) {
+                                    $bg_color = 'bg-status-yellow';
+                                } elseif ($total <= 90) {
+                                    $bg_color = 'bg-status-blue';
+                                } else {
+                                    $bg_color = 'bg-status-gree';
+                                }
                             @endphp
-
-
-
-                            <div class="table-body tx-center"
-                                style="width: 60px;
-                            @if ($total == 0) background: #E2445C; color: #FFFDE7
-                        @elseif ($total <= 75)
-                            background: #FDAB3D; color: #FFFDE7
-                        @elseif ($total <= 90)
-                            background: #0086C0; color: #FFFDE7
-                        @elseif ($total >= 91)
-                            background: #00C875; color: #FFFDE7 @endif">
-
+                            <td class="{{ $bg_color }} tx-center">
                                 {{ number_format($total, 0) }}%
 
-                            </div>
-
-                        </div>
+                            </td>
+                        </tr>
                     @endforeach
+                </tbody>
+                <tfoot>
+                    <tr class="bd-l bd-5 bd-primary">
+                        <td colspan="5" class="tx-bold tx-right tx-14 tx-uppercase">Sub-Total</td>
+                        @php
+                            if ($functional_percent == 0) {
+                                $bg_color_sub = 'bg-status-red';
+                            } elseif ($functional_percent <= 75) {
+                                $bg_color_sub = 'bg-status-yellow';
+                            } elseif ($functional_percent <= 90) {
+                                $bg_color_sub = 'bg-status-blue';
+                            } else {
+                                $bg_color_sub = 'bg-status-gree';
+                            }
+                        @endphp
+                        <td class="{{ $bg_color_sub }} tx-14 tx-bold tx-center">
+                            {{ number_format($functional_percent, 0) }}%</td>
+                    </tr>
+                </tfoot>
 
-                    <div class="d-flex table-body-hover" id="">
+            </table>
 
-                        <div class="table-line-body-footer" style="width: 5px;">
-
-                        </div>
-                        <div class="table-body tx-right tx-bold tx-grey" style="width: 1100px;">
-                            Sub-Total
-                        </div>
-
-                        <div class="table-body-footer tx-center tx-bold tx-grey"
-                            style="width: 60px;
-                        @if ($functional_percent == 0) background: #E2445C; color: #FFFDE7
-                        @elseif ($functional_percent <= 75)
-                            background: #FDAB3D; color: #FFFDE7
-                        @elseif ($functional_percent <= 90)
-                            background: #0086C0; color: #FFFDE7
-                        @elseif ($functional_percent >= 91)
-                            background: #00C875; color: #FFFDE7 @endif">
-                            {{ number_format($functional_percent, 0) }}%
-                        </div>
-                    </div>
-                @else
-                    <div class="d-flex table-body-hover" id="">
-
-                        <div class="table-line-body-footer" style="width: 5px;">
-
-                        </div>
-                        <div class="table-body-footer tx-italic tx-center tx-italic tx-grey" style="width: 1160px;">
-                            no data
-                        </div>
-                    </div>
-                @endif
-            </div>
         </div>
-        <div class="row mg-t-5">
+        <div class="row mg-t-0">
             <div class="col-md">
                 <ul class="list-inline d-flex mg-t-20 mg-sm-t-10 mg-md-t-0 mg-b-0">
                     <li class="list-inline-item d-flex align-items-center">
@@ -320,6 +285,7 @@
             </div>
         </div>
     </div>
+
     {{-- Core Leadership Competency --}}
     <div class="row row-xs mg-b-20">
         <div class="table-responsive">
@@ -332,45 +298,28 @@
 
             <!-- table -->
 
-            <div class="d-flex tx-center tx-uppercase">
-
-                <div class="table-line-header" style="width: 5px;">
-
-                </div>
-                <div class="table-header" style="width: 75px;">
-
-                </div>
-                <div class="table-header" style="width: 420px;">
-                    item competency
-                </div>
-                <div class="table-header" style="width: 100px;">
-                    target
-                </div>
-                <div class="table-header" style="width: 340px;">
-                    participant
-                </div>
-                <div class="table-header" style="width: 185px;">
-                    remarks
-                </div>
-                <div class="table-header-right" style="width: 60px;">
-                    %
-                </div>
-
-            </div>
-
-            <div id="cnl">
-
-                @if (!empty($cnl))
+            <table id="viewdata" class="table table-bordered tx-12 table-hover">
+                <thead class="tx-uppercase">
+                    <tr class="bd-l bd-5 bd-primary">
+                        <th class="w-list">#</th>
+                        <th>Item Competency</th>
+                        <th>Target</th>
+                        <th>Participant</th>
+                        <th>Comment</th>
+                        <th class="tx-center">%</th>
+                    </tr>
+                </thead>
+                <tbody id="cnl">
                     @foreach ($cnl as $view)
-                        <div class="d-flex tx-12 table-body-hover" id="detail_functional">
-
-                            <div class="table-line-body" style="width: 5px;">
-
-                            </div>
-                            <div class="table-body tx-center tx-15" style="width: 76px;">
-                                <a href="/departAldp/editCnl/{{ $view->id_aldp_details }}"
-                                    class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
+                        <tr class="bd-l bd-5 bd-primary rounded-10">
+                            <td>
+                                <a href="/departAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/1"
+                                    class="badge badge-primary pd-y-0 border-0y">
+                                    <i data-feather="user" class="wd-15"></i>
+                                </a>
+                                <a href="/departAldp/edit/{{ $view->id_aldp_details }}"
+                                    class="badge badge-warning pd-y-0 border-0y">
+                                    <i data-feather="edit-2" class="wd-15"></i>
                                 </a>
 
                                 <form action="/departAldp/deleteItem" method="post" class="d-inline"
@@ -384,35 +333,36 @@
                                         <i data-feather="x" class="wd-15"></i>
                                     </button>
                                 </form>
-                            </div>
-
-                            <div class="table-body" style="width: 419px;">
+                            </td>
+                            <td>
                                 <div>{{ $view->item_id }}</div>
                                 <div class="">{{ $view->item_name }}
                                     <label class="tx-italic">
                                         [{{ $view->intervention }}, {{ $view->type_training }}]
                                     </label>
                                 </div>
-                            </div>
-                            <div class="table-body tx-center" style="width: 102px;">
+                            </td>
+                            <td>
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
-                            </div>
+                            </td>
+                            <a href="#">
+                                <td>
+                                    @php
+                                        $detail = DB::table('learnings')
+                                            ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
+                                            ->leftjoin(
+                                                'employees',
+                                                'employees.employee_id',
+                                                '=',
+                                                'learnings.employee_id',
+                                            )
+                                            ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
+                                            ->get();
+                                    @endphp
 
-                            <a href="/departAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/2"
-                                class="table-body" style="width: 340px;">
-
-
-                                @php
-                                    $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
-                                        ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
-                                        ->get();
-                                @endphp
-
-                                @foreach ($detail as $vDetail)
-                                    <span
-                                        class="badge
+                                    @foreach ($detail as $vDetail)
+                                        <span
+                                            class="badge
                                         @if ($vDetail->status == 1) badge-primary
 
                                         @elseif ($vDetail->status == 2)
@@ -420,16 +370,15 @@
                                         @else
                                             badge-success @endif
                                     ">
-                                        {{ $vDetail->employee_name }}
-                                    </span>
-                                @endforeach
+                                            {{ $vDetail->employee_name }}
+                                        </span>
+                                    @endforeach
 
+                                </td>
                             </a>
-
-                            <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remarks }}</div>
-                            </div>
-
+                            <td>
+                                {{ $view->remarks }}
+                            </td>
                             @php
                                 $propose = DB::table('learnings')
                                     ->where('aldp_detail_id', '=', $view->id_aldp_details)
@@ -444,61 +393,47 @@
                                 } else {
                                     $total = ($actual / $propose) * 100;
                                 }
+
+                                if ($total == 0) {
+                                    $bg_color = 'bg-status-red';
+                                } elseif ($total <= 75) {
+                                    $bg_color = 'bg-status-yellow';
+                                } elseif ($total <= 90) {
+                                    $bg_color = 'bg-status-blue';
+                                } else {
+                                    $bg_color = 'bg-status-gree';
+                                }
                             @endphp
-
-
-                            <div class="table-body tx-center"
-                                style="width: 60px;
-                            @if ($total == 0) background: #E2445C; color: #FFFDE7
-                        @elseif ($total <= 75)
-                            background: #FDAB3D; color: #FFFDE7
-                        @elseif ($total <= 90)
-                            background: #0086C0; color: #FFFDE7
-                        @elseif ($total >= 91)
-                            background: #00C875; color: #FFFDE7 @endif">
-
+                            <td class="{{ $bg_color }} tx-center">
                                 {{ number_format($total, 0) }}%
 
-                            </div>
-
-                        </div>
+                            </td>
+                        </tr>
                     @endforeach
+                </tbody>
+                <tfoot>
+                    <tr class="bd-l bd-5 bd-primary">
+                        <td colspan="5" class="tx-bold tx-right tx-14 tx-uppercase">Sub-Total</td>
+                        @php
+                            if ($cnl_percent == 0) {
+                                $bg_color_sub = 'bg-status-red';
+                            } elseif ($cnl_percent <= 75) {
+                                $bg_color_sub = 'bg-status-yellow';
+                            } elseif ($cnl_percent <= 90) {
+                                $bg_color_sub = 'bg-status-blue';
+                            } else {
+                                $bg_color_sub = 'bg-status-gree';
+                            }
+                        @endphp
+                        <td class="{{ $bg_color_sub }} tx-14 tx-bold tx-center">
+                            {{ number_format($cnl_percent, 0) }}%</td>
+                    </tr>
+                </tfoot>
 
-                    <div class="d-flex table-body-hover" id="">
+            </table>
 
-                        <div class="table-line-body-footer" style="width: 5px;">
-
-                        </div>
-                        <div class="table-body tx-right tx-bold tx-grey" style="width: 1100px;">
-                            Sub-Total
-                        </div>
-
-                        <div class="table-body-footer tx-center tx-bold tx-grey"
-                            style="width: 60px;
-                        @if ($cnl_percent == 0) background: #E2445C; color: #FFFDE7
-                        @elseif ($cnl_percent <= 75)
-                            background: #FDAB3D; color: #FFFDE7
-                        @elseif ($cnl_percent <= 90)
-                            background: #0086C0; color: #FFFDE7
-                        @elseif ($cnl_percent >= 91)
-                            background: #00C875; color: #FFFDE7 @endif">
-                            {{ number_format($cnl_percent, 0) }}%
-                        </div>
-                    </div>
-                @else
-                    <div class="d-flex table-body-hover" id="">
-
-                        <div class="table-line-body-footer" style="width: 5px;">
-
-                        </div>
-                        <div class="table-body-footer tx-italic tx-center tx-italic tx-grey" style="width: 1160px;">
-                            no data
-                        </div>
-                    </div>
-                @endif
-            </div>
         </div>
-        <div class="row mg-t-5">
+        <div class="row mg-t-0">
             <div class="col-md">
                 <ul class="list-inline d-flex mg-t-20 mg-sm-t-10 mg-md-t-0 mg-b-0">
                     <li class="list-inline-item d-flex align-items-center">
@@ -529,44 +464,28 @@
 
             <!-- table -->
 
-            <div class="d-flex tx-center tx-uppercase">
-
-                <div class="table-line-header" style="width: 5px;">
-
-                </div>
-                <div class="table-header" style="width: 75px;">
-
-                </div>
-                <div class="table-header" style="width: 420px;">
-                    item competency
-                </div>
-                <div class="table-header" style="width: 100px;">
-                    target
-                </div>
-                <div class="table-header" style="width: 340px;">
-                    participant
-                </div>
-                <div class="table-header" style="width: 185px;">
-                    remarks
-                </div>
-                <div class="table-header-right" style="width: 60px;">
-                    %
-                </div>
-
-            </div>
-
-            <div id="other">
-
-                @if (!empty($other))
+            <table id="viewdata" class="table table-bordered tx-12 table-hover">
+                <thead class="tx-uppercase">
+                    <tr class="bd-l bd-5 bd-primary">
+                        <th class="w-list">#</th>
+                        <th>Item Competency</th>
+                        <th>Target</th>
+                        <th>Participant</th>
+                        <th>Comment</th>
+                        <th class="tx-center">%</th>
+                    </tr>
+                </thead>
+                <tbody id="other">
                     @foreach ($other as $view)
-                        <div class="d-flex tx-12 table-body-hover" id="detail_functional">
-
-                            <div class="table-line-body" style="width: 5px;">
-
-                            </div>
-                            <div class="table-body tx-center tx-15" style="width: 76px;">
-                                <a href="#" class="badge badge-primary pd-y-0 border-0">
-                                    <i data-feather="edit-2" style="width: 15px;"></i>
+                        <tr class="bd-l bd-5 bd-primary rounded-10">
+                            <td>
+                                <a href="/departAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/1"
+                                    class="badge badge-primary pd-y-0 border-0y">
+                                    <i data-feather="user" class="wd-15"></i>
+                                </a>
+                                <a href="/departAldp/edit/{{ $view->id_aldp_details }}"
+                                    class="badge badge-warning pd-y-0 border-0y">
+                                    <i data-feather="edit-2" class="wd-15"></i>
                                 </a>
 
                                 <form action="/departAldp/deleteItem" method="post" class="d-inline"
@@ -580,121 +499,102 @@
                                         <i data-feather="x" class="wd-15"></i>
                                     </button>
                                 </form>
-                            </div>
-
-                            <div class="table-body" style="width: 419px;">
+                            </td>
+                            <td>
                                 <div>{{ $view->item_name }}</div>
-                                {{-- <div class="">{{ $view->item_name }}
-                                    <label class="tx-italic">
-                                        [{{ $view->intervention }}, {{ $view->type_training }}]
-                                    </label>
-                                </div> --}}
-                            </div>
-                            <div class="table-body tx-center" style="width: 102px;">
+                            </td>
+                            <td>
                                 <div>{{ $view->planned_month }} ({{ $view->planned_week }})</div>
-                            </div>
+                            </td>
+                            <a href="#">
+                                <td>
+                                    @php
+                                        $detail = DB::table('learnings')
+                                            ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
+                                            ->leftjoin(
+                                                'employees',
+                                                'employees.employee_id',
+                                                '=',
+                                                'learnings.employee_id',
+                                            )
+                                            ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
+                                            ->get();
+                                    @endphp
 
-                            <a href="/departAldpParticipant/{{ $view->id_aldp_details }}/{{ $view->aldp_id }}/{{ $view->item_id }}/3"
-                                class="table-body" style="width: 340px;">
+                                    @foreach ($detail as $vDetail)
+                                        <span
+                                            class="badge
+                                        @if ($vDetail->status == 1) badge-primary
 
-                                @php
-                                    $detail = DB::table('learnings')
-                                        ->select('learnings.*', 'employees.employee_id', 'employees.employee_name')
-                                        ->leftjoin('employees', 'employees.employee_id', '=', 'learnings.employee_id')
-                                        ->where('learnings.aldp_detail_id', '=', $view->id_aldp_details)
-                                        ->get();
-                                @endphp
+                                        @elseif ($vDetail->status == 2)
+                                            badge-warning
+                                        @else
+                                            badge-success @endif
+                                    ">
+                                            {{ $vDetail->employee_name }}
+                                        </span>
+                                    @endforeach
 
-                                @foreach ($detail as $vDetail)
-                                    <span
-                                        class="badge
-                                            @if ($vDetail->status == 1) badge-primary
-
-                                            @elseif ($vDetail->status == 2)
-                                                badge-warning
-                                            @else
-                                                badge-success @endif
-                                        ">
-                                        {{ $vDetail->employee_name }}
-                                    </span>
-                                @endforeach
-
+                                </td>
                             </a>
-
-                            <div class="table-body" style="width: 185px;">
-                                <div>{{ $view->remarks }}</div>
-                            </div>
-
+                            <td>
+                                {{ $view->remarks }}
+                            </td>
                             @php
                                 $propose = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
                                     ->count();
 
                                 $actual = DB::table('learnings')
-                                    ->where('aldp_detail_id', '=', $view->aldp_detail_id)
-                                    ->where('status', '=', 2)
+                                    ->where('aldp_detail_id', '=', $view->id_aldp_details)
+                                    ->where('status', '=', 3)
                                     ->count();
-
-                                // $total = 0;
-
-                                if (empty($actual)) {
+                                if (empty($propose)) {
                                     $total = 0;
                                 } else {
                                     $total = ($actual / $propose) * 100;
                                 }
+
+                                if ($total == 0) {
+                                    $bg_color = 'bg-status-red';
+                                } elseif ($total <= 75) {
+                                    $bg_color = 'bg-status-yellow';
+                                } elseif ($total <= 90) {
+                                    $bg_color = 'bg-status-blue';
+                                } else {
+                                    $bg_color = 'bg-status-gree';
+                                }
                             @endphp
-
-                            <div class="table-body tx-center"
-                                style="width: 60px;
-                            @if ($total == 0) background: #E2445C; color: #FFFDE7
-                        @elseif ($total <= 75)
-                            background: #FDAB3D; color: #FFFDE7
-                        @elseif ($total <= 90)
-                            background: #0086C0; color: #FFFDE7
-                        @elseif ($total >= 91)
-                            background: #00C875; color: #FFFDE7 @endif">
-
+                            <td class="{{ $bg_color }} tx-center">
                                 {{ number_format($total, 0) }}%
-                            </div>
 
-                        </div>
+                            </td>
+                        </tr>
                     @endforeach
+                </tbody>
+                <tfoot>
+                    <tr class="bd-l bd-5 bd-primary">
+                        <td colspan="5" class="tx-bold tx-right tx-14 tx-uppercase">Sub-Total</td>
+                        @php
+                            if ($other_percent == 0) {
+                                $bg_color_sub = 'bg-status-red';
+                            } elseif ($other_percent <= 75) {
+                                $bg_color_sub = 'bg-status-yellow';
+                            } elseif ($other_percent <= 90) {
+                                $bg_color_sub = 'bg-status-blue';
+                            } else {
+                                $bg_color_sub = 'bg-status-gree';
+                            }
+                        @endphp
+                        <td class="{{ $bg_color_sub }} tx-14 tx-bold tx-center">
+                            {{ number_format($other_percent, 0) }}%</td>
+                    </tr>
+                </tfoot>
 
-                    <div class="d-flex table-body-hover" id="">
+            </table>
 
-                        <div class="table-line-body-footer" style="width: 5px;">
-
-                        </div>
-                        <div class="table-body tx-right tx-bold tx-grey" style="width: 1100px;">
-                            Sub-Total
-                        </div>
-
-                        <div class="table-body-footer tx-center tx-bold tx-grey"
-                            style="width: 60px;
-                        @if ($cnl_percent == 0) background: #E2445C; color: #FFFDE7
-                        @elseif ($cnl_percent <= 75)
-                            background: #FDAB3D; color: #FFFDE7
-                        @elseif ($cnl_percent <= 90)
-                            background: #0086C0; color: #FFFDE7
-                        @elseif ($cnl_percent >= 91)
-                            background: #00C875; color: #FFFDE7 @endif">
-                            {{ number_format($cnl_percent, 0) }}%
-                        </div>
-                    </div>
-                @else
-                    <div class="d-flex table-body-hover" id="">
-
-                        <div class="table-line-body-footer" style="width: 5px;">
-
-                        </div>
-                        <div class="table-body-footer tx-italic tx-center tx-italic tx-grey" style="width: 1160px;">
-                            no data
-                        </div>
-                    </div>
-                @endif
-            </div>
         </div>
-        <div class="row mg-t-5">
+        <div class="row mg-t-0">
             <div class="col-md">
                 <ul class="list-inline d-flex mg-t-20 mg-sm-t-10 mg-md-t-0 mg-b-0">
                     <li class="list-inline-item d-flex align-items-center">
@@ -715,7 +615,8 @@
     </div>
 
 
-    {{-- -------------------------------------- MODAL ------------------------------------- --}}
+
+    {{-- ---------------------------- MODAL --------------------------------- --}}
 
     <div class="modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -760,5 +661,4 @@
             });
         });
     </script>
-
 @endsection

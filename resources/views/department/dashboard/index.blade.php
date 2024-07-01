@@ -119,12 +119,11 @@
 
             </div>
 
-
         </div><!-- container -->
     </div><!-- content -->
 
     @push('scripts')
-        <script>
+        <script nonce="{{ csp_nonce() }}">
             var config = {
                 series: [{{ number_format($percent, 1) }}],
                 labels: ['Progress'],
@@ -212,8 +211,8 @@
             $(function() {
                 'use strict'
 
-                var ctxLabel = ["Jan", 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                var ctxData1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var ctxLabel = @json($bulan);
+                var ctxData1 = [20, 40, 40, 50, 30, 60, 20, 80, 60, 50, 10, 90];
                 var ctxData2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 var ctxColor1 = '#001737';
                 var ctxColor2 = '#1ce1ac';

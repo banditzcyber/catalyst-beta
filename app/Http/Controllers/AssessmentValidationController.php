@@ -98,6 +98,15 @@ class AssessmentValidationController extends Controller
         return redirect('/assessmentValidation')->with('success', 'Assessment has been updated!');
     }
 
+    public function returnForm(Request $request)
+    {
+        $assessment_id = $request->input('assessment_id');
+        $data['status']     = 1;
+        $data['updated_at'] = now();
+        DB::table('assessments')->where('id', $assessment_id)->update($data);
+        return redirect('/assessmentValidation')->with('success', 'Assessment has been returned!');
+    }
+
     public function reviewAssessment(Request $request, $competency_id, $assessment_id, $jobcode)
     {
         //session

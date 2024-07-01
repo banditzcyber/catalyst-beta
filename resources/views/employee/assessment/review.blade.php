@@ -3,7 +3,7 @@
 @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
 
-        <img src="/images/cap/bnr.jpg" alt="">
+        <img src="/images/cap/bnr.jpg" alt="" class="bg-banner">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
@@ -61,8 +61,9 @@
                         id="kd_assessment_update" value="<?= $assessment_id ?>">
 
 
-
-                    <select name="assessment_result[]" id="assessment_result" class="tx-12 custom-select mg-b-5 pd-t-5"
+                    <span class="badge badge-warning tx-italic">if not selected, it will automatically
+                        counted as "Need Improvement"</span>
+                    <select name="assessment_result[]" id="assessment_result" class="custom-select tx-12 mb-2 mt-2"
                         style="width: 190px; border-radius: 0px; height: 30px;">
 
                         <option value="{{ $vData->assessment_result }}" @selected(old('assessment_result') == $vData->assessment_result)>
@@ -77,10 +78,8 @@
                         <option value="1">Competent</option>
                         <option value="2">Need Improvement</option>
                         <option value="3">Not Applicable</option>
-                    </select>&nbsp;<span class="badge badge-warning tx-italic">if not selected, it will automatically
-                        counted as "Need Improvement"</span>
-                    <textarea id="" class="form-control col-lg-6 tx-12 pd-t-5" name="comment[]" placeholder="Comment"
-                        style="border-radius: 0px;"></textarea>
+                    </select>
+                    <textarea name="comment[]" class="form-control" id="comment[]" cols="30" rows="3">{{ $vData->comment }}</textarea>
 
                 </div>
             </div>

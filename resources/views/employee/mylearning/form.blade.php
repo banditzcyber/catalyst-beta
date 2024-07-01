@@ -1,6 +1,6 @@
 @extends('layouts.main') @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
-        <img src="/images/cap/bnr2.jpg" alt="">
+        <img src="/images/cap/bnr2.jpg" alt="" class="bg-banner">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>

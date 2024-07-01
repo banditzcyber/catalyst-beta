@@ -49,7 +49,10 @@ class DepartDashboardController extends Controller
 
         $bulan  = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
 
-        // dd($bulan);
+        foreach ($bulan as $vbulan) :
+
+        endforeach;
+
 
         return view('department.dashboard.index', [
             'title'             => 'Dashboard',
@@ -66,7 +69,7 @@ class DepartDashboardController extends Controller
             'countLearning'     => $countLearning,
             'competentLearning' => $competenctLearning,
             'plannedLearning'   => $plannedLearning,
-            'bulan'             => json_encode($bulan)
+            'bulan'             => $bulan
 
 
         ]);

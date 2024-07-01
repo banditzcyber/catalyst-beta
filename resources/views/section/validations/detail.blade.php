@@ -3,7 +3,7 @@
 @section('body')
     <div class="mg-t-0 mg-b-5 pd-0">
 
-        <img src="/images/cap/bnr4.jpg" alt="">
+        <img src="/images/cap/bnr4.jpg" alt="" class="bg-banner">
     </div>
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
@@ -23,6 +23,13 @@
                         <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                         back
                     </a>
+                    <form action="/returnForm" method="POST">
+                        @csrf
+                        <input type="hidden" name="assessment_id" value="{{ $id }}">
+                        <button type="submit" class="btn btn-sm pd-x-15 btn-warning btn-uppercase">
+                            <i data-feather="corner-down-right" class="wd-10 mg-r-5"></i>
+                            Returned</button>
+                    </form>
                 </div>
 
             </div>

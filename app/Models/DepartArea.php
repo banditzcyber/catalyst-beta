@@ -24,4 +24,6 @@ class DepartArea extends Model
                     ->whereIn('l.employee_id', $subEmployee);
     }
 
+
+
 }
