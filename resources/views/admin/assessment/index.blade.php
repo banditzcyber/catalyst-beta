@@ -42,8 +42,8 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
                 <tr>
-                    <th>#</th>
-                    <th>CDX</th>
+                    <th class="w-action-4">#</th>
+                    <th>CDXAA</th>
                     <th>ID</th>
                     <th>Employee Name</th>
                     <th>Position</th>

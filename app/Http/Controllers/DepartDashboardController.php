@@ -21,16 +21,18 @@ class DepartDashboardController extends Controller
         $dEmployee      = DB::table('employees')
             ->where('employees.employee_id', '=', $idLogin);
 
+        $baseQuery =  new \App\Models\DepartArea();
+
         $assessments = [];
-        $dSubordinate = DB::table('employees')->where('dm_code', $idLogin);
+        $dSubordinate = $baseQuery->getSubordinate()->where('dm_code', $idLogin);
 
         foreach ($dSubordinate->get() as $vSubordinate) {
             // Append the assessment to the assessments array
             $subEmployee[] = $vSubordinate->employee_id;
         }
 
+        // dd($subEmployee);
 
-        $baseQuery =  new \App\Models\DepartArea();
         $qResult = $baseQuery->getAssessment($subEmployee);
 
         $competent              = $baseQuery->getAssessment($subEmployee)->where('ad.actual_result', 1)->count();
@@ -48,8 +50,10 @@ class DepartDashboardController extends Controller
         $qSubordinate       = DB::table('employees')->where('dm_code', $idLogin);
 
         $bulan  = array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+        $f_bulan  = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
-        foreach ($bulan as $vbulan) :
+        foreach ($f_bulan as $vf_bulan) :
+            // $qLearning  =
 
         endforeach;
 
@@ -70,7 +74,6 @@ class DepartDashboardController extends Controller
             'competentLearning' => $competenctLearning,
             'plannedLearning'   => $plannedLearning,
             'bulan'             => $bulan
-
 
         ]);
     }

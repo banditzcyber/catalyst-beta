@@ -24,6 +24,17 @@ class DepartArea extends Model
                     ->whereIn('l.employee_id', $subEmployee);
     }
 
+    public function getAldp($getEmployee)
+    {
+        $query  = DB::table('learnings as l')
+                    ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                    ->join('aldps as a', 'ad.aldp_id', '=', 'a.id')
+                    ->whereIn('');
+    }
 
+    public function getSubordinate()
+    {
+        return DB::table('employees');
+    }
 
 }

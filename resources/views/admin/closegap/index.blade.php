@@ -92,7 +92,7 @@
                     <tr class="bd-l bd-4 bd-danger">
                         <td>{{ $view->employee_name }} - {{ $view->employee_id }}</td>
                         <td>{{ $view->item_id }}</td>
-                        <td style="cursor: pointer" onclick ="tampil({{ $view->id }})">{{ $view->item_name }}</td>
+                        <td onclick ="tampil({{ $view->id }})">{{ $view->item_name }}</td>
                         <td>
                             @if (!empty($view->started_at))
                                 {{ date('d F Y', strtotime($view->started_at)) }} s/d
@@ -107,8 +107,7 @@
                             </a>
                         </td>
                         <td>{{ $view->comment }}</td>
-                        <td class="{{ $color }} tx-center" style="cursor: pointer"
-                            onclick ="show({{ $view->id }})">
+                        <td class="{{ $color }} tx-center" onclick ="show({{ $view->id }})">
                             {{ $text }}
                         </td>
                     </tr>
@@ -124,7 +123,7 @@
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header pd-0 pd-t-10 pd-x-10 bg-warning">
-                    <h6 class="modal-title tx-uppercase" id="titleModel" style="margin-top: 0px;"></h6>
+                    <h6 class="modal-title tx-uppercase" id="titleModel"></h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -138,7 +137,7 @@
 
 
 @push('scripts')
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         $(document).ready(function() {
             // viewData();
             $("#viewdata").DataTable();

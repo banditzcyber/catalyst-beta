@@ -213,7 +213,7 @@
 
                 var ctxLabel = @json($bulan);
                 var ctxData1 = [20, 40, 40, 50, 30, 60, 20, 80, 60, 50, 10, 90];
-                var ctxData2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                var ctxData2 = [10, 50, 30, 20, 20, 10, 10, 20, 80, 60, 20, 10];
                 var ctxColor1 = '#001737';
                 var ctxColor2 = '#1ce1ac';
 
@@ -225,9 +225,11 @@
                         labels: ctxLabel,
                         datasets: [{
                             data: ctxData1,
+                            label: 'Planning',
                             backgroundColor: ctxColor1
                         }, {
                             data: ctxData2,
+                            label: 'Actual',
                             backgroundColor: ctxColor2
                         }]
                     },
@@ -235,9 +237,9 @@
                         maintainAspectRatio: false,
                         responsive: true,
                         legend: {
-                            display: false,
+                            display: true,
                             labels: {
-                                display: false
+                                display: true
                             }
                         },
                         scales: {
