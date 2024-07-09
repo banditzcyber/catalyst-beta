@@ -65,7 +65,7 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
                 <tr>
-                    <th style="width: 105px">#</th>
+                    <th class="w-action-3">#</th>
                     <th>Employee ID</th>
                     <th>Employee Name</th>
                     <th>Section</th>

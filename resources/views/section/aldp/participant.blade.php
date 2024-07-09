@@ -191,9 +191,11 @@
     </div><!-- modal -->
 
     @push('scripts')
-        <script>
+        <script nonce="{{ csp_nonce() }}">
             $(document).ready(function() {
-                $("#data_detail").DataTable();
+                $("#data_detail").DataTable({
+                    "autoWidth": false
+                });
             });
 
             $(document).on("click", ".get", function(e) {

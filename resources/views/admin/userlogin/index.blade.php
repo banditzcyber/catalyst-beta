@@ -29,10 +29,10 @@
     @endif
 
     <div class="table-responsive">
-        <table id="viewdata" class="table table-bordered tx-14 table-hover">
+        <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 55px">#</th>
+                    <th class="w-action-2">#</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -85,7 +85,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         $(document).ready(function() {
             $("#viewdata").DataTable();
         });

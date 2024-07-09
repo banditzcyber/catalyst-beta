@@ -76,19 +76,19 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 45px">#</th>
+                    <th class="w-action-2">#</th>
                     <th>ID</th>
                     <th>Item Name</th>
                     <th>Intervention</th>
-                    <th>Type Training</th>
+                    <th>Type</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($data as $view)
                     <tr>
                         <td class="tx-center">
-                            {{-- <a href="/items/{{ $view->item_id }}/edit" class="badge badge-warning pd-y-0"><i
-                                    data-feather="edit-2" class="wd-15"></i></a> --}}
+                            <a href="/itemEdits/{{ $view->item_id }}" class="badge badge-warning pd-y-0"><i
+                                    data-feather="edit-2" class="wd-15"></i></a>
                             <form action="/items/{{ $view->item_id }}" method="post" class="d-inline"
                                 onclick="return confirm('Are you sure?')">
                                 @method('delete') @csrf

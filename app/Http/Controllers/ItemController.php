@@ -77,15 +77,27 @@ class ItemController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Item  $item
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Item $item)
+    public function edit($id, Request $request)
     {
-        //
+        //session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+                            ->where('employees.employee_id', '=', $idLogin );
+
+        $query = DB::table('items')
+                            ->where('item_id', $id)
+                            ->first();
+
+
+        return view('admin.items.edit', [
+            'title'     => 'Learning Item',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $query
+        ]);
     }
 
     /**

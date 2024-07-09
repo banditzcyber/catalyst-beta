@@ -19,6 +19,7 @@
     <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
     <link href="/lib/ion-rangeslider/css/ion.rangeSlider.min.css" rel="stylesheet">
+    <link href="/lib/select2/css/select2.min.css" rel="stylesheet">
 
     <!-- DashForge CSS -->
     <link rel="stylesheet" href="/css/dashforge.css">
@@ -26,6 +27,14 @@
     <link rel="stylesheet" href="/css/style-cyber.css">
     <link rel="stylesheet" href="/css/dashforge.demo.css">
     <link rel="stylesheet" href="/css/datatables.min.css">
+
+    <!-- include libraries(jQuery, bootstrap) -->
+    {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
 
 
 </head>
@@ -150,10 +159,10 @@
     <script src="/lib/jqvmap/jquery.vmap.min.js"></script>
     <script src="/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
     <script src="/lib/jqueryui/jquery-ui.min.js"></script>
-
     <script src="/js/dashforge.js"></script>
     <script src="/js/dashforge.aside.js"></script>
     <script src="/js/dashforge.sampledata.js"></script>
+    <script src="/lib/select2/js/select2.min.js"></script>
 
     <script src="/js/datatables.min.js"></script>
 
@@ -165,6 +174,8 @@
     {{-- <script src="/vendor/apexcharts/apexcharts.js"></script> --}}
     <script src="{{ asset('vendor/apexcharts/apexcharts.js') }}"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> --}}
+    <!-- include summernote css/js -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     <script nonce="{{ csp_nonce() }}">
         function close() {

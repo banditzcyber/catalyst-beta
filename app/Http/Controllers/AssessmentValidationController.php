@@ -93,6 +93,7 @@ class AssessmentValidationController extends Controller
     {
         $assessment_id = $request->input('assessment_id');
         $data['status']     = 3;
+        $data['status_launch']     = 1;
         $data['updated_at'] = now();
         DB::table('assessments')->where('id', $assessment_id)->update($data);
         return redirect('/assessmentValidation')->with('success', 'Assessment has been updated!');
@@ -124,7 +125,7 @@ class AssessmentValidationController extends Controller
                         ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
                         ->join('performance_standards', 'performance_standards.ps_id', '=', 'items.ps_id')
                         ->join('competencies', 'competencies.competency_id', '=', 'performance_standards.competency_id')
-                        ->select('assessment_details.*', 'assessments.id as assessment_id', 'items.item_name', 'items.intervention','performance_standards.ps_name', 'performance_standards.level')
+                        ->select('assessment_details.*', 'assessments.id as assessment_id', 'items.item_name', 'items.intervention','performance_standards.ps_name','performance_standards.ps_bahasa', 'performance_standards.level')
                         ->where('assessment_details.assessment_id', '=', $id)
                         ->where('competencies.competency_id', $competency_id);
 

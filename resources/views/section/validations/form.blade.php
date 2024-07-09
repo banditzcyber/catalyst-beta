@@ -34,14 +34,19 @@
         @foreach ($data as $vData)
             <div class="card mg-b-10">
                 <div class="card-body">
-                    <span class="step-desc tx-bold tx-warning tx-uppercase">Level <?= $vData->level ?></span>
-                    <span class="step-desc mb-2 text-muted tx-11"><?= $vData->ps_name ?></span>
-                    <span class="card-text tx-14 tx-dark tx-bold">
-                        <label>[<?= $vData->item_id ?>]</label>
-                        -
-                        <label class="tx-uppercase">[<?= $vData->intervention ?>]</label>
-                        <?= $vData->item_name ?>
+                    <span class="step-desc tx-bold tx-primary tx-uppercase tx-sans">Level <?= $vData->level ?></span>
+                    <span class="mb-0 tx-13">
+                        <?= $vData->ps_name ?>
+                        <lavel class="tx-italic tx-color-02">
+                            (<?= $vData->ps_bahasa ?>)
+                        </lavel>
                     </span>
+
+                    <span class="step-desc tx-color-02 tx-9 tx-uppercase tx-sans mg-t-10">Learning item</span>
+                    <p class="card-text tx-13 tx-dark">
+                        <?= $vData->item_name ?><br />
+                        <label class="tx-uppercase tx-color-03 mt-2">[<?= $vData->intervention ?>]</label>
+                    </p>
                 </div>
                 <div class="card-footer">
                     <input type="hidden" class="tx-12 mg-b-5 pd-t-5" style="width: 60px; border-radius: 0px; height: 30px;"
@@ -54,7 +59,8 @@
                         value="<?= $vData->item_id ?>">
 
 
-
+                    <span class="badge badge-warning tx-italic">if not selected, it will automatically
+                        counted as "Need Improvement"</span>
                     <select name="assessment_result[]" id="assessment_result" class="tx-12 custom-select mg-b-5 pd-t-5"
                         style="width: 190px; border-radius: 0px; height: 30px;">
 
@@ -70,10 +76,9 @@
                         <option value="1">Competent</option>
                         <option value="2">Need Improvement</option>
                         <option value="3">Not Applicable</option>
-                    </select>&nbsp;<span class="badge badge-warning tx-italic">if not selected, it will automatically
-                        counted as "Need Improvement"</span>
+                    </select>
                     <textarea id="" class="form-control col-lg-6 tx-12 pd-t-5" name="comment[]" placeholder="Comment"
-                        style="border-radius: 0px;"></textarea>
+                        style="border-radius: 0px;">{{ $vData->comment }}</textarea>
 
                 </div>
             </div>

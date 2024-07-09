@@ -76,7 +76,7 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 75px">#</th>
+                    <th class="w-action-2">#</th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>

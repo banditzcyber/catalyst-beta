@@ -42,7 +42,8 @@
                         </lavel>
                     </span>
 
-                    <p class="card-text tx-13 tx-dark mg-t-15">
+                    <span class="step-desc tx-color-02 tx-9 tx-uppercase tx-sans mg-t-10">Learning item</span>
+                    <p class="card-text tx-13 tx-dark">
                         <?= $vData->item_name ?><br />
                         <label class="tx-uppercase tx-color-03 mt-2">[<?= $vData->intervention ?>]</label>
                     </p>

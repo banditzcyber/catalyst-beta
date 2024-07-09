@@ -79,8 +79,8 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
                 <tr>
-                    <th style="width: 75px">#</th>
-                    <th style="width: 100px">ID</th>
+                    <th class="w-action-2">#</th>
+                    <th class="w-action-3">ID</th>
                     <th>Area</th>
                     <th>Type</th>
                     <th>Name</th>
@@ -138,7 +138,7 @@
                     $("#titleModel").html('Update Data')
                     $("#form").html(data);
 
-                    // $('#modalUpdate').modal('show'); 
+                    // $('#modalUpdate').modal('show');
                     $('#modalUpdate').modal({
                         backdrop: 'static',
                         keyboard: false

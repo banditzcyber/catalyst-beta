@@ -209,6 +209,18 @@
     width: 100%;
 }
 
+.w-action-1 {
+    width: 45px;
+}
+
+.w-action-2 {
+    width: 75px;
+}
+
+.w-action-3 {
+    width: 105px;
+}
+
 .w-action-4 {
     width: 140px;
 }

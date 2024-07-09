@@ -184,15 +184,15 @@
 
                 <div class="modal-body">
                     <div class="table-responsive">
-                        <table id="tableData" style="width: 100%" class="table table-bordered tx-12 table-hover">
+                        <table id="tableData" class="table table-bordered tx-12 table-hover">
 
                             <thead>
                                 <tr>
-                                    <th style="width: 15%">Competencies</th>
-                                    <th style="width: 35%">Performance Standars</th>
-                                    <th style="width: 5%">Level</th>
-                                    <th style="width: 30%">Learning Item</th>
-                                    <th style="width: 15%">Intervention</th>
+                                    <th>Competencies</th>
+                                    <th>Performance Standars</th>
+                                    <th>Level</th>
+                                    <th>Learning Item</th>
+                                    <th>Intervention</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -222,9 +222,11 @@
     </div><!-- modal -->
 
     @push('scripts')
-        <script>
+        <script nonce="{{ csp_nonce() }}">
             $(document).ready(function() {
-                $("#tableData").DataTable();
+                $("#tableData").DataTable({
+                    "autoWidth": false
+                });
             });
 
             $(document).on("click", ".get", function(e) {

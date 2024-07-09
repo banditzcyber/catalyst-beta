@@ -66,7 +66,7 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover pd-0">
             <thead class="thead-primary">
                 <tr>
-                    <th style="width: 85px">#</th>
+                    <th class="w-action-2">#</th>
                     <th>Section</th>
                     <th>Competency</th>
                     <th>Position</th>
@@ -137,7 +137,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <script nonce="{{ csp_nonce() }}">
         $(document).ready(function() {
             $("#viewdata").DataTable();
         });

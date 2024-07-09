@@ -10,20 +10,25 @@
         </div>
         <div class="d-none d-md-block">
             <div class="row row-xs pd-0" style="width: 250px">
-                <div class="col-lg-7 pd-0">
-                    <form action="/finishFormValidationDepartment" method="POST" onclick="return confirm('Are you sure?')">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <form action="/finishFormValidationDepartment" method="POST">
                         @csrf
                         <input type="hidden" name="assessment_id" value="{{ $id }}">
                         <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase">
                             <i data-feather="save" class="wd-10 mg-r-5"></i>
                             Finish Form</button>
                     </form>
-                </div>
-                <div class="col-lg-5 pd-0">
-                    <a href="/assessmentValidationDepartment" class="btn btn-sm pd-x-15 btn-danger btn-uppercase mg-l-5">
+                    <a href="/assessmentValidationDepartment" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
                         <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                         back
                     </a>
+                    <form action="/returnFormDepartment" method="POST">
+                        @csrf
+                        <input type="hidden" name="assessment_id" value="{{ $id }}">
+                        <button type="submit" class="btn btn-sm pd-x-15 btn-warning btn-uppercase">
+                            <i data-feather="corner-down-right" class="wd-10 mg-r-5"></i>
+                            Returned</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -91,7 +96,7 @@
         @foreach ($data as $vData)
             <div class="col-sm-6 col-lg-3 mg-t-10">
 
-                <div class="card" style="height: 190px;">
+                <div class="card card-cyber">
                     <div class="card-body pd-b-0">
                         <label class="tx-bold tx-success tx-13 tx-uppercase">
                             {{-- {{ $vData->competency_name }} --}}

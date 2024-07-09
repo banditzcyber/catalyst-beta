@@ -157,6 +157,7 @@ Route::get('/departSubordinate/profile/{employee_id}', [DepartSubordinateControl
 Route::get('/assessmentValidationDepartment', [DepartAssessmentValidationController::class, 'index']);
 Route::get('/assessmentValidationDepartment/show/{id}', [DepartAssessmentValidationController::class, 'show']);
 Route::post('/finishFormValidationDepartment', [DepartAssessmentValidationController::class, 'finishFormValidation']);
+Route::post('/returnFormDepartment', [DepartAssessmentValidationController::class, 'returnForm']);
 
 Route::post('/departSubordinate', [DepartSubordinateController::class, 'finishFormValidation']);
 
@@ -213,8 +214,10 @@ Route::get('/generalAldpParticipantFinish/{aldp_detail_id}/{aldp_id}/{item_id}/{
 // ------------------------------------- Access for administrator -----------------------------------------------
 Route::get('/dashboardFunct', [DashboardFunctController::class, 'index']);
 Route::resource('/performance', PerformanceStandardController::class);
-Route::resource('/items', ItemController::class);
+// Route::resource('/items', ItemController::class);
 Route::resource('/employees', EmployeeController::class);
+
+
 
 // # ALDP
 Route::resource('/aldpAdmin', AldpController::class);
@@ -259,6 +262,10 @@ Route::resource('/competency', CompetencyController::class);
 Route::get('/formCompetency', [CompetencyController::class, 'form']);
 Route::get('/saveData', [CompetencyController::class, 'saveData']);
 Route::post('/competency/updateData', [CompetencyController::class, 'updateData']);
+
+// Menu Items
+Route::get('/items', [ItemController::class, 'index']);
+Route::get('/itemEdits/{id}', [ItemController::class, 'edit']);
 
 // import data
 Route::post('/competency/import-data', [CompetencyController::class, 'importData']);

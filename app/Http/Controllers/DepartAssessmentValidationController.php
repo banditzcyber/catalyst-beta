@@ -94,8 +94,18 @@ class DepartAssessmentValidationController extends Controller
     {
         $assessment_id = $request->input('assessment_id');
         $data['status']     = 3;
+        $data['status_launch'] = 1;
         $data['updated_at'] = now();
         DB::table('assessments')->where('id', $assessment_id)->update($data);
         return redirect('/assessmentValidationDepartment')->with('success', 'Assessment has been updated!');
+    }
+
+    public function returnForm(Request $request)
+    {
+        $assessment_id = $request->input('assessment_id');
+        $data['status']     = 1;
+        $data['updated_at'] = now();
+        DB::table('assessments')->where('id', $assessment_id)->update($data);
+        return redirect('/assessmentValidationDepartment')->with('success', 'Assessment has been returned!');
     }
 }
