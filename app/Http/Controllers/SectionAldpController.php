@@ -318,6 +318,55 @@ class SectionAldpController extends Controller
         return redirect('/sectionAldpShow/' . $aldp_id)->with('success', 'Data has been updated!');
     }
 
+    public function updateDataOther(Request $request)
+    {
+
+        $validation = $request->validate([
+            'item_id'           => 'required',
+            'item_name'         => '',
+            'planned_month'     => 'required',
+            'planned_week'      => 'required',
+            'remarks'           => ''
+        ]);
+
+        $learning = [
+            'item_id'           => $request->input('item_id'),
+            'item_name'         => $request->input('item_name'),
+        ];
+
+
+        $aldp_detail_id     = $request->input('aldp_detail_id');
+        $aldp_id            = $request->input('aldp_id');
+
+
+        DB::table('aldp_details')->where('id', $aldp_detail_id)->update($validation);
+        DB::table('learnings')->where('aldp_detail_id', $aldp_detail_id)->update($learning);
+
+        return redirect('/sectionAldpShow/' . $aldp_id)->with('success', 'Data has been updated!');
+    }
+
+    public function editDataOther(Request $request, $id)
+    {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+            ->where('employees.employee_id', '=', $idLogin);
+
+        $data = DB::table('aldp_details as ad')
+                    ->where('ad.id', $id)->first();
+
+        return view('section.aldp.editother', [
+            'title'             => 'Form Edit ALDP (Other Program)',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $data,
+            'id_aldp'           => $data->aldp_id
+        ]);
+    }
+
     public function deleteItemAldp(Request $request)
     {
         $idAldp         = $request->input('idAldp');

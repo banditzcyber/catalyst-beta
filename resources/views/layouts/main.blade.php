@@ -15,6 +15,7 @@
     <title>{{ $title }} | MyCatalyst</title>
 
     <!-- vendor css -->
+    <link rel="stylesheet" href="{{ asset('vendor/iziToast/dist/css/iziToast.css')}}">
     <link href="/lib/fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
@@ -76,15 +77,11 @@
                 </div>
                 <div class="collapse" id="loggedinMenu">
                     <ul class="nav nav-aside mg-b-0">
-
                         <li class="nav-item">
-                            <form action="/signout" method="POST">
-                                @csrf
-                                <button type="submit" class="nav-link dropdown-item">
-                                    <i data-feather="log-out"></i>
-                                    <span>Sign Out</span>
-                                </button>
-                            </form>
+                            <button type="button " class="nav-link dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                                <i data-feather="log-out"></i>
+                                <span>Sign Out</span>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -131,12 +128,9 @@
             </div>
 
             <nav class="nav">
-                <form action="/signout" method="POST">
-                    @csrf
-                    <button type="submit" class="nav-link dropdown-item">
-                        <i data-feather="power"></i>
-                    </button>
-                </form>
+                <button type="submit" class="nav-link dropdown-item" data-toggle="modal" data-target="#logoutModal">
+                    <i data-feather="power"></i>
+                </button>
             </nav>
         </div><!-- content-header -->
         <div class="content-body pd-y-0">
@@ -144,9 +138,36 @@
 
 
                 @yield('body')
+
+                {{-- Modal Logout --}}
+                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
+                    <div class="modal-dialog modal-sm" data-bs-backdrop="static" data-bs-keyboard="false" role="document">
+                      <div class="modal-content tx-14">
+                        <div class="modal-header">
+                          <h6 class="modal-title" id="exampleModalLabel5">Log Out</h6>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p class="mg-b-0">Are you sure you want to log-off?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="/signout" method="POST">
+                                @csrf
+                                <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary tx-13">Logout</button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{-- End Modal Logout --}}
             </div><!-- container -->
         </div>
     </div>
+
+    <script src="{{ asset('vendor/iziToast/dist/js/iziToast.js')}}"></script>
 
     <script src="/lib/jquery/jquery.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.bundle.min.js"></script>

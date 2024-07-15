@@ -1,4 +1,13 @@
 @extends('layouts.main') @section('body')
+    <style nonce="{{ csp_nonce() }}">
+        .image-add {
+            width: 50px;
+        }
+
+        .text-link {
+            text-decoration: none;
+        }
+    </style>
     <div class="mg-t-0 mg-b-5 pd-0">
         <img src="/images/cap/bnr3.jpg" alt="" class="bg-banner">
     </div>
@@ -484,7 +493,7 @@
                                     class="badge badge-primary pd-y-0 border-0y">
                                     <i data-feather="user" class="wd-15"></i>
                                 </a>
-                                <a href="/sectionAldp/edit/{{ $view->id_aldp_details }}"
+                                <a href="/sectionAldp/editOther/{{ $view->id_aldp_details }}"
                                     class="badge badge-warning pd-y-0 border-0y">
                                     <i data-feather="edit-2" class="wd-15"></i>
                                 </a>
@@ -622,21 +631,25 @@
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
 
-                <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-5">
+
+                <div class="modal-body pd-sm-t-15 pd-sm-b-0 pd-sm-x-5">
                     <div class="row row-xs">
-                        <div class="col-sm-4 tx-center bg-primary">
-                            <a href="/sectionAldp/functional/{{ $id_aldp }}" class=" tx-white">
-                                Functional Competency
+                        <div class="col-sm-4 tx-center">
+                            <a href="/sectionAldp/functional/{{ $id_aldp }}" class="text-link">
+                                <img src="/images/functional_program.png" alt="" class="image-add">
+                                <p class="text-link">Functional</p>
                             </a>
                         </div>
-                        <div class="col-sm-4 tx-center bg-success">
-                            <a href="/sectionAldp/leadership/{{ $id_aldp }}" class=" tx-white">
-                                Leadership Program
+                        <div class="col-sm-4 tx-center">
+                            <a href="/sectionAldp/leadership/{{ $id_aldp }}">
+                                <img src="/images/leadership_program.png" alt="" class="image-add">
+                                Leadership
                             </a>
                         </div>
-                        <div class="col-sm-4 tx-center bg-dark">
-                            <a href="/sectionAldp/other/{{ $id_aldp }}" class=" tx-white">
-                                Other Program
+                        <div class="col-sm-4 tx-center">
+                            <a href="/sectionAldp/other/{{ $id_aldp }}">
+                                <img src="/images/other_program.png" alt="" class="image-add">
+                                <p> Program</p>
                             </a>
                         </div>
                     </div>

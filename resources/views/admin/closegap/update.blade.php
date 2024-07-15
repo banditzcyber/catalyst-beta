@@ -11,5 +11,15 @@
 
 <div class="modal-footer pd-x-20 pd-y-15">
     <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">Cancel</button>
-    <button class="btn btn-xs btn-primary btnSave" onclick="update({{ $data->id }})">Save</button>
+    <button class="btn btn-xs btn-primary btnSave" id="btnUpdate" data-id="{{ $data->id }}">Save</button>
 </div>
+
+<script>
+    //get data-id and parsing it
+    $(document).ready(function() {
+        $('#btnUpdate').click(function() {
+            var id = $(this).data('id');
+            $(document).trigger('updateButtonClicked', { id: id });
+        });
+    });
+</script>

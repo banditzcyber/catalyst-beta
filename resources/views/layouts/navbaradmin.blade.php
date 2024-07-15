@@ -49,11 +49,19 @@
         <i data-feather="shopping-bag"></i> <span>ALDP</span>
     </a>
 </li>
-<li class="nav-item mt-25 {{ request()->is('closegap*') ? 'active' : '' }}">
+<li class="nav-item show with-sub {{ request()->is('closegap*') ? 'active' : '' }}">
+    <a href="" class="nav-link with-sub"><i data-feather="shopping-bag"></i> <span>Close Gap Activity</span></a>
+    <ul>
+      <li class="{{ request()->is('closegapfunctional') ? 'active' : '' }}"><a href="/closegapfunctional">Functional</a></li>
+      <li class="{{ request()->is('closegapleadership') ? 'active' : '' }}"><a href="/closegapleadership">Leadership</a></li>
+      <li class="{{ request()->is('closegapother') ? 'active' : '' }}"><a href="/closegapother">Other</a></li>
+    </ul>
+  </li>
+{{-- <li class="nav-item mt-25 {{ request()->is('closegap*') ? 'active' : '' }}">
     <a href="/closegap" class="nav-link">
-        <i data-feather="shopping-bag"></i> <span>Close Gap Activity</span>
+        <i data-feather="shopping-bag"></i> <span>Close Gap Activity Before</span>
     </a>
-</li>
+</li> --}}
 
 
 <li class="nav-label mg-t-25">Configuration</li>

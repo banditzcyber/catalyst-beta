@@ -24,6 +24,9 @@ use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\DashboardFunctController;
 use App\Http\Controllers\AldpController;
 use App\Http\Controllers\CloseGapController;
+use App\Http\Controllers\CloseGapFunctionalController;
+use App\Http\Controllers\CloseGapLeaderShipController;
+use App\Http\Controllers\CloseGapOtherController;
 
 // Employees
 use App\Http\Controllers\ProfileEmployController;
@@ -125,7 +128,10 @@ Route::post('/sectionAldp/saveForm', [sectionAldpController::class, 'saveForm'])
 Route::post('/sectionAldp/saveFormOther', [sectionAldpController::class, 'saveForm']);
 Route::get('/sectionAldp/edit/{id}', [sectionAldpController::class, 'editData']);
 Route::get('/sectionAldp/editCnl/{id}', [sectionAldpController::class, 'editData']);
+Route::get('/sectionAldp/editOther/{id}', [sectionAldpController::class, 'editDataOther']);
+
 Route::post('/sectionAldp/update', [sectionAldpController::class, 'updateData']);
+Route::post('/sectionAldp/updateOther', [sectionAldpController::class, 'updateDataOther']);
 Route::post('/sectionAldp/deleteItem', [sectionAldpController::class, 'deleteItemAldp']);
 Route::get('/sectionAldpParticipant/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [sectionAldpController::class, 'formParticipant']);
 Route::post('/sectionAldpAddParticipant', [sectionAldpController::class, 'addParticipant']);
@@ -252,10 +258,24 @@ Route::get('/read', [CloseGapController::class, 'read']);
 Route::get('/onprogress', [CloseGapController::class, 'onprogress']);
 Route::get('/show/{id}', [CloseGapController::class, 'show']);
 Route::get('/update/{id}', [CloseGapController::class, 'updateData']);
-Route::get('/closegapcompleted', [CloseGapController::class, 'closegapcompleted']);
-Route::get('/closegapreview', [CloseGapController::class, 'closegapreview']);
-Route::get('/closegapreview', [CloseGapController::class, 'closegapreview']);
-Route::get('/closegapall', [CloseGapController::class, 'closegapall']);
+Route::prefix('closegapfunctional')->group(function () {
+    Route::get('/', [CloseGapFunctionalController::class, 'index']);
+    Route::get('/completed', [CloseGapFunctionalController::class, 'completed']);
+    Route::get('/preview', [CloseGapFunctionalController::class, 'preview']);
+    Route::get('/submitted', [CloseGapFunctionalController::class, 'submitted']);
+});
+Route::prefix('closegapleadership')->group(function () {
+    Route::get('/', [CloseGapLeaderShipController::class, 'index']);
+    Route::get('/completed', [CloseGapLeaderShipController::class, 'completed']);
+    Route::get('/preview', [CloseGapLeaderShipController::class, 'preview']);
+    Route::get('/submitted', [CloseGapLeaderShipController::class, 'submitted']);
+});
+Route::prefix('closegapother')->group(function () {
+    Route::get('/', [CloseGapOtherController::class, 'index']);
+    Route::get('/completed', [CloseGapOtherController::class, 'completed']);
+    Route::get('/preview', [CloseGapOtherController::class, 'preview']);
+    Route::get('/submitted', [CloseGapOtherController::class, 'submitted']);
+});
 
 // Menu Competency
 Route::resource('/competency', CompetencyController::class);

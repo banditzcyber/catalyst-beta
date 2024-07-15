@@ -12,36 +12,31 @@
         </div>
         <div class="d-none d-md-block">
 
-            <div class="btn-group mg-0" role="group" aria-label="Basic example">
-                <a href="/closegapall" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
-                    <i data-feather="list" class="wd-10 mg-r-5"></i>
-                    Functional
-                </a>
-                <a href="/closegapall" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
-                    <i data-feather="list" class="wd-10 mg-r-5"></i>
-                    Leardership
-                </a>
-                <a href="/closegapall" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
-                    <i data-feather="list" class="wd-10 mg-r-5"></i>
-                    Other
-                </a>
-            </div>
+                @php
+                    if ($competency_type == 1) {
+                        $link = '/closegapfunctional';
+                    } elseif ($competency_type == 2) {
+                        $link = '/closegapleadership';
+                    } else {
+                        $link = '/closegapother';
+                    }
+                @endphp
 
             <div class="btn-group mg-0" role="group" aria-label="Basic example">
-                <a href="/closegapall" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
+                <a href="{{ $link }}" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
                     <i data-feather="list" class="wd-10 mg-r-5"></i>
 
                 </a>
-                <a href="/closegap" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $submitted }}"
+                <a href="{{ $link }}/submitted" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $submitted }}"
                     data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                     <i data-feather="navigation" class="wd-10 mg-r-5"></i>
 
                 </a>
-                <a href="/closegapreview" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $reviewed }}">
+                <a href="{{ $link }}/preview" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $reviewed }}">
                     <i data-feather="refresh-cw" class="wd-10 mg-r-5"></i>
 
                 </a>
-                <a href="/closegapcompleted" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $completed }}">
+                <a href="{{ $link }}/completed" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $completed }}">
                     <i data-feather="check-circle" class="wd-10 mg-r-5"></i>
 
                 </a>
@@ -62,19 +57,20 @@
         <table id="viewdata" class="table table-bordered tx-12 table-hover">
             <thead class="thead-primary tx-uppercase">
                 <tr class="bd-l bd-4 bd-danger">
+                    {{-- <th class="d-none">id</th> --}}
                     <th>Employee</th>
-                    <th>Item ID</th>
                     <th>Item Name</th>
-                    <th>Date</th>
-                    <th>Doc</th>
+                    <th>Date started</th>
+                    <th>Date finished</th>
+                    {{-- <th>Doc</th> --}}
                     <th>Comment</th>
+                    <th>Evidence</th>
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody>
+            {{-- <tbody>
                 @foreach ($data as $view)
                     @php
-
                         if ($view->status == 1) {
                             $color = 'bg-light';
                             $text = 'Submitted';
@@ -89,9 +85,9 @@
                             $text = 'Rejected';
                         }
                     @endphp
+
                     <tr class="bd-l bd-4 bd-danger">
                         <td>{{ $view->employee_name }} - {{ $view->employee_id }}</td>
-                        <td>{{ $view->item_id }}</td>
                         <td onclick ="tampil({{ $view->id }})">{{ $view->item_name }}</td>
                         <td>
                             @if (!empty($view->started_at))
@@ -107,12 +103,13 @@
                             </a>
                         </td>
                         <td>{{ $view->comment }}</td>
-                        <td class="{{ $color }} tx-center" onclick ="show({{ $view->id }})">
+                        <td class="{{ $color }} tx-center show-modal pointer" data-id="{{ $view->id }}">
                             {{ $text }}
                         </td>
+                        <td>{{ $view->competency_type}}</td>
                     </tr>
                 @endforeach
-            </tbody>
+            </tbody> --}}
         </table>
 
     </div>
@@ -139,8 +136,105 @@
 @push('scripts')
     <script nonce="{{ csp_nonce() }}">
         $(document).ready(function() {
+
+            var competencyType = {{ $competency_type }};
+            var status = {{ $status }}; 
+            var ajaxUrl;
+
+            if (competencyType === 1) {
+                if (status === 0) {
+                    ajaxUrl = '/closegapfunctional';
+                } else if (status === 1 ) {
+                    ajaxUrl = '/closegapfunctional/submitted';
+                } else if (status === 2 ) {
+                    ajaxUrl = '/closegapfunctional/preview';
+                } else if (status === 3 ) {
+                    ajaxUrl = '/closegapfunctional/completed';
+                }
+            } else if (competencyType === 2) {
+                if (status === 0) {
+                    ajaxUrl = '/closegapleadership';
+                } else if (status === 1 ) {
+                    ajaxUrl = '/closegapleadership/submitted';
+                } else if (status === 2 ) {
+                    ajaxUrl = '/closegapleadership/preview';
+                } else if (status === 3 ) {
+                    ajaxUrl = '/closegapleadership/completed';
+                }
+            } else if (competencyType === 3) {
+                if (status === 0) {
+                    ajaxUrl = '/closegapother';
+                } else if (status === 1 ) {
+                    ajaxUrl = '/closegapother/submitted';
+                } else if (status === 2 ) {
+                    ajaxUrl = '/closegapother/preview';
+                } else if (status === 3 ) {
+                    ajaxUrl = '/closegapother/completed';
+                }
+            }
+
+
             // viewData();
-            $("#viewdata").DataTable();
+            $("#viewdata").DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: ajaxUrl,
+                columns: [
+                    { data: 'employee_name', name: 'e.employee_name' },
+                    { data: 
+                        'item_name', 
+                        name: 'i.item_name',
+                       render: function(data, type, row) {
+                            // Memisahkan teks berdasarkan pola nomor di awal (angka diikuti oleh titik dan spasi)
+                            let items = data.split(/(\d+\.\s+)/);
+                            let html = '';
+
+                            // Loop melalui setiap bagian yang dipisahkan
+                            for (let i = 0; i < items.length; i++) {
+                                // Jika bagian merupakan angka diikuti oleh titik dan spasi
+                                if (/^\d+\.\s+$/.test(items[i])) {
+                                    html += `<div>${items[i]}${items[i+1]}</div>`;
+                                    i++; // Melompati teks yang mengikuti angka di depannya
+                                } else {
+                                    html += `<div>${items[i]}</div>`;
+                                }
+                            }
+
+                            return html;
+                        }
+                    },
+                    { data: 'started_at', name: 'l.started_at', },
+                    { data: 'finished_at', name: 'l.finished_at' },
+                    { data: 'comment', name: 'l.comment' },
+                    { data: 'evidence', name: 'l.evidence' },
+                    { 
+                        data: 'status', 
+                        name: 'l.status',
+                        render: function(data, type, row) {
+                            let color, text;
+                            if (data == 1) {
+                                color = 'bg-light';
+                                text = 'Submitted';
+                            } else if (data == 2) {
+                                color = 'bg-warning';
+                                text = 'Reviewed';
+                            } else if (data == 3) {
+                                color = 'bg-success';
+                                text = 'Approved';
+                            } else {
+                                color = 'bg-danger';
+                                text = 'Rejected';
+                            }
+                            return `<div class="tx-center show-modal pointer" data-id="${row.id}">${text}</div>`;
+                        }
+                    },
+                ],
+                createdRow: function(row, data, dataIndex) {
+                    $(row).find('td:eq(6)').addClass(data.status === 1 ? 'bg-light pointer show-modal' : (data.status === 2 ? 'bg-warning text-white pointer show-modal' : (data.status === 3 ? 'bg-success text-white pointer show-modal' : 'bg-danger text-white pointer show-modal')));
+                    const modalBtn = $(row).find('.show-modal');
+                        modalBtn.attr('data-id', data.id);
+                }
+            });
         })
 
         function addData() {
@@ -187,6 +281,11 @@
             })
         }
 
+        $(document).on('click', '.show-modal', function() {
+            const id = $(this).data('id');
+            show(id);
+        });
+
         function show(id) {
             $.get("{{ url('show') }}/" + id, {}, function(data, status) {
                 $("#titleModel").html('Update Status')
@@ -201,28 +300,40 @@
 
         }
 
-        //proses data
-        function update(id) {
+
+        //For Update//
+        //trigger button update from update.blade.php
+        $(document).on('updateButtonClicked', function(event, data) {
+            //Get data-id from update.blade.php
+            var id = data.id;
+            update(id);
+
+            //proses data
+            function update(id) {
             let status = $("#status").val();
             let item_id = $("#item_id").val();
             let employee_id = $("#employee_id").val();
-            $.ajax({
-                type: "get",
-                url: "{{ url('update') }}/" + id,
-                // data: "status=" + status,
-                data: {
-                    "status": status,
-                    "item_id": item_id,
-                    "employee_id": employee_id
-                },
-                success: function(data) {
-                    alert("Update data successed!");
-                    $(".close").click();
-                    // viewData();
-                    location.reload();
-
-                }
-            })
-        }
+                $.ajax({
+                    type: "get",
+                    url: "{{ url('update') }}/" + id,
+                    // data: "status=" + status,
+                    data: {
+                        "status": status,
+                        "item_id": item_id,
+                        "employee_id": employee_id
+                    },
+                    success: function(data) {
+                        iziToast.success({
+                            title: 'Success',
+                            timeout: 2200,
+                            message: 'Update status berhasil!',
+                            position: 'topRight'
+                        });
+                        $(".close").click();
+                            $('#viewdata').DataTable().ajax.reload();
+                    }
+                })                                      
+            }
+        })
     </script>
 @endpush

@@ -17,7 +17,7 @@
 </li>
 <li class="nav-item mt-25 {{ request()->is('mylearning*') ? 'active' : '' }}">
     <a href="/mylearning" class="nav-link">
-        <i data-feather="book-open"></i> <span>My Learning</span>
+        <i data-feather="book-open"></i> <span>Learning Journey</span>
     </a>
 </li>
 

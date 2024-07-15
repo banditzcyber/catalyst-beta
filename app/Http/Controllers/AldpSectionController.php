@@ -339,6 +339,28 @@ class AldpSectionController extends Controller
         ]);
     }
 
+    public function editDataOther(Request $request, $id)
+    {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+            ->where('employees.employee_id', '=', $idLogin);
+
+        $data = DB::table('aldp_details as ad')
+                    ->where('ad.id', $id)->first();
+
+        return view('section.aldp.editother', [
+            'title'             => 'Form Edit ALDP (Other Program)',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $data,
+            'id_aldp'           => $data->aldp_id
+        ]);
+    }
+
     public function updateData(Request $request)
     {
 

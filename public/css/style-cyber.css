@@ -224,3 +224,7 @@
 .w-action-4 {
     width: 140px;
 }
+
+.pointer {
+    cursor: pointer;
+}
