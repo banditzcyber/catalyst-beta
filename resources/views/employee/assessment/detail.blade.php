@@ -100,17 +100,12 @@
                     </div>
 
                     @php
-                        $dValid = DB::table('assessment_details')
-                            ->join('items', 'assessment_details.item_id', '=', 'items.item_id')
-                            ->join('performance_standards', 'items.ps_id', '=', 'performance_standards.ps_id')
-                            ->join(
-                                'competencies',
-                                'performance_standards.competency_id',
-                                '=',
-                                'competencies.competency_id',
-                            )
-                            ->where('assessment_details.assessment_id', '=', $id)
-                            ->where('competencies.competency_id', '=', $vData->competency_id)
+                        $dValid = DB::table('assessment_details as ad')
+                            ->join('items as i', 'ad.item_id', '=', 'i.item_id')
+                            ->join('performance_standards as ps', 'i.ps_id', '=', 'ps.ps_id')
+                            ->join('competencies as c', 'ps.competency_id', '=', 'c.competency_id')
+                            ->where('ad.assessment_id', '=', $id)
+                            ->where('c.competency_id', '=', $vData->competency_id)
                             ->count();
 
                         if ($vStatus->status == 1) {

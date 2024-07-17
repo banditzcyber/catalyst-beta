@@ -12,15 +12,15 @@
         </div>
         <div class="d-none d-md-block">
 
-                @php
-                    if ($competency_type == 1) {
-                        $link = '/closegapfunctional';
-                    } elseif ($competency_type == 2) {
-                        $link = '/closegapleadership';
-                    } else {
-                        $link = '/closegapother';
-                    }
-                @endphp
+            @php
+                if ($competency_type == 1) {
+                    $link = '/closegapfunctional';
+                } elseif ($competency_type == 2) {
+                    $link = '/closegapleadership';
+                } else {
+                    $link = '/closegapother';
+                }
+            @endphp
 
             <div class="btn-group mg-0" role="group" aria-label="Basic example">
                 <a href="{{ $link }}" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
@@ -138,37 +138,37 @@
         $(document).ready(function() {
 
             var competencyType = {{ $competency_type }};
-            var status = {{ $status }}; 
+            var status = {{ $status }};
             var ajaxUrl;
 
             if (competencyType === 1) {
                 if (status === 0) {
                     ajaxUrl = '/closegapfunctional';
-                } else if (status === 1 ) {
+                } else if (status === 1) {
                     ajaxUrl = '/closegapfunctional/submitted';
-                } else if (status === 2 ) {
+                } else if (status === 2) {
                     ajaxUrl = '/closegapfunctional/preview';
-                } else if (status === 3 ) {
+                } else if (status === 3) {
                     ajaxUrl = '/closegapfunctional/completed';
                 }
             } else if (competencyType === 2) {
                 if (status === 0) {
                     ajaxUrl = '/closegapleadership';
-                } else if (status === 1 ) {
+                } else if (status === 1) {
                     ajaxUrl = '/closegapleadership/submitted';
-                } else if (status === 2 ) {
+                } else if (status === 2) {
                     ajaxUrl = '/closegapleadership/preview';
-                } else if (status === 3 ) {
+                } else if (status === 3) {
                     ajaxUrl = '/closegapleadership/completed';
                 }
             } else if (competencyType === 3) {
                 if (status === 0) {
                     ajaxUrl = '/closegapother';
-                } else if (status === 1 ) {
+                } else if (status === 1) {
                     ajaxUrl = '/closegapother/submitted';
-                } else if (status === 2 ) {
+                } else if (status === 2) {
                     ajaxUrl = '/closegapother/preview';
-                } else if (status === 3 ) {
+                } else if (status === 3) {
                     ajaxUrl = '/closegapother/completed';
                 }
             }
@@ -179,12 +179,14 @@
                 processing: true,
                 serverSide: true,
                 ajax: ajaxUrl,
-                columns: [
-                    { data: 'employee_name', name: 'e.employee_name' },
-                    { data: 
-                        'item_name', 
+                columns: [{
+                        data: 'employee_name',
+                        name: 'e.employee_name'
+                    },
+                    {
+                        data: 'item_name',
                         name: 'i.item_name',
-                       render: function(data, type, row) {
+                        render: function(data, type, row) {
                             // Memisahkan teks berdasarkan pola nomor di awal (angka diikuti oleh titik dan spasi)
                             let items = data.split(/(\d+\.\s+)/);
                             let html = '';
@@ -203,12 +205,24 @@
                             return html;
                         }
                     },
-                    { data: 'started_at', name: 'l.started_at', },
-                    { data: 'finished_at', name: 'l.finished_at' },
-                    { data: 'comment', name: 'l.comment' },
-                    { data: 'evidence', name: 'l.evidence' },
-                    { 
-                        data: 'status', 
+                    {
+                        data: 'started_at',
+                        name: 'l.started_at',
+                    },
+                    {
+                        data: 'finished_at',
+                        name: 'l.finished_at'
+                    },
+                    {
+                        data: 'comment',
+                        name: 'l.comment'
+                    },
+                    {
+                        data: 'evidence',
+                        name: 'l.evidence'
+                    },
+                    {
+                        data: 'status',
                         name: 'l.status',
                         render: function(data, type, row) {
                             let color, text;
@@ -230,9 +244,12 @@
                     },
                 ],
                 createdRow: function(row, data, dataIndex) {
-                    $(row).find('td:eq(6)').addClass(data.status === 1 ? 'bg-light pointer show-modal' : (data.status === 2 ? 'bg-warning text-white pointer show-modal' : (data.status === 3 ? 'bg-success text-white pointer show-modal' : 'bg-danger text-white pointer show-modal')));
+                    $(row).find('td:eq(6)').addClass(data.status === 1 ? 'bg-light pointer show-modal' :
+                        (data.status === 2 ? 'bg-warning text-white pointer show-modal' : (data
+                            .status === 3 ? 'bg-success text-white pointer show-modal' :
+                            'bg-danger text-white pointer show-modal')));
                     const modalBtn = $(row).find('.show-modal');
-                        modalBtn.attr('data-id', data.id);
+                    modalBtn.attr('data-id', data.id);
                 }
             });
         })
@@ -310,9 +327,9 @@
 
             //proses data
             function update(id) {
-            let status = $("#status").val();
-            let item_id = $("#item_id").val();
-            let employee_id = $("#employee_id").val();
+                let status = $("#status").val();
+                let item_id = $("#item_id").val();
+                let employee_id = $("#employee_id").val();
                 $.ajax({
                     type: "get",
                     url: "{{ url('update') }}/" + id,
@@ -330,9 +347,9 @@
                             position: 'topRight'
                         });
                         $(".close").click();
-                            $('#viewdata').DataTable().ajax.reload();
+                        $('#viewdata').DataTable().ajax.reload();
                     }
-                })                                      
+                })
             }
         })
     </script>

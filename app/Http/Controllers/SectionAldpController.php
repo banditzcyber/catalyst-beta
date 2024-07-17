@@ -157,6 +157,8 @@ class SectionAldpController extends Controller
                         ->join('competencies As c', 'c.competency_id', '=', 'ps.competency_id')
                         ->select('ad.item_id', 'i.item_name', 'i.intervention', 'i.type_training', 'ps.level', 'ps.ps_name', 'c.competency_name')
                         ->where('ad.actual_result', 2)
+                        ->where('a.status', 3)
+                        ->where('a.status_launch', 1)
                         ->whereIn('a.employee_id', $assessments)
                         ->distinct('ad.item_id')
                         ->get();

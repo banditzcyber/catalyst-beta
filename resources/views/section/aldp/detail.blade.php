@@ -1,7 +1,7 @@
 @extends('layouts.main') @section('body')
     <style nonce="{{ csp_nonce() }}">
         .image-add {
-            width: 50px;
+            width: 70px;
         }
 
         .text-link {
@@ -633,23 +633,23 @@
 
 
                 <div class="modal-body pd-sm-t-15 pd-sm-b-0 pd-sm-x-5">
-                    <div class="row row-xs">
+                    <div class="row row-xs mg-t-5">
                         <div class="col-sm-4 tx-center">
                             <a href="/sectionAldp/functional/{{ $id_aldp }}" class="text-link">
                                 <img src="/images/functional_program.png" alt="" class="image-add">
-                                <p class="text-link">Functional</p>
+                                <p class="tx-black mg-t-5">Functional</p>
                             </a>
                         </div>
                         <div class="col-sm-4 tx-center">
                             <a href="/sectionAldp/leadership/{{ $id_aldp }}">
                                 <img src="/images/leadership_program.png" alt="" class="image-add">
-                                Leadership
+                                <p class="tx-black mg-t-5">Leadership</p>
                             </a>
                         </div>
                         <div class="col-sm-4 tx-center">
                             <a href="/sectionAldp/other/{{ $id_aldp }}">
                                 <img src="/images/other_program.png" alt="" class="image-add">
-                                <p> Program</p>
+                                <p class="tx-black mg-t-5">Other</p>
                             </a>
                         </div>
                     </div>
