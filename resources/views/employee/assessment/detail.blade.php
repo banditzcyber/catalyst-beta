@@ -7,21 +7,21 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
         <div>
-            <h5 class="tx-uppercase">Assessment Detail</h5>
+            <h5 class=>Assessment Detail</h5>
         </div>
         <div class="d-none d-md-block">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <form action="/finishForm" method="POST">
+                {{-- <form action="/finishForm" method="POST">
                     @csrf
                     <input type="hidden" name="id" value="{{ $id }}">
                     <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase">
                         <i data-feather="save" class="wd-10 mg-r-5"></i>
                         Finish Form</button>
-                </form>
-                <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
+                </form> --}}
+                {{-- <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
                     <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
                     back
-                </a>
+                </a> --}}
             </div>
 
         </div>
@@ -34,6 +34,7 @@
             @php
                 $kd_assessment = $vStatus->id;
                 $jobcode = $vStatus->jobcode;
+                $status_assessment = $vStatus->status;
                 if ($vStatus->status == 1) {
                     $person = 'active';
                     $superior = '';
@@ -115,6 +116,7 @@
                                 $btn = 'btn-outline-secondary';
                                 $title = 'Start';
                                 $bg = 'bg-light';
+                                $valid = 0;
                             } else {
                                 $link =
                                     '/updateAssessment/' .
@@ -126,6 +128,7 @@
                                 $btn = 'btn-light';
                                 $title = 'Update';
                                 $bg = 'bg-success';
+                                $valid = 1;
                             }
                         } else {
                             $link =
@@ -133,6 +136,7 @@
                             $btn = 'btn-light';
                             $title = 'View';
                             $bg = 'bg-success';
+                            $valid = 1;
                         }
                     @endphp
 
@@ -153,7 +157,58 @@
                 </div>
 
             </div>
+
+            @php
+                $dCompetency[] = $valid;
+            @endphp
         @endforeach
 
+        @php
+
+            // dd($dCompetency);
+
+            if (in_array(0, $dCompetency)) {
+                $disable = 'disabled';
+            } else {
+                if ($status_assessment == 1) {
+                    $disable = '';
+                } else {
+                    $disable = 'disabled';
+                }
+            }
+
+        @endphp
+
+        <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-t-30">
+
+            <div class="d-none d-md-block">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <form action="/finishForm" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $id }}">
+                        <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase confirmation"
+                            {{ $disable }}>
+                            <i data-feather="save" class="wd-10 mg-r-5"></i>
+                            Finish Form</button>
+                    </form>
+                    <a href="/assessmentEmployee" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
+                        <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
+                        back
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
     </div><!-- row -->
+
+    <script type="text/javascript" nonce="{{ csp_nonce() }}">
+        var elems = document.getElementsByClassName('confirmation');
+        var confirmIt = function(e) {
+            if (!confirm('Are you sure?')) e.preventDefault();
+        };
+        for (var i = 0, l = elems.length; i < l; i++) {
+            elems[i].addEventListener('click', confirmIt, false);
+        }
+    </script>
 @endsection

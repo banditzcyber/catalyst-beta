@@ -79,8 +79,8 @@ class SectionAldpController extends Controller
 
         $other_all          = $learning3->where('aldp_details.competency_type', '=', '3')->count();
         $other_comp         = $learning3->where('aldp_details.competency_type', '=', '3')
-            ->where('learnings.status', '=', 3)
-            ->count();
+                ->where('learnings.status', '=', 3)
+                ->count();
 
 
         if (!empty($functional_all)) {
@@ -135,12 +135,13 @@ class SectionAldpController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-            ->where('employees.employee_id', '=', $idLogin);
+                            ->where('employees.employee_id', '=', $idLogin);
 
         $assessments = []; // Array to store all assessments
 
         $dSubordinate = DB::table('employees')
             ->where('sm_code', $idLogin)
+            ->where('employee_id', $idLogin)
             ->get();
 
         foreach ($dSubordinate as $vSubordinate) {
@@ -151,15 +152,17 @@ class SectionAldpController extends Controller
 
 
         $data   = DB::table('assessment_details AS ad')
-            ->join('assessments AS a', 'a.id', '=', 'ad.assessment_id')
-            ->join('items AS i', 'i.item_id', '=', 'ad.item_id')
-            ->join('performance_standards As ps', 'ps.ps_id', '=', 'i.ps_id')
-            ->join('competencies As c', 'c.competency_id', '=', 'ps.competency_id')
-            ->select('ad.item_id', 'i.item_name', 'i.intervention', 'i.type_training', 'ps.level', 'ps.ps_name', 'c.competency_name')
-            ->where('ad.actual_result', 2)
-            ->whereIn('a.employee_id', $assessments)
-            ->distinct('ad.item_id')
-            ->get();
+                        ->join('assessments AS a', 'a.id', '=', 'ad.assessment_id')
+                        ->join('items AS i', 'i.item_id', '=', 'ad.item_id')
+                        ->join('performance_standards As ps', 'ps.ps_id', '=', 'i.ps_id')
+                        ->join('competencies As c', 'c.competency_id', '=', 'ps.competency_id')
+                        ->select('ad.item_id', 'i.item_name', 'i.intervention', 'i.type_training', 'ps.level', 'ps.ps_name', 'c.competency_name')
+                        ->where('ad.actual_result', 2)
+                        ->where('a.status', 3)
+                        ->where('a.status_launch', 1)
+                        ->whereIn('a.employee_id', $assessments)
+                        ->distinct('ad.item_id')
+                        ->get();
 
         return view('section.aldp.create', [
             'title'             => 'Form Input ALDP (Functional)',
@@ -217,65 +220,22 @@ class SectionAldpController extends Controller
 
     public function saveForm(Request $request)
     {
+
         $validation     = $request->validate([
-            'aldp_detail_id'    => 'required|unique:aldp_details,id',
             'aldp_id'           => 'required',
             'competency_type'   => 'required',
             'item_id'           => 'required',
             'item_name'         => '',
             'planned_month'     => 'required',
             'planned_week'      => 'required',
-            'remarks'           => '',
-            'employee_id'       => 'required',
-        ], [
-            'aldp_detail_id.unique' => 'There is an error, please '
+            'remarks'           => ''
         ]);
 
         $validation['status_detail'] = 0;
+        // dd($validation);
 
-        $validation['status']   =  1;
-
-        $employeeId = explode(', ', $validation['employee_id']);
-
-
-        foreach ($employeeId as $eId) {
-            DB::table('learnings')->insert([
-                'aldp_detail_id'    => $validation['aldp_detail_id'],
-                'competency_type'   => $validation['competency_type'],
-                'employee_id'       => trim($eId),
-                'item_id'           => $validation['item_id'],
-                'item_name'         => $validation['item_name'],
-                'status'            => $validation['status']
-            ]);
-        };
-
-        DB::table('aldp_details')->insert([
-            'id'              => $validation['aldp_detail_id'],
-            'aldp_id'         => $validation['aldp_id'],
-            'competency_type' => $validation['competency_type'],
-            'item_id'         => $validation['item_id'],
-            'item_name'       => $validation['item_name'],
-            'planned_month'   => $validation['planned_month'],
-            'planned_week'    => $validation['planned_week'],
-            'remarks'         => $validation['remarks'],
-            'status_detail'   => $validation['status_detail']
-        ]);
-
-        session()->flash('successAddFunc', 'Data berhasil disimpan.');
-
-        $aldp_id = $validation['aldp_id'];
-
-        return response()->json(['id' => $aldp_id], 200);
-
-        // return redirect('/sectionAldpShow/' . $validationAldp['aldp_id'])->with('success', 'New data has been addedd!');
-        // $validationParticip = $request->validate([
-        //     'competency_type'   => 'required',
-        //     'aldp_detail_id'    => 'required',
-        //     'employee_id'       => 'required',
-        //     'item_id'           => 'required',
-        //     'item_name'         => ''
-        // ]);
-
+        DB::table('aldp_details')->insert($validation);
+        return redirect('/sectionAldpShow/' . $validation['aldp_id'])->with('success', 'New data has been addedd!');
     }
 
     public function saveFormOther(Request $request)
@@ -361,6 +321,55 @@ class SectionAldpController extends Controller
         return redirect('/sectionAldpShow/' . $aldp_id)->with('success', 'Data has been updated!');
     }
 
+    public function updateDataOther(Request $request)
+    {
+
+        $validation = $request->validate([
+            'item_id'           => 'required',
+            'item_name'         => '',
+            'planned_month'     => 'required',
+            'planned_week'      => 'required',
+            'remarks'           => ''
+        ]);
+
+        $learning = [
+            'item_id'           => $request->input('item_id'),
+            'item_name'         => $request->input('item_name'),
+        ];
+
+
+        $aldp_detail_id     = $request->input('aldp_detail_id');
+        $aldp_id            = $request->input('aldp_id');
+
+
+        DB::table('aldp_details')->where('id', $aldp_detail_id)->update($validation);
+        DB::table('learnings')->where('aldp_detail_id', $aldp_detail_id)->update($learning);
+
+        return redirect('/sectionAldpShow/' . $aldp_id)->with('success', 'Data has been updated!');
+    }
+
+    public function editDataOther(Request $request, $id)
+    {
+        // session
+        $area           = $request->session()->get('local');
+        $roleId         = $request->session()->get('roleId');
+        $idLogin        = $request->session()->get('user');
+        $dEmployee      = DB::table('employees')
+            ->where('employees.employee_id', '=', $idLogin);
+
+        $data = DB::table('aldp_details as ad')
+                    ->where('ad.id', $id)->first();
+
+        return view('section.aldp.editother', [
+            'title'             => 'Form Edit ALDP (Other Program)',
+            'employeeSession'   => $dEmployee->first(),
+            'area'              => $area,
+            'roleId'            => $roleId,
+            'data'              => $data,
+            'id_aldp'           => $data->aldp_id
+        ]);
+    }
+
     public function deleteItemAldp(Request $request)
     {
         $idAldp         = $request->input('idAldp');
@@ -383,13 +392,13 @@ class SectionAldpController extends Controller
         $dEmployee      = DB::table('employees')
             ->where('employees.employee_id', '=', $idLogin);
 
-        if ($type_program == 1) {
+        if($type_program == 1){
             $itemEmployy = DB::table('assessment_details')
-                ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
-                ->where('assessment_details.actual_result', 2)
-                ->where('assessment_details.item_id', $item_id)
-                ->select('assessments.employee_id')
-                ->get();
+            ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
+            ->where('assessment_details.actual_result', 2)
+            ->where('assessment_details.item_id', $item_id)
+            ->select('assessments.employee_id')
+            ->get();
 
 
 
@@ -398,22 +407,19 @@ class SectionAldpController extends Controller
                 $rowItemEmployee[] = $vItemEmploy->employee_id;
             }
 
-
-
-            if (!empty($rowItemEmployee)) {
+            if(!empty($rowItemEmployee)){
 
                 $employee   = DB::table('employees')
                     ->whereIn('employee_id', $rowItemEmployee)
-                    ->where('sm_code', $idLogin)
-                    ->orWhere('employee_id', $idLogin)->get();
-            } else {
+                    ->where('sm_code', $idLogin)->get();
+            }else{
                 $employee   = DB::table('employees')
                     ->where('sm_code', $idLogin)->get();
             }
-        } else {
+
+        }else{
             $employee   = DB::table('employees')
-                ->where('sm_code', $idLogin)
-                ->orWhere('employee_id', $idLogin)->get();
+                ->where('sm_code', $idLogin)->get();
         }
 
 
@@ -461,7 +467,7 @@ class SectionAldpController extends Controller
         $type_program = $request->input('type_program');
 
         DB::table('learnings')->insert($validation);
-        return redirect('/sectionAldpParticipant/' . $aldp_detail . '/' . $aldp . '/' . $item_id . '/' . $type_program)->with('success', 'New data has been addedd!');
+        return redirect('/sectionAldpParticipant/' . $aldp_detail . '/' . $aldp . '/' . $item_id . '/'. $type_program)->with('success', 'New data has been addedd!');
     }
 
     public function deleteParticipat(Request $request)
@@ -474,7 +480,7 @@ class SectionAldpController extends Controller
 
         DB::table('learnings')->where('id', $learning_id)->delete();
 
-        return redirect('/sectionAldpParticipant/' . $aldp_detail_id . '/' . $aldp_id . '/' . $item_id . '/' . $type_program)->with('success', 'Data has been Deleted!');
+        return redirect('/sectionAldpParticipant/' . $aldp_detail_id . '/' . $aldp_id . '/' . $item_id . '/'. $type_program)->with('success', 'Data has been Deleted!');
     }
 
     public function submitForm(Request $request)
@@ -590,13 +596,13 @@ class SectionAldpController extends Controller
         $dEmployee      = DB::table('employees')
             ->where('employees.employee_id', '=', $idLogin);
 
-        if ($type_program == 1) {
+        if($type_program == 1){
             $itemEmployy = DB::table('assessment_details')
-                ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
-                ->where('assessment_details.actual_result', 2)
-                ->where('assessment_details.item_id', $item_id)
-                ->select('assessments.employee_id')
-                ->get();
+            ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
+            ->where('assessment_details.actual_result', 2)
+            ->where('assessment_details.item_id', $item_id)
+            ->select('assessments.employee_id')
+            ->get();
 
 
 
@@ -605,16 +611,17 @@ class SectionAldpController extends Controller
                 $rowItemEmployee[] = $vItemEmploy->employee_id;
             }
 
-            if (!empty($rowItemEmployee)) {
+            if(!empty($rowItemEmployee)){
 
                 $employee   = DB::table('employees')
                     ->whereIn('employee_id', $rowItemEmployee)
                     ->where('sm_code', $idLogin)->get();
-            } else {
+            }else{
                 $employee   = DB::table('employees')
                     ->where('sm_code', $idLogin)->get();
             }
-        } else {
+
+        }else{
             $employee   = DB::table('employees')
                 ->where('sm_code', $idLogin)->get();
         }
@@ -646,99 +653,4 @@ class SectionAldpController extends Controller
         ]);
     }
 
-    public function tambahData(Request $request, $id)
-    {
-        // session
-        $area           = $request->session()->get('local');
-        $roleId         = $request->session()->get('roleId');
-        $idLogin        = $request->session()->get('user');
-        $dEmployee      = DB::table('employees')
-            ->where('employees.employee_id', '=', $idLogin);
-
-        $assessments = []; // Array to store all assessments
-
-        $dSubordinate = DB::table('employees')
-            ->where('sm_code', $idLogin)
-            ->get();
-
-        foreach ($dSubordinate as $vSubordinate) {
-
-            // Append the assessment to the assessments array
-            $assessments[] = $vSubordinate->employee_id;
-        }
-
-        $data1   = DB::table('assessment_details AS ad')
-            ->join('assessments AS a', 'a.id', '=', 'ad.assessment_id')
-            ->join('items AS i', 'i.item_id', '=', 'ad.item_id')
-            ->join('performance_standards As ps', 'ps.ps_id', '=', 'i.ps_id')
-            ->join('competencies As c', 'c.competency_id', '=', 'ps.competency_id')
-            ->select('ad.item_id', 'i.item_name', 'i.intervention', 'i.type_training', 'ps.level', 'ps.ps_name', 'c.competency_name')
-            ->where('ad.actual_result', 2)
-            ->whereIn('a.employee_id', $assessments)
-            ->distinct('ad.item_id')
-            ->get();
-
-
-        // Menangkap Parsing data Participant
-        // $type_program = 
-
-        return view('section.aldp.create', [
-            'title'             => 'Form Input ALDP (Functional)',
-            'employeeSession'   => $dEmployee->first(),
-            'area'              => $area,
-            'roleId'            => $roleId,
-            'id_aldp'           => $id,
-            'data1'              => $data1,
-            'comp_type'         => 1
-        ]);
-    }
-
-    public function sendData(Request $request)
-    {
-        $aldp_id = $request->input('aldp_id');
-        $competency_type = $request->input('competency_type');
-        $item_id = $request->input('item_id');
-        $idLogin        = $request->session()->get('user');
-
-        // Default response data
-        $responseData = [
-            'id_aldp' => $aldp_id,
-            'employee' => [],
-            'item_id' => $item_id,
-            'competency_type' => $competency_type
-        ];
-
-        if ($competency_type == 1) {
-            $itemEmployy = DB::table('assessment_details')
-                ->join('assessments', 'assessment_details.assessment_id', '=', 'assessments.id')
-                ->where('assessment_details.actual_result', 2)
-                ->where('assessment_details.item_id', $item_id)
-                ->select('assessments.employee_id')
-                ->get();
-
-            foreach ($itemEmployy as $vItemEmploy) {
-                $rowItemEmployee[] = $vItemEmploy->employee_id;
-            }
-
-            if (!empty($rowItemEmployee)) {
-                $employee = DB::table('employees')
-                    ->whereIn('employee_id', $rowItemEmployee)
-                    ->where('sm_code', $idLogin)
-                    ->get();
-            } else {
-                $employee = DB::table('employees')
-                    ->where('sm_code', $idLogin)
-                    ->get();
-            }
-        } else {
-            $employee = DB::table('employees')
-                ->where('sm_code', $idLogin)
-                ->orWhere('employee_id', $idLogin)
-                ->get();
-        }
-
-        $responseData['employee'] = $employee;
-
-        return response()->json($responseData);
-    }
 }

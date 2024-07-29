@@ -15,25 +15,25 @@ class CloseGapOtherController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
+            ->where('employees.employee_id', '=', $idLogin);
 
         if ($request->ajax()) {
             $search = DB::table('learnings as l')
-                        ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
-                        ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
-                        ->where('ad.competency_type', 3)
-                        ->select(
-                            'l.id', 
-                            'e.employee_name', 
-                            'l.item_name', 
-                            'l.started_at', 
-                            'l.finished_at', 
-                            'l.comment', 
-                            'l.evidence', 
-                            'l.status',
-                        );
-                        return DataTables::of($search)->make(true);
-            }
+                ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
+                ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                ->where('ad.competency_type', 3)
+                ->select(
+                    'l.id',
+                    'e.employee_name',
+                    'l.item_name',
+                    'l.started_at',
+                    'l.finished_at',
+                    'l.comment',
+                    'l.evidence',
+                    'l.status',
+                );
+            return DataTables::of($search)->make(true);
+        }
 
         // if(request('search')) {
         //     $search->where('i.item_id', 'like', '%' . request('search') . '%')
@@ -64,26 +64,26 @@ class CloseGapOtherController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
+            ->where('employees.employee_id', '=', $idLogin);
 
         if ($request->ajax()) {
             $search = DB::table('learnings as l')
-                        ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
-                        ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
-                        ->where('ad.competency_type', 3)
-                        ->where('l.status', 1)
-                        ->select(
-                            'l.id', 
-                            'l.item_name', 
-                            'e.employee_name', 
-                            'l.started_at', 
-                            'l.finished_at', 
-                            'l.comment', 
-                            'l.evidence', 
-                            'l.status'
-                        );
-                        return DataTables::of($search)->make(true);
-            }
+                ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
+                ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                ->where('ad.competency_type', 3)
+                ->where('l.status', 1)
+                ->select(
+                    'l.id',
+                    'l.item_name',
+                    'e.employee_name',
+                    'l.started_at',
+                    'l.finished_at',
+                    'l.comment',
+                    'l.evidence',
+                    'l.status'
+                );
+            return DataTables::of($search)->make(true);
+        }
 
         // if(request('search')) {
         //     $search->where('i.item_id', 'like', '%' . request('search') . '%')
@@ -114,26 +114,26 @@ class CloseGapOtherController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
+            ->where('employees.employee_id', '=', $idLogin);
 
         if ($request->ajax()) {
             $search = DB::table('learnings as l')
-                        ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
-                        ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
-                        ->where('ad.competency_type', 3)
-                        ->where('l.status', 2)
-                        ->select(
-                            'l.id', 
-                            'l.item_name', 
-                            'e.employee_name', 
-                            'l.started_at', 
-                            'l.finished_at', 
-                            'l.comment', 
-                            'l.evidence', 
-                            'l.status'
-                        );
-                        return DataTables::of($search)->make(true);
-            }
+                ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
+                ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                ->where('ad.competency_type', 3)
+                ->where('l.status', 2)
+                ->select(
+                    'l.id',
+                    'l.item_name',
+                    'e.employee_name',
+                    'l.started_at',
+                    'l.finished_at',
+                    'l.comment',
+                    'l.evidence',
+                    'l.status'
+                );
+            return DataTables::of($search)->make(true);
+        }
 
         // if(request('search')) {
         //     $search->where('i.item_id', 'like', '%' . request('search') . '%')
@@ -164,26 +164,26 @@ class CloseGapOtherController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
+            ->where('employees.employee_id', '=', $idLogin);
 
         if ($request->ajax()) {
             $search = DB::table('learnings as l')
-                        ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
-                        ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
-                        ->where('ad.competency_type', 3)
-                        ->where('l.status', 3)
-                        ->select(
-                            'l.id', 
-                            'l.item_name', 
-                            'e.employee_name', 
-                            'l.started_at', 
-                            'l.finished_at', 
-                            'l.comment', 
-                            'l.evidence', 
-                            'l.status'
-                        );
-                        return DataTables::of($search)->make(true);
-            }
+                ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
+                ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                ->where('ad.competency_type', 3)
+                ->where('l.status', 3)
+                ->select(
+                    'l.id',
+                    'l.item_name',
+                    'e.employee_name',
+                    'l.started_at',
+                    'l.finished_at',
+                    'l.comment',
+                    'l.evidence',
+                    'l.status'
+                );
+            return DataTables::of($search)->make(true);
+        }
 
         // if(request('search')) {
         //     $search->where('i.item_id', 'like', '%' . request('search') . '%')
@@ -205,5 +205,18 @@ class CloseGapOtherController extends Controller
             'completed'         => 'btn-warning',
             'all'               => 'btn-white'
         ]);
+    }
+
+    public function updateData(Request $request, $id)
+    {
+        $data['status'] = $request->status;
+
+        if ($data['status'] == 3) {
+            DB::table('learnings')->where('id', $id)->update($data);
+        } else {
+            DB::table('learnings')->where('id', $id)->update($data);
+        }
+
+        return response()->json(['message' => 'Data berhasil diperbarui']);
     }
 }

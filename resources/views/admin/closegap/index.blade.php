@@ -12,15 +12,15 @@
         </div>
         <div class="d-none d-md-block">
 
-            @php
-                if ($competency_type == 1) {
-                    $link = '/closegapfunctional';
-                } elseif ($competency_type == 2) {
-                    $link = '/closegapleadership';
-                } else {
-                    $link = '/closegapother';
-                }
-            @endphp
+                @php
+                    if ($competency_type == 1) {
+                        $link = '/closegapfunctional';
+                    } elseif ($competency_type == 2) {
+                        $link = '/closegapleadership';
+                    } else {
+                        $link = '/closegapother';
+                    }
+                @endphp
 
             <div class="btn-group mg-0" role="group" aria-label="Basic example">
                 <a href="{{ $link }}" class="btn btn-sm pd-x-15 btn-uppercase mg-l-5 {{ $all }}">
@@ -134,57 +134,63 @@
 
 
 @push('scripts')
-    <script nonce="{{ csp_nonce() }}">
+    <script nonce="{{ csp_nonce() }}"> 
         $(document).ready(function() {
-
+            var storageUrl = "{{ asset('storage') }}";
             var competencyType = {{ $competency_type }};
             var status = {{ $status }};
             var ajaxUrl;
-
             if (competencyType === 1) {
                 if (status === 0) {
                     ajaxUrl = '/closegapfunctional';
-                } else if (status === 1) {
+                } else if (status === 1 ) {
                     ajaxUrl = '/closegapfunctional/submitted';
-                } else if (status === 2) {
+                } else if (status === 2 ) {
                     ajaxUrl = '/closegapfunctional/preview';
-                } else if (status === 3) {
+                } else if (status === 3 ) {
                     ajaxUrl = '/closegapfunctional/completed';
                 }
             } else if (competencyType === 2) {
                 if (status === 0) {
                     ajaxUrl = '/closegapleadership';
-                } else if (status === 1) {
+                } else if (status === 1 ) {
                     ajaxUrl = '/closegapleadership/submitted';
-                } else if (status === 2) {
+                } else if (status === 2 ) {
                     ajaxUrl = '/closegapleadership/preview';
-                } else if (status === 3) {
+                } else if (status === 3 ) {
                     ajaxUrl = '/closegapleadership/completed';
                 }
             } else if (competencyType === 3) {
                 if (status === 0) {
                     ajaxUrl = '/closegapother';
-                } else if (status === 1) {
+                } else if (status === 1 ) {
                     ajaxUrl = '/closegapother/submitted';
-                } else if (status === 2) {
+                } else if (status === 2 ) {
                     ajaxUrl = '/closegapother/preview';
-                } else if (status === 3) {
+                } else if (status === 3 ) {
                     ajaxUrl = '/closegapother/completed';
                 }
             }
 
-
+            //----------------------------------- Datatables ------------------------------------------//
             // viewData();
             $("#viewdata").DataTable({
                 processing: true,
                 serverSide: true,
+                search:true,
                 ajax: ajaxUrl,
-                columns: [{
-                        data: 'employee_name',
-                        name: 'e.employee_name'
+                columns: [
+                    { 
+                        data: 'employee_name', 
+                        name: 'e.employee_name', 
+                        render: function(data, type, row) {
+                            if (data) {
+                                return `<div class="text-center">${data}</div>`;
+                            }
+                            return ''; 
+                        } 
                     },
-                    {
-                        data: 'item_name',
+                    {   data: 'item_name', 
                         name: 'i.item_name',
                         render: function(data, type, row) {
                             // Memisahkan teks berdasarkan pola nomor di awal (angka diikuti oleh titik dan spasi)
@@ -205,25 +211,40 @@
                             return html;
                         }
                     },
-                    {
-                        data: 'started_at',
+                    { 
+                        data: 'started_at', 
                         name: 'l.started_at',
+                        render: function(data, type, row) {
+                            if (data) {
+                                return `<div class="text-center">${moment(data).format('DD MMMM YYYY')}</div>`; // Format tanggal
+                            }
+                            return '';
+                        } 
                     },
-                    {
-                        data: 'finished_at',
-                        name: 'l.finished_at'
+                    { 
+                        data: 'finished_at', 
+                        name: 'l.finished_at',
+                        render: function(data, type, row) {
+                            if (data) {
+                                return `<div class="text-center">${moment(data).format('DD MMMM YYYY')}</div>`; // Format tanggal
+                            }
+                            return '';
+                        }
                     },
-                    {
-                        data: 'comment',
-                        name: 'l.comment'
+                    { data: 'comment', name: 'l.comment' },
+                    { 
+                        data: 'evidence', 
+                        name: 'l.evidence',
+                        render: function(data, type, row) {
+                            if (data) {
+                                return `<div class="text-center"><a href="${storageUrl}/${data}" target="_blank">Evidence</a></div>`;
+                            }
+                            return ''; 
+                        } 
                     },
-                    {
-                        data: 'evidence',
-                        name: 'l.evidence'
-                    },
-                    {
-                        data: 'status',
-                        name: 'l.status',
+                    { 
+                        data: 'status', 
+                        name: 'status',
                         render: function(data, type, row) {
                             let color, text;
                             if (data == 1) {
@@ -244,10 +265,7 @@
                     },
                 ],
                 createdRow: function(row, data, dataIndex) {
-                    $(row).find('td:eq(6)').addClass(data.status === 1 ? 'bg-light pointer show-modal' :
-                        (data.status === 2 ? 'bg-warning text-white pointer show-modal' : (data
-                            .status === 3 ? 'bg-success text-white pointer show-modal' :
-                            'bg-danger text-white pointer show-modal')));
+                    $(row).find('td:eq(6)').addClass(data.status === 1 ? 'bg-light pointer show-modal' : (data.status === 2 ? 'bg-warning text-white pointer show-modal' : (data.status === 3 ? 'bg-success text-white pointer show-modal' : 'bg-danger text-white pointer show-modal')));
                     const modalBtn = $(row).find('.show-modal');
                     modalBtn.attr('data-id', data.id);
                 }
@@ -265,7 +283,6 @@
                     keyboard: false
                 });
             })
-
         }
 
         function viewData() {
@@ -317,22 +334,38 @@
 
         }
 
-
         //For Update//
         //trigger button update from update.blade.php
         $(document).on('updateButtonClicked', function(event, data) {
-            //Get data-id from update.blade.php
-            var id = data.id;
+            var id = data.id; //Get data-id from update.blade.php
+            var status = data.status;
+            var item_id = data.item_id;
+            var employee_id = data.employee_id;
+            var com_type = {{ $competency_type }};
+            var url;
             update(id);
+
 
             //proses data
             function update(id) {
-                let status = $("#status").val();
-                let item_id = $("#item_id").val();
-                let employee_id = $("#employee_id").val();
+            let status = $("#status").val();
+            let item_id = $("#item_id").val();
+            let employee_id = $("#employee_id").val();
+            
+
+            if (com_type == 1) {
+                url = "{{ url('closegapleadership/update') }}/"+ id
+            } else if (com_type == 2) {
+                url = "{{ url('closegapleadership/update') }}/" + id
+            } else if (com_type == 3) {
+                url = "{{ url('closegapother/update') }}/" + id
+            } else {
+                confirm('URL tidak ditemukan')
+            }
+
                 $.ajax({
                     type: "get",
-                    url: "{{ url('update') }}/" + id,
+                    url: url,
                     // data: "status=" + status,
                     data: {
                         "status": status,
@@ -342,14 +375,23 @@
                     success: function(data) {
                         iziToast.success({
                             title: 'Success',
-                            timeout: 2200,
+                            timeout: 1500,
+                            iconColor: 'dark',
                             message: 'Update status berhasil!',
                             position: 'topRight'
                         });
                         $(".close").click();
                         $('#viewdata').DataTable().ajax.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', error);
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'Failed to update data', // Pesan error yang ingin ditampilkan
+                            position: 'topRight'
+                        });
                     }
-                })
+                })                                      
             }
         })
     </script>

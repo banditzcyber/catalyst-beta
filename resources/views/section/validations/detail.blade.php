@@ -5,12 +5,12 @@
 
         <img src="/images/cap/bnr4.jpg" alt="" class="bg-banner">
     </div>
-    <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
+    <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30 mg-t-20">
         <div>
             <h5 class="mg-b-0 tx-spacing--1">{{ $employee_name }} ({{ $employee_id }})</h5>
         </div>
         <div class="d-none d-md-block">
-            <div class="row row-xs pd-0">
+            {{-- <div class="row row-xs pd-0">
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <form action="/finishFormValidation" method="POST">
                         @csrf
@@ -32,7 +32,7 @@
                     </form>
                 </div>
 
-            </div>
+            </div> --}}
 
         </div>
     </div>
@@ -154,6 +154,40 @@
 
             </div>
         @endforeach
+
+        @php
+            if ($status == 2) {
+                $btnFinish = '';
+                $btnReturn = '';
+            } else {
+                $btnFinish = 'disabled';
+                $btnReturn = 'disabled';
+            }
+        @endphp
+
+        <div class="row row-xs pd-0 mg-t-20">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <form action="/finishFormValidation" method="POST">
+                    @csrf
+                    <input type="hidden" name="assessment_id" value="{{ $id }}">
+                    <button type="submit" class="btn btn-sm pd-x-15 btn-dark btn-uppercase" {{ $btnFinish }}>
+                        <i data-feather="save" class="wd-10 mg-r-5"></i>
+                        Finish Form</button>
+                </form>
+                <a href="/assessmentValidation" class="btn btn-sm pd-x-15 btn-danger btn-uppercase">
+                    <i data-feather="corner-down-left" class="wd-10 mg-r-5"></i>
+                    back
+                </a>
+                <form action="/returnForm" method="POST">
+                    @csrf
+                    <input type="hidden" name="assessment_id" value="{{ $id }}">
+                    <button type="submit" class="btn btn-sm pd-x-15 btn-warning btn-uppercase" {{ $btnReturn }}>
+                        <i data-feather="corner-down-right" class="wd-10 mg-r-5"></i>
+                        Returned</button>
+                </form>
+            </div>
+
+        </div>
 
     </div><!-- row -->
 @endsection

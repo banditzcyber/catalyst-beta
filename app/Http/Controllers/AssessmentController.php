@@ -9,10 +9,12 @@ use App\Http\Requests\StoreAssessmentRequest;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\AssessmentDetailImport;
 use Illuminate\Support\Facades\Cache;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class AssessmentController extends Controller
 {
@@ -206,31 +208,85 @@ class AssessmentController extends Controller
     public function destroy($id)
     {
         DB::table('assessments')->where('id', $id)->delete();
+        DB::table('assessment_details')->where('assessment_id', $id)->delete();
         return redirect('/assessmentAdmin')->with('success', 'Data has been deleted!');
     }
 
     public function importData(Request $request)
     {
+        ///////////// PHPOFFICE/PHPSPREADSHEET /////////////
+        
+        // $assessment_id = $request->input('assessment_id');
+        // $validator = Validator::make($request->all(), [
+        //     'file' => 'required|mimes:xlsx,xls',
+        // ]);
+    
+        // if ($validator->fails()) {
+        //     // return response()->json(['error' => $validator->errors()->first()]);
+        //     return redirect('/assessmentAdmin/show/' . $assessment_id)->with(['error' => $validator->errors()->first()]);
+        // }
 
+        // try {
+        //     $file = $request->file('file');
+
+        //     // Load Excel file
+        //     $spreadsheet = IOFactory::load($file);
+        //     $sheet = $spreadsheet->getActiveSheet();
+
+        //     // Get highest row and column numbers containing data
+        //     $highestRow = $sheet->getHighestDataRow();
+        //     $highestColumn = $sheet->getHighestDataColumn();
+
+        //     $successCount = 0;
+
+        //     // Iterate through each row
+        //     for ($row = 2; $row <= $highestRow; $row++) { // Mulai dari baris kedua untuk melewati header
+        //         // Ambil data dari setiap kolom
+        //         $assessment_id = $request->input('assessment_id');
+        //         $item_id = $sheet->getCell('C' . $row)->getValue();
+        //         $resultActual = $sheet->getCell('I' . $row)->getValue();
+
+        //         DB::table('assessment_details')->insert([
+        //             'assessment_id' => $assessment_id,
+        //             'item_id' => $item_id,
+        //             'assessment_result' => $resultActual,
+        //             'actual_result' => $resultActual,
+        //             ]);
+        //             $successCount++; 
+        //     }
+
+        //     return redirect('/assessmentAdmin/show/' . $assessment_id)->with(['success' => 'Berhasil mengimpor ' . $successCount . ' data.']);
+        //  } catch (\Exception) {
+        //     return redirect('/assessmentAdmin/show/' . $assessment_id)->with(['error' => 'Data Tidak Sesuai']);
+        // }
+
+
+        /////////////// LARAVEL EXCEL ///////////////
         $assessment_id = $request->input('assessment_id');
-        // dd($assessment_id);
-
         $request->validate([
             'file' => 'required|file|mimes:xlsx,csv', // Add any validation rules you need
             'assessment_id' => 'required'
         ]);
 
         if ($request->hasFile('file')) {
-
             try {
                 $path = $request->file('file')->getRealPath();
                 $import = new AssessmentDetailImport($assessment_id);
                 Excel::import($import, $path);
-                return redirect('/assessmentAdmin')->with('success', 'Import data has been succsed !');
-            } catch (\Throwable $th) {
-                return redirect('/assessmentAdmin')->with('danger', 'Import data failed ! , please check the file');
+
+                $successCount = $import->getImportedCount(); 
+
+                return redirect('/assessmentAdmin/show/' . $assessment_id)
+                    ->with(['success' => 'Berhasil mengimpor ' . $successCount . ' data.']);
+            } catch (\Throwable) {
+                return redirect('/assessmentAdmin/show/' . $assessment_id)
+                    ->with([
+                        'error' => 'Format Excel tidak sesuai, mohon dicek kembali. <a href="#" data-toggle="modal" data-target="#formatExcel" data-full="/images/format_excel.png">For Example</a>'
+                    ]);
             }
         }
+        return redirect('/assessmentAdmin/show/' . $assessment_id)
+            ->with(['error' => 'File tidak ditemukan! Silakan unggah file yang valid.']);
     }
 
     public function profile(Request $request, $employee_id)
@@ -393,10 +449,11 @@ class AssessmentController extends Controller
         $data = DB::table('assessment_details')
                     ->where('id', $id)
                     ->first();
+
         return view('admin.assessment.edititem', [
             'data'  => $data,
-
         ]);
+
     }
 
     public function updateItemAssessment(Request $request, $id)

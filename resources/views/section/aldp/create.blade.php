@@ -22,7 +22,7 @@
     </div>
 
     <div class="col-md-8">
-        <form action="/sectionAldp/saveForm" method="post">
+        <form id="formInput" action="/sectionAldp/saveForm" method="post" novalidate class="needs-validation">
             @csrf
 
             <div class="form-group row row-xs">
@@ -38,6 +38,13 @@
 
             <input type="hidden" name="item_id" id="item_id" class="form-control @error('item_id') is-invalid @enderror"
                 value="{{ old('item_id') }}" placeholder="item_id" readonly />
+
+            <input type="hidden" name="aldp_detail_id" id="aldp_detail_id"
+                class="form-control @error('aldp_detail_id') is-invalid @enderror" value=""
+                placeholder="aldp_detail_id" readonly />
+            @error('aldp_detail_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
 
             <div class="form-group row row-xs">
                 <label class="col-sm-4 col-form-label">Competency</label>
@@ -56,7 +63,7 @@
                     </div>
                 </div>
                 @error('competency_name')
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback-competency_name">
                         {{ $message }}
                     </div>
                 @enderror
@@ -112,7 +119,7 @@
             </div>
 
             <div class="form-group row row-xs">
-                <label class="col-sm-4 col-form-label">Planning</label>
+                <label class="col-sm-4 col-form-label">Target</label>
                 <div class="col-sm-5">
                     <select class="custom-select" name="planned_month" id="planned_month">
                         <option value="" selected class="tx-italic">--select mount-</option>
@@ -128,6 +135,7 @@
                         <option value="November">November</option>
                         <option value="December">December</option>
                     </select>
+                    <div class="invalid-feedback-planned_month"></div>
                 </div>
                 <div class="col-sm-3">
                     <select class="custom-select" name="planned_week" id="planned_week">
@@ -138,14 +146,9 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
+                    <div class="invalid-feedback-planned_week"></div>
                 </div>
 
-
-                @error('planning_week')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
 
             <div class="form-group row row-xs">
@@ -165,7 +168,46 @@
                     </div>
                 @enderror
             </div>
+            <h4 class="mg-b-0 tx-spacing--1 mt-4">Add Participant</h4>
 
+            <div class="form-group row row-xs">
+                <label class="col-sm-4 col-form-label">Participant</label>
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <input type="text" name="participant" id="participant" class="form-control" autofocus
+                            value="{{ old('participant') }}" placeholder="Participant" readonly />
+
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light" id="btnAddParticipant" type="button"
+                                data-content="Input Competency First">
+                                <i data-feather="search" class="wd-15"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback-participant"></div>
+                </div>
+
+            </div>
+            <div class="form-group row row-xs d-none" id="part_name">
+                <label class="col-sm-4 col-form-label">Participant Name</label>
+                <div class="col-sm-8">
+                    <textarea name="participant_name" class="form-control" id="participant_name" cols="30" rows="4"
+                        value="" readonly required></textarea>
+                    <div class="invalid-feedback-ps_name"></div>
+                </div>
+                <div class="col-sm-4">
+                    <input type="hidden" name="employee_id" id="employee_id" class="form-control " autofocus
+                        value="" placeholder="id" readonly />
+                </div>
+                <div class="col-sm-4">
+                    <input type="hidden" name="employee_name" id="employee_name" class="form-control " autofocus
+                        value="" placeholder="employee_name" readonly />
+                </div>
+                <div class="col-sm-4">
+                    <input type="hidden" name="position" id="position" class="form-control " autofocus value=""
+                        placeholder="position" readonly />
+                </div>
+            </div>
 
             <div class="form-group row row-xs mg-b-0">
                 <div class="col-sm-10">
@@ -178,6 +220,7 @@
         </form>
     </div>
 
+    {{-- Modal Add Item --}}
     <div class="modal fade" id="modalItem" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -196,7 +239,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $view)
+                                @foreach ($data1 as $view)
                                     <tr class="get" item_id="{{ $view->item_id }}"
                                         item_name="{{ $view->item_name }}" ps_name="{{ $view->ps_name }}"
                                         competency_name="{{ $view->competency_name }}" level="{{ $view->level }}"
@@ -210,13 +253,49 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-
                         </table>
                     </div>
+                </div><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 
+    {{-- Modal Add Participant --}}
+    <div class="modal fade" id="modalemployee" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel2" style="margin-top: 5px;">Participant</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body pd-sm-t-10 pd-sm-b-10 pd-sm-x-20">
 
+                    <button id="buttonRow">Select All</button>
+
+                    <table id="data_participant" class="table table-bordered" style="width: 100%; font-size: 12px;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>POSITION</th>
+                                <th>SECTION</th>
+                                <th>JOBCODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+
+                    </table>
 
                 </div><!-- modal-body -->
+                <div class="modal-footer pd-x-20 pd-y-15">
+                    <button type="button" class="btn btn-xs btn-white btnCancelParticipName"
+                        data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-xs btn-primary btnSaveParticipName">Save</button>
+                </div>
             </div><!-- modal-content -->
         </div><!-- modal-dialog -->
     </div><!-- modal -->
@@ -227,7 +306,184 @@
                 $("#tableData").DataTable({
                     "autoWidth": false
                 });
-            });
+
+
+                $('#btnAddParticipant').click(function(e) {
+                    e.preventDefault();
+
+                    var aldp_id = $('#aldp_id').val();
+                    var competency_type = $('#competency_type').val();
+                    var item_id = $('#item_id').val();
+                    var competency_name = $('#competency_name').val();
+
+                    if (competency_name.trim() === '') {
+                        iziToast.warning({
+                            title: 'Warning',
+                            message: 'Fill Competency first',
+                            position: 'topRight',
+                            timeout: 2000,
+                        });
+                    } else {
+                        // Lakukan Ajax request
+                        $.ajax({
+                            url: "{{ url('sendData') }}",
+                            method: 'GET',
+                            data: {
+                                aldp_id: aldp_id,
+                                competency_type: competency_type,
+                                item_id: item_id,
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+
+                                $('#data_participant tbody').empty();
+                                // Loop untuk memasukkan setiap data employee ke dalam tabel
+                                $.each(response.employee, function(index, vemployee) {
+                                    var row = '<tr employeeID="' + vemployee.employee_id +
+                                        '" ' +
+                                        'employeeName="' + vemployee.employee_name + '" ' +
+                                        'position="' + vemployee.position + '" ' +
+                                        'jobcode="' + vemployee.jobcode + '"> ' +
+                                        '<td>' + vemployee.employee_id + '</td> ' +
+                                        '<td>' + vemployee.employee_name + '</td> ' +
+                                        '<td>' + vemployee.position + '</td> ' +
+                                        '<td>' + vemployee.section + '</td> ' +
+                                        '<td>' + vemployee.jobcode + '</td> ' +
+                                        '</tr>';
+                                    $('#data_participant tbody').append(row);
+                                });
+
+                                $("#modalemployee").modal("show");
+
+                                $("#data_participant").DataTable({
+                                    autoWidth: false,
+                                    retrieve: true,
+                                    order: [
+                                        [1, 'asc']
+                                    ]
+                                });
+
+                                $('#buttonRow').click(function() {
+                                    $('#data_participant tbody tr').toggleClass('selected');
+                                });
+
+                                $('#data_participant tbody').on('click', 'tr', function() {
+                                    $(this).toggleClass('selected');
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    }
+                });
+
+
+
+                $('.btnSaveParticipName').click(function() {
+                    var selectedRows = $('#data_participant tbody tr.selected');
+
+                    // Memeriksa apakah ada baris yang dipilih
+                    if (selectedRows.length > 0) {
+                        // Mengosongkan nilai di input dan textarea
+                        $('#employee_id').val('');
+                        $('#employee_name').val('');
+                        $('#position').val('');
+                        $('#participant_name').val('');
+
+                        // Array untuk menyimpan data yang akan dimasukkan ke textarea
+                        var selectedData = [];
+                        var employeeIds = [];
+                        var employeeNames = [];
+                        var positions = [];
+
+                        selectedRows.each(function(index) {
+                            var id = $(this).find('td:nth-child(1)').text().trim();
+                            var name = $(this).find('td:nth-child(2)').text().trim();
+                            var position = $(this).find('td:nth-child(3)').text().trim();
+
+                            // Format data untuk textarea
+                            var rowData = (index + 1) + '. ' + id + ', ' + name + ', ' + position;
+                            selectedData.push(rowData);
+                            employeeIds.push(id);
+                            employeeNames.push(name);
+                            positions.push(position);
+                        });
+
+                        // Mengisi nilai ke elemen input
+                        $('#employee_id').val(employeeIds.join(', '));
+                        $('#employee_name').val(employeeNames.join(', '));
+                        $('#position').val(positions.join(', '));
+
+
+                        $('#participant_name').val(selectedData.join('\n'));
+
+                        $('#part_name').removeClass('d-none');
+                        $('.btnCancelParticipName').click();
+                        $("#modalemployee").modal("hide");
+
+                    } else {
+                        $('#employee_id').val('');
+                        $('#employee_name').val('');
+                        $('#position').val('');
+                        $('#participant_name').val('');
+                    }
+                })
+
+                function generateRandomNumber() {
+                    return Math.floor(Math.random() * 10000000);
+                }
+
+                var randomNumber = generateRandomNumber();
+                $('#aldp_detail_id').val(randomNumber);
+
+                $('#formInput').submit(function(event) {
+                    event.preventDefault();
+
+                    var formData = $(this).serialize();
+                    var url = $(this).attr('action');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: formData,
+                        dataType: 'json',
+                        success: function(response) {
+                            window.location.href = '/sectionAldpShow/' + response.id;
+                        },
+                        error: function(xhr, status, error) {
+                            var errors = xhr.responseJSON.errors;
+                            if (errors && errors.aldp_detail_id) {
+                                iziToast.info({
+                                    title: 'Info!',
+                                    message: errors.aldp_detail_id[0],
+                                    position: 'topRight',
+                                    buttons: [
+                                        ['<button>Refresh</button>', function(instance,
+                                            toast) {
+                                            var randomNumber =
+                                            generateRandomNumber();
+
+                                            $('#aldp_detail_id').val(randomNumber);
+
+                                            instance.hide({
+                                                transitionOut: 'fadeOut'
+                                            }, toast, 'buttonName');
+                                        }, true],
+                                    ]
+                                });
+                            } else {
+                                iziToast.warning({
+                                    title: 'Warning!',
+                                    message: 'Please Complete it',
+                                    position: 'topRight'
+                                });
+                            }
+                        }
+                    });
+                });
+            })
+
 
             $(document).on("click", ".get", function(e) {
                 $("#item_id").val($(this).attr("item_id"));

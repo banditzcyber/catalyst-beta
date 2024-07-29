@@ -56,6 +56,8 @@
                             $link = '#';
                             $onclick = "alert('assessment is still blank!')";
                             $btnColor = 'badge-light';
+                            $icon = 'eye-off';
+                            $txBtn = 'review';
                         } elseif ($view->status == 2) {
                             $color = 'bg-warning';
                             $text = 'Review by Superior';
@@ -63,13 +65,17 @@
                             $btnColor = 'badge-warning';
                             $link = '/assessmentValidation/show/' . $view->id;
                             $onclick = '#';
+                            $icon = 'eye';
+                            $txBtn = 'review';
                         } else {
                             $color = 'bg-success';
                             $text = 'Completed';
                             $btn = '';
-                            $btnColor = 'badge-warning';
+                            $btnColor = 'badge-success';
                             $link = '/assessmentValidation/show/' . $view->id;
                             $onclick = '#';
+                            $icon = 'tv';
+                            $txBtn = 'review';
                         }
                     @endphp
 
@@ -77,16 +83,27 @@
                         <td class="tx-center">
                             <a href="{{ $link }}" onclick="{{ $onclick }}"
                                 class="badge {{ $btnColor }} pd-y-0 {{ $btn }}" title="Review Assessment">
-                                <i data-feather="feather" class="wd-15"></i>
+                                <i data-feather="{{ $icon }}" class="wd-15"></i> {{ $txBtn }}
                             </a>
                         </td>
                         <td class="pd-t-25">{{ $view->employee_id }}</td>
                         <td>{{ $view->employee_name }}</td>
                         <td>{{ $view->position }}</td>
                         <td>{{ $view->year }}</td>
-                        <td>{{ $view->created_at }}</td>
-                        <td>{{ $view->updated_at }}</td>
-                        <td class="{{ $color }} tx-center" onclick="show({{ $view->id }})">
+                        <td>{{ date('d F Y', strtotime($view->created_at)) }}</td>
+                        {{-- <td>{{ date('d F Y', strtotime($view->updated_at)) }}</td> --}}
+                        <td>
+                            @php
+                                if ($view->updated_at) {
+                                    $date = date('d F Y', strtotime($view->updated_at));
+                                } else {
+                                    $date = '-';
+                                }
+                            @endphp
+
+                            {{ $date }}
+                        </td>
+                        <td class="{{ $color }} tx-center">
                             {{ $text }}
                         </td>
                     </tr>
@@ -119,29 +136,6 @@
             $(document).ready(function() {
                 $("#viewdata").DataTable();
             });
-
-            function addData() {
-                $.get("{{ url('formCompetency') }}", {}, function(data, status) {
-                    $("#titleModel").html('Update Data')
-                    $("#form").html(data);
-
-                    // $('#modalUpdate').modal('show');
-                    $('#modalUpdate').modal({
-                        backdrop: 'static',
-                        keyboard: false
-                    });
-                })
-            }
-
-            function saveData() {
-                const competency_id = $('#competency_id').val();
-                const competency_area = $('#competency_area').val();
-                const competency_type = $('#competency_type').val();
-                const competency_name = $('#competnecy_name').val();
-                const competency_bahasa = $('#competency_bahasa').val();
-                const description = $('#description').val();
-                const description_bahasa = $('#description_bahasa').val();
-            }
         </script>
     @endpush
 @endsection

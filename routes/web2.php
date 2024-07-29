@@ -120,9 +120,7 @@ Route::resource('/dashboardSection', DashboardSectionController::class);
 // # menu ALDP
 Route::get('/sectionAldp', [sectionAldpController::class, 'index']);
 Route::get('/sectionAldpShow/{id}', [sectionAldpController::class, 'show']);
-// Route::get('/sectionAldp/functional/{id_aldp}', [sectionAldpController::class, 'formFunctional']);
-Route::get('/sectionAldp/functional/{id_aldp}', [sectionAldpController::class, 'tambahData']);
-Route::get('/sendData', [sectionAldpController::class, 'sendData']);
+Route::get('/sectionAldp/functional/{id_aldp}', [sectionAldpController::class, 'formFunctional']);
 Route::get('/sectionAldp/leadership/{id_aldp}', [sectionAldpController::class, 'formLeadership']);
 Route::get('/sectionAldp/other/{id_aldp}', [sectionAldpController::class, 'formOther']);
 Route::post('/sectionAldp/saveForm', [sectionAldpController::class, 'saveForm']);
@@ -131,8 +129,7 @@ Route::get('/sectionAldp/edit/{id}', [sectionAldpController::class, 'editData'])
 Route::get('/sectionAldp/editCnl/{id}', [sectionAldpController::class, 'editData']);
 Route::post('/sectionAldp/update', [sectionAldpController::class, 'updateData']);
 Route::post('/sectionAldp/deleteItem', [sectionAldpController::class, 'deleteItemAldp']);
-// Route::get('/sectionAldpParticipant/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [sectionAldpController::class, 'formParticipant']);
-// Route::get('/sectionAldpParticipant/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [sectionAldpController::class, 'formParticipant']);
+Route::get('/sectionAldpParticipant/{aldp_detail_id}/{aldp_id}/{item_id}/{type_program}', [sectionAldpController::class, 'formParticipant']);
 Route::post('/sectionAldpAddParticipant', [sectionAldpController::class, 'addParticipant']);
 Route::post('/sectionAldpDeleteParticipant', [sectionAldpController::class, 'deleteParticipat']);
 Route::post('/sectionAldpDeleteParticipant', [sectionAldpController::class, 'deleteParticipat']);
@@ -258,7 +255,6 @@ Route::get('/onprogress', [CloseGapController::class, 'onprogress']);
 Route::get('/show/{id}', [CloseGapController::class, 'show']);
 Route::prefix('closegapfunctional')->group(function () {
     Route::get('/', [CloseGapFunctionalController::class, 'index']);
-    Route::get('/getData', [CloseGapFunctionalController::class, 'getData']);
     Route::get('/completed', [CloseGapFunctionalController::class, 'completed']);
     Route::get('/preview', [CloseGapFunctionalController::class, 'preview']);
     Route::get('/submitted', [CloseGapFunctionalController::class, 'submitted']);

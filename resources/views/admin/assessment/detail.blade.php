@@ -45,7 +45,6 @@
             </div>
         </div>
         <div class="d-none d-md-block">
-
             <div class="form-group row row-xs mg-0">
                 <div class="col-sm-12">
                     <form action="/assessment/importData" method="post" enctype="multipart/form-data">
@@ -59,17 +58,27 @@
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
-
         </div>
     </div>
 
     @if (session()->has('success'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
         </div>
+    @endif
+
+    @if (session()->has('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{!! session('error') !!}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+    </div>
     @endif
 
     <div class="table-responsive">
@@ -77,6 +86,7 @@
             <thead class="thead-primary">
                 <tr>
                     <th>#</th>
+                    <th>id assessment</th>
                     <th>Item ID</th>
                     <th>Item Name</th>
                     <th>Intervention</th>
@@ -103,7 +113,7 @@
                         if ($view->actual_result == 1) {
                             $color2 = 'bg-hijau';
                             $text2 = '(C)';
-                        } elseif ($view->assessment_result == 2) {
+                        } elseif ($view->actual_result == 2) {
                             $color2 = 'bg-kuning';
                             $text2 = '(N.I)';
                         } else {
@@ -112,11 +122,12 @@
                         }
                     @endphp
                     <tr>
-                        <td class="tx-center">
-                            <a onclick="show({{ $view->id }})">
+                        <td class="tx-center show-modal pointer" data-id="{{ $view->id }}">
+                            <a>
                                 <i data-feather="edit-2" class="wd-15"></i>
                             </a>
                         </td>
+                        <td>{{ $view->id }}</td>
                         <td>{{ $view->item_id }}</td>
                         <td>{{ $view->item_name }}</td>
                         <td>{{ $view->intervention }}</td>
@@ -129,6 +140,24 @@
             </tbody>
         </table>
     </div>
+
+    <div class="modal fade" id="formatExcel" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered d-flex modal-custom modal-lg">
+            <div class="modal-content flex-shrink-1 w-auto mx-auto">
+
+                <div class="modal-header">
+                    <h6 class="modal-title tx-uppercase" id="titleModel"></h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body" id="dynamic-content">
+                    <img src="{{ asset('images/format_excel.png')}}" class="img-fluid" alt="">
+                </div>
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 
 
 
@@ -157,8 +186,18 @@
             $("#viewdata").DataTable();
         });
 
+        $('[data-full]').click(function(){
+            $('#dynamic-content > img').attr('src',$(this).data('full'))
+        })
+
+        $(document).on('click', '.show-modal', function() {
+            const id = $(this).data('id');
+            show(id);
+        });
+
         function show(id) {
             $.get("{{ url('edititem') }}/" + id, {}, function(data, status) {
+                console.log(id);
                 $("#titleModel").html('Update Data')
                 $("#form").html(data);
 
@@ -169,26 +208,60 @@
             });
         }
 
-        function update(id) {
-            let assessment_result = $("#assessment_result").val();
-            let actual_result = $("#actual_result").val();
+        //For Update//
+        //trigger button update from update.blade.php
+        $(document).on('updateButtonClicked', function(event, data) {
+            //Get data-id from edititem.blade.php
+            var id = data.id;
+            update(id);
 
-            $.ajax({
-                type: "get",
-                url: "{{ url('updateitem') }}/" + id,
-                // data: "status=" + status,
-                data: {
-                    "assessment_result": assessment_result,
-                    "actual_result": actual_result
-                },
-                success: function(data) {
-                    alert("Update data successed!");
-                    $(".close").click();
-                    // viewData();
-                    location.reload();
+            //proses data
+            function update(id) {
+                let assessment_result = $("#assessment_result").val();
+                let actual_result = $("#actual_result").val();
+ 
+                $.ajax({
+                    type: "get",
+                    url: "{{ url('updateitem') }}/" + id,
+                    // data: "status=" + status,
+                    data: {
+                        "assessment_result": assessment_result,
+                        "actual_result": actual_result
+                    },
+                    success: function(data) {
+                        iziToast.success({
+                            title: 'Success',
+                            timeout: 1700,
+                            message: 'Update status berhasil!',
+                            position: 'topRight'
+                        });
+                        $(".close").click();
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1300);
+                    }
+                })                                      
+            }
+        })
 
-                }
-            })
-        }
+        // function update(id) {
+        //     let assessment_result = $("#assessment_result").val();
+        //     let actual_result = $("#actual_result").val();
+
+        //     $.ajax({
+        //         type: "get",
+        //         url: "{{ url('updateitem') }}/" + id,
+        //         // data: "status=" + status,
+        //         data: {
+        //             "assessment_result": assessment_result,
+        //             "actual_result": actual_result
+        //         },
+        //         success: function(data) {
+        //             alert("Update data successed!");
+        //             $(".close").click();
+        //             $('#viewdata').DataTable().ajax.reload();
+        //         }
+        //     })
+        // }
     </script>
 @endpush

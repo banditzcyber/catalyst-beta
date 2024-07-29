@@ -38,7 +38,7 @@
                                 @if ($vData->status == 1)
                                     <span class="badge badge-light">Please complete the form provided</span>
                                 @else
-                                    <span class="badge badge-success">Verified</span>
+                                    <span class="badge badge-success">Completed</span>
                                 @endif
                             </p>
                         </div>

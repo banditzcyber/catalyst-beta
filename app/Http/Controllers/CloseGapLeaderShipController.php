@@ -15,25 +15,25 @@ class CloseGapLeaderShipController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
+            ->where('employees.employee_id', '=', $idLogin);
 
         if ($request->ajax()) {
             $search = DB::table('learnings as l')
-                        ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
-                        ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
-                        ->join('items as i', 'l.item_id', '=', 'i.item_id')
-                        ->where('ad.competency_type', 2)
-                        ->select(
-                            'l.id', 
-                            'e.employee_name', 
-                            'i.item_name', 
-                            'l.started_at', 
-                            'l.finished_at', 
-                            'l.comment', 
-                            'l.evidence', 
-                            'l.status'
-                        );
-                    return DataTables::of($search)->make(true);
+                ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
+                ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                ->join('items as i', 'l.item_id', '=', 'i.item_id')
+                ->where('ad.competency_type', 2)
+                ->select(
+                    'l.id',
+                    'e.employee_name',
+                    'i.item_name',
+                    'l.started_at',
+                    'l.finished_at',
+                    'l.comment',
+                    'l.evidence',
+                    'l.status'
+                );
+            return DataTables::of($search)->make(true);
         }
 
         return view('admin.closegap.index', [
@@ -50,7 +50,7 @@ class CloseGapLeaderShipController extends Controller
         ]);
     }
 
-    
+
     public function submitted(Request $request)
     {
         //session
@@ -58,27 +58,27 @@ class CloseGapLeaderShipController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
+            ->where('employees.employee_id', '=', $idLogin);
 
         if ($request->ajax()) {
             $search = DB::table('learnings as l')
-                        ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
-                        ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
-                        ->join('items as i', 'l.item_id', '=', 'i.item_id')
-                        ->where('ad.competency_type', 2)
-                        ->where('l.status', 1)
-                        ->select(
-                            'l.id', 
-                            'e.employee_name', 
-                            'i.item_name', 
-                            'l.started_at', 
-                            'l.finished_at', 
-                            'l.comment', 
-                            'l.evidence', 
-                            'l.status'
-                        );
-                        return DataTables::of($search)->make(true);
-            }
+                ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
+                ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                ->join('items as i', 'l.item_id', '=', 'i.item_id')
+                ->where('ad.competency_type', 2)
+                ->where('l.status', 1)
+                ->select(
+                    'l.id',
+                    'e.employee_name',
+                    'i.item_name',
+                    'l.started_at',
+                    'l.finished_at',
+                    'l.comment',
+                    'l.evidence',
+                    'l.status'
+                );
+            return DataTables::of($search)->make(true);
+        }
 
         return view('admin.closegap.index', [
             'title'     => 'Close Gap Activity - Leadership Submitted',
@@ -102,28 +102,28 @@ class CloseGapLeaderShipController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
-        
+            ->where('employees.employee_id', '=', $idLogin);
+
         if ($request->ajax()) {
             $search = DB::table('learnings as l')
-                        ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
-                        ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
-                        ->join('items as i', 'l.item_id', '=', 'i.item_id')
-                        ->where('ad.competency_type', 2)
-                        ->Where('l.status', 2 )
-                        ->select(
-                            'l.id', 
-                            'e.employee_name', 
-                            'i.item_name', 
-                            'l.started_at', 
-                            'l.finished_at', 
-                            'l.comment', 
-                            'l.evidence', 
-                            'l.status'
-                        );
+                ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
+                ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                ->join('items as i', 'l.item_id', '=', 'i.item_id')
+                ->where('ad.competency_type', 2)
+                ->Where('l.status', 2)
+                ->select(
+                    'l.id',
+                    'e.employee_name',
+                    'i.item_name',
+                    'l.started_at',
+                    'l.finished_at',
+                    'l.comment',
+                    'l.evidence',
+                    'l.status'
+                );
 
-                        return DataTables::of($search)->make(true);
-            }
+            return DataTables::of($search)->make(true);
+        }
 
         return view('admin.closegap.index', [
             'title'             => 'Close Gap Activity - Functional Reviewed',
@@ -146,28 +146,28 @@ class CloseGapLeaderShipController extends Controller
         $roleId         = $request->session()->get('roleId');
         $idLogin        = $request->session()->get('user');
         $dEmployee      = DB::table('employees')
-                            ->where('employees.employee_id', '=', $idLogin );
+            ->where('employees.employee_id', '=', $idLogin);
 
         if ($request->ajax()) {
             $search = DB::table('learnings as l')
-                        ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
-                        ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
-                        ->join('items as i', 'l.item_id', '=', 'i.item_id')
-                        ->where('ad.competency_type', 2)
-                        ->where('l.status', 3)
-                        ->select(
-                            'l.id', 
-                            'e.employee_name', 
-                            'i.item_name', 
-                            'l.started_at', 
-                            'l.finished_at', 
-                            'l.comment', 
-                            'l.evidence', 
-                            'l.status'
-                        );
+                ->join('employees as e', 'l.employee_id', '=', 'e.employee_id')
+                ->join('aldp_details as ad', 'l.aldp_detail_id', '=', 'ad.id')
+                ->join('items as i', 'l.item_id', '=', 'i.item_id')
+                ->where('ad.competency_type', 2)
+                ->where('l.status', 3)
+                ->select(
+                    'l.id',
+                    'e.employee_name',
+                    'i.item_name',
+                    'l.started_at',
+                    'l.finished_at',
+                    'l.comment',
+                    'l.evidence',
+                    'l.status'
+                );
 
-                        return DataTables::of($search)->make(true);
-            }
+            return DataTables::of($search)->make(true);
+        }
 
         return view('admin.closegap.index', [
             'title'             => 'Close Gap Activity - Leadership Completed',
@@ -181,5 +181,18 @@ class CloseGapLeaderShipController extends Controller
             'completed'         => 'btn-warning',
             'all'               => 'btn-white'
         ]);
+    }
+
+    public function updateData(Request $request, $id)
+    {
+        $data['status'] = $request->status;
+
+        if ($data['status'] == 3) {
+            DB::table('learnings')->where('id', $id)->update($data);
+        } else {
+            DB::table('learnings')->where('id', $id)->update($data);
+        }
+
+        return response()->json(['message' => 'Data berhasil diperbarui']);
     }
 }

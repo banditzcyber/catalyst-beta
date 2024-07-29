@@ -36,15 +36,15 @@
                         <div class="search-form input-group">
                             <input type="hidden" class="form-control tx-11" name="competency_type" id="competency_type"
                                 value="{{ $type_program }}" required>
-                            <input type="hidden" class="form-control tx-11" name="id_aldp" id="id_aldp"
+                            <input type="text" class="form-control tx-11" name="id_aldp" id="id_aldp"
                                 value="{{ $id_aldp }}" required>
-                            <input type="hidden" class="form-control tx-11" name="aldp_detail_id" id="aldp_detail_id"
+                            <input type="text" class="form-control tx-11" name="aldp_detail_id" id="aldp_detail_id"
                                 value="{{ $id_aldp_details }}" required>
-                            <input type="hidden" class="form-control tx-11" name="item_id" id="item_id"
+                            <input type="text" class="form-control tx-11" name="item_id" id="item_id"
                                 value="{{ $item_id }}" required>
-                            <input type="hidden" class="form-control tx-11" name="item_name" id="item_name"
+                            <input type="text" class="form-control tx-11" name="item_name" id="item_name"
                                 value="{{ $item_name }}" required>
-                            <input type="hidden" class="form-control tx-11" name="type_program" id="type_program"
+                            <input type="text" class="form-control tx-11" name="type_program" id="type_program"
                                 value="{{ $type_program }}" required>
 
                             <input type="hidden" class="form-control tx-11" name="employee_id" id="employee_id" required>
@@ -67,6 +67,7 @@
                     </div>
                 </div>
             </form>
+            <button id="modalshow">test</button>
 
         </div>
     </div>
@@ -158,6 +159,7 @@
                         style="width: 100%; font-size: 12px;">
                         <thead>
                             <tr>
+                                <th><input type="checkbox" id="check-all"></th>
                                 <th>ID</th>
                                 <th>NAME</th>
                                 <th>POSITION</th>
@@ -170,6 +172,8 @@
                                 <tr class="get" employeeID="{{ $vemployee->employee_id }}"
                                     employeeName="{{ $vemployee->employee_name }}" position="{{ $vemployee->position }}"
                                     jobcode="{{ $vemployee->jobcode }}">
+                                    <td><input type="checkbox" class="check-item" name="{{ $vemployee->employee_id }}">
+                                    </td>
                                     <td>{{ $vemployee->employee_id }}</td>
                                     <td>{{ $vemployee->employee_name }}</td>
                                     <td>{{ $vemployee->position }}</td>
@@ -198,11 +202,36 @@
                 });
             });
 
-            $(document).on("click", ".get", function(e) {
-                $("#employee_id").val($(this).attr("employeeId"));
-                $("#employee_name").val($(this).attr("employeeName"));
-                $("#modalemployee").modal("hide");
-            });
+            // $('#modalemployee').modal({
+            //     backdrop: 'static',
+            //     keyboard: false
+            // })
+
+            $(document).ready(function() {
+                $('#check-all').click(function() {
+                    if ($(this).is(':checked')) {
+                        $('.check-item').prop("checked", true);
+                    } else {
+                        $('.check-item').prop("checked", false);
+                    }
+                })
+            })
+
+            // $(document).on("click", ".get", function(e) {
+            //     $("#employee_id").val($(this).attr("employeeId"));
+            //     $("#employee_name").val($(this).attr("employeeName"));
+            //     $("#modalemployee").modal("hide");
+            // });
+
+            $(document).ready(function() {
+                $('#modalshow').click(function() {
+                    $('#modalemployee').modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true
+                    })
+                })
+            })
         </script>
     @endpush
 @endsection
